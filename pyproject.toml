@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "symphonix-bridge-sdk"
+version = "0.1.0"
+description = "Protocol Bridge SDK — heterogeneous healthcare protocol translation with FHIR R4 canonical pivot"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+authors = [{ name = "Symphonix Health" }]
+dependencies = [
+    "httpx>=0.27",
+    "pydantic>=2.0",
+]
+
+[project.optional-dependencies]
+all = [
+    "hl7>=0.4",
+    "pydicom>=2.4",
+    "confluent-kafka>=2.3",
+    "grpcio>=1.60",
+    "websockets>=12.0",
+    "mcp>=1.0",
+]
+bullettrain = [
+    "fastapi>=0.115",
+    "uvicorn>=0.30",
+]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.3",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/bridge_sdk"]
