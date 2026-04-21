@@ -1,0 +1,3 @@
+[submodule ".claude/skills/symphonix-health-design"]
+	path = .claude/skills/symphonix-health-design
+	url = https://github.com/symphonix-health/design-system
