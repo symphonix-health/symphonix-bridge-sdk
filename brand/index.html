@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Bridge SDK — Symphonix Health</title>
+<link rel="stylesheet" href="../.claude/skills/symphonix-health-design/colors_and_type.css"/>
+<style>
+  html, body { margin: 0; padding: 0; background: var(--surface-0); min-height: 100vh; }
+  body {
+    font-family: var(--f-sans);
+    color: var(--text-1);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.7;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 0%, rgba(99,102,241,0.14), transparent 60%),
+      radial-gradient(ellipse 60% 60% at 90% 100%, rgba(20,145,155,0.10), transparent 60%),
+      var(--surface-0);
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: clamp(40px, 8vw, 96px) clamp(20px, 5vw, 48px); }
+  .eyebrow {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--brand-400);
+    margin-bottom: 22px;
+  }
+  h1 {
+    font-family: var(--f-sans);
+    font-size: clamp(2.4rem, 5.2vw, 3.8rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
+    margin: 0 0 18px 0;
+    color: var(--text-1);
+  }
+  .rainbow-underline {
+    width: 56px;
+    height: 3px;
+    background: var(--rainbow);
+    border-radius: 2px;
+    margin: 0 0 26px 0;
+  }
+  .lede {
+    font-size: 1.15rem;
+    color: var(--text-2);
+    max-width: 68ch;
+    margin: 0 0 44px 0;
+  }
+  .card {
+    background: var(--surface-card);
+    backdrop-filter: blur(12px) saturate(1.5);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: var(--r-xl);
+    padding: 28px 30px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.02) inset;
+  }
+  .card::before {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--rainbow-x2);
+  }
+  .product {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 12px;
+  }
+  .card h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    margin: 0 0 10px 0;
+  }
+  .card p { color: var(--text-2); margin: 0; }
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
+    margin: 38px 0 0 0;
+  }
+  .metric {
+    background: var(--surface-1);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: var(--r-lg);
+    padding: 18px 20px;
+  }
+  .metric-value {
+    font-family: var(--f-sans);
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--brand-300);
+    margin-bottom: 4px;
+  }
+  .metric-label {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+  .footer {
+    margin-top: 56px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+  .footer strong { color: var(--brand-400); font-weight: 500; }
+</style>
+</head>
+<body data-repo="symphonix-bridge-sdk" data-brand="symphonix-health">
+<div class="wrap">
+  <div class="eyebrow">INTEROP · FHIR R4 PIVOT</div>
+  <h1>Every protocol, one canonical envelope.</h1>
+  <div class="rainbow-underline"></div>
+  <p class="lede">Heterogeneous healthcare protocol translation with a FHIR R4 canonical pivot. REST, FHIR, HL7v2, Nexus-A2A, Kafka, MCP, DICOM, CDA, gRPC, WebSocket, SSE, X12 — one BridgeEngine.</p>
+
+  <div class="card">
+    <div class="product">Bridge SDK</div>
+    <h2>Governed connectivity for healthcare AI.</h2>
+    <p>Move clinical and AI data safely, reliably, and at national scale — every integration traceable, every agent accountable.</p>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><div class="metric-value">12</div><div class="metric-label">PROTOCOL ADAPTERS</div></div>
+    <div class="metric"><div class="metric-value">FHIR R4</div><div class="metric-label">CANONICAL</div></div>
+    <div class="metric"><div class="metric-value">1</div><div class="metric-label">ENVELOPE</div></div>
+  </div>
+
+  <div class="footer">
+    Symphonix Health · <strong>symphonix-bridge-sdk</strong> · tokens via <code>.claude/skills/symphonix-health-design</code>
+  </div>
+</div>
+</body>
+</html>
