@@ -22,6 +22,8 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).parent.parent
+NFR_DIR = ROOT / "tests" / "harness" / "nfr_canonical_matrices"
+DERIVED_NFRS = ROOT / "tests" / "harness" / "derived_nfrs.json"
 CANON_DIR = ROOT / "tests" / "harness" / "canonical_matrices"
 REQ_MATRIX = ROOT / "tests" / "harness" / "requirements_matrix.json"
 SUPERSET = ROOT / "tests" / "harness" / "requirements_superset.json"
@@ -196,4 +198,90 @@ def test_derived_nfrs_match_caid_engine_output() -> None:
 
     assert persisted.get("schema_version") == "BT_DERIVED_NFRS_V1"
     assert persisted.get("iso_model") == "ISO/IEC 25010:2023"
+
+
+def _load_nfr_matrices() -> dict[str, dict]:
+    if not NFR_DIR.exists():
+        return {}
+    return {
+        p.name: json.loads(p.read_text(encoding="utf-8"))
+        for p in sorted(NFR_DIR.glob("*_canonical.json"))
+    }
+
+
+def test_nfr_matrices_present_for_every_derived_nfr() -> None:
+    """One NFR canonical matrix must exist for every derived NFR."""
+    if not DERIVED_NFRS.exists():
+        pytest.skip("derived_nfrs.json not present in tests/harness")
+    derived = json.loads(DERIVED_NFRS.read_text(encoding="utf-8"))
+    nfrs = derived.get("derived_nfrs", [])
+    if not nfrs:
+        pytest.skip("no NFRs derived — build not present")
+    matrices = _load_nfr_matrices()
+    assert matrices, (
+        f"no NFR canonical matrices found in {NFR_DIR.name} â run "
+        f"`python tests/harness/build_nfr_canonical_matrices.py`"
+    )
+    expected_ids = {n["requirement_id"] for n in nfrs}
+    seen_ids: set[str] = set()
+    for m in matrices.values():
+        seen_ids.update(
+            m.get("metadata", {}).get("default_requirement_ids", [])
+        )
+    missing = expected_ids - seen_ids
+    extra = seen_ids - expected_ids
+    assert not missing and not extra, (
+        f"NFR matrix coverage drift â re-run "
+        f"`python tests/harness/build_nfr_canonical_matrices.py`. "
+        f"Missing matrices for: {sorted(missing)}. "
+        f"Extra (no matching NFR): {sorted(extra)}."
+    )
+
+
+def test_nfr_matrices_canonical_schema() -> None:
+    matrices = _load_nfr_matrices()
+    if not matrices:
+        pytest.skip("NFR matrices not present in tests/harness")
+    for name, m in matrices.items():
+        assert m.get("schema_version") == "BT_CANONICAL_MATRIX_V1_14COL", \
+            f"{name} missing canonical schema"
+        assert tuple(m.get("columns", ())) == CANONICAL_COLUMNS, \
+            f"{name} columns mismatch"
+
+
+def test_nfr_matrices_have_exactly_100_scenarios() -> None:
+    matrices = _load_nfr_matrices()
+    if not matrices:
+        pytest.skip("NFR matrices not present in tests/harness")
+    for name, m in matrices.items():
+        scenarios = m.get("scenarios", [])
+        assert len(scenarios) == 100, \
+            f"{name} has {len(scenarios)} scenarios (expected 100)"
+
+
+def test_nfr_matrices_distribution_is_85_10_5() -> None:
+    matrices = _load_nfr_matrices()
+    if not matrices:
+        pytest.skip("NFR matrices not present in tests/harness")
+    for name, m in matrices.items():
+        scenarios = m["scenarios"]
+        pos = sum(1 for s in scenarios
+                  if s.get("scenario_category") == "Positive")
+        neg = sum(1 for s in scenarios
+                  if s.get("scenario_category") == "Negative")
+        edg = sum(1 for s in scenarios
+                  if s.get("scenario_category") == "Edge")
+        assert (pos, neg, edg) == (85, 10, 5), \
+            f"{name}: distribution {pos}/{neg}/{edg} (expected 85/10/5)"
+
+
+def test_nfr_matrices_metadata_carries_iso_attribution() -> None:
+    matrices = _load_nfr_matrices()
+    if not matrices:
+        pytest.skip("NFR matrices not present in tests/harness")
+    for name, m in matrices.items():
+        meta = m.get("metadata", {})
+        assert meta.get("iso_25010_characteristic"), (
+            f"{name} metadata missing iso_25010_characteristic"
+        )
 
