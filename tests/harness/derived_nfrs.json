@@ -1,0 +1,542 @@
+{
+  "schema_version": "BT_DERIVED_NFRS_V1",
+  "iso_model": "ISO/IEC 25010:2023",
+  "metadata": {
+    "subsystem": "symphonix-bridge-sdk",
+    "fr_count": 73,
+    "derived_nfr_count": 20,
+    "project_type": "sdk",
+    "regulatory_regime": [
+      "ISO_27001",
+      "ISO_27701",
+      "HIPAA",
+      "GDPR"
+    ],
+    "scale_tier": "production",
+    "characteristics_covered": [
+      "Compatibility",
+      "Flexibility",
+      "Interaction Capability",
+      "Maintainability",
+      "Performance Efficiency",
+      "Reliability",
+      "Safety",
+      "Security"
+    ]
+  },
+  "derived_nfrs": [
+    {
+      "requirement_id": "NFR-PE-001",
+      "title": "API time behaviour (p95 latency)",
+      "statement": "The system SHALL respond to mutating + read requests within 50ms (p95) under nominal load.",
+      "rationale": "ISO/IEC 25010:2023 Performance Efficiency / time_behaviour. Derived because the project exposes 73 functional endpoint(s); without a quantified latency target the SRS is unverifiable per Eckhardt 2016.",
+      "category": "non-functional",
+      "priority": "HIGH",
+      "iso_25010_characteristic": "Performance Efficiency",
+      "iso_25010_subcharacteristic": "time_behaviour",
+      "regulatory_ref": "",
+      "trace_links": [
+        "BSDK-002",
+        "BSDK-003",
+        "BSDK-101",
+        "BSDK-102",
+        "BSDK-103"
+      ],
+      "acceptance_criteria": [
+        {
+          "ac_id": "NFR-PE-001-AC01",
+          "given": "the system is under nominal load (50 concurrent users)",
+          "when": "any documented endpoint is invoked",
+          "then": "p95 response time < 50ms",
+          "test_type": "Positive"
+        }
+      ]
+    },
+    {
+      "requirement_id": "NFR-FL-001",
+      "title": "Horizontal scalability target",
+      "statement": "The system SHALL sustain 100 RPS sustained throughput with horizontal pod scaling without per-request degradation.",
+      "rationale": "ISO/IEC 25010:2023 Flexibility / scalability. Derived from scale_tier='production'; pilot tier omits this.",
+      "category": "non-functional",
+      "priority": "MEDIUM",
+      "iso_25010_characteristic": "Flexibility",
+      "iso_25010_subcharacteristic": "scalability",
+      "regulatory_ref": "",
+      "trace_links": [
+        "BSDK-002",
+        "BSDK-003",
+        "BSDK-101"
+      ],
+      "acceptance_criteria": [
+        {
+          "ac_id": "NFR-FL-001-AC01",
+          "given": "the system is deployed with replica count >= 2",
+          "when": "sustained load of 100 RPS is applied for 5 minutes",
+          "then": "p95 latency stays within performance target with no 5xx errors",
+          "test_type": "Positive"
+        }
+      ]
+    },
+    {
+      "requirement_id": "NFR-RE-001",
+      "title": "Availability target (99.9%)",
+      "statement": "The system SHALL be available 99.9% measured monthly, excluding documented planned maintenance windows.",
+      "rationale": "ISO/IEC 25010:2023 Reliability / availability. Tier-specific target ('production'); without a quantified target the SLO is unaccountable.",
+      "category": "non-functional",
+      "priority": "HIGH",
+      "iso_25010_characteristic": "Reliability",
+      "iso_25010_subcharacteristic": "availability",
+      "regulatory_ref": "",
+      "trace_links": [
+        "BSDK-002",
+        "BSDK-003",
+        "BSDK-101"
+      ],
+      "acceptance_criteria": [
+        {
+          "ac_id": "NFR-RE-001-AC01",
+          "given": "the /health endpoint is documented",
+          "when": "external uptime probe queries /health every 60 s for a month",
+          "then": "recorded availability >= 99.9%",
+          "test_type": "Positive"
+        }
+      ]
+    },
+    {
+      "requirement_id": "NFR-RE-002",
+      "title": "Downstream-call resilience (circuit breaker + retry)",
+      "statement": "Calls to downstream systems SHALL be wrapped in a circuit breaker with exponential-backoff retry; the system SHALL degrade gracefully and surface a typed error to the caller rather than propagating the underlying failure.",
+      "rationale": "ISO/IEC 25010:2023 Reliability / fault_tolerance. Derived from FRs that touch external systems; without breaker + retry semantics, transient downstream faults cascade.",
+      "category": "non-functional",
+      "priority": "HIGH",
+      "iso_25010_characteristic": "Reliability",
+      "iso_25010_subcharacteristic": "fault_tolerance",
+      "regulatory_ref": "",
+      "trace_links": [
+        "BSDK-152",
+        "BSDK-154"
+      ],
+      "acceptance_criteria": [
+        {
+          "ac_id": "NFR-RE-002-AC01",
+          "given": "the downstream is artificially returning 5xx",
+          "when": "the system invokes the downstream",
+          "then": "the breaker opens after threshold and a typed error is returned to the caller",
+          "test_type": "Negative"
+        },
+        {
+          "ac_id": "NFR-RE-002-AC02",
+          "given": "the downstream recovers",
+          "when": "the breaker reset window elapses",
+          "then": "the breaker half-opens, probes succeed, and full traffic resumes",
+          "test_type": "Positive"
+        }
+      ]
+    },
+    {
+      "requirement_id": "NFR-RE-003",
+      "title": "Disaster recovery (RPO 15 min / RTO 1 h)",
+      "statement": "The system SHALL declare and exercise documented RPO 15 min and RTO 1 h via at least an annual DR drill.",
+      "rationale": "ISO/IEC 25010:2023 Reliability / recoverability. Derived from scale_tier='production'.",
+      "category": "non-functional",
+      "priority": "HIGH",
+      "iso_25010_characteristic": "Reliability",
+      "iso_25010_subcharacteristic": "recoverability",
+      "regulatory_ref": "",
+      "trace_links": [
+        "BSDK-002",
+        "BSDK-003",
+        "BSDK-101"
+      ],
+      "acceptance_criteria": [
+        {
+          "ac_id": "NFR-RE-003-AC01",
+          "given": "the operator triggers a DR drill",
+          "when": "primary region is taken offline",
+          "then": "failover completes within RTO (1 h) and data loss <= RPO (15 min)",
+          "test_type": "Positive"
+        }
+      ]
+    },
+    {
+      "requirement_id": "NFR-SE-001",
+      "title": "PHI / PII confidentiality (encryption + redaction)",
+      "statement": "PHI / PII SHALL be encrypted at rest (AES-256 or equivalent) and in transit (TLS 1.2+); PHI SHALL be redacted before any cross-tenant or external sharing.",
+      "rationale": "ISO/IEC 25010:2023 Security / confidentiality. Derived because the FRs touch PHI/PII (markers: []).",
+      "category": "non-functional",
+      "priority": "CRITICAL",
+      "iso_25010_characteristic": "Security",
+      "iso_25010_subcharacteristic": "confidentiality",
+      "regulatory_ref": "HIPAA Security Rule §164.312",
+      "trace_links": [
+        "BSDK-179"
+      ],
+      "acceptance_criteria": [
+        {
+          "ac_id": "NFR-SE-001-AC01",
+          "given": "a record containing PHI is stored",
+          "when": "the operator inspects the storage layer",
+          "then": "the record is encrypted at rest",
+          "test_type": "Positive"
+        },
+        {
+          "ac_id": "NFR-SE-001-AC02",
+          "given": "user A's PHI exists",
+          "when": "user B requests it via any documented endpoint",
+          "then": "the response is 403 Forbidden and no PHI leaks in error details",
+          "test_type": "Negative"
+        }
+      ]
+    },
+    {
+      "requirement_id": "NFR-SE-002",
+      "title": "Tamper-evident integrity (hash-chain or signed log)",
+      "statement": "Records that establish accountability (audit log, claim, clinical action) SHALL be tamper-evident via hash-chain or cryptographic signature with periodic anchor publication.",
+      "rationale": "ISO/IEC 25010:2023 Security / integrity. Triggered by audit trail, payment, or clinical-decision domain markers.",
+      "category": "non-functional",
+      "priority": "CRITICAL",
+      "iso_25010_characteristic": "Security",
+      "iso_25010_subcharacteristic": "integrity",
+      "regulatory_ref": "",
+      "trace_links": [
+        "BSDK-002",
+        "BSDK-103",
+        "BSDK-104",
+        "BSDK-105",
+        "BSDK-145"
+      ],
+      "acceptance_criteria": [
+        {
+          "ac_id": "NFR-SE-002-AC01",
+          "given": "an entry is appended to the accountability log",
+          "when": "an attacker mutates a previous entry",
+          "then": "verification rejects the chain and emits an alertable signal",
+          "test_type": "Negative"
+        }
+      ]
+    },
+    {
+      "requirement_id": "NFR-SE-003",
+      "title": "Audit trail with correlation ID",
+      "statement": "Every state-changing request SHALL emit an audit-log entry carrying caller identity, timestamp, correlation ID, operation, and outcome.",
+      "rationale": "ISO/IEC 25010:2023 Security / accountability. Required by every regulatory regime that touches accountability.",
+      "category": "non-functional",
+      "priority": "HIGH",
+      "iso_25010_characteristic": "Security",
+      "iso_25010_subcharacteristic": "accountability",
+      "regulatory_ref": "HIPAA Security Rule §164.312(b)",
+      "trace_links": [
+        "BSDK-002",
+        "BSDK-003",
+        "BSDK-101",
+        "BSDK-102",
+        "BSDK-103"
+      ],
+      "acceptance_criteria": [
+        {
+          "ac_id": "NFR-SE-003-AC01",
+          "given": "any mutating endpoint is invoked",
+          "when": "the operator queries the audit log",
+          "then": "the request appears with caller, ts, correlation_id, operation, and outcome",
+          "test_type": "Positive"
+        }
+      ]
+    },
+    {
+      "requirement_id": "NFR-SE-004",
+      "title": "Strong authentication on all endpoints",
+      "statement": "All endpoints SHALL require authentication (OIDC JWT or mTLS); credentials SHALL be hashed with a memory-hard KDF (argon2id or bcrypt cost >= 12); JWT TTL <= 24 h.",
+      "rationale": "ISO/IEC 25010:2023 Security / authenticity. Anonymous endpoints are an OWASP A01 (broken access control) risk.",
+      "category": "non-functional",
+      "priority": "CRITICAL",
+      "iso_25010_characteristic": "Security",
+      "iso_25010_subcharacteristic": "authenticity",
+      "regulatory_ref": "",
+      "trace_links": [
+        "BSDK-002",
+        "BSDK-003",
+        "BSDK-101"
+      ],
+      "acceptance_criteria": [
+        {
+          "ac_id": "NFR-SE-004-AC01",
+          "given": "no credentials are presented",
+          "when": "any documented endpoint is invoked",
+          "then": "the response is 401 Unauthorized",
+          "test_type": "Negative"
+        },
+        {
+          "ac_id": "NFR-SE-004-AC02",
+          "given": "valid credentials are presented",
+          "when": "the documented login endpoint is invoked",
+          "then": "a bearer token is returned with TTL <= 24 h",
+          "test_type": "Positive"
+        }
+      ]
+    },
+    {
+      "requirement_id": "NFR-SE-005",
+      "title": "Rate limiting + abuse defence",
+      "statement": "Public endpoints SHALL apply per-principal rate limiting with documented thresholds; mutating endpoints SHALL honour Idempotency-Key headers; replay attacks within the Idempotency-Key window SHALL be rejected.",
+      "rationale": "ISO/IEC 25010:2023 Security / resistance. OWASP A07.",
+      "category": "non-functional",
+      "priority": "HIGH",
+      "iso_25010_characteristic": "Security",
+      "iso_25010_subcharacteristic": "resistance",
+      "regulatory_ref": "",
+      "trace_links": [
+        "BSDK-002",
+        "BSDK-003",
+        "BSDK-101",
+        "BSDK-102",
+        "BSDK-103"
+      ],
+      "acceptance_criteria": [
+        {
+          "ac_id": "NFR-SE-005-AC01",
+          "given": "a principal exceeds the documented rate threshold",
+          "when": "they continue making requests",
+          "then": "subsequent requests return 429 with Retry-After",
+          "test_type": "Negative"
+        }
+      ]
+    },
+    {
+      "requirement_id": "NFR-CO-001",
+      "title": "Standard-protocol interoperability",
+      "statement": "External integration SHALL use standard formats: FHIR R4; HL7 v2 / X12 / DICOM (per declared adapter); MCP server manifest + A2A agent card. A current OpenAPI document SHALL be published.",
+      "rationale": "ISO/IEC 25010:2023 Compatibility / interoperability. Bespoke wire formats raise integration cost and lock callers in.",
+      "category": "non-functional",
+      "priority": "HIGH",
+      "iso_25010_characteristic": "Compatibility",
+      "iso_25010_subcharacteristic": "interoperability",
+      "regulatory_ref": "",
+      "trace_links": [
+        "BSDK-101",
+        "BSDK-102",
+        "BSDK-109",
+        "BSDK-111",
+        "BSDK-112"
+      ],
+      "acceptance_criteria": [
+        {
+          "ac_id": "NFR-CO-001-AC01",
+          "given": "an external caller asks for the API contract",
+          "when": "they fetch /openapi.json",
+          "then": "a current valid OpenAPI 3.x document is returned",
+          "test_type": "Positive"
+        }
+      ]
+    },
+    {
+      "requirement_id": "NFR-CO-002",
+      "title": "Container co-existence + version pinning",
+      "statement": "The system SHALL ship as a signed container image with pinned base image, no :latest tags, and a published SBOM.",
+      "rationale": "ISO/IEC 25010:2023 Compatibility / coexistence.",
+      "category": "non-functional",
+      "priority": "MEDIUM",
+      "iso_25010_characteristic": "Compatibility",
+      "iso_25010_subcharacteristic": "coexistence",
+      "regulatory_ref": "",
+      "trace_links": [
+        "BSDK-002"
+      ],
+      "acceptance_criteria": [
+        {
+          "ac_id": "NFR-CO-002-AC01",
+          "given": "the operator pulls the released image",
+          "when": "they inspect the image manifest + SBOM",
+          "then": "all tags are pinned (no :latest), image is signed (cosign), and an SPDX SBOM is attached",
+          "test_type": "Positive"
+        }
+      ]
+    },
+    {
+      "requirement_id": "NFR-IC-001",
+      "title": "Multilingual operability (BCP-47)",
+      "statement": "Citizen / patient-facing content SHALL be translatable; language preference SHALL be selectable per BCP-47 tag and respected in all subsequent responses.",
+      "rationale": "ISO/IEC 25010:2023 Interaction Capability / operability.",
+      "category": "non-functional",
+      "priority": "HIGH",
+      "iso_25010_characteristic": "Interaction Capability",
+      "iso_25010_subcharacteristic": "operability",
+      "regulatory_ref": "",
+      "trace_links": [
+        "BSDK-003",
+        "BSDK-151"
+      ],
+      "acceptance_criteria": [
+        {
+          "ac_id": "NFR-IC-001-AC01",
+          "given": "a user sets Accept-Language: sw",
+          "when": "they navigate the application",
+          "then": "all UI strings render in Swahili (fallback to English only for untranslated keys with explicit warning)",
+          "test_type": "Positive"
+        }
+      ]
+    },
+    {
+      "requirement_id": "NFR-MA-001",
+      "title": "Modular package layout with public-API surface",
+      "statement": "The codebase SHALL be organised so each top-level concern is a directly-importable package; public API surface SHALL be enumerated in a stable __all__ / public manifest.",
+      "rationale": "ISO/IEC 25010:2023 Maintainability / modularity.",
+      "category": "non-functional",
+      "priority": "MEDIUM",
+      "iso_25010_characteristic": "Maintainability",
+      "iso_25010_subcharacteristic": "modularity",
+      "regulatory_ref": "",
+      "trace_links": [
+        "BSDK-002"
+      ],
+      "acceptance_criteria": [
+        {
+          "ac_id": "NFR-MA-001-AC01",
+          "given": "a downstream consumer needs only the public API",
+          "when": "they import only from the documented public surface",
+          "then": "the import graph never reaches private modules",
+          "test_type": "Positive"
+        }
+      ]
+    },
+    {
+      "requirement_id": "NFR-MA-002",
+      "title": "Testable component contracts",
+      "statement": "Every public function SHALL be unit-testable without network or filesystem dependencies; integration tests SHALL be invokable in CI without a paid hosted service.",
+      "rationale": "ISO/IEC 25010:2023 Maintainability / testability.",
+      "category": "non-functional",
+      "priority": "MEDIUM",
+      "iso_25010_characteristic": "Maintainability",
+      "iso_25010_subcharacteristic": "testability",
+      "regulatory_ref": "",
+      "trace_links": [
+        "BSDK-002"
+      ],
+      "acceptance_criteria": [
+        {
+          "ac_id": "NFR-MA-002-AC01",
+          "given": "the test suite is invoked offline",
+          "when": "pytest runs with no internet access",
+          "then": "all unit tests still pass",
+          "test_type": "Positive"
+        }
+      ]
+    },
+    {
+      "requirement_id": "NFR-MA-003",
+      "title": "OpenTelemetry traces, metrics, logs",
+      "statement": "All entrypoints SHALL emit OpenTelemetry traces, metrics, and structured JSON logs carrying the correlation ID; Prometheus /metrics SHALL be exposed.",
+      "rationale": "ISO/IEC 25010:2023 Maintainability / analysability — covers Observability in the user's NFR list.",
+      "category": "non-functional",
+      "priority": "HIGH",
+      "iso_25010_characteristic": "Maintainability",
+      "iso_25010_subcharacteristic": "analysability",
+      "regulatory_ref": "",
+      "trace_links": [
+        "BSDK-002",
+        "BSDK-003",
+        "BSDK-101"
+      ],
+      "acceptance_criteria": [
+        {
+          "ac_id": "NFR-MA-003-AC01",
+          "given": "any endpoint is invoked",
+          "when": "the operator queries the trace backend by correlation ID",
+          "then": "a span tree covering the full request is returned",
+          "test_type": "Positive"
+        }
+      ]
+    },
+    {
+      "requirement_id": "NFR-MA-004",
+      "title": "SemVer + deprecation policy",
+      "statement": "Releases SHALL follow Semantic Versioning; breaking changes SHALL be preceded by a deprecation window of >= 1 minor release with a migration guide.",
+      "rationale": "ISO/IEC 25010:2023 Maintainability / modifiability — covers Extensibility in the user's NFR list.",
+      "category": "non-functional",
+      "priority": "MEDIUM",
+      "iso_25010_characteristic": "Maintainability",
+      "iso_25010_subcharacteristic": "modifiability",
+      "regulatory_ref": "",
+      "trace_links": [
+        "BSDK-002"
+      ],
+      "acceptance_criteria": [
+        {
+          "ac_id": "NFR-MA-004-AC01",
+          "given": "a public function changes signature",
+          "when": "a release is cut",
+          "then": "the major version is bumped OR the change went through a deprecation window with a migration guide",
+          "test_type": "Positive"
+        }
+      ]
+    },
+    {
+      "requirement_id": "NFR-FL-002",
+      "title": "Single-command install + Helm chart parity",
+      "statement": "The system SHALL ship a Helm chart (production deployment) and a docker-compose for local development; both SHALL produce the same runtime contract.",
+      "rationale": "ISO/IEC 25010:2023 Flexibility / installability — covers Portability in the user's NFR list.",
+      "category": "non-functional",
+      "priority": "MEDIUM",
+      "iso_25010_characteristic": "Flexibility",
+      "iso_25010_subcharacteristic": "installability",
+      "regulatory_ref": "",
+      "trace_links": [
+        "BSDK-002"
+      ],
+      "acceptance_criteria": [
+        {
+          "ac_id": "NFR-FL-002-AC01",
+          "given": "a fresh operator clones the repo",
+          "when": "they run docker-compose up",
+          "then": "the documented endpoints respond without further configuration",
+          "test_type": "Positive"
+        }
+      ]
+    },
+    {
+      "requirement_id": "NFR-SA-001",
+      "title": "Clinical-safety hazard log + CSO sign-off",
+      "statement": "A documented hazard log SHALL be maintained; each release SHALL evidence sign-off by a clinical safety officer prior to deployment.",
+      "rationale": "ISO/IEC 25010:2023 Safety / hazard_warning.",
+      "category": "non-functional",
+      "priority": "CRITICAL",
+      "iso_25010_characteristic": "Safety",
+      "iso_25010_subcharacteristic": "hazard_warning",
+      "regulatory_ref": "",
+      "trace_links": [
+        "BSDK-145"
+      ],
+      "acceptance_criteria": [
+        {
+          "ac_id": "NFR-SA-001-AC01",
+          "given": "a release is staged",
+          "when": "the deployment gate is invoked",
+          "then": "release is blocked until CSO sign-off + current hazard log are linked",
+          "test_type": "Negative"
+        }
+      ]
+    },
+    {
+      "requirement_id": "NFR-SA-002",
+      "title": "Confidence threshold + human-in-the-loop fallback",
+      "statement": "Clinical recommendations SHALL declare a confidence threshold below which the response is deferred to a human-in-the-loop reviewer.",
+      "rationale": "ISO/IEC 25010:2023 Safety / fail_safe.",
+      "category": "non-functional",
+      "priority": "CRITICAL",
+      "iso_25010_characteristic": "Safety",
+      "iso_25010_subcharacteristic": "fail_safe",
+      "regulatory_ref": "",
+      "trace_links": [
+        "BSDK-145"
+      ],
+      "acceptance_criteria": [
+        {
+          "ac_id": "NFR-SA-002-AC01",
+          "given": "the inference returns confidence < threshold",
+          "when": "the response path runs",
+          "then": "a human-in-the-loop escalation is emitted instead of an auto-recommendation",
+          "test_type": "Positive"
+        }
+      ]
+    }
+  ]
+}

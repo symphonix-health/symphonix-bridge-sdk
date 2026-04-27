@@ -1,0 +1,814 @@
+{
+  "schema_version": "BT_REQUIREMENTS_SUPERSET_V1",
+  "metadata": {
+    "subsystem": "symphonix-bridge-sdk",
+    "requirement_count": 99,
+    "families": [
+      "A_PROMPT_PRESERVED",
+      "B_FHIR_PIVOT",
+      "C_ADAPTERS_INBOUND",
+      "D_ADAPTERS_OUTBOUND",
+      "E_ENGINE",
+      "F_REGULATORY",
+      "G_INTEROP",
+      "H_OBSERVABILITY",
+      "I_SECURITY",
+      "J_REA_BASELINE",
+      "K_CROSS_CUTTING_NFR"
+    ]
+  },
+  "requirements": [
+    {
+      "requirement_id": "BSDK-001",
+      "family": "A_PROMPT_PRESERVED",
+      "title": "FHIR R4 canonical pivot",
+      "statement": "SDK SHALL use FHIR R4 as the canonical pivot.",
+      "category": "non-functional",
+      "source": "README.md"
+    },
+    {
+      "requirement_id": "BSDK-002",
+      "family": "A_PROMPT_PRESERVED",
+      "title": "CanonicalEnvelope shape",
+      "statement": "SDK SHALL define a CanonicalEnvelope with payload + terminology + metadata.",
+      "category": "functional",
+      "source": "README.md"
+    },
+    {
+      "requirement_id": "BSDK-003",
+      "family": "A_PROMPT_PRESERVED",
+      "title": "Any-to-any translation",
+      "statement": "SDK SHALL support any-to-any translation across declared adapters.",
+      "category": "functional",
+      "source": "README.md"
+    },
+    {
+      "requirement_id": "BSDK-101",
+      "family": "B_FHIR_PIVOT",
+      "title": "FHIR R4 base profile",
+      "statement": "Pivot SHALL be FHIR R4 conformant.",
+      "category": "functional",
+      "source": "Fhir Pivot"
+    },
+    {
+      "requirement_id": "BSDK-102",
+      "family": "B_FHIR_PIVOT",
+      "title": "FHIR R5 transition plan",
+      "statement": "Pivot SHALL document FHIR R5 transition plan.",
+      "category": "functional",
+      "source": "Fhir Pivot"
+    },
+    {
+      "requirement_id": "BSDK-103",
+      "family": "B_FHIR_PIVOT",
+      "title": "LOINC code binding",
+      "statement": "Terminology SHALL include LOINC bindings.",
+      "category": "functional",
+      "source": "Fhir Pivot"
+    },
+    {
+      "requirement_id": "BSDK-104",
+      "family": "B_FHIR_PIVOT",
+      "title": "SNOMED CT code binding",
+      "statement": "Terminology SHALL include SNOMED CT bindings.",
+      "category": "functional",
+      "source": "Fhir Pivot"
+    },
+    {
+      "requirement_id": "BSDK-105",
+      "family": "B_FHIR_PIVOT",
+      "title": "ICD-10/11 code binding",
+      "statement": "Terminology SHALL support ICD-10/11.",
+      "category": "functional",
+      "source": "Fhir Pivot"
+    },
+    {
+      "requirement_id": "BSDK-106",
+      "family": "B_FHIR_PIVOT",
+      "title": "UCUM unit binding",
+      "statement": "Quantitative observations SHALL bind UCUM units.",
+      "category": "functional",
+      "source": "Fhir Pivot"
+    },
+    {
+      "requirement_id": "BSDK-107",
+      "family": "B_FHIR_PIVOT",
+      "title": "RxNorm code binding",
+      "statement": "Medication codes SHALL bind RxNorm where applicable.",
+      "category": "functional",
+      "source": "Fhir Pivot"
+    },
+    {
+      "requirement_id": "BSDK-108",
+      "family": "B_FHIR_PIVOT",
+      "title": "dm+d code binding",
+      "statement": "UK medication codes SHALL bind dm+d.",
+      "category": "functional",
+      "source": "Fhir Pivot"
+    },
+    {
+      "requirement_id": "BSDK-109",
+      "family": "B_FHIR_PIVOT",
+      "title": "CapabilityStatement publication",
+      "statement": "FHIR endpoints SHALL publish CapabilityStatement.",
+      "category": "functional",
+      "source": "Fhir Pivot"
+    },
+    {
+      "requirement_id": "BSDK-110",
+      "family": "B_FHIR_PIVOT",
+      "title": "Profile resolution registry",
+      "statement": "Pivot SHALL maintain a profile resolution registry.",
+      "category": "functional",
+      "source": "Fhir Pivot"
+    },
+    {
+      "requirement_id": "BSDK-111",
+      "family": "C_ADAPTERS_INBOUND",
+      "title": "HL7 v2 MLLP inbound",
+      "statement": "SDK SHALL accept HL7 v2 over MLLP.",
+      "category": "functional",
+      "source": "Adapters Inbound"
+    },
+    {
+      "requirement_id": "BSDK-112",
+      "family": "C_ADAPTERS_INBOUND",
+      "title": "DICOM C-FIND/C-STORE inbound",
+      "statement": "SDK SHALL accept DICOM C-FIND / C-STORE.",
+      "category": "functional",
+      "source": "Adapters Inbound"
+    },
+    {
+      "requirement_id": "BSDK-113",
+      "family": "C_ADAPTERS_INBOUND",
+      "title": "X12 EDI inbound",
+      "statement": "SDK SHALL accept X12 EDI.",
+      "category": "functional",
+      "source": "Adapters Inbound"
+    },
+    {
+      "requirement_id": "BSDK-114",
+      "family": "C_ADAPTERS_INBOUND",
+      "title": "CDA R2 inbound",
+      "statement": "SDK SHALL accept CDA R2 documents.",
+      "category": "functional",
+      "source": "Adapters Inbound"
+    },
+    {
+      "requirement_id": "BSDK-115",
+      "family": "C_ADAPTERS_INBOUND",
+      "title": "REST/JSON inbound",
+      "statement": "SDK SHALL accept generic REST/JSON.",
+      "category": "functional",
+      "source": "Adapters Inbound"
+    },
+    {
+      "requirement_id": "BSDK-116",
+      "family": "C_ADAPTERS_INBOUND",
+      "title": "Nexus A2A inbound",
+      "statement": "SDK SHALL accept Nexus A2A messages.",
+      "category": "functional",
+      "source": "Adapters Inbound"
+    },
+    {
+      "requirement_id": "BSDK-117",
+      "family": "C_ADAPTERS_INBOUND",
+      "title": "MCP tool-call inbound",
+      "statement": "SDK SHALL accept MCP tool calls.",
+      "category": "functional",
+      "source": "Adapters Inbound"
+    },
+    {
+      "requirement_id": "BSDK-118",
+      "family": "C_ADAPTERS_INBOUND",
+      "title": "Kafka inbound",
+      "statement": "SDK SHALL consume Kafka topics.",
+      "category": "functional",
+      "source": "Adapters Inbound"
+    },
+    {
+      "requirement_id": "BSDK-119",
+      "family": "C_ADAPTERS_INBOUND",
+      "title": "gRPC inbound",
+      "statement": "SDK SHALL accept gRPC requests.",
+      "category": "functional",
+      "source": "Adapters Inbound"
+    },
+    {
+      "requirement_id": "BSDK-120",
+      "family": "C_ADAPTERS_INBOUND",
+      "title": "WebSocket inbound",
+      "statement": "SDK SHALL accept WebSocket messages.",
+      "category": "functional",
+      "source": "Adapters Inbound"
+    },
+    {
+      "requirement_id": "BSDK-121",
+      "family": "D_ADAPTERS_OUTBOUND",
+      "title": "HL7 v2 MLLP outbound",
+      "statement": "SDK SHALL emit HL7 v2 over MLLP.",
+      "category": "functional",
+      "source": "Adapters Outbound"
+    },
+    {
+      "requirement_id": "BSDK-122",
+      "family": "D_ADAPTERS_OUTBOUND",
+      "title": "DICOM outbound",
+      "statement": "SDK SHALL emit DICOM messages.",
+      "category": "functional",
+      "source": "Adapters Outbound"
+    },
+    {
+      "requirement_id": "BSDK-123",
+      "family": "D_ADAPTERS_OUTBOUND",
+      "title": "X12 EDI outbound",
+      "statement": "SDK SHALL emit X12 EDI.",
+      "category": "functional",
+      "source": "Adapters Outbound"
+    },
+    {
+      "requirement_id": "BSDK-124",
+      "family": "D_ADAPTERS_OUTBOUND",
+      "title": "CDA R2 outbound",
+      "statement": "SDK SHALL emit CDA R2 documents.",
+      "category": "functional",
+      "source": "Adapters Outbound"
+    },
+    {
+      "requirement_id": "BSDK-125",
+      "family": "D_ADAPTERS_OUTBOUND",
+      "title": "REST/JSON outbound",
+      "statement": "SDK SHALL emit REST/JSON.",
+      "category": "functional",
+      "source": "Adapters Outbound"
+    },
+    {
+      "requirement_id": "BSDK-126",
+      "family": "D_ADAPTERS_OUTBOUND",
+      "title": "Nexus A2A outbound",
+      "statement": "SDK SHALL emit Nexus A2A messages.",
+      "category": "functional",
+      "source": "Adapters Outbound"
+    },
+    {
+      "requirement_id": "BSDK-127",
+      "family": "D_ADAPTERS_OUTBOUND",
+      "title": "MCP tool-call outbound",
+      "statement": "SDK SHALL emit MCP tool calls.",
+      "category": "functional",
+      "source": "Adapters Outbound"
+    },
+    {
+      "requirement_id": "BSDK-128",
+      "family": "D_ADAPTERS_OUTBOUND",
+      "title": "Kafka outbound",
+      "statement": "SDK SHALL produce Kafka messages.",
+      "category": "functional",
+      "source": "Adapters Outbound"
+    },
+    {
+      "requirement_id": "BSDK-129",
+      "family": "D_ADAPTERS_OUTBOUND",
+      "title": "gRPC outbound",
+      "statement": "SDK SHALL emit gRPC calls.",
+      "category": "functional",
+      "source": "Adapters Outbound"
+    },
+    {
+      "requirement_id": "BSDK-130",
+      "family": "D_ADAPTERS_OUTBOUND",
+      "title": "WebSocket outbound",
+      "statement": "SDK SHALL emit WebSocket messages.",
+      "category": "functional",
+      "source": "Adapters Outbound"
+    },
+    {
+      "requirement_id": "BSDK-131",
+      "family": "D_ADAPTERS_OUTBOUND",
+      "title": "SSE outbound",
+      "statement": "SDK SHALL emit SSE push messages.",
+      "category": "functional",
+      "source": "Adapters Outbound"
+    },
+    {
+      "requirement_id": "BSDK-132",
+      "family": "E_ENGINE",
+      "title": "Routing rule engine",
+      "statement": "SDK SHALL include a routing rule engine.",
+      "category": "functional",
+      "source": "Engine"
+    },
+    {
+      "requirement_id": "BSDK-133",
+      "family": "E_ENGINE",
+      "title": "Pluggable adapter registry",
+      "statement": "Adapters SHALL be pluggable.",
+      "category": "functional",
+      "source": "Engine"
+    },
+    {
+      "requirement_id": "BSDK-134",
+      "family": "E_ENGINE",
+      "title": "Per-route transformation pipeline",
+      "statement": "Routes SHALL support transformation pipelines.",
+      "category": "functional",
+      "source": "Engine"
+    },
+    {
+      "requirement_id": "BSDK-135",
+      "family": "E_ENGINE",
+      "title": "Validation per adapter",
+      "statement": "Adapters SHALL validate inputs + outputs.",
+      "category": "functional",
+      "source": "Engine"
+    },
+    {
+      "requirement_id": "BSDK-136",
+      "family": "E_ENGINE",
+      "title": "Error envelope normalisation",
+      "statement": "Errors SHALL be normalised across adapters.",
+      "category": "functional",
+      "source": "Engine"
+    },
+    {
+      "requirement_id": "BSDK-137",
+      "family": "E_ENGINE",
+      "title": "Dead-letter for poison messages",
+      "statement": "Poison messages SHALL be DLQ'd.",
+      "category": "functional",
+      "source": "Engine"
+    },
+    {
+      "requirement_id": "BSDK-138",
+      "family": "E_ENGINE",
+      "title": "Replay queue for retries",
+      "statement": "Retries SHALL use a replay queue.",
+      "category": "functional",
+      "source": "Engine"
+    },
+    {
+      "requirement_id": "BSDK-139",
+      "family": "E_ENGINE",
+      "title": "Idempotency key honouring",
+      "statement": "Mutating routes SHALL honour Idempotency-Key.",
+      "category": "functional",
+      "source": "Engine"
+    },
+    {
+      "requirement_id": "BSDK-140",
+      "family": "E_ENGINE",
+      "title": "Correlation ID propagation",
+      "statement": "Correlation ID SHALL propagate across adapters.",
+      "category": "functional",
+      "source": "Engine"
+    },
+    {
+      "requirement_id": "BSDK-141",
+      "family": "E_ENGINE",
+      "title": "Streaming transform",
+      "statement": "Streaming transforms SHALL be supported.",
+      "category": "functional",
+      "source": "Engine"
+    },
+    {
+      "requirement_id": "BSDK-142",
+      "family": "F_REGULATORY",
+      "title": "HIPAA Privacy Rule",
+      "statement": "US deployments SHALL evidence HIPAA.",
+      "category": "compliance",
+      "source": "Regulatory"
+    },
+    {
+      "requirement_id": "BSDK-143",
+      "family": "F_REGULATORY",
+      "title": "GDPR lawful basis",
+      "statement": "EU deployments SHALL declare GDPR lawful basis.",
+      "category": "compliance",
+      "source": "Regulatory"
+    },
+    {
+      "requirement_id": "BSDK-144",
+      "family": "F_REGULATORY",
+      "title": "UK DSPT compliance",
+      "statement": "UK deployments SHALL evidence DSPT.",
+      "category": "compliance",
+      "source": "Regulatory"
+    },
+    {
+      "requirement_id": "BSDK-145",
+      "family": "F_REGULATORY",
+      "title": "DCB 0129 / 0160",
+      "statement": "UK clinical-claimed SHALL evidence DCB 0129 / 0160.",
+      "category": "compliance",
+      "source": "Regulatory"
+    },
+    {
+      "requirement_id": "BSDK-146",
+      "family": "F_REGULATORY",
+      "title": "ISO 27001 ISMS",
+      "statement": "Operators SHALL evidence ISO 27001 ISMS.",
+      "category": "compliance",
+      "source": "Regulatory"
+    },
+    {
+      "requirement_id": "BSDK-147",
+      "family": "F_REGULATORY",
+      "title": "ISO 27701 PIMS",
+      "statement": "Operators SHALL evidence ISO 27701 PIMS.",
+      "category": "compliance",
+      "source": "Regulatory"
+    },
+    {
+      "requirement_id": "BSDK-148",
+      "family": "F_REGULATORY",
+      "title": "ISO 22301 BCMS",
+      "statement": "Operators SHALL evidence ISO 22301 BCMS.",
+      "category": "compliance",
+      "source": "Regulatory"
+    },
+    {
+      "requirement_id": "BSDK-149",
+      "family": "F_REGULATORY",
+      "title": "ISO 13485 QMS",
+      "statement": "Where applicable, ISO 13485 QMS SHALL be evidenced.",
+      "category": "compliance",
+      "source": "Regulatory"
+    },
+    {
+      "requirement_id": "BSDK-150",
+      "family": "F_REGULATORY",
+      "title": "Audit log retention",
+      "statement": "Audit log retention SHALL be declared.",
+      "category": "compliance",
+      "source": "Regulatory"
+    },
+    {
+      "requirement_id": "BSDK-151",
+      "family": "F_REGULATORY",
+      "title": "Right to be forgotten",
+      "statement": "Erasure SHALL propagate through translated history.",
+      "category": "compliance",
+      "source": "Regulatory"
+    },
+    {
+      "requirement_id": "BSDK-152",
+      "family": "G_INTEROP",
+      "title": "OpenAPI publication",
+      "statement": "REST API SHALL publish OpenAPI.",
+      "category": "functional",
+      "source": "Interop"
+    },
+    {
+      "requirement_id": "BSDK-153",
+      "family": "G_INTEROP",
+      "title": "Adapter conformance suite",
+      "statement": "Adapters SHALL ship a conformance suite.",
+      "category": "functional",
+      "source": "Interop"
+    },
+    {
+      "requirement_id": "BSDK-154",
+      "family": "G_INTEROP",
+      "title": "HAPI FHIR test compatibility",
+      "statement": "FHIR adapter SHALL be HAPI-compatible.",
+      "category": "functional",
+      "source": "Interop"
+    },
+    {
+      "requirement_id": "BSDK-155",
+      "family": "G_INTEROP",
+      "title": "Healthcare.gov interop tests",
+      "statement": "Where applicable, HC.gov interop tests SHALL be passed.",
+      "category": "functional",
+      "source": "Interop"
+    },
+    {
+      "requirement_id": "BSDK-156",
+      "family": "G_INTEROP",
+      "title": "HL7 v2 conformance profile",
+      "statement": "HL7 v2 adapter SHALL declare conformance profile.",
+      "category": "functional",
+      "source": "Interop"
+    },
+    {
+      "requirement_id": "BSDK-157",
+      "family": "G_INTEROP",
+      "title": "DICOM conformance statement",
+      "statement": "DICOM adapter SHALL ship conformance statement.",
+      "category": "functional",
+      "source": "Interop"
+    },
+    {
+      "requirement_id": "BSDK-158",
+      "family": "G_INTEROP",
+      "title": "X12 implementation guide adherence",
+      "statement": "X12 adapter SHALL adhere to documented IGs.",
+      "category": "functional",
+      "source": "Interop"
+    },
+    {
+      "requirement_id": "BSDK-159",
+      "family": "G_INTEROP",
+      "title": "Bulk Data conformance",
+      "statement": "FHIR Bulk Data SHALL be supported.",
+      "category": "functional",
+      "source": "Interop"
+    },
+    {
+      "requirement_id": "BSDK-160",
+      "family": "G_INTEROP",
+      "title": "MCP server manifest",
+      "statement": "MCP adapter SHALL publish server manifest.",
+      "category": "functional",
+      "source": "Interop"
+    },
+    {
+      "requirement_id": "BSDK-161",
+      "family": "G_INTEROP",
+      "title": "A2A agent card",
+      "statement": "Nexus A2A adapter SHALL publish agent card.",
+      "category": "functional",
+      "source": "Interop"
+    },
+    {
+      "requirement_id": "BSDK-162",
+      "family": "H_OBSERVABILITY",
+      "title": "OTel traces",
+      "statement": "All adapters SHALL emit OTel traces.",
+      "category": "non-functional",
+      "source": "Observability"
+    },
+    {
+      "requirement_id": "BSDK-163",
+      "family": "H_OBSERVABILITY",
+      "title": "OTel metrics",
+      "statement": "All adapters SHALL emit OTel metrics.",
+      "category": "non-functional",
+      "source": "Observability"
+    },
+    {
+      "requirement_id": "BSDK-164",
+      "family": "H_OBSERVABILITY",
+      "title": "OTel logs",
+      "statement": "All adapters SHALL emit OTel logs.",
+      "category": "non-functional",
+      "source": "Observability"
+    },
+    {
+      "requirement_id": "BSDK-165",
+      "family": "H_OBSERVABILITY",
+      "title": "Per-adapter throughput metric",
+      "statement": "Per-adapter throughput SHALL be emitted.",
+      "category": "non-functional",
+      "source": "Observability"
+    },
+    {
+      "requirement_id": "BSDK-166",
+      "family": "H_OBSERVABILITY",
+      "title": "Per-adapter error rate metric",
+      "statement": "Per-adapter error rate SHALL be emitted.",
+      "category": "non-functional",
+      "source": "Observability"
+    },
+    {
+      "requirement_id": "BSDK-167",
+      "family": "H_OBSERVABILITY",
+      "title": "Translation latency histogram",
+      "statement": "Translation latency SHALL be emitted as histogram.",
+      "category": "non-functional",
+      "source": "Observability"
+    },
+    {
+      "requirement_id": "BSDK-168",
+      "family": "H_OBSERVABILITY",
+      "title": "DLQ depth metric",
+      "statement": "DLQ depth SHALL be emitted.",
+      "category": "non-functional",
+      "source": "Observability"
+    },
+    {
+      "requirement_id": "BSDK-169",
+      "family": "H_OBSERVABILITY",
+      "title": "Replay queue depth metric",
+      "statement": "Replay queue depth SHALL be emitted.",
+      "category": "non-functional",
+      "source": "Observability"
+    },
+    {
+      "requirement_id": "BSDK-170",
+      "family": "H_OBSERVABILITY",
+      "title": "Adapter health endpoint",
+      "statement": "Each adapter SHALL expose a health endpoint.",
+      "category": "non-functional",
+      "source": "Observability"
+    },
+    {
+      "requirement_id": "BSDK-171",
+      "family": "H_OBSERVABILITY",
+      "title": "Audit log per translation",
+      "statement": "Each translation SHALL emit audit log.",
+      "category": "non-functional",
+      "source": "Observability"
+    },
+    {
+      "requirement_id": "BSDK-172",
+      "family": "I_SECURITY",
+      "title": "OIDC JWT auth",
+      "statement": "Endpoints SHALL be authenticated via OIDC JWT.",
+      "category": "compliance",
+      "source": "Security"
+    },
+    {
+      "requirement_id": "BSDK-173",
+      "family": "I_SECURITY",
+      "title": "mTLS transport",
+      "statement": "Endpoints SHALL support mTLS transport option.",
+      "category": "compliance",
+      "source": "Security"
+    },
+    {
+      "requirement_id": "BSDK-174",
+      "family": "I_SECURITY",
+      "title": "Scope-based auth",
+      "statement": "Endpoints SHALL apply scope-based authorisation.",
+      "category": "compliance",
+      "source": "Security"
+    },
+    {
+      "requirement_id": "BSDK-175",
+      "family": "I_SECURITY",
+      "title": "Per-principal rate limit",
+      "statement": "Endpoints SHALL apply per-principal rate limit.",
+      "category": "compliance",
+      "source": "Security"
+    },
+    {
+      "requirement_id": "BSDK-176",
+      "family": "I_SECURITY",
+      "title": "Replay attack defence",
+      "statement": "Idempotency-Key SHALL defend against replay.",
+      "category": "compliance",
+      "source": "Security"
+    },
+    {
+      "requirement_id": "BSDK-177",
+      "family": "I_SECURITY",
+      "title": "Input validation",
+      "statement": "Inputs SHALL be validated.",
+      "category": "compliance",
+      "source": "Security"
+    },
+    {
+      "requirement_id": "BSDK-178",
+      "family": "I_SECURITY",
+      "title": "Output encoding safe",
+      "statement": "Outputs SHALL be encoding-safe.",
+      "category": "compliance",
+      "source": "Security"
+    },
+    {
+      "requirement_id": "BSDK-179",
+      "family": "I_SECURITY",
+      "title": "Secret rotation policy",
+      "statement": "Secrets SHALL be rotated per policy.",
+      "category": "compliance",
+      "source": "Security"
+    },
+    {
+      "requirement_id": "BSDK-180",
+      "family": "I_SECURITY",
+      "title": "Pen-test policy",
+      "statement": "Operators SHALL evidence pen-test policy.",
+      "category": "compliance",
+      "source": "Security"
+    },
+    {
+      "requirement_id": "BSDK-181",
+      "family": "I_SECURITY",
+      "title": "VDP",
+      "statement": "Operators SHALL maintain a vulnerability disclosure programme.",
+      "category": "compliance",
+      "source": "Security"
+    },
+    {
+      "requirement_id": "BSDK-182",
+      "family": "J_REA_BASELINE",
+      "title": "REA template registry coverage",
+      "statement": "SDK SHALL trace consumed REA template families.",
+      "category": "non-functional",
+      "source": "Rea Baseline"
+    },
+    {
+      "requirement_id": "BSDK-183",
+      "family": "J_REA_BASELINE",
+      "title": "REA gap-filler ingestion",
+      "statement": "SDK SHALL ingest REA gap-filler output.",
+      "category": "non-functional",
+      "source": "Rea Baseline"
+    },
+    {
+      "requirement_id": "BSDK-184",
+      "family": "J_REA_BASELINE",
+      "title": "REA coverage heatmap export",
+      "statement": "SDK SHALL emit REA coverage heatmap.",
+      "category": "non-functional",
+      "source": "Rea Baseline"
+    },
+    {
+      "requirement_id": "BSDK-185",
+      "family": "J_REA_BASELINE",
+      "title": "REA derive_all batch run",
+      "statement": "SDK SHALL support REA batch runs.",
+      "category": "non-functional",
+      "source": "Rea Baseline"
+    },
+    {
+      "requirement_id": "BSDK-186",
+      "family": "J_REA_BASELINE",
+      "title": "REA anomaly diagnostics",
+      "statement": "SDK SHALL expose REA anomaly diagnostics.",
+      "category": "non-functional",
+      "source": "Rea Baseline"
+    },
+    {
+      "requirement_id": "BSDK-187",
+      "family": "K_CROSS_CUTTING_NFR",
+      "title": "Helm chart parity",
+      "statement": "SDK deployments SHALL be evidenced by an in-tree Helm chart.",
+      "category": "non-functional",
+      "source": "Cross Cutting Nfr"
+    },
+    {
+      "requirement_id": "BSDK-188",
+      "family": "K_CROSS_CUTTING_NFR",
+      "title": "SBOM generation",
+      "statement": "Build SHALL emit SPDX SBOM.",
+      "category": "non-functional",
+      "source": "Cross Cutting Nfr"
+    },
+    {
+      "requirement_id": "BSDK-189",
+      "family": "K_CROSS_CUTTING_NFR",
+      "title": "DR RPO/RTO",
+      "statement": "Operators SHALL declare RPO/RTO.",
+      "category": "non-functional",
+      "source": "Cross Cutting Nfr"
+    },
+    {
+      "requirement_id": "BSDK-190",
+      "family": "K_CROSS_CUTTING_NFR",
+      "title": "Container image signing",
+      "statement": "Container images SHALL be signed.",
+      "category": "non-functional",
+      "source": "Cross Cutting Nfr"
+    },
+    {
+      "requirement_id": "BSDK-191",
+      "family": "K_CROSS_CUTTING_NFR",
+      "title": "Dependency scanning",
+      "statement": "CI SHALL run dependency scanning.",
+      "category": "non-functional",
+      "source": "Cross Cutting Nfr"
+    },
+    {
+      "requirement_id": "BSDK-192",
+      "family": "K_CROSS_CUTTING_NFR",
+      "title": "Backups encrypted at rest",
+      "statement": "Backups SHALL be encrypted at rest.",
+      "category": "non-functional",
+      "source": "Cross Cutting Nfr"
+    },
+    {
+      "requirement_id": "BSDK-193",
+      "family": "K_CROSS_CUTTING_NFR",
+      "title": "Incident response playbook",
+      "statement": "Operators SHALL link to incident response playbook.",
+      "category": "non-functional",
+      "source": "Cross Cutting Nfr"
+    },
+    {
+      "requirement_id": "BSDK-194",
+      "family": "K_CROSS_CUTTING_NFR",
+      "title": "On-call schedule",
+      "statement": "Operators SHALL maintain on-call schedule.",
+      "category": "non-functional",
+      "source": "Cross Cutting Nfr"
+    },
+    {
+      "requirement_id": "BSDK-195",
+      "family": "K_CROSS_CUTTING_NFR",
+      "title": "Status page",
+      "statement": "Operators SHALL run a status page.",
+      "category": "non-functional",
+      "source": "Cross Cutting Nfr"
+    },
+    {
+      "requirement_id": "BSDK-196",
+      "family": "K_CROSS_CUTTING_NFR",
+      "title": "SLSA attestation",
+      "statement": "Releases SHALL include SLSA supply-chain attestation.",
+      "category": "non-functional",
+      "source": "Cross Cutting Nfr"
+    }
+  ]
+}
