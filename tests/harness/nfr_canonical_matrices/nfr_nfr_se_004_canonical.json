@@ -1,5 +1,5 @@
 {
-  "schema_version": "BT_CANONICAL_MATRIX_V1_14COL",
+  "schema_version": "BT_CANONICAL_MATRIX_V2_18COL",
   "columns": [
     "use_case_id",
     "subsystem",
@@ -14,7 +14,11 @@
     "expected_events",
     "expected_outputs",
     "fault_profile",
-    "security_profile"
+    "security_profile",
+    "priority",
+    "automation_status",
+    "estimated_duration_seconds",
+    "tags"
   ],
   "metadata": {
     "subsystem": "symphonix-bridge-sdk.nfr.nfr_se_004",
@@ -118,7 +122,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_002",
@@ -199,7 +207,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_003",
@@ -280,7 +292,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_004",
@@ -361,7 +377,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_005",
@@ -442,7 +462,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_006",
@@ -523,7 +547,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_007",
@@ -604,7 +632,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_008",
@@ -685,7 +717,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_009",
@@ -766,7 +802,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_010",
@@ -847,7 +887,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_011",
@@ -928,7 +972,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_012",
@@ -1009,7 +1057,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_013",
@@ -1090,7 +1142,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_014",
@@ -1171,7 +1227,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_015",
@@ -1252,7 +1312,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_016",
@@ -1333,7 +1397,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_017",
@@ -1414,7 +1482,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_018",
@@ -1495,7 +1567,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_019",
@@ -1576,7 +1652,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_020",
@@ -1657,7 +1737,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_021",
@@ -1738,7 +1822,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_022",
@@ -1819,7 +1907,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_023",
@@ -1900,7 +1992,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_024",
@@ -1981,7 +2077,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_025",
@@ -2062,7 +2162,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_026",
@@ -2143,7 +2247,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_027",
@@ -2224,7 +2332,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_028",
@@ -2305,7 +2417,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_029",
@@ -2386,7 +2502,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_030",
@@ -2467,7 +2587,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_031",
@@ -2548,7 +2672,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_032",
@@ -2629,7 +2757,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_033",
@@ -2710,7 +2842,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_034",
@@ -2791,7 +2927,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_035",
@@ -2872,7 +3012,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_036",
@@ -2953,7 +3097,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_037",
@@ -3034,7 +3182,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_038",
@@ -3115,7 +3267,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_039",
@@ -3196,7 +3352,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_040",
@@ -3277,7 +3437,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_041",
@@ -3358,7 +3522,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_042",
@@ -3439,7 +3607,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_043",
@@ -3520,7 +3692,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_044",
@@ -3601,7 +3777,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_045",
@@ -3682,7 +3862,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_046",
@@ -3763,7 +3947,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_047",
@@ -3844,7 +4032,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_048",
@@ -3925,7 +4117,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_049",
@@ -4006,7 +4202,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_050",
@@ -4087,7 +4287,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_051",
@@ -4168,7 +4372,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_052",
@@ -4249,7 +4457,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_053",
@@ -4330,7 +4542,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_054",
@@ -4411,7 +4627,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_055",
@@ -4492,7 +4712,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_056",
@@ -4573,7 +4797,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_057",
@@ -4654,7 +4882,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_058",
@@ -4735,7 +4967,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_059",
@@ -4816,7 +5052,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_060",
@@ -4897,7 +5137,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_061",
@@ -4978,7 +5222,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_062",
@@ -5059,7 +5307,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_063",
@@ -5140,7 +5392,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_064",
@@ -5221,7 +5477,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_065",
@@ -5302,7 +5562,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_066",
@@ -5383,7 +5647,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_067",
@@ -5464,7 +5732,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_068",
@@ -5545,7 +5817,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_069",
@@ -5626,7 +5902,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_070",
@@ -5707,7 +5987,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_071",
@@ -5788,7 +6072,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_072",
@@ -5869,7 +6157,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_073",
@@ -5950,7 +6242,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_074",
@@ -6031,7 +6327,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_075",
@@ -6112,7 +6412,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_076",
@@ -6193,7 +6497,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_077",
@@ -6274,7 +6582,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_078",
@@ -6355,7 +6667,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_079",
@@ -6436,7 +6752,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_080",
@@ -6517,7 +6837,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_081",
@@ -6598,7 +6922,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_082",
@@ -6679,7 +7007,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_083",
@@ -6760,7 +7092,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_084",
@@ -6841,7 +7177,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_POS_085",
@@ -6922,7 +7262,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_NEG_001",
@@ -7000,7 +7344,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_NEG_002",
@@ -7078,7 +7426,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_NEG_003",
@@ -7156,7 +7508,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_NEG_004",
@@ -7234,7 +7590,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_NEG_005",
@@ -7312,7 +7672,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_NEG_006",
@@ -7390,7 +7754,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_NEG_007",
@@ -7468,7 +7836,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_NEG_008",
@@ -7546,7 +7918,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_NEG_009",
@@ -7624,7 +8000,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_NEG_010",
@@ -7702,7 +8082,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_EDG_001",
@@ -7780,7 +8164,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P2",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 10,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_EDG_002",
@@ -7858,7 +8246,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P2",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 10,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_EDG_003",
@@ -7936,7 +8328,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P2",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 10,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_EDG_004",
@@ -8014,7 +8410,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P2",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 10,
+      "tags": []
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_se_004_EDG_005",
@@ -8092,7 +8492,11 @@
         "transport": "mTLS",
         "expected_auth_result": "ALLOW",
         "dpop_required": true
-      }
+      },
+      "priority": "P2",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 10,
+      "tags": []
     }
   ]
 }

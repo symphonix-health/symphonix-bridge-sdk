@@ -53,7 +53,7 @@ def main() -> None:
     uncovered = [r for r in rows if r["coverage_status"] != "covered"]
     payload = {
         "schema_version": "BT_REQUIREMENTS_TRACEABILITY_V1",
-        "canonical_matrix_schema": "BT_CANONICAL_MATRIX_V1_14COL",
+        "canonical_matrix_schema": "BT_CANONICAL_MATRIX_V2_18COL",
         "metadata": {
             "subsystem": "symphonix-bridge-sdk",
             "requirement_count": len(rows),

@@ -36,3 +36,25 @@ dev = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/bridge_sdk"]
+
+[tool.pytest.ini_options]
+markers = [
+    "scenario: scenario tests",
+    "monetisation: monetisation scenario tests",
+    "helixcare: HelixCare-specific tests",
+    "slow: slow / network-dependent tests",
+    "integration: integration tests against real services",
+    "visual: visual inspection tests requiring live servers and Playwright",
+    "unit: unit tests",
+    "contract: contract tests",
+    "system: system / e2e tests",
+    "acceptance: scenario acceptance tests",
+    "e2e: end-to-end tests",
+    "asyncio: async tests",
+]
+filterwarnings = [
+    'ignore:datetime.datetime.utcnow.*:DeprecationWarning:pydantic.v1',
+    'ignore::DeprecationWarning:langchain_core',
+    'ignore:asyncio.iscoroutinefunction:DeprecationWarning',
+    'ignore::jwt.warnings.InsecureKeyLengthWarning',
+]

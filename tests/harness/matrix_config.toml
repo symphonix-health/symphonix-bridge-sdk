@@ -1,0 +1,14 @@
+subsystem_default = "eps"
+requirement_id_prefixes = ["BSDK-"]
+
+[paths]
+json_dir = "tests/harness/json_matrices"
+superset = "tests/harness/requirements_superset.json"
+requirements_matrix = "tests/harness/requirements_matrix.json"
+
+[compliance_policy]
+out_dir = "tests/harness/json_matrices"
+out_file = "compliance-policy_scenarios.json"
+uc_sep = "underscore"
+has_crosslink = false
+default_artefact = "docs/REQUIREMENTS_SUPERSET.md"
