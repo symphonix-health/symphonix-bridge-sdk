@@ -1,0 +1,106 @@
+# BulletTrain Integration Constitution -- Rule 1 + Rule 5 (HTTP variant).
+# Rejects direct HTTP calls TO VENDOR APIs from workflow / orchestration
+# / agent code.  The canonical sibling-side pattern of POSTing to the
+# BulletTrain api_gateway hub at /v1/connectors/{name}/exchange via httpx
+# is explicitly allowed -- the hub URL is not a vendor URL, so it does
+# not match the vendor regex below.
+# Companion: docs/architecture/integration-anti-patterns.md (BT-IAP-01)
+#
+# This file is intended to be copied into each BulletTrain sibling repo's
+# `.semgrep/` directory. It is also useful as a CI gate in caid-agent
+# itself if generated workflow code lands here for review.
+#
+# Run with:  semgrep --config .semgrep/
+
+rules:
+  - id: bullettrain-no-direct-http-from-workflows
+    message: |
+      BT-IAP-01 / BT-IAP-05 -- Direct HTTP call to a vendor API.
+      Workflow orchestration must not call vendor APIs directly.  Route
+      the call through the BulletTrain api_gateway hub at
+      POST /v1/connectors/{name}/exchange (the canonical sibling-side
+      pattern), which the hub then dispatches to a registered connector
+      under bullettrain/connectors/.
+      See docs/architecture/integration-anti-patterns.md.
+    severity: ERROR
+    languages: [python]
+    paths:
+      include:
+        - "src/workflows/**"
+        - "src/orchestration/**"
+        - "src/handlers/**"
+        - "src/routers/**"
+        - "backend/**"
+        - "app/**"
+        - "bullettrain/orchestration/**"
+        - "caid_agent/**"
+      exclude:
+        - "**/connectors/**"
+        - "**/integration/**"
+        - "**/adapters/**"
+        - "**/tests/**"
+        - "**/test_*.py"
+        - "**/*_test.py"
+        - "**/conftest.py"
+    # Match HTTP method invocations whose URL argument literal targets a
+    # known vendor host.  Hub URLs (api_gateway:8000, localhost:8000,
+    # hub.bullettrain.*) do NOT match the vendor regex, so the canonical
+    # `httpx.post(f"{hub}/v1/connectors/{name}/exchange", ...)` shape
+    # used by every sibling adapter (pacs-ris HubBlobBackend,
+    # insurance-eclaims _post_to_hub, prompt-engine _run_agent, ...)
+    # is allowed.  Constructor calls without a URL argument
+    # (`httpx.Client(...)`, `httpx.AsyncClient(...)`,
+    # `aiohttp.ClientSession(...)`) are also no longer flagged on their
+    # own -- it is the URL of the eventual call that distinguishes a
+    # hub round-trip from a vendor call, and the URL-string regex
+    # in the companion `bullettrain-no-hardcoded-external-url` rule
+    # below catches vendor URLs assigned to variables / constants.
+    patterns:
+      - pattern-either:
+          - pattern: requests.$METHOD($URL, ...)
+          - pattern: httpx.$METHOD($URL, ...)
+          - pattern: aiohttp.$METHOD($URL, ...)
+          - pattern: urllib.request.urlopen($URL, ...)
+      - metavariable-regex:
+          metavariable: $URL
+          regex: '(?i)https?://(api\.twilio\.com|api\.stripe\.com|api\.openai\.com|api\.anthropic\.com|api\.slack\.com|hooks\.slack\.com|api\.sendgrid\.com|api\.mailgun\.net|api\.github\.com|[a-z0-9-]+\.amazonaws\.com|[a-z0-9-]+\.googleapis\.com|[a-z0-9-]+\.azurewebsites\.net|api\.cloudflare\.com|api\.notion\.com|api\.deepseek\.com)'
+
+  - id: bullettrain-no-hardcoded-external-url
+    message: |
+      BT-IAP-05 -- Hardcoded external endpoint. URLs to external vendors must
+      not appear in workflow code. Resolve the endpoint from the connector
+      manifest at bullettrain/connectors/manifests/.
+    severity: ERROR
+    languages: [python, javascript, typescript]
+    paths:
+      include:
+        - "src/workflows/**"
+        - "src/orchestration/**"
+        - "src/handlers/**"
+        - "backend/**"
+        - "app/**"
+        - "frontend/src/**"
+        - "bullettrain/orchestration/**"
+        - "caid_agent/**"
+      exclude:
+        - "**/connectors/**"
+        - "**/integration/**"
+        - "**/tests/**"
+        - "**/__tests__/**"
+        - "**/test_*.py"
+    patterns:
+      - pattern-either:
+          - pattern-regex: 'https?://api\.twilio\.com'
+          - pattern-regex: 'https?://api\.stripe\.com'
+          - pattern-regex: 'https?://api\.openai\.com'
+          - pattern-regex: 'https?://api\.anthropic\.com'
+          - pattern-regex: 'https?://api\.slack\.com'
+          - pattern-regex: 'https?://hooks\.slack\.com'
+          - pattern-regex: 'https?://api\.sendgrid\.com'
+          - pattern-regex: 'https?://api\.mailgun\.net'
+          - pattern-regex: 'https?://api\.github\.com'
+          - pattern-regex: 'https?://[a-z0-9-]+\.amazonaws\.com'
+          - pattern-regex: 'https?://[a-z0-9-]+\.googleapis\.com'
+          - pattern-regex: 'https?://[a-z0-9-]+\.azurewebsites\.net'
+          - pattern-regex: 'https?://api\.cloudflare\.com'
+          - pattern-regex: 'https?://api\.notion\.com'
