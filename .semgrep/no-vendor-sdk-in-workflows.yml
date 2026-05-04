@@ -1,0 +1,87 @@
+# BulletTrain Integration Constitution -- Rule 3 + Rule 5 (SDK variant).
+# Rejects vendor SDK imports from workflow / orchestration / agent code.
+# Companion: docs/architecture/integration-anti-patterns.md (BT-IAP-03)
+#
+# Run with:  semgrep --config .semgrep/
+
+rules:
+  - id: bullettrain-no-vendor-sdk-in-workflows
+    message: |
+      BT-IAP-03 -- External SDK inside workflow. Vendor SDKs must not be
+      imported from workflow / orchestration code. Wrap the vendor through
+      a BulletTrain connector under bullettrain/connectors/ and import the
+      connector via get_connector(...).
+      See docs/architecture/integration-anti-patterns.md.
+    severity: ERROR
+    languages: [python]
+    paths:
+      include:
+        - "src/workflows/**"
+        - "src/orchestration/**"
+        - "src/handlers/**"
+        - "src/routers/**"
+        - "backend/**"
+        - "app/**"
+        - "bullettrain/orchestration/**"
+        - "caid_agent/**"
+      exclude:
+        - "**/connectors/**"
+        - "**/integration/**"
+        - "**/adapters/**"
+        - "**/tests/**"
+        - "**/test_*.py"
+        - "**/*_test.py"
+        - "**/conftest.py"
+    patterns:
+      - pattern-either:
+          - pattern: import boto3
+          - pattern: import twilio
+          - pattern: import stripe
+          - pattern: import salesforce
+          - pattern: import openai
+          - pattern: import anthropic
+          - pattern: import sendgrid
+          - pattern: import slack_sdk
+          - pattern: from boto3 import ...
+          - pattern: from twilio import ...
+          - pattern: from stripe import ...
+          - pattern: from salesforce import ...
+          - pattern: from openai import ...
+          - pattern: from anthropic import ...
+          - pattern: from sendgrid import ...
+          - pattern: from slack_sdk import ...
+          - pattern: from google.cloud import ...
+          - pattern: from azure import ...
+
+  - id: bullettrain-no-hardcoded-credentials
+    message: |
+      BT-IAP-06 -- Credentials in orchestration. Tokens / API keys must not
+      appear in workflow code. Resolve via the secret manager at call time:
+      `from bullettrain.secrets import get_secret; token = get_secret("name")`.
+    severity: ERROR
+    languages: [python, javascript, typescript]
+    paths:
+      include:
+        - "src/**"
+        - "backend/**"
+        - "app/**"
+        - "frontend/src/**"
+        - "bullettrain/**"
+        - "caid_agent/**"
+      exclude:
+        - "**/tests/**"
+        - "**/__tests__/**"
+        - "**/test_*.py"
+        - "**/*_test.py"
+        - "**/conftest.py"
+        - "**/.semgrep/**"
+        - "**/docs/**"
+    patterns:
+      - pattern-either:
+          - pattern-regex: '\bAKIA[0-9A-Z]{16}\b'
+          - pattern-regex: '\bsk-[A-Za-z0-9_-]{20,}\b'
+          - pattern-regex: '\bxox[baprs]-[A-Za-z0-9-]{10,}\b'
+          - pattern-regex: '\bghp_[A-Za-z0-9]{30,}\b'
+          - pattern-regex: '\bgithub_pat_[A-Za-z0-9_]{30,}\b'
+          - pattern-regex: '\bAC[a-f0-9]{32}\b'
+          - pattern-regex: "['\"]Bearer\\s+[A-Za-z0-9._\\-]{20,}['\"]"

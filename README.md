@@ -47,12 +47,12 @@ pip install -e .[all,dev]
 ```python
 import asyncio
 from bridge_sdk.engine import BridgeEngine
-from bridge_sdk.adapters.hl7v2 import HL7v2Adapter
-from bridge_sdk.adapters.fhir import FHIRAdapter
+from bridge_sdk.adapters.hl7v2 import Hl7v2Adapter
+from bridge_sdk.adapters.fhir import FhirAdapter
 
 engine = BridgeEngine()
-engine.register("hl7v2", HL7v2Adapter())
-engine.register("fhir", FHIRAdapter(base_url="http://hapi.fhir.org/baseR4"))
+engine.register("hl7v2", Hl7v2Adapter())
+engine.register("fhir", FhirAdapter(base_url="http://hapi.fhir.org/baseR4"))
 
 async def main():
     # Translate an HL7 v2 ADT^A01 admission to FHIR R4 Encounter
