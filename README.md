@@ -1,11 +1,18 @@
+<p align="center">
+  <img src="brand/symphonix-bridge-sdk-logo.svg" alt="symphonix-bridge-sdk logo" width="420">
+</p>
+
+<!-- tagline:start -->
+<p align="center"><em>12 protocol adapters around a FHIR R4 pivot.</em></p>
+<!-- tagline:end -->
 # Symphonix Bridge SDK
 
-Heterogeneous healthcare protocol translation with a FHIR R4 canonical pivot.
 
-Every message is normalised to a `CanonicalEnvelope` (FHIR R4 payload + LOINC/SNOMED
-terminology codes + correlation/idempotency metadata), routed via the `BridgeEngine`,
-then serialised to the target protocol. This allows any-to-any translation across the
-13 supported adapters without combinatorial point-to-point mapping.
+## Recent Enhancements
+
+- `b80d7be` Add V-model L2/L3 integration tests
+
+_Updated 2026-05-09 — generated from `git log` since last README revision. Filtered to feature/architecture commits; chore/test/wip omitted._
 
 ## Supported protocols
 
@@ -110,4 +117,3 @@ python -m pytest -q
 - Python ≥ 3.11
 - Core: `httpx`, `pydantic ≥ 2.0`
 - Optional adapters: `hl7`, `pydicom`, `confluent-kafka`, `grpcio`, `websockets`, `mcp`
-
