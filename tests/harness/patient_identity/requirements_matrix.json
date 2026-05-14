@@ -1,0 +1,332 @@
+{
+  "schema_version": "SYMPHONIX_PATIENT_IDENTITY_TRACEABILITY_V1",
+  "metadata": {
+    "subsystem": "patient-identity-closed-loop",
+    "owner": "symphonix-health",
+    "canonical_identifier_name": "Symphonix Patient Identifier",
+    "canonical_identifier_short_name": "SPID",
+    "canonical_identifier_system": "https://fhir.symphonix.health/Id/patient",
+    "nhs_number_system": "https://fhir.nhs.uk/Id/nhs-number",
+    "requirement_count": 18
+  },
+  "requirements": [
+    {
+      "requirement_id": "SPID-FR-001",
+      "family": "MASTER_PATIENT_IDENTITY",
+      "title": "Client Registry is issuing authority",
+      "statement": "Client Registry SHALL be the only service that creates or assigns the canonical Symphonix Patient Identifier.",
+      "category": "functional",
+      "priority": "P0",
+      "source": "Architecture review of BulletTrain client_registry and shared_health_record",
+      "acceptance_criteria": [
+        "No patient-data service creates PAT-* or UUID clinical patient identifiers when a patient is missing.",
+        "All new patient creation flows call Client Registry or consume a registry-issued creation event."
+      ],
+      "scenario_ids": [
+        "patient_identity_POS_0001",
+        "patient_identity_NEG_0004"
+      ]
+    },
+    {
+      "requirement_id": "SPID-FR-002",
+      "family": "MASTER_PATIENT_IDENTITY",
+      "title": "NHS-style checksum shape",
+      "statement": "SPID SHALL be exactly 10 digits and SHALL pass the modulus-11 check digit algorithm used by the UK NHS number format.",
+      "category": "functional",
+      "priority": "P0",
+      "source": "NHS Data Dictionary NHS NUMBER format",
+      "acceptance_criteria": [
+        "Spaces and hyphens are accepted at API boundaries.",
+        "The stored canonical form is 10 digits.",
+        "Invalid modulus-11 values are rejected."
+      ],
+      "scenario_ids": [
+        "patient_identity_POS_0001",
+        "patient_identity_NEG_0002"
+      ]
+    },
+    {
+      "requirement_id": "SPID-FR-003",
+      "family": "MASTER_PATIENT_IDENTITY",
+      "title": "Not an NHS number",
+      "statement": "SPID SHALL NOT be labelled, stored, emitted, or documented as an NHS Number.",
+      "category": "compliance",
+      "priority": "P0",
+      "source": "User architecture directive; NHS Number is an external identifier only",
+      "acceptance_criteria": [
+        "FHIR identifier system for SPID is Symphonix-owned.",
+        "Real NHS Number, if present, remains an external alias with the NHS Number system.",
+        "Internal API fields use patient_id, spid, or symphonix_patient_id, not nhs_number."
+      ],
+      "scenario_ids": [
+        "patient_identity_POS_0001",
+        "patient_identity_NEG_0003"
+      ]
+    },
+    {
+      "requirement_id": "SPID-FR-004",
+      "family": "FHIR_CANONICAL",
+      "title": "FHIR Patient identity binding",
+      "statement": "FHIR Patient.id and Patient.identifier SHALL include the SPID for every patient-data exchange.",
+      "category": "functional",
+      "priority": "P0",
+      "source": "Bridge SDK canonical FHIR pivot",
+      "acceptance_criteria": [
+        "Patient.id equals SPID unless a FHIR facade must preserve an external logical id.",
+        "Patient.identifier includes the Symphonix patient identifier system.",
+        "Patient references use Patient/{SPID}."
+      ],
+      "scenario_ids": [
+        "patient_identity_POS_0001",
+        "patient_identity_POS_0003"
+      ]
+    },
+    {
+      "requirement_id": "SPID-FR-005",
+      "family": "FHIR_CANONICAL",
+      "title": "Canonical envelope carries patient identity",
+      "statement": "Bridge envelopes and agent messages carrying patient data SHALL expose the canonical SPID as structured metadata.",
+      "category": "functional",
+      "priority": "P1",
+      "source": "Bridge SDK canonical envelope review",
+      "acceptance_criteria": [
+        "Patient-data envelopes include patient_id with a valid SPID.",
+        "Envelopes include identifier_system and identity_version when available.",
+        "Patient identity metadata is available to adapters without parsing free text."
+      ],
+      "scenario_ids": [
+        "patient_identity_POS_0003"
+      ]
+    },
+    {
+      "requirement_id": "SPID-FR-006",
+      "family": "PROPAGATION",
+      "title": "Creation event propagation",
+      "statement": "Client Registry SHALL publish a patient.identity.created event for every committed patient creation.",
+      "category": "functional",
+      "priority": "P0",
+      "source": "BulletTrain EventBus and client_registry review",
+      "acceptance_criteria": [
+        "The event is written through an outbox in the same transaction as patient creation.",
+        "The event includes SPID, identity version, correlation id, idempotency key, demographics hash, and lifecycle status.",
+        "Shared HealthRecord and patient-data siblings upsert their local patient projection from the event."
+      ],
+      "scenario_ids": [
+        "patient_identity_POS_0001",
+        "patient_identity_POS_0002"
+      ]
+    },
+    {
+      "requirement_id": "SPID-FR-007",
+      "family": "PROPAGATION",
+      "title": "Subscriber projection contract",
+      "statement": "Every patient-data service SHALL maintain a local patient context keyed by SPID and reconciled from identity events.",
+      "category": "functional",
+      "priority": "P0",
+      "source": "Sibling repo review",
+      "acceptance_criteria": [
+        "Projection upserts are idempotent.",
+        "Local domain records reference SPID but retain local encounter/order/episode identifiers.",
+        "Projection version regressions are rejected or ignored."
+      ],
+      "scenario_ids": [
+        "patient_identity_POS_0002",
+        "patient_identity_EDG_0008"
+      ]
+    },
+    {
+      "requirement_id": "SPID-FR-008",
+      "family": "SAFETY_CONTROLS",
+      "title": "Reject unknown or inactive patient writes",
+      "statement": "Patient-data services SHALL reject non-emergency clinical writes when SPID is unknown, invalid, inactive, confused, restricted without permitted purpose, or deceased.",
+      "category": "safety",
+      "priority": "P0",
+      "source": "Shared HealthRecord write-path review",
+      "acceptance_criteria": [
+        "Unknown patient writes fail closed with a typed patient_identity error.",
+        "Emergency writes require break-glass metadata and audit.",
+        "Blocked writes emit operational telemetry."
+      ],
+      "scenario_ids": [
+        "patient_identity_NEG_0004",
+        "patient_identity_EDG_0006",
+        "patient_identity_EDG_0007"
+      ]
+    },
+    {
+      "requirement_id": "SPID-FR-009",
+      "family": "PROPAGATION",
+      "title": "Idempotent outbox delivery",
+      "statement": "Identity events SHALL use idempotency keys and replayable outbox semantics across EventBus, hub, Nexus A2A, and subscriber adapters.",
+      "category": "reliability",
+      "priority": "P0",
+      "source": "Agent-first closed-loop architecture review",
+      "acceptance_criteria": [
+        "Duplicate events do not create duplicate patient projections.",
+        "Dead-lettered events are replayable after correction.",
+        "Reconciliation can prove registry and subscriber identity versions match."
+      ],
+      "scenario_ids": [
+        "patient_identity_POS_0002",
+        "patient_identity_EDG_0008"
+      ]
+    },
+    {
+      "requirement_id": "SPID-FR-010",
+      "family": "CONFUSED_RECORDS",
+      "title": "Confused record workflow",
+      "statement": "Potential confused records SHALL be placed under review and resolved by an NBO-style human approval workflow before merge, split, or reassignment.",
+      "category": "safety",
+      "priority": "P0",
+      "source": "NHS PDS National Back Office data quality guidance",
+      "acceptance_criteria": [
+        "Automated matching can recommend but cannot complete a confused-record correction.",
+        "Affected records are flagged as under_review/confused.",
+        "Outbound notifications and non-essential automated agent actions are suppressed until resolved."
+      ],
+      "scenario_ids": [
+        "patient_identity_EDG_0005"
+      ]
+    },
+    {
+      "requirement_id": "SPID-FR-011",
+      "family": "CONFUSED_RECORDS",
+      "title": "Merge and link audit",
+      "statement": "Confirmed duplicates SHALL be merged or linked with alias retention, event replay, and immutable audit history.",
+      "category": "functional",
+      "priority": "P0",
+      "source": "NHS duplicate NHS Number handling pattern",
+      "acceptance_criteria": [
+        "Old identifiers remain aliases and cannot be reissued.",
+        "All subscribers receive merge/link events.",
+        "A full audit trail records approver, source evidence, and affected resources."
+      ],
+      "scenario_ids": [
+        "patient_identity_EDG_0005",
+        "patient_identity_EDG_0008"
+      ]
+    },
+    {
+      "requirement_id": "SPID-FR-012",
+      "family": "RESTRICTED_RECORDS",
+      "title": "Stop-note and sensitive status",
+      "statement": "Restricted access, historically described as stop-noting, SHALL be represented as a sensitive/restricted identity state and propagated to services.",
+      "category": "privacy",
+      "priority": "P0",
+      "source": "NHS PDS access restriction and S-flag guidance",
+      "acceptance_criteria": [
+        "Location/contact details are withheld from services without an allowed purpose.",
+        "Automated agent reads and notifications are suppressed unless policy allows.",
+        "Break-glass reads are audited and visible in patient safety telemetry."
+      ],
+      "scenario_ids": [
+        "patient_identity_EDG_0006"
+      ]
+    },
+    {
+      "requirement_id": "SPID-FR-013",
+      "family": "DECEASED_PATIENTS",
+      "title": "Death status propagation",
+      "statement": "Formal and informal death status SHALL be modelled, audited, and propagated without deleting the patient record.",
+      "category": "safety",
+      "priority": "P0",
+      "source": "NHS Notify death-status handling and NHS records-management retention guidance",
+      "acceptance_criteria": [
+        "Active care loops, appointments, recalls, and notifications are stopped or routed to permitted administrative workflows.",
+        "The clinical record remains retained according to policy.",
+        "Incorrect death status can be corrected through an audited reinstatement event."
+      ],
+      "scenario_ids": [
+        "patient_identity_EDG_0007"
+      ]
+    },
+    {
+      "requirement_id": "SPID-FR-014",
+      "family": "AUDIT",
+      "title": "Identity lifecycle audit",
+      "statement": "Every identity lifecycle transition SHALL emit an immutable audit record with actor, system, reason, correlation id, and before/after state.",
+      "category": "compliance",
+      "priority": "P0",
+      "source": "PDS audit expectations and Symphonix observability baseline",
+      "acceptance_criteria": [
+        "Audit spans registry, hub, agent, and subscriber processing.",
+        "Audit records are queryable by SPID and correlation id.",
+        "Manual approvals include approver role and evidence references."
+      ],
+      "scenario_ids": [
+        "patient_identity_POS_0001",
+        "patient_identity_EDG_0005",
+        "patient_identity_EDG_0007"
+      ]
+    },
+    {
+      "requirement_id": "SPID-FR-015",
+      "family": "AGENT_GOVERNANCE",
+      "title": "Agent recommendations require deterministic guardrails",
+      "statement": "Agents MAY detect, reconcile, and recommend patient identity fixes, but SHALL NOT autonomously create identifiers, merge records, remove restrictions, or change death status.",
+      "category": "safety",
+      "priority": "P0",
+      "source": "Symphonix agent-first architecture review",
+      "acceptance_criteria": [
+        "Deterministic services own ID generation, validation, and state transitions.",
+        "Agent proposals are evidence-bearing tasks requiring human approval for high-risk changes.",
+        "Guardrails prevent privileged identity mutation through prompt/tool paths."
+      ],
+      "scenario_ids": [
+        "patient_identity_EDG_0005",
+        "patient_identity_NEG_0009"
+      ]
+    },
+    {
+      "requirement_id": "SPID-FR-016",
+      "family": "RECONCILIATION",
+      "title": "Closed-loop reconciliation",
+      "statement": "A scheduled closed-loop reconciliation SHALL compare Client Registry with all patient-data projections and open remediation tasks for drift.",
+      "category": "reliability",
+      "priority": "P1",
+      "source": "Cross-repo architecture review",
+      "acceptance_criteria": [
+        "Drift reports include missing patients, stale versions, invalid identifiers, and lifecycle mismatches.",
+        "Reconciliation uses deterministic checks before agent triage.",
+        "Resolved drift replays missing events or applies approved corrective events."
+      ],
+      "scenario_ids": [
+        "patient_identity_EDG_0008"
+      ]
+    },
+    {
+      "requirement_id": "SPID-NFR-001",
+      "family": "SECURITY_PRIVACY",
+      "title": "Minimum disclosure",
+      "statement": "Patient identity propagation SHALL disclose only fields needed by each subscriber purpose and SHALL carry consent and purpose-of-use metadata.",
+      "category": "non-functional",
+      "priority": "P0",
+      "source": "PDS access restriction model and Symphonix PHI controls",
+      "acceptance_criteria": [
+        "Subscribers receive pseudonymized or hashed demographics where full demographics are not needed.",
+        "Purpose-of-use is enforced at registry, hub, and subscriber boundaries.",
+        "Restricted records suppress contact/location data by default."
+      ],
+      "scenario_ids": [
+        "patient_identity_EDG_0006"
+      ]
+    },
+    {
+      "requirement_id": "SPID-NFR-002",
+      "family": "OPERABILITY",
+      "title": "Migration without patient-record loss",
+      "statement": "Migration from mpiId, nationalID, nhs_number, and local PAT-* identifiers SHALL preserve aliases and map every patient-data record to exactly one active SPID or one explicit under-review exception.",
+      "category": "non-functional",
+      "priority": "P0",
+      "source": "Cross-repo identifier inventory",
+      "acceptance_criteria": [
+        "Every migrated identifier has a reversible alias mapping or an under-review case.",
+        "No clinical resource is dropped during migration.",
+        "Backfill reports are signed off before write-path enforcement is enabled."
+      ],
+      "scenario_ids": [
+        "patient_identity_POS_0010"
+      ]
+    }
+  ]
+}

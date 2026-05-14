@@ -1,0 +1,1038 @@
+{
+  "schema_version": "BT_CANONICAL_MATRIX_V2_18COL",
+  "metadata": {
+    "subsystem": "patient-identity-closed-loop",
+    "scenario_count": 12,
+    "distribution": {
+      "positive": 4,
+      "negative": 4,
+      "edge": 4
+    }
+  },
+  "scenarios": [
+    {
+      "use_case_id": "patient_identity_POS_0001",
+      "subsystem": "client-registry",
+      "requirement_ids": [
+        "SPID-FR-001",
+        "SPID-FR-002",
+        "SPID-FR-003",
+        "SPID-FR-004",
+        "SPID-FR-006",
+        "SPID-FR-014"
+      ],
+      "scenario_category": "Positive",
+      "title": "Create patient with registry-issued SPID",
+      "description": "Client Registry creates a patient, issues a 10-digit modulus-11 SPID, stores it as the master identity, and publishes a creation event.",
+      "preconditions": [
+        "Client Registry is healthy",
+        "No duplicate or confused-record candidate blocks the request"
+      ],
+      "trigger": {
+        "api": "POST /registry/patients",
+        "body_ref": "input_payload",
+        "idempotency_key": "idem-patient_identity_POS_0001"
+      },
+      "input_payload": {
+        "correlation_id": "corr-patient_identity_POS_0001",
+        "demographics": {
+          "given_name": "Sam",
+          "family_name": "Adebayo",
+          "date_of_birth": "1981-04-12"
+        },
+        "external_identifiers": [
+          {
+            "system": "urn:mrn:example",
+            "value": "MRN-12345"
+          }
+        ]
+      },
+      "expected_connector_calls": [
+        {
+          "connector": "client_registry",
+          "direction": "inbound",
+          "endpoint_or_channel": "/registry/patients",
+          "protocol": "REST",
+          "expected_status": 201
+        },
+        {
+          "connector": "eventbus",
+          "direction": "outbound",
+          "endpoint_or_channel": "patient.identity.created",
+          "protocol": "EVENT",
+          "expected_status": 202
+        }
+      ],
+      "expected_events": [
+        {
+          "topic": "patient.identity.created",
+          "type": "PatientIdentityCreated",
+          "payload": {
+            "patient_id": "9000000009",
+            "identifier_system": "https://fhir.symphonix.health/Id/patient",
+            "lifecycle_status": "active",
+            "identity_version": 1
+          }
+        }
+      ],
+      "expected_outputs": {
+        "final_status": "SUCCESS",
+        "assertions": [
+          {
+            "check": "patient_id_modulus_11_valid",
+            "expected": true
+          },
+          {
+            "check": "nhs_number_system_not_used_for_internal_id",
+            "expected": true
+          }
+        ]
+      },
+      "fault_profile": {
+        "inject_at": "none",
+        "mode": "none",
+        "severity": "low",
+        "retry_policy": {
+          "max_retries": 0,
+          "backoff_ms": 0
+        }
+      },
+      "security_profile": {
+        "auth": "OIDC_JWT",
+        "scopes": [
+          "patient.identity:create"
+        ],
+        "transport": "mTLS",
+        "expected_auth_result": "ALLOW"
+      },
+      "priority": "P0",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 10,
+      "tags": [
+        "create",
+        "registry",
+        "event"
+      ]
+    },
+    {
+      "use_case_id": "patient_identity_POS_0002",
+      "subsystem": "shared-health-record",
+      "requirement_ids": [
+        "SPID-FR-006",
+        "SPID-FR-007",
+        "SPID-FR-009"
+      ],
+      "scenario_category": "Positive",
+      "title": "Creation event upserts Shared HealthRecord projection",
+      "description": "Shared HealthRecord consumes patient.identity.created and creates a local patient context keyed by SPID without issuing a local patient identifier.",
+      "preconditions": [
+        "Client Registry outbox contains patient.identity.created",
+        "Shared HealthRecord subscriber is running"
+      ],
+      "trigger": {
+        "api": "EVENT patient.identity.created",
+        "body_ref": "input_payload",
+        "idempotency_key": "idem-patient_identity_POS_0002"
+      },
+      "input_payload": {
+        "patient_id": "9000000009",
+        "identifier_system": "https://fhir.symphonix.health/Id/patient",
+        "identity_version": 1,
+        "lifecycle_status": "active",
+        "demographics_hash": "sha256:example"
+      },
+      "expected_connector_calls": [
+        {
+          "connector": "shared_health_record",
+          "direction": "inbound",
+          "endpoint_or_channel": "patient.identity.created",
+          "protocol": "EVENT",
+          "expected_status": 202
+        }
+      ],
+      "expected_events": [
+        {
+          "topic": "patient.projection.upserted",
+          "type": "PatientProjectionUpserted",
+          "payload": {
+            "patient_id": "9000000009",
+            "projection_owner": "shared-health-record",
+            "identity_version": 1
+          }
+        }
+      ],
+      "expected_outputs": {
+        "final_status": "SUCCESS",
+        "assertions": [
+          {
+            "check": "projection_key_equals_spid",
+            "expected": true
+          },
+          {
+            "check": "duplicate_delivery_is_idempotent",
+            "expected": true
+          }
+        ]
+      },
+      "fault_profile": {
+        "inject_at": "eventbus",
+        "mode": "duplicate_delivery",
+        "severity": "low",
+        "retry_policy": {
+          "max_retries": 3,
+          "backoff_ms": 500
+        }
+      },
+      "security_profile": {
+        "auth": "mTLS",
+        "scopes": [
+          "patient.identity:consume"
+        ],
+        "transport": "mTLS",
+        "expected_auth_result": "ALLOW"
+      },
+      "priority": "P0",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 8,
+      "tags": [
+        "projection",
+        "idempotency"
+      ]
+    },
+    {
+      "use_case_id": "patient_identity_POS_0003",
+      "subsystem": "bridge-sdk",
+      "requirement_ids": [
+        "SPID-FR-004",
+        "SPID-FR-005"
+      ],
+      "scenario_category": "Positive",
+      "title": "FHIR resource carries canonical SPID",
+      "description": "A FHIR Observation translated through the bridge keeps subject.reference as Patient/{SPID} and envelope metadata exposes patient_id.",
+      "preconditions": [
+        "Bridge SDK receives a FHIR R4 resource"
+      ],
+      "trigger": {
+        "api": "BridgeEngine.translate",
+        "body_ref": "input_payload",
+        "idempotency_key": "idem-patient_identity_POS_0003"
+      },
+      "input_payload": {
+        "patient_id": "9000000009",
+        "fhir_resource": {
+          "resourceType": "Observation",
+          "subject": {
+            "reference": "Patient/9000000009"
+          }
+        }
+      },
+      "expected_connector_calls": [
+        {
+          "connector": "bridge_sdk",
+          "direction": "inbound",
+          "endpoint_or_channel": "CanonicalEnvelope",
+          "protocol": "IN_PROCESS",
+          "expected_status": 200
+        }
+      ],
+      "expected_events": [
+        {
+          "topic": "bridge.patient_identity.validated",
+          "type": "PatientIdentityValidated",
+          "payload": {
+            "patient_id": "9000000009"
+          }
+        }
+      ],
+      "expected_outputs": {
+        "final_status": "SUCCESS",
+        "assertions": [
+          {
+            "check": "subject_reference_uses_spid",
+            "expected": true
+          }
+        ]
+      },
+      "fault_profile": {
+        "inject_at": "none",
+        "mode": "none",
+        "severity": "low",
+        "retry_policy": {
+          "max_retries": 0,
+          "backoff_ms": 0
+        }
+      },
+      "security_profile": {
+        "auth": "IN_PROCESS",
+        "scopes": [
+          "bridge:translate"
+        ],
+        "transport": "IN_PROCESS",
+        "expected_auth_result": "ALLOW"
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 3,
+      "tags": [
+        "fhir",
+        "bridge"
+      ]
+    },
+    {
+      "use_case_id": "patient_identity_NEG_0004",
+      "subsystem": "patient-data-service",
+      "requirement_ids": [
+        "SPID-FR-001",
+        "SPID-FR-008"
+      ],
+      "scenario_category": "Negative",
+      "title": "Clinical write with unknown patient is rejected",
+      "description": "A patient-data sibling receives a clinical write for an unknown patient and fails closed instead of creating a local PAT-* record.",
+      "preconditions": [
+        "Patient projection does not contain 9000000017"
+      ],
+      "trigger": {
+        "api": "POST /observations",
+        "body_ref": "input_payload",
+        "idempotency_key": "idem-patient_identity_NEG_0004"
+      },
+      "input_payload": {
+        "patient_id": "9000000017",
+        "observation_code": "8480-6"
+      },
+      "expected_connector_calls": [
+        {
+          "connector": "patient_projection",
+          "direction": "outbound",
+          "endpoint_or_channel": "lookup",
+          "protocol": "IN_PROCESS",
+          "expected_status": 404
+        }
+      ],
+      "expected_events": [
+        {
+          "topic": "patient.identity.write_blocked",
+          "type": "PatientIdentityWriteBlocked",
+          "payload": {
+            "patient_id": "9000000017",
+            "reason": "UNKNOWN_PATIENT"
+          }
+        }
+      ],
+      "expected_outputs": {
+        "final_status": "FAILURE",
+        "assertions": [
+          {
+            "check": "local_patient_id_not_created",
+            "expected": true
+          },
+          {
+            "check": "typed_error_returned",
+            "expected": "PATIENT_IDENTITY_UNKNOWN"
+          }
+        ]
+      },
+      "fault_profile": {
+        "inject_at": "patient_projection",
+        "mode": "missing_patient",
+        "severity": "high",
+        "retry_policy": {
+          "max_retries": 0,
+          "backoff_ms": 0
+        }
+      },
+      "security_profile": {
+        "auth": "OIDC_JWT",
+        "scopes": [
+          "clinical:write"
+        ],
+        "transport": "mTLS",
+        "expected_auth_result": "ALLOW"
+      },
+      "priority": "P0",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": [
+        "fail-closed",
+        "unknown-patient"
+      ]
+    },
+    {
+      "use_case_id": "patient_identity_EDG_0005",
+      "subsystem": "client-registry",
+      "requirement_ids": [
+        "SPID-FR-010",
+        "SPID-FR-011",
+        "SPID-FR-014",
+        "SPID-FR-015"
+      ],
+      "scenario_category": "Edge",
+      "title": "Confused record enters human approval workflow",
+      "description": "Probable confused-record evidence is detected. Agents may recommend resolution, but registry places identities under review until an authorised human approves split, merge, or no-merge.",
+      "preconditions": [
+        "Two demographic profiles collide against one SPID",
+        "Duplicate/confusion detector confidence exceeds threshold"
+      ],
+      "trigger": {
+        "api": "POST /registry/confusion-cases",
+        "body_ref": "input_payload",
+        "idempotency_key": "idem-patient_identity_EDG_0005"
+      },
+      "input_payload": {
+        "patient_id": "9000000009",
+        "candidate_patient_id": "9000000017",
+        "evidence": [
+          "same external MRN used by two demographics"
+        ]
+      },
+      "expected_connector_calls": [
+        {
+          "connector": "identity_agent",
+          "direction": "outbound",
+          "endpoint_or_channel": "recommend-resolution",
+          "protocol": "A2A",
+          "expected_status": 202
+        },
+        {
+          "connector": "human_approval_queue",
+          "direction": "outbound",
+          "endpoint_or_channel": "identity-review",
+          "protocol": "TASK",
+          "expected_status": 202
+        }
+      ],
+      "expected_events": [
+        {
+          "topic": "patient.identity.confusion_detected",
+          "type": "PatientIdentityConfusionDetected",
+          "payload": {
+            "patient_id": "9000000009",
+            "candidate_patient_id": "9000000017",
+            "status": "under_review"
+          }
+        }
+      ],
+      "expected_outputs": {
+        "final_status": "UNDER_REVIEW",
+        "assertions": [
+          {
+            "check": "agent_does_not_merge",
+            "expected": true
+          },
+          {
+            "check": "notifications_suppressed",
+            "expected": true
+          }
+        ]
+      },
+      "fault_profile": {
+        "inject_at": "identity_matching",
+        "mode": "ambiguous_match",
+        "severity": "critical",
+        "retry_policy": {
+          "max_retries": 0,
+          "backoff_ms": 0
+        }
+      },
+      "security_profile": {
+        "auth": "OIDC_JWT",
+        "scopes": [
+          "patient.identity:review"
+        ],
+        "transport": "mTLS",
+        "expected_auth_result": "ALLOW"
+      },
+      "priority": "P0",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 20,
+      "tags": [
+        "confused-record",
+        "human-approval",
+        "agent-governance"
+      ]
+    },
+    {
+      "use_case_id": "patient_identity_EDG_0006",
+      "subsystem": "patient-data-service",
+      "requirement_ids": [
+        "SPID-FR-008",
+        "SPID-FR-012",
+        "SPID-NFR-001"
+      ],
+      "scenario_category": "Edge",
+      "title": "Restricted patient suppresses location and automated contact",
+      "description": "A sensitive/restricted identity state is propagated and subscribers withhold contact/location data and block automated outreach unless purpose-of-use policy permits it.",
+      "preconditions": [
+        "Patient has restricted access status"
+      ],
+      "trigger": {
+        "api": "EVENT patient.identity.restricted",
+        "body_ref": "input_payload",
+        "idempotency_key": "idem-patient_identity_EDG_0006"
+      },
+      "input_payload": {
+        "patient_id": "9000000009",
+        "identity_version": 2,
+        "restricted": true,
+        "restriction_type": "sensitive"
+      },
+      "expected_connector_calls": [
+        {
+          "connector": "notification_service",
+          "direction": "outbound",
+          "endpoint_or_channel": "suppress-recipient",
+          "protocol": "EVENT",
+          "expected_status": 202
+        }
+      ],
+      "expected_events": [
+        {
+          "topic": "patient.identity.restricted",
+          "type": "PatientIdentityRestricted",
+          "payload": {
+            "patient_id": "9000000009",
+            "restricted": true
+          }
+        }
+      ],
+      "expected_outputs": {
+        "final_status": "SUCCESS",
+        "assertions": [
+          {
+            "check": "location_not_disclosed",
+            "expected": true
+          },
+          {
+            "check": "automated_contact_suppressed",
+            "expected": true
+          }
+        ]
+      },
+      "fault_profile": {
+        "inject_at": "policy",
+        "mode": "restricted_record",
+        "severity": "critical",
+        "retry_policy": {
+          "max_retries": 0,
+          "backoff_ms": 0
+        }
+      },
+      "security_profile": {
+        "auth": "OIDC_JWT",
+        "scopes": [
+          "patient.identity:consume"
+        ],
+        "transport": "mTLS",
+        "expected_auth_result": "ALLOW"
+      },
+      "priority": "P0",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 10,
+      "tags": [
+        "restricted",
+        "stop-note",
+        "privacy"
+      ]
+    },
+    {
+      "use_case_id": "patient_identity_EDG_0007",
+      "subsystem": "closed-loop-care",
+      "requirement_ids": [
+        "SPID-FR-008",
+        "SPID-FR-013",
+        "SPID-FR-014"
+      ],
+      "scenario_category": "Edge",
+      "title": "Death status stops active care loops without deleting record",
+      "description": "A death-status event suppresses appointments, recalls, notifications, and agent care-loop actions while preserving the clinical record and audit trail.",
+      "preconditions": [
+        "Patient has active appointment and recall tasks"
+      ],
+      "trigger": {
+        "api": "EVENT patient.identity.deceased",
+        "body_ref": "input_payload",
+        "idempotency_key": "idem-patient_identity_EDG_0007"
+      },
+      "input_payload": {
+        "patient_id": "9000000009",
+        "death_status": "formal",
+        "date_of_death": "2026-04-30",
+        "identity_version": 3
+      },
+      "expected_connector_calls": [
+        {
+          "connector": "appointment-system",
+          "direction": "outbound",
+          "endpoint_or_channel": "cancel-active-appointments",
+          "protocol": "EVENT",
+          "expected_status": 202
+        },
+        {
+          "connector": "screening-recall",
+          "direction": "outbound",
+          "endpoint_or_channel": "suppress-recalls",
+          "protocol": "EVENT",
+          "expected_status": 202
+        }
+      ],
+      "expected_events": [
+        {
+          "topic": "patient.identity.deceased",
+          "type": "PatientIdentityDeceased",
+          "payload": {
+            "patient_id": "9000000009",
+            "death_status": "formal"
+          }
+        }
+      ],
+      "expected_outputs": {
+        "final_status": "SUCCESS",
+        "assertions": [
+          {
+            "check": "clinical_record_retained",
+            "expected": true
+          },
+          {
+            "check": "active_loops_stopped",
+            "expected": true
+          }
+        ]
+      },
+      "fault_profile": {
+        "inject_at": "lifecycle",
+        "mode": "deceased_patient",
+        "severity": "critical",
+        "retry_policy": {
+          "max_retries": 2,
+          "backoff_ms": 1000
+        }
+      },
+      "security_profile": {
+        "auth": "OIDC_JWT",
+        "scopes": [
+          "patient.identity:lifecycle"
+        ],
+        "transport": "mTLS",
+        "expected_auth_result": "ALLOW"
+      },
+      "priority": "P0",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 15,
+      "tags": [
+        "deceased",
+        "closed-loop"
+      ]
+    },
+    {
+      "use_case_id": "patient_identity_EDG_0008",
+      "subsystem": "reconciliation",
+      "requirement_ids": [
+        "SPID-FR-007",
+        "SPID-FR-009",
+        "SPID-FR-011",
+        "SPID-FR-016"
+      ],
+      "scenario_category": "Edge",
+      "title": "Closed-loop reconciliation repairs projection drift",
+      "description": "A scheduled job compares registry and subscriber projections, detects a stale identity version, and replays missing events.",
+      "preconditions": [
+        "Shared HealthRecord projection is one identity version behind Client Registry"
+      ],
+      "trigger": {
+        "api": "SCHEDULED patient-identity-reconcile",
+        "body_ref": "input_payload",
+        "idempotency_key": "idem-patient_identity_EDG_0008"
+      },
+      "input_payload": {
+        "patient_id": "9000000009",
+        "registry_identity_version": 4,
+        "subscriber_identity_version": 3,
+        "subscriber": "shared-health-record"
+      },
+      "expected_connector_calls": [
+        {
+          "connector": "client_registry",
+          "direction": "outbound",
+          "endpoint_or_channel": "/registry/patients/9000000009",
+          "protocol": "REST",
+          "expected_status": 200
+        },
+        {
+          "connector": "eventbus",
+          "direction": "outbound",
+          "endpoint_or_channel": "identity.replay",
+          "protocol": "EVENT",
+          "expected_status": 202
+        }
+      ],
+      "expected_events": [
+        {
+          "topic": "patient.identity.reconciled",
+          "type": "PatientIdentityReconciled",
+          "payload": {
+            "patient_id": "9000000009",
+            "subscriber": "shared-health-record",
+            "from_version": 3,
+            "to_version": 4
+          }
+        }
+      ],
+      "expected_outputs": {
+        "final_status": "SUCCESS",
+        "assertions": [
+          {
+            "check": "drift_resolved",
+            "expected": true
+          }
+        ]
+      },
+      "fault_profile": {
+        "inject_at": "subscriber_projection",
+        "mode": "stale_version",
+        "severity": "medium",
+        "retry_policy": {
+          "max_retries": 3,
+          "backoff_ms": 1000
+        }
+      },
+      "security_profile": {
+        "auth": "OIDC_JWT",
+        "scopes": [
+          "patient.identity:reconcile"
+        ],
+        "transport": "mTLS",
+        "expected_auth_result": "ALLOW"
+      },
+      "priority": "P1",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 30,
+      "tags": [
+        "reconciliation",
+        "drift"
+      ]
+    },
+    {
+      "use_case_id": "patient_identity_NEG_0009",
+      "subsystem": "agent-governance",
+      "requirement_ids": [
+        "SPID-FR-015"
+      ],
+      "scenario_category": "Negative",
+      "title": "Agent identity mutation without approval is blocked",
+      "description": "An agent attempts to merge two identities directly. The tool boundary blocks the mutation and opens a review task instead.",
+      "preconditions": [
+        "Agent has identity triage role but no human approval token"
+      ],
+      "trigger": {
+        "api": "A2A identity.merge",
+        "body_ref": "input_payload",
+        "idempotency_key": "idem-patient_identity_NEG_0009"
+      },
+      "input_payload": {
+        "agent_id": "identity-triage-agent",
+        "source_patient_id": "9000000017",
+        "target_patient_id": "9000000009"
+      },
+      "expected_connector_calls": [
+        {
+          "connector": "guardrail",
+          "direction": "inbound",
+          "endpoint_or_channel": "identity.merge",
+          "protocol": "A2A",
+          "expected_status": 403
+        }
+      ],
+      "expected_events": [
+        {
+          "topic": "patient.identity.agent_action_blocked",
+          "type": "PatientIdentityAgentActionBlocked",
+          "payload": {
+            "agent_id": "identity-triage-agent",
+            "reason": "HUMAN_APPROVAL_REQUIRED"
+          }
+        }
+      ],
+      "expected_outputs": {
+        "final_status": "FAILURE",
+        "assertions": [
+          {
+            "check": "merge_not_applied",
+            "expected": true
+          },
+          {
+            "check": "review_task_opened",
+            "expected": true
+          }
+        ]
+      },
+      "fault_profile": {
+        "inject_at": "agent_tool_boundary",
+        "mode": "unauthorised_identity_mutation",
+        "severity": "critical",
+        "retry_policy": {
+          "max_retries": 0,
+          "backoff_ms": 0
+        }
+      },
+      "security_profile": {
+        "auth": "AGENT_IDENTITY",
+        "scopes": [
+          "patient.identity:recommend"
+        ],
+        "transport": "mTLS",
+        "expected_auth_result": "DENY"
+      },
+      "priority": "P0",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 5,
+      "tags": [
+        "agent",
+        "guardrail"
+      ]
+    },
+    {
+      "use_case_id": "patient_identity_POS_0010",
+      "subsystem": "migration",
+      "requirement_ids": [
+        "SPID-NFR-002"
+      ],
+      "scenario_category": "Positive",
+      "title": "Legacy identifiers migrate to one SPID with aliases",
+      "description": "A migration row maps mpiId, local PAT-* identifiers, nationalID, and MRN aliases to exactly one SPID without dropping clinical resources.",
+      "preconditions": [
+        "Legacy patient identity inventory has been exported",
+        "Confused-record candidates have been routed to review"
+      ],
+      "trigger": {
+        "api": "POST /migration/patient-identity/backfill",
+        "body_ref": "input_payload",
+        "idempotency_key": "idem-patient_identity_POS_0010"
+      },
+      "input_payload": {
+        "patient_id": "9000000009",
+        "aliases": [
+          {
+            "system": "legacy:mpiId",
+            "value": "1f1d2d8a-0000-4000-8000-000000000001"
+          },
+          {
+            "system": "legacy:local-patient-id",
+            "value": "PAT-001"
+          },
+          {
+            "system": "legacy:nationalID",
+            "value": "NID-12345"
+          }
+        ]
+      },
+      "expected_connector_calls": [
+        {
+          "connector": "migration_harness",
+          "direction": "inbound",
+          "endpoint_or_channel": "patient-identity/backfill",
+          "protocol": "JOB",
+          "expected_status": 200
+        }
+      ],
+      "expected_events": [
+        {
+          "topic": "patient.identity.aliases_backfilled",
+          "type": "PatientIdentityAliasesBackfilled",
+          "payload": {
+            "patient_id": "9000000009",
+            "alias_count": 3
+          }
+        }
+      ],
+      "expected_outputs": {
+        "final_status": "SUCCESS",
+        "assertions": [
+          {
+            "check": "one_active_spid_per_legacy_patient",
+            "expected": true
+          },
+          {
+            "check": "clinical_resources_retained",
+            "expected": true
+          }
+        ]
+      },
+      "fault_profile": {
+        "inject_at": "migration",
+        "mode": "legacy_aliases",
+        "severity": "medium",
+        "retry_policy": {
+          "max_retries": 1,
+          "backoff_ms": 1000
+        }
+      },
+      "security_profile": {
+        "auth": "OIDC_JWT",
+        "scopes": [
+          "patient.identity:migrate"
+        ],
+        "transport": "mTLS",
+        "expected_auth_result": "ALLOW"
+      },
+      "priority": "P0",
+      "automation_status": "manual_until_migration_window",
+      "estimated_duration_seconds": 60,
+      "tags": [
+        "migration",
+        "aliases"
+      ]
+    },
+    {
+      "use_case_id": "patient_identity_NEG_0002",
+      "subsystem": "client-registry",
+      "requirement_ids": [
+        "SPID-FR-002"
+      ],
+      "scenario_category": "Negative",
+      "title": "Invalid SPID checksum is rejected",
+      "description": "A supplied patient identifier with the right length but wrong modulus-11 check digit is rejected.",
+      "preconditions": [
+        "Client Registry accepts optional supplied SPID only for controlled migration"
+      ],
+      "trigger": {
+        "api": "POST /registry/patients",
+        "body_ref": "input_payload",
+        "idempotency_key": "idem-patient_identity_NEG_0002"
+      },
+      "input_payload": {
+        "patient_id": "9000000000",
+        "migration_mode": true
+      },
+      "expected_connector_calls": [
+        {
+          "connector": "client_registry",
+          "direction": "inbound",
+          "endpoint_or_channel": "/registry/patients",
+          "protocol": "REST",
+          "expected_status": 422
+        }
+      ],
+      "expected_events": [
+        {
+          "topic": "patient.identity.validation_failed",
+          "type": "PatientIdentityValidationFailed",
+          "payload": {
+            "reason": "INVALID_CHECK_DIGIT"
+          }
+        }
+      ],
+      "expected_outputs": {
+        "final_status": "FAILURE",
+        "assertions": [
+          {
+            "check": "patient_not_created",
+            "expected": true
+          }
+        ]
+      },
+      "fault_profile": {
+        "inject_at": "input_validation",
+        "mode": "invalid_check_digit",
+        "severity": "medium",
+        "retry_policy": {
+          "max_retries": 0,
+          "backoff_ms": 0
+        }
+      },
+      "security_profile": {
+        "auth": "OIDC_JWT",
+        "scopes": [
+          "patient.identity:create"
+        ],
+        "transport": "mTLS",
+        "expected_auth_result": "ALLOW"
+      },
+      "priority": "P0",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 3,
+      "tags": [
+        "validation"
+      ]
+    },
+    {
+      "use_case_id": "patient_identity_NEG_0003",
+      "subsystem": "bridge-sdk",
+      "requirement_ids": [
+        "SPID-FR-003"
+      ],
+      "scenario_category": "Negative",
+      "title": "NHS Number namespace is rejected as internal identity",
+      "description": "A FHIR Patient containing only the NHS Number identifier system is treated as an external alias and cannot satisfy the internal SPID requirement.",
+      "preconditions": [
+        "Patient resource includes an external NHS Number identifier"
+      ],
+      "trigger": {
+        "api": "BridgeEngine.validate_patient_identity",
+        "body_ref": "input_payload",
+        "idempotency_key": "idem-patient_identity_NEG_0003"
+      },
+      "input_payload": {
+        "fhir_resource": {
+          "resourceType": "Patient",
+          "identifier": [
+            {
+              "system": "https://fhir.nhs.uk/Id/nhs-number",
+              "value": "9434765919"
+            }
+          ]
+        }
+      },
+      "expected_connector_calls": [
+        {
+          "connector": "bridge_sdk",
+          "direction": "inbound",
+          "endpoint_or_channel": "validate_patient_identity",
+          "protocol": "IN_PROCESS",
+          "expected_status": 422
+        }
+      ],
+      "expected_events": [
+        {
+          "topic": "bridge.patient_identity.validation_failed",
+          "type": "PatientIdentityValidationFailed",
+          "payload": {
+            "reason": "SPID_REQUIRED"
+          }
+        }
+      ],
+      "expected_outputs": {
+        "final_status": "FAILURE",
+        "assertions": [
+          {
+            "check": "nhs_identifier_not_promoted",
+            "expected": true
+          }
+        ]
+      },
+      "fault_profile": {
+        "inject_at": "identity_validation",
+        "mode": "external_identifier_only",
+        "severity": "medium",
+        "retry_policy": {
+          "max_retries": 0,
+          "backoff_ms": 0
+        }
+      },
+      "security_profile": {
+        "auth": "IN_PROCESS",
+        "scopes": [
+          "bridge:translate"
+        ],
+        "transport": "IN_PROCESS",
+        "expected_auth_result": "ALLOW"
+      },
+      "priority": "P0",
+      "automation_status": "automated",
+      "estimated_duration_seconds": 3,
+      "tags": [
+        "nhs-number",
+        "external-alias"
+      ]
+    }
+  ]
+}
