@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Symphonix Patient Identity Closed Loop</title>
+  <style>:root {
+  color-scheme: light;
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --text: #111827;
+  --muted: #4b5563;
+  --border: #d1d5db;
+  --accent: #0f766e;
+  --accent-soft: #e6fffb;
+  --code-bg: #f3f4f6;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.65 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+main {
+  width: min(1100px, calc(100% - 32px));
+  margin: 32px auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: clamp(24px, 4vw, 48px);
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+}
+.source-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: var(--accent);
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+.source-link:hover { text-decoration: underline; }
+h1, h2, h3, h4 { line-height: 1.25; margin: 1.6em 0 0.55em; }
+h1 { margin-top: 0; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.01em; }
+h2 { padding-top: 0.35em; border-top: 1px solid var(--border); font-size: 1.55rem; }
+h3 { font-size: 1.22rem; }
+p, ul, ol, blockquote, pre, table { margin: 0 0 1.1rem; }
+a { color: var(--accent); }
+ul, ol { padding-left: 1.45rem; }
+li + li { margin-top: 0.25rem; }
+blockquote {
+  border-left: 4px solid var(--accent);
+  padding: 0.75rem 1rem;
+  color: var(--muted);
+  background: var(--accent-soft);
+}
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 0.12rem 0.3rem;
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 0.92em;
+}
+pre {
+  overflow: auto;
+  padding: 1rem;
+  background: #0f172a;
+  color: #e5e7eb;
+  border-radius: 8px;
+}
+pre code { background: transparent; color: inherit; padding: 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  display: block;
+  overflow-x: auto;
+}
+th, td {
+  border: 1px solid var(--border);
+  padding: 0.65rem 0.8rem;
+  vertical-align: top;
+}
+th { background: #f1f5f9; text-align: left; }
+tr:nth-child(even) td { background: #fafafa; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 2rem 0; }
+.mermaid {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #ffffff;
+  overflow-x: auto;
+}
+@media (max-width: 720px) {
+  body { font-size: 15px; }
+  main { width: 100%; margin: 0; border-radius: 0; border-left: 0; border-right: 0; }
+}</style>
+</head>
+<body>
+  <main>
+    <a class="source-link" href="patient-identity-closed-loop.md">View source Markdown</a>
+<h1>Symphonix Patient Identity Closed Loop</h1>
+<h2>Decision</h2>
+<p>Symphonix Health should standardise every patient-data repo on one canonical internal identifier: the Symphonix Patient Identifier (SPID).</p>
+<p>SPID uses the UK NHS number shape because the 10-digit modulus-11 format is familiar, compact, and self-checking. SPID is not an NHS Number. It must use the Symphonix-owned FHIR identifier system:</p>
+<pre><code class="language-text">https://fhir.symphonix.health/Id/patient
+</code></pre>
+<p>The NHS Number FHIR system remains an external alias only:</p>
+<pre><code class="language-text">https://fhir.nhs.uk/Id/nhs-number
+</code></pre>
+<h2>Current Architecture Findings</h2>
+<p>The repo review found that patient identity is fragmented:</p>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Current pattern</th>
+<th>Risk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BulletTrain Client Registry</td>
+<td><code>mpiId</code> UUID primary key, <code>nationalID</code>, sample <code>NHS-*</code>, local duplicate/confusion tables</td>
+<td>Registry exists but the clinical identifier is not the shared canonical patient id</td>
+</tr>
+<tr>
+<td>BulletTrain Shared HealthRecord</td>
+<td>Local <code>patient_id</code>, generated <code>PAT-*</code>, optional <code>national_id</code>, FHIR <code>Patient/{id}</code></td>
+<td>SHR can create patients outside the registry and drift from MPI</td>
+</tr>
+<tr>
+<td>Common validation</td>
+<td><code>validate_patient_id</code> accepts UUID/CR/MPI; separate <code>validate_nhs_number</code> implements modulus-11</td>
+<td>Desired identifier shape exists, but naming and accepted formats are inconsistent</td>
+</tr>
+<tr>
+<td>Appointment, portal, triage, maternity, screening, EPS siblings</td>
+<td><code>PAT-*</code>, <code>patient_id</code>, <code>nhs_number</code>, <code>patient_nhs_number</code>, docs saying NHS Number is primary</td>
+<td>Cross-service patient view cannot be guaranteed</td>
+</tr>
+<tr>
+<td>Bridge SDK</td>
+<td><code>CanonicalEnvelope</code> carries FHIR resources and PHI metadata but no explicit patient identity metadata</td>
+<td>Adapters and agents must parse resources or payload-specific fields</td>
+</tr>
+<tr>
+<td>Agent/control plane repos</td>
+<td>Nexus A2A, global registry, health agent workspace are coordination surfaces</td>
+<td>Useful for propagation and reconciliation, not a deterministic identity authority</td>
+</tr>
+</tbody>
+</table>
+<p>HMIS documentation says it should not hold patient identifiers, but shared schemas include patient fields. Treat HMIS as aggregate-only unless a product decision puts it in the patient-data loop.</p>
+<h2>Local Repository Coverage</h2>
+<p>Local inventory was checked under <code>C:\Users\hgeec\github</code> on 2026-05-14. The patient identity static gate now includes only unique local Git repos whose origin is owned by <code>github.com/symphonix-health</code>. Other-owner local repos are excluded, even if their names mention Symphonix.</p>
+<p>The static sibling scan covers these Symphonix Health repos:</p>
+<ul>
+<li><code>ambulance-ems</code></li>
+<li><code>analytics-bi</code></li>
+<li><code>appointment-system</code></li>
+<li><code>blood-transfusion</code></li>
+<li><code>BulletTrain</code></li>
+<li><code>caid-agent</code></li>
+<li><code>cancer-pathway-tracker</code></li>
+<li><code>citizen-portal</code></li>
+<li><code>clinical-pathways</code></li>
+<li><code>community-nursing</code></li>
+<li><code>csaa</code></li>
+<li><code>design-system</code></li>
+<li><code>epaccs</code></li>
+<li><code>eps</code></li>
+<li><code>erp</code></li>
+<li><code>etps</code></li>
+<li><code>genomics-interpretation</code></li>
+<li><code>global-agent-registry</code></li>
+<li><code>gp-system</code></li>
+<li><code>health-agent-workspace</code></li>
+<li><code>healthcare-pain-points-plan</code></li>
+<li><code>HMIS</code></li>
+<li><code>insurance-eclaims</code></li>
+<li><code>kenya-uhc-implementation</code></li>
+<li><code>lis</code></li>
+<li><code>maternity-system</code></li>
+<li><code>mha-administration</code></li>
+<li><code>mortuary-and-me</code></li>
+<li><code>nexus-a2a-protocol</code></li>
+<li><code>pacs-ris</code></li>
+<li><code>pharmacy-system</code></li>
+<li><code>picis-system</code></li>
+<li><code>prompt-engine</code></li>
+<li><code>provider-portal</code></li>
+<li><code>REA-Agent-mcp</code></li>
+<li><code>scheduling-gateway</code></li>
+<li><code>screening-recall</code></li>
+<li><code>signalbox-mcp</code></li>
+<li><code>supply-chain-erp</code></li>
+<li><code>symphonix-eps-ig</code></li>
+<li><code>symphonix-health.github.io</code></li>
+<li><code>symphonix-public</code></li>
+<li><code>tool-library</code></li>
+<li><code>triage-api</code></li>
+</ul>
+<p><code>symphonix-bridge-sdk</code> is the harness repo and is covered by its direct patient identity tests rather than by the sibling static scan.</p>
+<p>The following local repos are excluded from the Symphonix Health patient identity sibling scan:</p>
+<ul>
+<li><code>.github</code> - origin owner is <code>GmailTedam</code></li>
+<li><code>africa-marketplace</code> - origin owner is <code>Tedam-Technologies-UK-Ltd</code></li>
+<li><code>BulletTrain-gap-2-signatures</code> - duplicate checkout of <code>github.com/symphonix-health/BulletTrain</code></li>
+<li><code>claw-code-parity</code> - origin owner is <code>GmailTedam</code></li>
+<li><code>elocute</code> - origin owner is <code>Tedam-Technologies-UK-Ltd</code></li>
+<li><code>Liquid4Allcookbook</code> - origin owner is <code>Liquid4All</code></li>
+<li><code>openclaw</code> - origin owner is <code>GmailTedam</code></li>
+<li><code>symphonix-health-docs</code> - origin owner is <code>GmailTedam</code></li>
+</ul>
+<h2>NHS/PDS Design Lessons</h2>
+<p>The NHS Personal Demographics Service (PDS) is the master demographic database for NHS patients and holds the NHS number as the national unique identifier. NHS England Digital states that PDS has a National Back Office for data quality and that duplicate records and confusion cases are resolved through that office.</p>
+<p>NHS handling patterns to mirror:</p>
+<table>
+<thead>
+<tr>
+<th>NHS pattern</th>
+<th>Symphonix interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Duplicate NHS Numbers: multiple identifiers for one patient are investigated, confirmed, and merged to leave one number</td>
+<td>Confirmed duplicates become alias/merge events. Old identifiers are retained as aliases and never reissued</td>
+</tr>
+<tr>
+<td>Confused record: one number used by multiple patients is investigated and corrected</td>
+<td>SPID confusion must enter under-review state. Agents can recommend, but humans approve split, merge, or no-merge</td>
+</tr>
+<tr>
+<td>Sensitive status / S-flagging: location/contact access is restricted and some services are unavailable</td>
+<td>Model <code>restricted</code> lifecycle state. Suppress location/contact disclosure and automated outreach unless policy allows</td>
+</tr>
+<tr>
+<td>Stop-noting: older language for restricting access/flagging a record</td>
+<td>Implement this as the modern restricted/sensitive status, not a free-text note</td>
+</tr>
+<tr>
+<td>Death status: NHS Notify blocks messages where PDS has formal or informal death status</td>
+<td>Model formal and informal death states. Stop active care loops and notifications, but do not delete clinical records</td>
+</tr>
+<tr>
+<td>Incorrect death status: NBO can investigate and reset death status</td>
+<td>Add <code>patient.identity.reinstated</code> or <code>patient.identity.death_status_corrected</code> with full audit</td>
+</tr>
+<tr>
+<td>Records management: patient records are retained after death according to health record retention policy</td>
+<td>Death changes lifecycle and permitted workflows; it is not a deletion event</td>
+</tr>
+</tbody>
+</table>
+<p>Key sources used:</p>
+<ul>
+<li>NHS England Digital, Personal Demographics Service: <a href="https://digital.nhs.uk/services/personal-demographics-service">https://digital.nhs.uk/services/personal-demographics-service</a></li>
+<li>NHS England Digital, National Back Office for PDS: <a href="https://digital.nhs.uk/services/personal-demographics-service/national-back-office-for-the-personal-demographics-service">https://digital.nhs.uk/services/personal-demographics-service/national-back-office-for-the-personal-demographics-service</a></li>
+<li>NHS England Digital, PDS data quality incidents: <a href="https://digital.nhs.uk/services/personal-demographics-service/national-back-office-for-the-personal-demographics-service/data-quality-incidents">https://digital.nhs.uk/services/personal-demographics-service/national-back-office-for-the-personal-demographics-service/data-quality-incidents</a></li>
+<li>NHS England Digital, restricting access to a patient demographic record: <a href="https://digital.nhs.uk/services/personal-demographics-service/restricting-access-to-a-patients-demographic-record">https://digital.nhs.uk/services/personal-demographics-service/restricting-access-to-a-patients-demographic-record</a></li>
+<li>NHS England Digital, NHS number format: <a href="https://digital.nhs.uk/services/personal-demographics-service/nhs-number">https://digital.nhs.uk/services/personal-demographics-service/nhs-number</a></li>
+<li>NHS Data Dictionary, NHS NUMBER modulus-11 format: <a href="https://v2.datadictionary.nhs.uk/data_dictionary/data_field_notes/n/nhs_number_de.asp%40shownav%3D0.html">https://v2.datadictionary.nhs.uk/data_dictionary/data_field_notes/n/nhs_number_de.asp%40shownav%3D0.html</a></li>
+<li>NHS Notify, recipients you cannot message: <a href="https://webcms.prod.nhsnotify.national.nhs.uk/using-nhs-notify/recipients-you-cannot-message">https://webcms.prod.nhsnotify.national.nhs.uk/using-nhs-notify/recipients-you-cannot-message</a></li>
+<li>NHS Records Management Code of Practice: <a href="https://transform.england.nhs.uk/information-governance/guidance/records-management-code/records-management-code-of-practice/">https://transform.england.nhs.uk/information-governance/guidance/records-management-code/records-management-code-of-practice/</a></li>
+</ul>
+<h2>Target Architecture</h2>
+<div class="mermaid">
+flowchart LR
+    CR[&quot;Client Registry\nSPID authority&quot;] --&gt; OUTBOX[&quot;Transactional outbox\npatient.identity.*&quot;]
+    OUTBOX --&gt; HUB[&quot;EventBus / Cascade Hub / Nexus A2A&quot;]
+    HUB --&gt; SHR[&quot;Shared HealthRecord\nSPID projection&quot;]
+    HUB --&gt; SIB[&quot;Patient-data siblings\nSPID projection&quot;]
+    HUB --&gt; AGENT[&quot;Identity reconciliation agents\nrecommendations only&quot;]
+    AGENT --&gt; REVIEW[&quot;Human identity review queue&quot;]
+    REVIEW --&gt; CR
+    SHR --&gt; VIEW[&quot;Single patient view&quot;]
+    SIB --&gt; VIEW
+</div>
+<h3>Authority Boundaries</h3>
+<p>Client Registry owns:</p>
+<ul>
+<li>SPID allocation and validation.</li>
+<li>External aliases: NHS Number, MRN, legacy <code>mpiId</code>, local <code>PAT-*</code>, passport, national identifiers.</li>
+<li>Identity lifecycle state: <code>active</code>, <code>inactive</code>, <code>restricted</code>, <code>under_review</code>, <code>confused</code>, <code>merged</code>, <code>deceased</code>.</li>
+<li>Merge, link, split, restriction, death-status correction, and reinstatement workflows.</li>
+<li>A transactional outbox for identity lifecycle events.</li>
+</ul>
+<p>Shared HealthRecord owns:</p>
+<ul>
+<li>Clinical records, documents, consents, and privacy constraints.</li>
+<li>A local patient projection keyed by SPID.</li>
+<li>Fail-closed write checks against the local projection or registry.</li>
+</ul>
+<p>Patient-data siblings own:</p>
+<ul>
+<li>Local business objects such as appointments, prescriptions, specimens, pathways, imaging orders, and episodes.</li>
+<li>A local patient projection keyed by SPID.</li>
+<li>Domain identifiers that reference SPID, not replace it.</li>
+</ul>
+<p>Agents own:</p>
+<ul>
+<li>Duplicate/confusion detection recommendations.</li>
+<li>Reconciliation triage.</li>
+<li>Migration assistance and evidence gathering.</li>
+<li>No autonomous identifier allocation, merge, split, restriction removal, or death-status mutation.</li>
+</ul>
+<h2>Event Contract</h2>
+<p>All identity events must include:</p>
+<pre><code class="language-json">{
+  &quot;patient_id&quot;: &quot;9000000009&quot;,
+  &quot;identifier_system&quot;: &quot;https://fhir.symphonix.health/Id/patient&quot;,
+  &quot;identity_version&quot;: 1,
+  &quot;correlation_id&quot;: &quot;corr-example&quot;,
+  &quot;idempotency_key&quot;: &quot;idem-example&quot;,
+  &quot;lifecycle_status&quot;: &quot;active&quot;,
+  &quot;occurred_at&quot;: &quot;2026-05-13T00:00:00Z&quot;,
+  &quot;source&quot;: &quot;client-registry&quot;
+}
+</code></pre>
+<p>Required event types:</p>
+<ul>
+<li><code>patient.identity.created</code></li>
+<li><code>patient.identity.updated</code></li>
+<li><code>patient.identity.restricted</code></li>
+<li><code>patient.identity.confusion_detected</code></li>
+<li><code>patient.identity.linked</code></li>
+<li><code>patient.identity.merged</code></li>
+<li><code>patient.identity.deceased</code></li>
+<li><code>patient.identity.death_status_corrected</code></li>
+<li><code>patient.identity.reinstated</code></li>
+<li><code>patient.identity.reconciled</code></li>
+</ul>
+<h2>FHIR Binding</h2>
+<p>FHIR Patient resources should carry SPID as:</p>
+<pre><code class="language-json">{
+  &quot;resourceType&quot;: &quot;Patient&quot;,
+  &quot;id&quot;: &quot;9000000009&quot;,
+  &quot;identifier&quot;: [
+    {
+      &quot;use&quot;: &quot;official&quot;,
+      &quot;system&quot;: &quot;https://fhir.symphonix.health/Id/patient&quot;,
+      &quot;value&quot;: &quot;9000000009&quot;
+    }
+  ]
+}
+</code></pre>
+<p>Other FHIR resources should reference the patient as:</p>
+<pre><code class="language-json">{
+  &quot;subject&quot;: {
+    &quot;reference&quot;: &quot;Patient/9000000009&quot;
+  }
+}
+</code></pre>
+<p>If a real NHS Number is known, add it only as an external identifier:</p>
+<pre><code class="language-json">{
+  &quot;system&quot;: &quot;https://fhir.nhs.uk/Id/nhs-number&quot;,
+  &quot;value&quot;: &quot;9434765919&quot;
+}
+</code></pre>
+<h2>Requirements And Scenarios</h2>
+<p>Generated traceability assets live in:</p>
+<ul>
+<li><code>tests/harness/patient_identity/requirements_matrix.json</code></li>
+<li><code>tests/harness/patient_identity/patient_identity_scenarios.json</code></li>
+</ul>
+<p>The matrix covers:</p>
+<ul>
+<li>Single issuing authority.</li>
+<li>NHS-style checksum shape without NHS namespace use.</li>
+<li>FHIR binding.</li>
+<li>Creation propagation.</li>
+<li>Subscriber projections.</li>
+<li>Fail-closed clinical write checks.</li>
+<li>Idempotent outbox and replay.</li>
+<li>Confused-record, merge/link, restriction, stop-note, death, and reinstatement lifecycle.</li>
+<li>Agent governance.</li>
+<li>Closed-loop reconciliation.</li>
+<li>Migration from <code>mpiId</code>, <code>nationalID</code>, <code>nhs_number</code>, and <code>PAT-*</code>.</li>
+</ul>
+<h2>Implementation Plan</h2>
+<h3>Phase 1: Contract And Shared SDK</h3>
+<ul>
+<li>Use <code>bridge_sdk.patient_identity</code> as the shared validation and FHIR helper module.</li>
+<li>Add SPID fields to <code>CanonicalEnvelope</code>: <code>patient_id</code>, <code>patient_identifier_system</code>, <code>patient_identity_version</code>, and <code>patient_lifecycle_status</code>.</li>
+<li>Publish JSON Schema or Pydantic models for all <code>patient.identity.*</code> events.</li>
+<li>Update adapters to extract SPID from FHIR <code>Patient</code>, <code>subject.reference</code>, and explicit <code>patient_id</code>.</li>
+</ul>
+<h3>Phase 2: BulletTrain Registry And SHR Refactor</h3>
+<ul>
+<li>Client Registry:
+<ul>
+<li>Add <code>patient_id</code> / SPID column and unique index.</li>
+<li>Keep existing <code>mpiId</code> as technical row id or alias.</li>
+<li>Rename <code>nationalID</code> semantics to external identifier, not master patient identity.</li>
+<li>Add SPID generation with modulus-11 validation and collision checks.</li>
+<li>Add lifecycle statuses and transactional outbox.</li>
+</ul>
+</li>
+<li>Shared HealthRecord:
+<ul>
+<li>Remove local <code>PAT-*</code> generation for patient creation.</li>
+<li>Accept patient creation only from Client Registry or a registry creation event.</li>
+<li>Enforce SPID on FHIR Patient and subject references.</li>
+<li>Block non-emergency writes for invalid, unknown, under-review, restricted, or deceased identities.</li>
+</ul>
+</li>
+</ul>
+<h3>Phase 3: Sibling Migration</h3>
+<ul>
+<li>Replace internal <code>nhs_number</code>, <code>patient_nhs_number</code>, and <code>PAT-*</code> usage with SPID.</li>
+<li>Keep real NHS Number only as an optional external alias.</li>
+<li>Add patient projection consumers to appointment, provider portal, triage, maternity, screening, EPS, pharmacy, GP, LIS, PACS/RIS, epaccs, ambulance, cancer pathway, and mortuary repos where they handle patient data.</li>
+<li>Backfill aliases from legacy identifiers to SPID.</li>
+</ul>
+<h3>Phase 4: Closed-Loop Governance</h3>
+<ul>
+<li>Add reconciliation jobs comparing Client Registry and subscriber projections.</li>
+<li>Route drift and suspected confusion to agent-assisted review.</li>
+<li>Require human approval for merge, split, restriction removal, death-status correction, and reinstatement.</li>
+<li>Add dashboards and audit queries keyed by SPID and correlation id.</li>
+</ul>
+<h2>Test Harness</h2>
+<p>Fast contract tests:</p>
+<pre><code class="language-powershell">python -m pytest tests/test_patient_identity.py tests/harness/patient_identity/test_patient_identity_contract.py -q
+</code></pre>
+<p>Static enforcement is always active:</p>
+<pre><code class="language-powershell">python -m pytest tests/harness/patient_identity/test_patient_identity_contract.py -q
+</code></pre>
+<p>The static scan checks owner-verified Symphonix Health sibling repos for legacy identity patterns that must be removed or explicitly quarantined before rollout:</p>
+<ul>
+<li><code>nhs_number</code> / <code>patient_nhs_number</code> / <code>nhsNumber</code> as internal fields.</li>
+<li><code>NHS Number as primary patient identifier</code> documentation.</li>
+<li>local <code>PAT-*</code> patient ids.</li>
+<li>local <code>PAT-</code> generators.</li>
+<li><code>mpiId</code> as the clinical primary key.</li>
+</ul>
+<h2>Architecture Rationale</h2>
+<p>The strongest architecture is deterministic identity authority plus agent-assisted reconciliation. Pure agentic identity management is too risky because identifier allocation, merging, restriction, and death-state changes are safety-critical and audit-heavy. Pure deterministic matching leaves real-world duplicate and confused-record cases unresolved without expensive manual discovery.</p>
+<p>The right split is:</p>
+<ul>
+<li>Deterministic services own the contract, validation, state transitions, outbox, and idempotency.</li>
+<li>Agents find probable issues, gather evidence, explain recommendations, and open tasks.</li>
+<li>Humans approve high-risk identity lifecycle corrections.</li>
+</ul>
+<p>This keeps Symphonix Health agent-first where agents add value, but prevents agents from becoming an unsafe master patient index.</p>
+
+  </main>
+  <script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'default' });
+</script>
+</body>
+</html>

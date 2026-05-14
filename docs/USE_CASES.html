@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Use Case Scenarios</title>
+  <style>:root {
+  color-scheme: light;
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --text: #111827;
+  --muted: #4b5563;
+  --border: #d1d5db;
+  --accent: #0f766e;
+  --accent-soft: #e6fffb;
+  --code-bg: #f3f4f6;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.65 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+main {
+  width: min(1100px, calc(100% - 32px));
+  margin: 32px auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: clamp(24px, 4vw, 48px);
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+}
+.source-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: var(--accent);
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+.source-link:hover { text-decoration: underline; }
+h1, h2, h3, h4 { line-height: 1.25; margin: 1.6em 0 0.55em; }
+h1 { margin-top: 0; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.01em; }
+h2 { padding-top: 0.35em; border-top: 1px solid var(--border); font-size: 1.55rem; }
+h3 { font-size: 1.22rem; }
+p, ul, ol, blockquote, pre, table { margin: 0 0 1.1rem; }
+a { color: var(--accent); }
+ul, ol { padding-left: 1.45rem; }
+li + li { margin-top: 0.25rem; }
+blockquote {
+  border-left: 4px solid var(--accent);
+  padding: 0.75rem 1rem;
+  color: var(--muted);
+  background: var(--accent-soft);
+}
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 0.12rem 0.3rem;
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 0.92em;
+}
+pre {
+  overflow: auto;
+  padding: 1rem;
+  background: #0f172a;
+  color: #e5e7eb;
+  border-radius: 8px;
+}
+pre code { background: transparent; color: inherit; padding: 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  display: block;
+  overflow-x: auto;
+}
+th, td {
+  border: 1px solid var(--border);
+  padding: 0.65rem 0.8rem;
+  vertical-align: top;
+}
+th { background: #f1f5f9; text-align: left; }
+tr:nth-child(even) td { background: #fafafa; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 2rem 0; }
+.mermaid {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #ffffff;
+  overflow-x: auto;
+}
+@media (max-width: 720px) {
+  body { font-size: 15px; }
+  main { width: 100%; margin: 0; border-radius: 0; border-left: 0; border-right: 0; }
+}</style>
+</head>
+<body>
+  <main>
+    <a class="source-link" href="USE_CASES.md">View source Markdown</a>
+<h1>Use Case Scenarios</h1>
+<p><strong>Project:</strong> symphonix-bridge-sdk
+<strong>Date:</strong> 2026-05-14</p>
+<h2>UC-BSDK-001: Canonical FHIR pivot</h2>
+<p><strong>Actor:</strong> Integration adapter
+workflow_id: compliance_policy_POS_0001</p>
+<h3>Preconditions</h3>
+<ul>
+<li>The SDK is available to the adapter.</li>
+<li>Source payloads can be mapped into the canonical bridge envelope.</li>
+</ul>
+<h3>Main Flow</h3>
+<ol>
+<li>The adapter receives a source-system payload.</li>
+<li>The SDK maps the payload into the canonical FHIR R4 pivot.</li>
+<li>The SDK emits a bridge envelope with payload, terminology, and metadata intact.</li>
+</ol>
+<h3>Postconditions</h3>
+<ul>
+<li>Downstream adapters can consume a stable FHIR R4 representation.</li>
+</ul>
+<h2>UC-BSDK-002: Canonical envelope contract</h2>
+<p><strong>Actor:</strong> Bridge SDK consumer
+workflow_id: compliance_policy_POS_0002</p>
+<h3>Preconditions</h3>
+<ul>
+<li>The consumer has a payload requiring exchange across Symphonix services.</li>
+</ul>
+<h3>Main Flow</h3>
+<ol>
+<li>The consumer creates a canonical envelope.</li>
+<li>The SDK validates required payload, terminology, and metadata fields.</li>
+<li>The consumer forwards the validated envelope.</li>
+</ol>
+<h3>Postconditions</h3>
+<ul>
+<li>The envelope has a consistent contract for routing, audit, and translation.</li>
+</ul>
+<h2>UC-BSDK-003: Any-to-any adapter translation</h2>
+<p><strong>Actor:</strong> Source and target system adapters
+workflow_id: compliance_policy_POS_0003</p>
+<h3>Preconditions</h3>
+<ul>
+<li>Source and target adapters are registered.</li>
+<li>The source payload can be normalized into the canonical pivot.</li>
+</ul>
+<h3>Main Flow</h3>
+<ol>
+<li>The source adapter normalizes an inbound payload.</li>
+<li>The SDK validates the canonical envelope.</li>
+<li>The target adapter renders the outbound payload.</li>
+</ol>
+<h3>Postconditions</h3>
+<ul>
+<li>The exchange avoids pairwise custom mapping between every service pair.</li>
+</ul>
+<h2>UC-BSDK-004: FHIR profile conformance</h2>
+<p><strong>Actor:</strong> Clinical integration service
+workflow_id: compliance_policy_POS_0004</p>
+<h3>Preconditions</h3>
+<ul>
+<li>The service requires FHIR-conformant payload exchange.</li>
+</ul>
+<h3>Main Flow</h3>
+<ol>
+<li>The service submits a candidate FHIR resource.</li>
+<li>The SDK checks canonical profile expectations.</li>
+<li>The SDK returns a conformant envelope or a validation failure.</li>
+</ol>
+<h3>Postconditions</h3>
+<ul>
+<li>Invalid payloads fail before they enter the exchange fabric.</li>
+</ul>
+<h2>UC-BSDK-005: FHIR R5 transition readiness</h2>
+<p><strong>Actor:</strong> Platform maintainer
+workflow_id: compliance_policy_POS_0005</p>
+<h3>Preconditions</h3>
+<ul>
+<li>FHIR R4 remains the active canonical pivot.</li>
+</ul>
+<h3>Main Flow</h3>
+<ol>
+<li>The maintainer reviews the documented R5 transition plan.</li>
+<li>The SDK keeps R4 behavior stable while documenting future compatibility work.</li>
+<li>Compatibility changes are traced through requirements and canonical scenarios.</li>
+</ol>
+<h3>Postconditions</h3>
+<ul>
+<li>The SDK has an auditable migration path without destabilizing current adapters.</li>
+</ul>
+
+  </main>
+  
+</body>
+</html>
