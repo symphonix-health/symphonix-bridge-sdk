@@ -1,4 +1,4 @@
-subsystem_default = "eps"
+subsystem_default = "symphonix-bridge-sdk"
 requirement_id_prefixes = ["BSDK-"]
 
 [paths]
