@@ -3,7 +3,7 @@
   "canonical_matrix_schema": "BT_CANONICAL_MATRIX_V2_18COL",
   "metadata": {
     "subsystem": "symphonix-bridge-sdk",
-    "requirement_count": 99,
+    "requirement_count": 111,
     "covered_count": 99,
     "uncovered_count": 0
   },
@@ -1795,6 +1795,222 @@
           "scenario_category": "Edge"
         }
       ]
+    },
+    {
+      "requirement_id": "FR-BSDK-001",
+      "family": "Z_CANONICAL_ANCHOR",
+      "title": "Canonical FHIR R4 pivot type",
+      "statement": "SDK SHALL provide a canonical FHIR R4 pivot type that source-system payloads can be mapped into.",
+      "category": "functional",
+      "source": "docs/REQUIREMENTS.md",
+      "coverage_status": "covered",
+      "scenarios": [
+        {
+          "matrix": "compliance_policy_canonical.json",
+          "subsystem": "compliance-policy",
+          "use_case_id": "compliance_policy_POS_0001",
+          "scenario_category": "Positive"
+        }
+      ],
+      "scenario_count": 1
+    },
+    {
+      "requirement_id": "FR-BSDK-002",
+      "family": "Z_CANONICAL_ANCHOR",
+      "title": "Bridge envelope emission",
+      "statement": "SDK SHALL emit a bridge envelope with payload, terminology, and metadata intact after pivot.",
+      "category": "functional",
+      "source": "docs/REQUIREMENTS.md",
+      "coverage_status": "covered",
+      "scenarios": [
+        {
+          "matrix": "compliance_policy_canonical.json",
+          "subsystem": "compliance-policy",
+          "use_case_id": "compliance_policy_POS_0002",
+          "scenario_category": "Positive"
+        }
+      ],
+      "scenario_count": 1
+    },
+    {
+      "requirement_id": "FR-BSDK-003",
+      "family": "Z_CANONICAL_ANCHOR",
+      "title": "Envelope contract validation",
+      "statement": "SDK SHALL validate required payload, terminology, and metadata fields on every envelope.",
+      "category": "functional",
+      "source": "docs/REQUIREMENTS.md",
+      "coverage_status": "covered",
+      "scenarios": [
+        {
+          "matrix": "compliance_policy_canonical.json",
+          "subsystem": "compliance-policy",
+          "use_case_id": "compliance_policy_POS_0003",
+          "scenario_category": "Positive"
+        }
+      ],
+      "scenario_count": 1
+    },
+    {
+      "requirement_id": "FR-BSDK-004",
+      "family": "Z_CANONICAL_ANCHOR",
+      "title": "Any-to-any adapter translation",
+      "statement": "SDK SHALL enable any-to-any adapter translation via the canonical pivot without pairwise mapping.",
+      "category": "functional",
+      "source": "docs/REQUIREMENTS.md",
+      "coverage_status": "covered",
+      "scenarios": [
+        {
+          "matrix": "compliance_policy_canonical.json",
+          "subsystem": "compliance-policy",
+          "use_case_id": "compliance_policy_POS_0004",
+          "scenario_category": "Positive"
+        }
+      ],
+      "scenario_count": 1
+    },
+    {
+      "requirement_id": "FR-BSDK-005",
+      "family": "Z_CANONICAL_ANCHOR",
+      "title": "FHIR R4 profile conformance",
+      "statement": "SDK SHALL check FHIR R4 profile conformance and return a conformant envelope OR a validation failure.",
+      "category": "functional",
+      "source": "docs/REQUIREMENTS.md",
+      "coverage_status": "covered",
+      "scenarios": [
+        {
+          "matrix": "compliance_policy_canonical.json",
+          "subsystem": "compliance-policy",
+          "use_case_id": "compliance_policy_POS_0005",
+          "scenario_category": "Positive"
+        }
+      ],
+      "scenario_count": 1
+    },
+    {
+      "requirement_id": "FR-BSDK-006",
+      "family": "Z_CANONICAL_ANCHOR",
+      "title": "R5 transition plan",
+      "statement": "SDK SHALL document a FHIR R5 transition plan keeping R4 behaviour stable.",
+      "category": "functional",
+      "source": "docs/REQUIREMENTS.md",
+      "coverage_status": "covered",
+      "scenarios": [
+        {
+          "matrix": "compliance_policy_canonical.json",
+          "subsystem": "compliance-policy",
+          "use_case_id": "compliance_policy_POS_0006",
+          "scenario_category": "Positive"
+        }
+      ],
+      "scenario_count": 1
+    },
+    {
+      "requirement_id": "FR-BSDK-007",
+      "family": "Z_CANONICAL_ANCHOR",
+      "title": "Compatibility traceability",
+      "statement": "SDK SHALL trace compatibility changes through requirements and canonical scenarios.",
+      "category": "functional",
+      "source": "docs/REQUIREMENTS.md",
+      "coverage_status": "covered",
+      "scenarios": [
+        {
+          "matrix": "compliance_policy_canonical.json",
+          "subsystem": "compliance-policy",
+          "use_case_id": "compliance_policy_POS_0007",
+          "scenario_category": "Positive"
+        }
+      ],
+      "scenario_count": 1
+    },
+    {
+      "requirement_id": "FR-BSDK-008",
+      "family": "Z_CANONICAL_ANCHOR",
+      "title": "Adapter registry",
+      "statement": "SDK SHALL register source and target adapters that consume the canonical pivot.",
+      "category": "functional",
+      "source": "docs/REQUIREMENTS.md",
+      "coverage_status": "covered",
+      "scenarios": [
+        {
+          "matrix": "compliance_policy_canonical.json",
+          "subsystem": "compliance-policy",
+          "use_case_id": "compliance_policy_POS_0008",
+          "scenario_category": "Positive"
+        }
+      ],
+      "scenario_count": 1
+    },
+    {
+      "requirement_id": "NFR-BSDK-001",
+      "family": "Z_CANONICAL_ANCHOR",
+      "title": "Import stability",
+      "statement": "SDK MUST be import-stable across all sibling repos (no breaking pivot changes within R4 lifecycle).",
+      "category": "non-functional",
+      "source": "docs/REQUIREMENTS.md",
+      "coverage_status": "covered",
+      "scenarios": [
+        {
+          "matrix": "compliance_policy_canonical.json",
+          "subsystem": "compliance-policy",
+          "use_case_id": "compliance_policy_NEG_0086",
+          "scenario_category": "Negative"
+        }
+      ],
+      "scenario_count": 1
+    },
+    {
+      "requirement_id": "NFR-BSDK-002",
+      "family": "Z_CANONICAL_ANCHOR",
+      "title": "BulletTrain Integration Constitution",
+      "statement": "SDK MUST refuse to call sibling systems directly; cross-system traffic via bullettrain.connectors.* or api_gateway hub.",
+      "category": "non-functional",
+      "source": "docs/REQUIREMENTS.md",
+      "coverage_status": "covered",
+      "scenarios": [
+        {
+          "matrix": "compliance_policy_canonical.json",
+          "subsystem": "compliance-policy",
+          "use_case_id": "compliance_policy_NEG_0087",
+          "scenario_category": "Negative"
+        }
+      ],
+      "scenario_count": 1
+    },
+    {
+      "requirement_id": "NFR-BSDK-003",
+      "family": "Z_CANONICAL_ANCHOR",
+      "title": "Pip-installable, import-clean",
+      "statement": "SDK MUST be pip-installable and import-clean (no implicit network IO at import time).",
+      "category": "non-functional",
+      "source": "docs/REQUIREMENTS.md",
+      "coverage_status": "covered",
+      "scenarios": [
+        {
+          "matrix": "compliance_policy_canonical.json",
+          "subsystem": "compliance-policy",
+          "use_case_id": "compliance_policy_NEG_0088",
+          "scenario_category": "Negative"
+        }
+      ],
+      "scenario_count": 1
+    },
+    {
+      "requirement_id": "NFR-BSDK-004",
+      "family": "Z_CANONICAL_ANCHOR",
+      "title": "Deterministic serialisation",
+      "statement": "Envelope serialisation MUST be deterministic (stable field ordering for audit replay).",
+      "category": "non-functional",
+      "source": "docs/REQUIREMENTS.md",
+      "coverage_status": "covered",
+      "scenarios": [
+        {
+          "matrix": "compliance_policy_canonical.json",
+          "subsystem": "compliance-policy",
+          "use_case_id": "compliance_policy_NEG_0089",
+          "scenario_category": "Negative"
+        }
+      ],
+      "scenario_count": 1
     }
   ]
 }
