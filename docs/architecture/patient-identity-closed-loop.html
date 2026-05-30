@@ -435,6 +435,7 @@ flowchart LR
 <li>local <code>PAT-</code> generators.</li>
 <li><code>mpiId</code> as the clinical primary key.</li>
 </ul>
+<p>Known sibling findings are tracked in <code>tests/harness/patient_identity/legacy_identity_quarantine.json</code>. The test fails on any new unquarantined finding and also fails when a quarantined entry no longer appears, so sibling migrations have to remove their resolved entries instead of leaving stale backlog.</p>
 <h2>Architecture Rationale</h2>
 <p>The strongest architecture is deterministic identity authority plus agent-assisted reconciliation. Pure agentic identity management is too risky because identifier allocation, merging, restriction, and death-state changes are safety-critical and audit-heavy. Pure deterministic matching leaves real-world duplicate and confused-record cases unresolved without expensive manual discovery.</p>
 <p>The right split is:</p>

@@ -313,6 +313,8 @@ The static scan checks owner-verified Symphonix Health sibling repos for legacy 
 * local `PAT-` generators.
 * `mpiId` as the clinical primary key.
 
+Known sibling findings are tracked in `tests/harness/patient_identity/legacy_identity_quarantine.json`. The test fails on any new unquarantined finding and also fails when a quarantined entry no longer appears, so sibling migrations have to remove their resolved entries instead of leaving stale backlog.
+
 ## Architecture Rationale
 
 The strongest architecture is deterministic identity authority plus agent-assisted reconciliation. Pure agentic identity management is too risky because identifier allocation, merging, restriction, and death-state changes are safety-critical and audit-heavy. Pure deterministic matching leaves real-world duplicate and confused-record cases unresolved without expensive manual discovery.

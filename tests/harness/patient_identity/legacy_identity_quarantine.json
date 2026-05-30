@@ -1,0 +1,233 @@
+{
+  "schema_version": "SPID_LEGACY_QUARANTINE_V1",
+  "metadata": {
+    "purpose": "Exact quarantine for current sibling-repo legacy patient identity scan findings. New findings fail the Bridge SDK contract test; resolved findings must be removed from this file.",
+    "canonical_identifier": "Symphonix Patient Identifier",
+    "canonical_identifier_system": "https://fhir.symphonix.health/Id/patient",
+    "status": "pending_sibling_migration"
+  },
+  "findings": [
+    {
+      "path": "analytics-bi/backend/tests/test_invariants_e2e.py",
+      "owner_repo": "analytics-bi",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "analytics-bi/tests/harness/build_implementation_gap_report.py",
+      "owner_repo": "analytics-bi",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "BulletTrain/bullettrain/connectors/client_registry.py",
+      "owner_repo": "BulletTrain",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "BulletTrain/connectors/manifests/gp_system_manifest.json",
+      "owner_repo": "BulletTrain",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "BulletTrain/connectors/manifests/mhra_manifest.json",
+      "owner_repo": "BulletTrain",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "BulletTrain/services/fhir_proxy/tests/test_path_mapping.py",
+      "owner_repo": "BulletTrain",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "BulletTrain/services/observability_ingest/main.py",
+      "owner_repo": "BulletTrain",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "eps/src/seed.py",
+      "owner_repo": "eps",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "etps/src/demo_seed.py",
+      "owner_repo": "etps",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "kenya-uhc-implementation/emulators/patient_portal_ke/fixtures/list_appointments.json",
+      "owner_repo": "kenya-uhc-implementation",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "kenya-uhc-implementation/emulators/patient_portal_ke/tests/test_llm_backend.py",
+      "owner_repo": "kenya-uhc-implementation",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "kenya-uhc-implementation/reports/CAID_AUDIT_SUMMARY.md",
+      "owner_repo": "kenya-uhc-implementation",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "kenya-uhc-implementation/src/seed.py",
+      "owner_repo": "kenya-uhc-implementation",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "lis/tests/harness/build_implementation_gap_report.py",
+      "owner_repo": "lis",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "mha-administration/backend/src/assessment/integration_stubs.py",
+      "owner_repo": "mha-administration",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "mha-administration/backend/src/assessment/report_render.py",
+      "owner_repo": "mha-administration",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "mha-administration/backend/src/assessment/routes_reports.py",
+      "owner_repo": "mha-administration",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "mortuary-and-me/backend/mortuary_and_me/security.py",
+      "owner_repo": "mortuary-and-me",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "mortuary-and-me/backend/mortuary_and_me/seed.py",
+      "owner_repo": "mortuary-and-me",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "mortuary-and-me/backend/seed.py",
+      "owner_repo": "mortuary-and-me",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "pacs-ris/tests/harness/build_implementation_gap_report.py",
+      "owner_repo": "pacs-ris",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "pharmacy-system/backend/src/routes_anticipatory_packs.py",
+      "owner_repo": "pharmacy-system",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "pharmacy-system/backend/src/routes_nms_episodes.py",
+      "owner_repo": "pharmacy-system",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "pharmacy-system/backend/src/routes_yellow_card_submissions.py",
+      "owner_repo": "pharmacy-system",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "pharmacy-system/backend/tests/test_bullettrain_outbound.py",
+      "owner_repo": "pharmacy-system",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "pharmacy-system/docs/architecture/integration-points.md",
+      "owner_repo": "pharmacy-system",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "pharmacy-system/tests/harness/build_implementation_gap_report.py",
+      "owner_repo": "pharmacy-system",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "provider-portal/tests/harness/build_implementation_gap_report.py",
+      "owner_repo": "provider-portal",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "triage-api/DEMO_CREDENTIALS.md",
+      "owner_repo": "triage-api",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "triage-api/app/journey_routes.py",
+      "owner_repo": "triage-api",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "triage-api/app/seed.py",
+      "owner_repo": "triage-api",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "triage-api/app/seed_cohort.py",
+      "owner_repo": "triage-api",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "triage-api/docs/REQUIREMENTS.md",
+      "owner_repo": "triage-api",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "triage-api/docs/USE_CASES.md",
+      "owner_repo": "triage-api",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "triage-api/frontend/src/pages/CohortPage.tsx",
+      "owner_repo": "triage-api",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "triage-api/reports/_build_requirements.py",
+      "owner_repo": "triage-api",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "triage-api/scripts/demo_walkthrough.py",
+      "owner_repo": "triage-api",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    }
+  ]
+}

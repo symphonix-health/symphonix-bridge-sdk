@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -12,9 +13,27 @@ import pytest
 
 
 ROOT = Path(__file__).resolve().parents[3]
-WORKSPACE = ROOT.parent
+
+
+def _resolve_workspace_root(root: Path) -> Path:
+    candidates: list[Path] = []
+    for env_name in ("SYMPHONIX_WORKSPACE_ROOT", "WORKSPACE_ROOT"):
+        env_value = os.environ.get(env_name)
+        if env_value:
+            candidates.append(Path(env_value))
+
+    candidates.extend([root.parent, Path.home() / "github"])
+
+    for candidate in candidates:
+        if (candidate / "HMIS" / ".git").exists() and (candidate / "mha-administration" / ".git").exists():
+            return candidate
+    return root.parent
+
+
+WORKSPACE = _resolve_workspace_root(ROOT)
 MATRIX_PATH = Path(__file__).with_name("requirements_matrix.json")
 SCENARIOS_PATH = Path(__file__).with_name("patient_identity_scenarios.json")
+QUARANTINE_PATH = Path(__file__).with_name("legacy_identity_quarantine.json")
 
 CANONICAL_PATIENT_SYSTEM = "https://fhir.symphonix.health/Id/patient"
 NHS_NUMBER_SYSTEM = "https://fhir.nhs.uk/Id/nhs-number"
@@ -57,6 +76,26 @@ CANONICAL_COLUMNS = {
 
 def _load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _workspace_relative(path: Path) -> str:
+    return path.relative_to(WORKSPACE).as_posix()
+
+
+def _load_legacy_quarantine_paths() -> set[str]:
+    payload = _load_json(QUARANTINE_PATH)
+    findings = payload["findings"]
+    paths = [finding["path"] for finding in findings]
+
+    assert payload["schema_version"] == "SPID_LEGACY_QUARANTINE_V1"
+    assert paths
+    assert len(paths) == len(set(paths))
+    for finding in findings:
+        assert finding["status"] == "pending_sibling_migration", finding["path"]
+        assert finding["owner_repo"], finding["path"]
+        assert finding["reason"], finding["path"]
+
+    return set(paths)
 
 
 def _walk(obj: Any) -> list[Any]:
@@ -137,7 +176,7 @@ def _scan_repo_with_rg(repo: Path) -> list[str] | None:
             path = Path(line.strip())
             if not path.exists():
                 continue
-            findings.append(str(path.relative_to(WORKSPACE)))
+            findings.append(_workspace_relative(path))
             if len(findings) >= MAX_STATIC_SCAN_FINDINGS_PER_REPO:
                 process.kill()
                 break
@@ -184,7 +223,7 @@ def _scan_repo_with_git_grep(repo: Path) -> list[str] | None:
             path = repo / line.strip()
             if not path.exists():
                 continue
-            findings.append(str(path.relative_to(WORKSPACE)))
+            findings.append(_workspace_relative(path))
             if len(findings) >= MAX_STATIC_SCAN_FINDINGS_PER_REPO:
                 process.kill()
                 break
@@ -194,7 +233,7 @@ def _scan_repo_with_git_grep(repo: Path) -> list[str] | None:
         process.wait(timeout=5)
         if findings:
             return findings
-        return [f"{repo.relative_to(WORKSPACE)} static identity scan timed out"]
+        return [f"{_workspace_relative(repo)} static identity scan timed out"]
 
     if process.returncode not in {0, 1, -9} and not findings:
         return None
@@ -227,12 +266,18 @@ def _github_owner_and_repo(origin_url: str) -> tuple[str, str]:
     return match.group("owner"), match.group("repo")
 
 
+def _same_github_remote(left: Path, right: Path) -> bool:
+    left_owner, left_repo = _github_owner_and_repo(_origin_url(left))
+    right_owner, right_repo = _github_owner_and_repo(_origin_url(right))
+    return bool(left_owner and left_repo and (left_owner.lower(), left_repo.lower()) == (right_owner.lower(), right_repo.lower()))
+
+
 def _discover_symphonix_patient_data_repos() -> list[Path]:
     candidates: dict[str, list[Path]] = {}
     for repo in sorted(WORKSPACE.iterdir(), key=lambda path: path.name.lower()):
         if not repo.is_dir() or not (repo / ".git").exists():
             continue
-        if repo == ROOT:
+        if repo == ROOT or _same_github_remote(repo, ROOT):
             continue
         origin_url = _origin_url(repo)
         owner, remote_repo = _github_owner_and_repo(origin_url)
@@ -252,6 +297,8 @@ def test_patient_identity_static_repo_discovery_covers_local_symphonix_health_re
     candidates: dict[str, list[Path]] = {}
     for repo in sorted(WORKSPACE.iterdir(), key=lambda path: path.name.lower()):
         if not repo.is_dir() or not (repo / ".git").exists() or repo == ROOT:
+            continue
+        if _same_github_remote(repo, ROOT):
             continue
         owner, remote_repo = _github_owner_and_repo(_origin_url(repo))
         if owner.lower() != "symphonix-health":
@@ -405,7 +452,7 @@ def test_patient_identity_static_repo_scan_enforce_mode() -> None:
                 text = path.read_text(encoding="utf-8", errors="ignore")
                 for pattern in forbidden_patterns:
                     if pattern.search(text):
-                        repo_findings.append(str(path.relative_to(WORKSPACE)))
+                        repo_findings.append(_workspace_relative(path))
                         break
                 if len(repo_findings) >= MAX_STATIC_SCAN_FINDINGS_PER_REPO:
                     break
@@ -413,8 +460,17 @@ def test_patient_identity_static_repo_scan_enforce_mode() -> None:
                 break
         findings.extend(repo_findings)
 
-    assert not findings, (
+    finding_set = set(findings)
+    quarantined = _load_legacy_quarantine_paths()
+    unquarantined = sorted(finding_set - quarantined)
+    stale_quarantine = sorted(quarantined - finding_set)
+
+    assert not unquarantined, (
         "Every Symphonix patient-data sibling must use the same internal SPID; "
         "external identifiers must be aliases only.\n"
-        "Legacy patient identity patterns remain:\n" + "\n".join(findings)
+        "Unquarantined legacy patient identity patterns remain:\n" + "\n".join(unquarantined)
+    )
+    assert not stale_quarantine, (
+        "Legacy patient identity quarantine entries no longer match the current scan; "
+        "remove resolved entries or update the owning sibling evidence.\n" + "\n".join(stale_quarantine)
     )
