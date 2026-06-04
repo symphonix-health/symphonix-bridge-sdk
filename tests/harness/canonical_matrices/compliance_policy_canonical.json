@@ -24,13 +24,30 @@
       "negative": 10,
       "edge": 5
     },
-    "default_requirement_ids": []
+    "default_requirement_ids": [],
+    "canonical_requirement_anchors": [
+      "FR-BSDK-001",
+      "FR-BSDK-002",
+      "FR-BSDK-003",
+      "FR-BSDK-004",
+      "FR-BSDK-005",
+      "FR-BSDK-006",
+      "FR-BSDK-007",
+      "FR-BSDK-008",
+      "NFR-BSDK-001",
+      "NFR-BSDK-002",
+      "NFR-BSDK-003",
+      "NFR-BSDK-004"
+    ],
+    "gate_aligned": true,
+    "second_pass_alignment": "FR/NFR anchors mirrored from tests/harness/json_matrices/compliance-policy_scenarios.json for default seeding gate discovery."
   },
   "scenarios": [
     {
       "use_case_id": "compliance_policy_POS_0001",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-001",
         "BSDK-001"
       ],
       "scenario_category": "Positive",
@@ -108,6 +125,7 @@
       "use_case_id": "compliance_policy_POS_0002",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-002",
         "BSDK-002"
       ],
       "scenario_category": "Positive",
@@ -185,6 +203,7 @@
       "use_case_id": "compliance_policy_POS_0003",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-003",
         "BSDK-003"
       ],
       "scenario_category": "Positive",
@@ -262,6 +281,7 @@
       "use_case_id": "compliance_policy_POS_0004",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-004",
         "BSDK-101"
       ],
       "scenario_category": "Positive",
@@ -339,6 +359,7 @@
       "use_case_id": "compliance_policy_POS_0005",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-005",
         "BSDK-102"
       ],
       "scenario_category": "Positive",
@@ -416,6 +437,7 @@
       "use_case_id": "compliance_policy_POS_0006",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-006",
         "BSDK-103"
       ],
       "scenario_category": "Positive",
@@ -493,6 +515,7 @@
       "use_case_id": "compliance_policy_POS_0007",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-007",
         "BSDK-104"
       ],
       "scenario_category": "Positive",
@@ -570,6 +593,7 @@
       "use_case_id": "compliance_policy_POS_0008",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-008",
         "BSDK-105"
       ],
       "scenario_category": "Positive",
@@ -647,6 +671,7 @@
       "use_case_id": "compliance_policy_POS_0009",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-001",
         "BSDK-106"
       ],
       "scenario_category": "Positive",
@@ -724,6 +749,7 @@
       "use_case_id": "compliance_policy_POS_0010",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-002",
         "BSDK-107"
       ],
       "scenario_category": "Positive",
@@ -801,6 +827,7 @@
       "use_case_id": "compliance_policy_POS_0011",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-003",
         "BSDK-108"
       ],
       "scenario_category": "Positive",
@@ -878,6 +905,7 @@
       "use_case_id": "compliance_policy_POS_0012",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-004",
         "BSDK-109"
       ],
       "scenario_category": "Positive",
@@ -955,6 +983,7 @@
       "use_case_id": "compliance_policy_POS_0013",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-005",
         "BSDK-110"
       ],
       "scenario_category": "Positive",
@@ -1032,6 +1061,7 @@
       "use_case_id": "compliance_policy_POS_0014",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-006",
         "BSDK-111"
       ],
       "scenario_category": "Positive",
@@ -1109,6 +1139,7 @@
       "use_case_id": "compliance_policy_POS_0015",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-007",
         "BSDK-112"
       ],
       "scenario_category": "Positive",
@@ -1186,6 +1217,7 @@
       "use_case_id": "compliance_policy_POS_0016",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-008",
         "BSDK-113"
       ],
       "scenario_category": "Positive",
@@ -1263,6 +1295,7 @@
       "use_case_id": "compliance_policy_POS_0017",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-001",
         "BSDK-114"
       ],
       "scenario_category": "Positive",
@@ -1340,6 +1373,7 @@
       "use_case_id": "compliance_policy_POS_0018",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-002",
         "BSDK-115"
       ],
       "scenario_category": "Positive",
@@ -1417,6 +1451,7 @@
       "use_case_id": "compliance_policy_POS_0019",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-003",
         "BSDK-116"
       ],
       "scenario_category": "Positive",
@@ -1494,6 +1529,7 @@
       "use_case_id": "compliance_policy_POS_0020",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-004",
         "BSDK-117"
       ],
       "scenario_category": "Positive",
@@ -1571,6 +1607,7 @@
       "use_case_id": "compliance_policy_POS_0021",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-005",
         "BSDK-118"
       ],
       "scenario_category": "Positive",
@@ -1648,6 +1685,7 @@
       "use_case_id": "compliance_policy_POS_0022",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-006",
         "BSDK-119"
       ],
       "scenario_category": "Positive",
@@ -1725,6 +1763,7 @@
       "use_case_id": "compliance_policy_POS_0023",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-007",
         "BSDK-120"
       ],
       "scenario_category": "Positive",
@@ -1802,6 +1841,7 @@
       "use_case_id": "compliance_policy_POS_0024",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-008",
         "BSDK-121"
       ],
       "scenario_category": "Positive",
@@ -1879,6 +1919,7 @@
       "use_case_id": "compliance_policy_POS_0025",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-001",
         "BSDK-122"
       ],
       "scenario_category": "Positive",
@@ -1956,6 +1997,7 @@
       "use_case_id": "compliance_policy_POS_0026",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-002",
         "BSDK-123"
       ],
       "scenario_category": "Positive",
@@ -2033,6 +2075,7 @@
       "use_case_id": "compliance_policy_POS_0027",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-003",
         "BSDK-124"
       ],
       "scenario_category": "Positive",
@@ -2110,6 +2153,7 @@
       "use_case_id": "compliance_policy_POS_0028",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-004",
         "BSDK-125"
       ],
       "scenario_category": "Positive",
@@ -2187,6 +2231,7 @@
       "use_case_id": "compliance_policy_POS_0029",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-005",
         "BSDK-126"
       ],
       "scenario_category": "Positive",
@@ -2264,6 +2309,7 @@
       "use_case_id": "compliance_policy_POS_0030",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-006",
         "BSDK-127"
       ],
       "scenario_category": "Positive",
@@ -2341,6 +2387,7 @@
       "use_case_id": "compliance_policy_POS_0031",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-007",
         "BSDK-128"
       ],
       "scenario_category": "Positive",
@@ -2418,6 +2465,7 @@
       "use_case_id": "compliance_policy_POS_0032",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-008",
         "BSDK-129"
       ],
       "scenario_category": "Positive",
@@ -2495,6 +2543,7 @@
       "use_case_id": "compliance_policy_POS_0033",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-001",
         "BSDK-130"
       ],
       "scenario_category": "Positive",
@@ -2572,6 +2621,7 @@
       "use_case_id": "compliance_policy_POS_0034",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-002",
         "BSDK-131"
       ],
       "scenario_category": "Positive",
@@ -2649,6 +2699,7 @@
       "use_case_id": "compliance_policy_POS_0035",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-003",
         "BSDK-132"
       ],
       "scenario_category": "Positive",
@@ -2726,6 +2777,7 @@
       "use_case_id": "compliance_policy_POS_0036",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-004",
         "BSDK-133"
       ],
       "scenario_category": "Positive",
@@ -2803,6 +2855,7 @@
       "use_case_id": "compliance_policy_POS_0037",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-005",
         "BSDK-134"
       ],
       "scenario_category": "Positive",
@@ -2880,6 +2933,7 @@
       "use_case_id": "compliance_policy_POS_0038",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-006",
         "BSDK-135"
       ],
       "scenario_category": "Positive",
@@ -2957,6 +3011,7 @@
       "use_case_id": "compliance_policy_POS_0039",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-007",
         "BSDK-136"
       ],
       "scenario_category": "Positive",
@@ -3034,6 +3089,7 @@
       "use_case_id": "compliance_policy_POS_0040",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-008",
         "BSDK-137"
       ],
       "scenario_category": "Positive",
@@ -3111,6 +3167,7 @@
       "use_case_id": "compliance_policy_POS_0041",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-001",
         "BSDK-138"
       ],
       "scenario_category": "Positive",
@@ -3188,6 +3245,7 @@
       "use_case_id": "compliance_policy_POS_0042",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-002",
         "BSDK-139"
       ],
       "scenario_category": "Positive",
@@ -3265,6 +3323,7 @@
       "use_case_id": "compliance_policy_POS_0043",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-003",
         "BSDK-140"
       ],
       "scenario_category": "Positive",
@@ -3342,6 +3401,7 @@
       "use_case_id": "compliance_policy_POS_0044",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-004",
         "BSDK-141"
       ],
       "scenario_category": "Positive",
@@ -3419,6 +3479,7 @@
       "use_case_id": "compliance_policy_POS_0045",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-005",
         "BSDK-142"
       ],
       "scenario_category": "Positive",
@@ -3496,6 +3557,7 @@
       "use_case_id": "compliance_policy_POS_0046",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-006",
         "BSDK-143"
       ],
       "scenario_category": "Positive",
@@ -3573,6 +3635,7 @@
       "use_case_id": "compliance_policy_POS_0047",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-007",
         "BSDK-144"
       ],
       "scenario_category": "Positive",
@@ -3650,6 +3713,7 @@
       "use_case_id": "compliance_policy_POS_0048",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-008",
         "BSDK-145"
       ],
       "scenario_category": "Positive",
@@ -3727,6 +3791,7 @@
       "use_case_id": "compliance_policy_POS_0049",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-001",
         "BSDK-146"
       ],
       "scenario_category": "Positive",
@@ -3804,6 +3869,7 @@
       "use_case_id": "compliance_policy_POS_0050",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-002",
         "BSDK-147"
       ],
       "scenario_category": "Positive",
@@ -3881,6 +3947,7 @@
       "use_case_id": "compliance_policy_POS_0051",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-003",
         "BSDK-148"
       ],
       "scenario_category": "Positive",
@@ -3958,6 +4025,7 @@
       "use_case_id": "compliance_policy_POS_0052",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-004",
         "BSDK-149"
       ],
       "scenario_category": "Positive",
@@ -4035,6 +4103,7 @@
       "use_case_id": "compliance_policy_POS_0053",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-005",
         "BSDK-150"
       ],
       "scenario_category": "Positive",
@@ -4112,6 +4181,7 @@
       "use_case_id": "compliance_policy_POS_0054",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-006",
         "BSDK-151"
       ],
       "scenario_category": "Positive",
@@ -4189,6 +4259,7 @@
       "use_case_id": "compliance_policy_POS_0055",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-007",
         "BSDK-152"
       ],
       "scenario_category": "Positive",
@@ -4266,6 +4337,7 @@
       "use_case_id": "compliance_policy_POS_0056",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-008",
         "BSDK-153"
       ],
       "scenario_category": "Positive",
@@ -4343,6 +4415,7 @@
       "use_case_id": "compliance_policy_POS_0057",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-001",
         "BSDK-154"
       ],
       "scenario_category": "Positive",
@@ -4420,6 +4493,7 @@
       "use_case_id": "compliance_policy_POS_0058",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-002",
         "BSDK-155"
       ],
       "scenario_category": "Positive",
@@ -4497,6 +4571,7 @@
       "use_case_id": "compliance_policy_POS_0059",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-003",
         "BSDK-156"
       ],
       "scenario_category": "Positive",
@@ -4574,6 +4649,7 @@
       "use_case_id": "compliance_policy_POS_0060",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-004",
         "BSDK-157"
       ],
       "scenario_category": "Positive",
@@ -4651,6 +4727,7 @@
       "use_case_id": "compliance_policy_POS_0061",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-005",
         "BSDK-158"
       ],
       "scenario_category": "Positive",
@@ -4728,6 +4805,7 @@
       "use_case_id": "compliance_policy_POS_0062",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-006",
         "BSDK-159"
       ],
       "scenario_category": "Positive",
@@ -4805,6 +4883,7 @@
       "use_case_id": "compliance_policy_POS_0063",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-007",
         "BSDK-160"
       ],
       "scenario_category": "Positive",
@@ -4882,6 +4961,7 @@
       "use_case_id": "compliance_policy_POS_0064",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-008",
         "BSDK-161"
       ],
       "scenario_category": "Positive",
@@ -4959,6 +5039,7 @@
       "use_case_id": "compliance_policy_POS_0065",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-001",
         "BSDK-162"
       ],
       "scenario_category": "Positive",
@@ -5036,6 +5117,7 @@
       "use_case_id": "compliance_policy_POS_0066",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-002",
         "BSDK-163"
       ],
       "scenario_category": "Positive",
@@ -5113,6 +5195,7 @@
       "use_case_id": "compliance_policy_POS_0067",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-003",
         "BSDK-164"
       ],
       "scenario_category": "Positive",
@@ -5190,6 +5273,7 @@
       "use_case_id": "compliance_policy_POS_0068",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-004",
         "BSDK-165"
       ],
       "scenario_category": "Positive",
@@ -5267,6 +5351,7 @@
       "use_case_id": "compliance_policy_POS_0069",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-005",
         "BSDK-166"
       ],
       "scenario_category": "Positive",
@@ -5344,6 +5429,7 @@
       "use_case_id": "compliance_policy_POS_0070",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-006",
         "BSDK-167"
       ],
       "scenario_category": "Positive",
@@ -5421,6 +5507,7 @@
       "use_case_id": "compliance_policy_POS_0071",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-007",
         "BSDK-168"
       ],
       "scenario_category": "Positive",
@@ -5498,6 +5585,7 @@
       "use_case_id": "compliance_policy_POS_0072",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-008",
         "BSDK-169"
       ],
       "scenario_category": "Positive",
@@ -5575,6 +5663,7 @@
       "use_case_id": "compliance_policy_POS_0073",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-001",
         "BSDK-170"
       ],
       "scenario_category": "Positive",
@@ -5652,6 +5741,7 @@
       "use_case_id": "compliance_policy_POS_0074",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-002",
         "BSDK-171"
       ],
       "scenario_category": "Positive",
@@ -5729,6 +5819,7 @@
       "use_case_id": "compliance_policy_POS_0075",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-003",
         "BSDK-172"
       ],
       "scenario_category": "Positive",
@@ -5806,6 +5897,7 @@
       "use_case_id": "compliance_policy_POS_0076",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-004",
         "BSDK-173"
       ],
       "scenario_category": "Positive",
@@ -5883,6 +5975,7 @@
       "use_case_id": "compliance_policy_POS_0077",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-005",
         "BSDK-174"
       ],
       "scenario_category": "Positive",
@@ -5960,6 +6053,7 @@
       "use_case_id": "compliance_policy_POS_0078",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-006",
         "BSDK-175"
       ],
       "scenario_category": "Positive",
@@ -6037,6 +6131,7 @@
       "use_case_id": "compliance_policy_POS_0079",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-007",
         "BSDK-176"
       ],
       "scenario_category": "Positive",
@@ -6114,6 +6209,7 @@
       "use_case_id": "compliance_policy_POS_0080",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-008",
         "BSDK-177"
       ],
       "scenario_category": "Positive",
@@ -6191,6 +6287,7 @@
       "use_case_id": "compliance_policy_POS_0081",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-001",
         "BSDK-178"
       ],
       "scenario_category": "Positive",
@@ -6268,6 +6365,7 @@
       "use_case_id": "compliance_policy_POS_0082",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-002",
         "BSDK-179"
       ],
       "scenario_category": "Positive",
@@ -6345,6 +6443,7 @@
       "use_case_id": "compliance_policy_POS_0083",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-003",
         "BSDK-180"
       ],
       "scenario_category": "Positive",
@@ -6422,6 +6521,7 @@
       "use_case_id": "compliance_policy_POS_0084",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-004",
         "BSDK-181"
       ],
       "scenario_category": "Positive",
@@ -6499,6 +6599,7 @@
       "use_case_id": "compliance_policy_POS_0085",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-005",
         "BSDK-182"
       ],
       "scenario_category": "Positive",
@@ -6576,6 +6677,7 @@
       "use_case_id": "compliance_policy_NEG_0086",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "NFR-BSDK-001",
         "BSDK-183"
       ],
       "scenario_category": "Negative",
@@ -6653,6 +6755,7 @@
       "use_case_id": "compliance_policy_NEG_0087",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "NFR-BSDK-002",
         "BSDK-184"
       ],
       "scenario_category": "Negative",
@@ -6730,6 +6833,7 @@
       "use_case_id": "compliance_policy_NEG_0088",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "NFR-BSDK-003",
         "BSDK-185"
       ],
       "scenario_category": "Negative",
@@ -6807,6 +6911,7 @@
       "use_case_id": "compliance_policy_NEG_0089",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "NFR-BSDK-004",
         "BSDK-186"
       ],
       "scenario_category": "Negative",
@@ -6884,6 +6989,7 @@
       "use_case_id": "compliance_policy_NEG_0090",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "NFR-BSDK-001",
         "BSDK-187"
       ],
       "scenario_category": "Negative",
@@ -6961,6 +7067,7 @@
       "use_case_id": "compliance_policy_NEG_0091",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "NFR-BSDK-002",
         "BSDK-188"
       ],
       "scenario_category": "Negative",
@@ -7038,6 +7145,7 @@
       "use_case_id": "compliance_policy_NEG_0092",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "NFR-BSDK-003",
         "BSDK-189"
       ],
       "scenario_category": "Negative",
@@ -7115,6 +7223,7 @@
       "use_case_id": "compliance_policy_NEG_0093",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "NFR-BSDK-004",
         "BSDK-190"
       ],
       "scenario_category": "Negative",
@@ -7192,6 +7301,7 @@
       "use_case_id": "compliance_policy_NEG_0094",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "NFR-BSDK-001",
         "BSDK-191"
       ],
       "scenario_category": "Negative",
@@ -7269,6 +7379,7 @@
       "use_case_id": "compliance_policy_NEG_0095",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "NFR-BSDK-002",
         "BSDK-192"
       ],
       "scenario_category": "Negative",
@@ -7346,6 +7457,7 @@
       "use_case_id": "compliance_policy_EDG_0096",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-005",
         "BSDK-193"
       ],
       "scenario_category": "Edge",
@@ -7423,6 +7535,7 @@
       "use_case_id": "compliance_policy_EDG_0097",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-006",
         "BSDK-194"
       ],
       "scenario_category": "Edge",
@@ -7500,6 +7613,7 @@
       "use_case_id": "compliance_policy_EDG_0098",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-007",
         "BSDK-195"
       ],
       "scenario_category": "Edge",
@@ -7577,6 +7691,7 @@
       "use_case_id": "compliance_policy_EDG_0099",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-008",
         "BSDK-196"
       ],
       "scenario_category": "Edge",
@@ -7654,6 +7769,7 @@
       "use_case_id": "compliance_policy_EDG_0100",
       "subsystem": "compliance-policy",
       "requirement_ids": [
+        "FR-BSDK-005",
         "BSDK-001"
       ],
       "scenario_category": "Edge",
