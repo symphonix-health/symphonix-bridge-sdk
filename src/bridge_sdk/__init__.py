@@ -80,10 +80,12 @@ from bridge_sdk.error_envelope import (
     compensation_for,
 )
 from bridge_sdk.agent_contract import (
+    EXECUTION_MODE_BY_PATH,
     ActionIntent,
     AgentActionManifest,
     AutonomyLevel,
     Condition,
+    ExecutionMode,
     FieldSpec,
     FieldType,
     IOContract,
@@ -193,6 +195,8 @@ __all__ = [
     "AgentActionManifest",
     "AutonomyLevel",
     "Condition",
+    "EXECUTION_MODE_BY_PATH",
+    "ExecutionMode",
     "FieldSpec",
     "FieldType",
     "IOContract",

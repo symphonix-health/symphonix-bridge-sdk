@@ -38,7 +38,7 @@ __all__ = [
     "verified_live",
 ]
 
-SCHEMA_VERSION = "1.0.0-frozen-2026-06-05"
+SCHEMA_VERSION = "1.1.0-frozen-2026-06-05"
 
 
 class EmitterStatus(str, Enum):
@@ -112,19 +112,22 @@ CANONICAL_TELEMETRY_FIELDS: tuple[TelemetryField, ...] = (
         canonical_name="execution_mode",
         value_type="enum:typed_api|semantic_ui|browser",
         source_subsystem="agent_contract resolver / signalbox-mcp",
-        status=EmitterStatus.needs_wiring,
-        sdk_anchor="bridge_sdk.agent_contract.ResolverPath",
+        status=EmitterStatus.sdk_contract,
+        sdk_anchor="bridge_sdk.agent_contract.ResolverDecision.execution_mode",
         in_handoff_eight=True,
         normalization=(
-            "map ResolverPath: api,nexus -> typed_api; ui_fallback -> semantic_ui; "
-            "browser -> browser"
+            "codified once in agent_contract.EXECUTION_MODE_BY_PATH: api,nexus -> "
+            "typed_api; ui_fallback -> semantic_ui; browser -> browser"
         ),
         notes=(
-            "ResolverPath is computed by resolve_intent() and returned by "
-            "signalbox-mcp invoke_intent, but it is discarded -- not persisted to "
-            "any telemetry/capture/log, and the audit record folds only a free-text "
-            "action_path. The 3-valued execution_mode does not exist as a discrete "
-            "emitted field. The API-first KPI cannot be computed until it does."
+            "WIRED 2026-06-05 at the contract layer: ResolverDecision.execution_mode "
+            "is a computed_field that normalises ResolverPath to the 3-valued mode, "
+            "so model_dump() carries it and every face shares one normalisation "
+            "(EXECUTION_MODE_BY_PATH). compose_step_audit now threads it onto the "
+            "task reference. What remains for `live`: a running service must persist "
+            "decision.execution_mode on each action (signalbox-mcp invoke_intent and "
+            "the live audit path). Until then the API-first / browser-fallback KPIs "
+            "are computable from contract-level data but not yet from production."
         ),
     ),
     TelemetryField(

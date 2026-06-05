@@ -33,13 +33,15 @@ from __future__ import annotations
 from enum import Enum
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, computed_field
 
 __all__ = [
     "ActionIntent",
     "AgentActionManifest",
     "AutonomyLevel",
     "Condition",
+    "EXECUTION_MODE_BY_PATH",
+    "ExecutionMode",
     "FieldSpec",
     "FieldType",
     "IOContract",
@@ -83,6 +85,33 @@ class ResolverPath(str, Enum):
     nexus = "nexus"              # Nexus A2A task
     ui_fallback = "ui_fallback"  # semantic-UI action (no typed manifest entry)
     browser = "browser"          # raw browser control (last resort)
+
+
+class ExecutionMode(str, Enum):
+    """Normalised 3-valued execution mode for telemetry (FR-AEC-001).
+
+    The canonical mode the measurement framework joins on (the API-first and
+    browser-fallback KPIs). Derived once from the 4-valued ``ResolverPath`` via
+    ``EXECUTION_MODE_BY_PATH`` so every emitter agrees on one normalisation
+    rather than re-deriving it differently. ``typed_api`` covers both the typed
+    domain API and the Nexus task; ``semantic_ui`` is a semantic-UI action;
+    ``browser`` is raw browser control.
+    """
+
+    typed_api = "typed_api"
+    semantic_ui = "semantic_ui"
+    browser = "browser"
+
+
+# The single source of truth for path -> mode normalisation. Every face
+# (SignalBox executor, audit composer, dashboards) must use this map, not its
+# own copy, so the API-first rate is computed identically everywhere.
+EXECUTION_MODE_BY_PATH: dict[ResolverPath, ExecutionMode] = {
+    ResolverPath.api: ExecutionMode.typed_api,
+    ResolverPath.nexus: ExecutionMode.typed_api,
+    ResolverPath.ui_fallback: ExecutionMode.semantic_ui,
+    ResolverPath.browser: ExecutionMode.browser,
+}
 
 
 class FieldType(str, Enum):
@@ -299,6 +328,17 @@ class ResolverDecision(BaseModel):
     component: str | None = None
     manifest_backed: bool = False
     reason: str | None = None     # required when path is ui_fallback / browser
+
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def execution_mode(self) -> ExecutionMode:
+        """Normalised 3-valued execution mode for telemetry (FR-AEC-001).
+
+        Derived from ``path`` so every emitter records the same mode and
+        ``model_dump()`` carries it onto the action record. This is the field
+        the API-first / browser-fallback KPIs join on.
+        """
+        return EXECUTION_MODE_BY_PATH[self.path]
 
 
 def resolve_intent(

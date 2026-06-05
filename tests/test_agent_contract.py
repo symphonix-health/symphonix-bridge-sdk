@@ -4,13 +4,16 @@ from __future__ import annotations
 import pytest
 
 from bridge_sdk.agent_contract import (
+    EXECUTION_MODE_BY_PATH,
     REFERENCE_MANIFESTS,
     ActionIntent,
     AutonomyLevel,
+    ExecutionMode,
     FieldSpec,
     FieldType,
     IOContract,
     ManifestError,
+    ResolverDecision,
     ResolverPath,
     SafetyClass,
     reference_manifest,
@@ -159,3 +162,32 @@ def test_resolve_intent_accepts_list_of_manifests() -> None:
     d = resolve_intent("claim.submit", list(REFERENCE_MANIFESTS.values()))
     assert d.component == "insurance-eclaims"
     assert d.path is ResolverPath.api
+
+
+def test_execution_mode_normalisation_covers_every_path() -> None:
+    # FR-AEC-001: the canonical map normalises all four paths to three modes.
+    assert EXECUTION_MODE_BY_PATH == {
+        ResolverPath.api: ExecutionMode.typed_api,
+        ResolverPath.nexus: ExecutionMode.typed_api,
+        ResolverPath.ui_fallback: ExecutionMode.semantic_ui,
+        ResolverPath.browser: ExecutionMode.browser,
+    }
+    # No ResolverPath is left unmapped (a new path must be classified, not dropped).
+    assert set(EXECUTION_MODE_BY_PATH) == set(ResolverPath)
+
+
+def test_resolver_decision_exposes_normalised_execution_mode() -> None:
+    api = ResolverDecision(intent="claim.submit", path=ResolverPath.api)
+    nexus = ResolverDecision(intent="lab.order", path=ResolverPath.nexus)
+    ui = ResolverDecision(intent="legacy.x", path=ResolverPath.ui_fallback, reason="no entry")
+    browser = ResolverDecision(intent="legacy.y", path=ResolverPath.browser, reason="no entry")
+    assert api.execution_mode is ExecutionMode.typed_api
+    assert nexus.execution_mode is ExecutionMode.typed_api
+    assert ui.execution_mode is ExecutionMode.semantic_ui
+    assert browser.execution_mode is ExecutionMode.browser
+
+
+def test_execution_mode_is_serialised_onto_the_record() -> None:
+    # model_dump() carries execution_mode so an emitter persists it per action.
+    dumped = resolve_intent("triage.start", REFERENCE_MANIFESTS).model_dump()
+    assert dumped["execution_mode"] == "typed_api"

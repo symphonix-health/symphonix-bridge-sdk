@@ -51,6 +51,20 @@ def test_three_records_produced() -> None:
     assert r.audit_event["resourceType"] == "AuditEvent"
 
 
+def test_execution_mode_recorded_on_task_ref_when_supplied() -> None:
+    # The normalised telemetry mode lands on the persisted action record.
+    r = _compose(execution_mode="typed_api")
+    assert r.task_ref["execution_mode"] == "typed_api"
+    # The link hash still verifies (the new field is inside the hashed triple).
+    assert r.verify_link() is True
+
+
+def test_execution_mode_omitted_keeps_task_ref_backward_compatible() -> None:
+    # Optional: existing callers that do not pass it get no extra key.
+    r = _compose()
+    assert "execution_mode" not in r.task_ref
+
+
 def test_records_share_correlation_id() -> None:
     # FR-AU-001-AC01: mutually cross-referenced by correlation id.
     r = _compose(correlation_id="cid-xyz")

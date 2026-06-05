@@ -23,6 +23,7 @@ import pytest
 from bridge_sdk.agent_audit import REQUIRED_PROVENANCE_FIELDS, ProvenanceFields
 from bridge_sdk.agent_contract import (
     AutonomyLevel,
+    ExecutionMode,
     ResolverDecision,
     ResolverPath,
 )
@@ -193,8 +194,23 @@ def test_only_evidence_bundle_is_live_today() -> None:
     assert live_names == {"evidence_bundle_id"}
 
 
+def test_execution_mode_status_is_backed_by_a_real_contract() -> None:
+    # execution_mode was upgraded needs_wiring -> sdk_contract on 2026-06-05 only
+    # because the normalising contract now exists. Guard against a status flip
+    # that is not backed by code: ResolverDecision must expose execution_mode.
+    field = next(
+        f for f in CANONICAL_TELEMETRY_FIELDS if f.canonical_name == "execution_mode"
+    )
+    assert field.status is EmitterStatus.sdk_contract
+    decision = ResolverDecision(intent="claim.submit", path=ResolverPath.api)
+    assert decision.execution_mode is ExecutionMode.typed_api
+    # ...but it is still not live: no running service persists it yet.
+    assert field.status is not EmitterStatus.live
+
+
 def test_schema_version_is_frozen_string() -> None:
-    assert SCHEMA_VERSION.startswith("1.0.0")
+    assert SCHEMA_VERSION.startswith("1.")
+    assert "-frozen-" in SCHEMA_VERSION
 
 
 @pytest.mark.parametrize("status", list(EmitterStatus))

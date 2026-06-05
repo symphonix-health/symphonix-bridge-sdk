@@ -136,6 +136,7 @@ def compose_step_audit(
     timestamp: str,
     resource_type: str = "Task",
     patient_reference: str | None = None,
+    execution_mode: str | None = None,
 ) -> StepAuditRecords:
     """Compose the three linked audit records for a single agent step.
 
@@ -143,6 +144,13 @@ def compose_step_audit(
     FHIR ``AuditEvent`` -- all sharing ``correlation_id`` -- plus a tamper-evident
     link hash. Raises ``AuditCompositionError`` if any mandated provenance field
     is missing (FR-AU-002-AC01).
+
+    ``execution_mode`` is the normalised 3-valued telemetry mode
+    (``bridge_sdk.agent_contract.ExecutionMode``: typed_api / semantic_ui /
+    browser). When supplied it is recorded on the task reference so the
+    persisted action record carries the field the API-first / browser-fallback
+    KPIs join on. It is optional so existing callers stay valid; pass
+    ``decision.execution_mode.value`` from the resolver decision.
     """
     missing = fields.missing()
     if missing:
@@ -163,6 +171,8 @@ def compose_step_audit(
         "status": task_status,
         "action_path": fields.action_path,
     }
+    if execution_mode is not None:
+        task_ref["execution_mode"] = execution_mode
 
     provenance = {
         "correlation_id": correlation_id,
