@@ -102,7 +102,10 @@ from bridge_sdk.human_handoff import (
     HandoffInbox,
     HandoffPackage,
     HandoffTrigger,
+    OutcomeTally,
     PackageValidationError,
+    ReviewerOutcome,
+    summarise_outcomes,
 )
 from bridge_sdk.execution_ledger import (
     ExecutionLedger,
@@ -213,7 +216,10 @@ __all__ = [
     "HandoffInbox",
     "HandoffPackage",
     "HandoffTrigger",
+    "OutcomeTally",
     "PackageValidationError",
+    "ReviewerOutcome",
+    "summarise_outcomes",
     "ExecutionLedger",
     "LedgerError",
     "LedgerEvent",

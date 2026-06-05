@@ -14,7 +14,10 @@ from bridge_sdk.human_handoff import (
     HandoffInbox,
     HandoffPackage,
     HandoffTrigger,
+    OutcomeTally,
     PackageValidationError,
+    ReviewerOutcome,
+    summarise_outcomes,
 )
 
 TS = "2026-06-02T12:00:00Z"
@@ -178,3 +181,67 @@ def test_double_enqueue_rejected() -> None:
     inbox.enqueue(_package())
     with pytest.raises(HandoffError):
         inbox.enqueue(_package())
+
+
+# ---- reviewer rubric grade (measurement backlog item 3) ----------------
+
+def test_grade_is_recorded_and_distinct_from_disposition() -> None:
+    inbox = HandoffInbox()
+    inbox.enqueue(_package())
+    inbox.resume("wf-1", outcome=ReviewerOutcome.correct)
+    assert inbox.resolution_of("wf-1") == "resume"               # what reviewer did
+    assert inbox.outcome_of("wf-1") is ReviewerOutcome.correct   # the rubric grade
+
+
+def test_grade_can_be_set_independently_of_a_disposition() -> None:
+    # Grading a sampled action for calibration: no resume/amend/cancel needed.
+    inbox = HandoffInbox()
+    inbox.enqueue(_package())
+    inbox.grade("wf-1", ReviewerOutcome.unsafe)
+    assert inbox.outcome_of("wf-1") is ReviewerOutcome.unsafe
+    assert inbox.resolution_of("wf-1") is None  # disposition untouched
+
+
+def test_ungraded_workflow_returns_none() -> None:
+    inbox = HandoffInbox()
+    inbox.enqueue(_package())
+    assert inbox.outcome_of("wf-1") is None
+
+
+def test_amend_and_cancel_accept_a_grade() -> None:
+    inbox = HandoffInbox()
+    inbox.enqueue(_package())
+    inbox.amend("wf-1", note="fixed scope", outcome=ReviewerOutcome.incorrect_harmless)
+    assert inbox.outcome_of("wf-1") is ReviewerOutcome.incorrect_harmless
+
+
+def test_reviewer_outcome_unsafe_and_correct_flags() -> None:
+    assert ReviewerOutcome.unsafe.is_unsafe is True
+    assert ReviewerOutcome.correct.is_correct is True
+    assert ReviewerOutcome.correct_suboptimal.is_unsafe is False
+
+
+def test_summarise_outcomes_yields_scorecard_rates() -> None:
+    grades = [
+        ReviewerOutcome.correct,
+        ReviewerOutcome.correct,
+        ReviewerOutcome.correct_suboptimal,
+        ReviewerOutcome.incorrect_harmless,
+        ReviewerOutcome.unsafe,
+    ]
+    tally = summarise_outcomes(grades)
+    assert isinstance(tally, OutcomeTally)
+    assert tally.total == 5
+    assert tally.correct == 2
+    assert tally.unsafe == 1
+    assert tally.correct_rate == pytest.approx(0.4)
+    assert tally.unsafe_rate == pytest.approx(0.2)
+    # error_rate = unsafe + incorrect-but-harmless.
+    assert tally.error_rate == pytest.approx(0.4)
+
+
+def test_summarise_empty_is_zero_not_division_error() -> None:
+    tally = summarise_outcomes([])
+    assert tally.total == 0
+    assert tally.unsafe_rate == 0.0
+    assert tally.correct_rate == 0.0

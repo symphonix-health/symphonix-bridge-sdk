@@ -21,6 +21,7 @@ Requirements: FR-HH-001..004, NFR-HH-001
 """
 from __future__ import annotations
 
+from collections.abc import Iterable
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any
@@ -30,7 +31,10 @@ __all__ = [
     "HandoffInbox",
     "HandoffPackage",
     "HandoffTrigger",
+    "OutcomeTally",
     "PackageValidationError",
+    "ReviewerOutcome",
+    "summarise_outcomes",
 ]
 
 
@@ -51,6 +55,74 @@ class HandoffTrigger(str, Enum):
     booking_failure = "booking_failure"
     low_confidence = "low_confidence"
     policy_block = "policy_block"
+
+
+class ReviewerOutcome(str, Enum):
+    """The four-class reviewer rubric grade for an agent step.
+
+    This is the measurement-framework rubric (see
+    ``BulletTrain/docs/AGENT_NATIVE_MEASUREMENT_AND_EVALUATION.md``). It is
+    DISTINCT from the inbox disposition (resume / amend / cancel): the
+    disposition records what the reviewer DID; the grade records whether the
+    agent was right. Reviewer disagreement, unsafe-action, rework, subgroup
+    parity, and calibration KPIs all depend on this grade.
+    """
+
+    unsafe = "unsafe"                          # unsafe had it executed; blocker
+    incorrect_harmless = "incorrect_harmless"  # wrong, but no harm
+    correct_suboptimal = "correct_suboptimal"  # right outcome, poor path
+    correct = "correct"                        # safe, correct, appropriate
+
+    @property
+    def is_unsafe(self) -> bool:
+        return self is ReviewerOutcome.unsafe
+
+    @property
+    def is_correct(self) -> bool:
+        return self is ReviewerOutcome.correct
+
+
+@dataclass(frozen=True)
+class OutcomeTally:
+    """Aggregate reviewer grades into the rates the scorecard reports."""
+
+    total: int
+    unsafe: int
+    incorrect_harmless: int
+    correct_suboptimal: int
+    correct: int
+
+    @property
+    def unsafe_rate(self) -> float:
+        """Share graded unsafe -- the release blocker; target near zero."""
+        return self.unsafe / self.total if self.total else 0.0
+
+    @property
+    def correct_rate(self) -> float:
+        """Share graded fully correct -- the task-success proxy."""
+        return self.correct / self.total if self.total else 0.0
+
+    @property
+    def error_rate(self) -> float:
+        """Share graded wrong (unsafe + incorrect-but-harmless) -- feeds rework."""
+        wrong = self.unsafe + self.incorrect_harmless
+        return wrong / self.total if self.total else 0.0
+
+
+def summarise_outcomes(outcomes: Iterable[ReviewerOutcome]) -> OutcomeTally:
+    """Tally a set of reviewer grades for the correctness / safety KPIs."""
+    items = list(outcomes)
+    return OutcomeTally(
+        total=len(items),
+        unsafe=sum(1 for o in items if o is ReviewerOutcome.unsafe),
+        incorrect_harmless=sum(
+            1 for o in items if o is ReviewerOutcome.incorrect_harmless
+        ),
+        correct_suboptimal=sum(
+            1 for o in items if o is ReviewerOutcome.correct_suboptimal
+        ),
+        correct=sum(1 for o in items if o is ReviewerOutcome.correct),
+    )
 
 
 # Required elements of a handoff package (FR-HH-003). A package missing any of
@@ -109,8 +181,9 @@ class HandoffPackage:
 class _InboxEntry:
     package: HandoffPackage
     resolved: bool = False
-    resolution: str | None = None     # resume | amend | cancel
+    resolution: str | None = None     # resume | amend | cancel (the disposition)
     resumed_to_state: str | None = None
+    reviewer_outcome: ReviewerOutcome | None = None  # the 4-class rubric grade
 
 
 class HandoffInbox:
@@ -139,35 +212,61 @@ class HandoffInbox:
             raise HandoffError(f"workflow '{workflow_id}' not in inbox")
         return self._entries[workflow_id].package
 
-    def resume(self, workflow_id: str) -> str:
+    def resume(
+        self, workflow_id: str, *, outcome: ReviewerOutcome | None = None
+    ) -> str:
         """One-click resume; returns the state the workflow resumes to (FR-HH-002).
 
         Resume fidelity (NFR-HH-001): the returned state equals the package's
         ``pre_handoff_state`` -- the workflow continues from exactly where it
-        paused, no data loss, no work repeated.
+        paused, no data loss, no work repeated. ``outcome`` optionally records the
+        reviewer's four-class rubric grade alongside the disposition.
         """
         entry = self._entry(workflow_id)
         entry.resolved = True
         entry.resolution = "resume"
         entry.resumed_to_state = entry.package.pre_handoff_state
+        if outcome is not None:
+            entry.reviewer_outcome = outcome
         return entry.resumed_to_state
 
-    def amend(self, workflow_id: str, *, note: str) -> None:
+    def amend(
+        self, workflow_id: str, *, note: str, outcome: ReviewerOutcome | None = None
+    ) -> None:
         if not note:
             raise HandoffError("amend requires a note")
         entry = self._entry(workflow_id)
         entry.resolved = True
         entry.resolution = "amend"
+        if outcome is not None:
+            entry.reviewer_outcome = outcome
 
-    def cancel(self, workflow_id: str, *, reason: str) -> None:
+    def cancel(
+        self, workflow_id: str, *, reason: str, outcome: ReviewerOutcome | None = None
+    ) -> None:
         if not reason:
             raise HandoffError("cancel requires a reason")
         entry = self._entry(workflow_id)
         entry.resolved = True
         entry.resolution = "cancel"
+        if outcome is not None:
+            entry.reviewer_outcome = outcome
 
     def resolution_of(self, workflow_id: str) -> str | None:
+        """The disposition (resume / amend / cancel) -- what the reviewer DID."""
         return self._entry(workflow_id).resolution
+
+    def grade(self, workflow_id: str, outcome: ReviewerOutcome) -> None:
+        """Record the four-class rubric grade -- whether the agent was right.
+
+        Distinct from the disposition; can be set independently of resume/amend/
+        cancel (e.g. when grading a sampled action for the calibration KPI).
+        """
+        self._entry(workflow_id).reviewer_outcome = outcome
+
+    def outcome_of(self, workflow_id: str) -> ReviewerOutcome | None:
+        """The reviewer's rubric grade for a workflow, or None if ungraded."""
+        return self._entry(workflow_id).reviewer_outcome
 
     def _entry(self, workflow_id: str) -> _InboxEntry:
         if workflow_id not in self._entries:

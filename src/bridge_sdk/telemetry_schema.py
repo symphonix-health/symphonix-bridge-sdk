@@ -38,7 +38,7 @@ __all__ = [
     "verified_live",
 ]
 
-SCHEMA_VERSION = "1.1.0-frozen-2026-06-05"
+SCHEMA_VERSION = "1.2.0-frozen-2026-06-05"
 
 
 class EmitterStatus(str, Enum):
@@ -236,18 +236,23 @@ CANONICAL_TELEMETRY_FIELDS: tuple[TelemetryField, ...] = (
         canonical_name="reviewer_outcome",
         value_type="enum:unsafe|incorrect_harmless|correct_suboptimal|correct",
         source_subsystem="human_handoff inbox + reviewer rubric",
-        status=EmitterStatus.needs_wiring,
-        sdk_anchor="bridge_sdk.human_handoff.HandoffInbox.resolution_of",
+        status=EmitterStatus.sdk_contract,
+        sdk_anchor="bridge_sdk.human_handoff.ReviewerOutcome",
         in_handoff_eight=True,
         normalization=(
-            "add a rubric-graded outcome alongside the resume|amend|cancel "
-            "disposition; the disposition is NOT the rubric grade"
+            "the four-class grade is recorded alongside (not as) the resume|amend|"
+            "cancel disposition; summarise_outcomes() rolls grades into the rates"
         ),
         notes=(
-            "The inbox records only the disposition (resume/amend/cancel). The "
-            "four-class reviewer rubric (unsafe / incorrect-but-harmless / "
-            "correct-but-suboptimal / correct) has no field. Reviewer disagreement, "
-            "calibration, and automation-bias KPIs all depend on adding it."
+            "WIRED 2026-06-05 at the contract layer: ReviewerOutcome (unsafe / "
+            "incorrect_harmless / correct_suboptimal / correct) + HandoffInbox.grade/"
+            "outcome_of record the rubric grade distinct from the disposition; "
+            "summarise_outcomes() yields unsafe_rate / correct_rate / error_rate for "
+            "the scorecard. A live route also exists: POST /agent/step/review "
+            "(bullettrain/agent_native/audit_route.py, mounted on agent_manager) "
+            "lands the grade in the production audit trail joined by correlation_id, "
+            "real-ASGI tested. Kept sdk_contract, not live: no production reviewer "
+            "surface calls the route yet. Was needs_wiring (the field did not exist)."
         ),
     ),
     TelemetryField(

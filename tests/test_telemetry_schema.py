@@ -28,7 +28,12 @@ from bridge_sdk.agent_contract import (
     ResolverPath,
 )
 from bridge_sdk.consent_projection import project_consent
-from bridge_sdk.human_handoff import HandoffInbox, HandoffPackage, HandoffTrigger
+from bridge_sdk.human_handoff import (
+    HandoffInbox,
+    HandoffPackage,
+    HandoffTrigger,
+    ReviewerOutcome,
+)
 from bridge_sdk.telemetry_schema import (
     CANONICAL_TELEMETRY_FIELDS,
     SCHEMA_VERSION,
@@ -162,7 +167,9 @@ def test_consent_projection_emits_reference_not_projection_id() -> None:
     assert "consent_projection_id" not in claim
 
 
-def test_reviewer_outcome_has_no_rubric_grade_only_a_disposition() -> None:
+def test_reviewer_outcome_grade_is_distinct_from_the_disposition() -> None:
+    # WIRED 2026-06-05: the rubric grade now exists and is recorded ALONGSIDE the
+    # disposition, not as it. (Was: the inbox had only resume/amend/cancel.)
     package = HandoffPackage(
         workflow_id="wf-eclaims-1",
         trigger=HandoffTrigger.policy_block,
@@ -175,13 +182,26 @@ def test_reviewer_outcome_has_no_rubric_grade_only_a_disposition() -> None:
     )
     inbox = HandoffInbox()
     inbox.enqueue(package)
-    inbox.resume("wf-eclaims-1")
-    # The inbox records the disposition...
+    inbox.resume("wf-eclaims-1", outcome=ReviewerOutcome.correct_suboptimal)
+    # The disposition records what the reviewer DID...
     assert inbox.resolution_of("wf-eclaims-1") == "resume"
-    # ...which is one of resume|amend|cancel, NOT a rubric grade. There is no
-    # method that records unsafe/incorrect/suboptimal/correct.
-    assert not hasattr(inbox, "grade")
-    assert not hasattr(inbox, "reviewer_outcome")
+    # ...the grade records whether the agent was RIGHT -- a distinct field.
+    assert inbox.outcome_of("wf-eclaims-1") is ReviewerOutcome.correct_suboptimal
+
+
+def test_reviewer_outcome_status_is_backed_by_a_real_contract() -> None:
+    field = next(
+        f for f in CANONICAL_TELEMETRY_FIELDS if f.canonical_name == "reviewer_outcome"
+    )
+    assert field.status is EmitterStatus.sdk_contract
+    assert {o.value for o in ReviewerOutcome} == {
+        "unsafe",
+        "incorrect_harmless",
+        "correct_suboptimal",
+        "correct",
+    }
+    # Still not live: no production reviewer surface calls the route yet.
+    assert field.status is not EmitterStatus.live
 
 
 # --------------------------------------------------------------------------- #
