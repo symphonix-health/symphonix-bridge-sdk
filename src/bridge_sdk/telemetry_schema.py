@@ -38,7 +38,7 @@ __all__ = [
     "verified_live",
 ]
 
-SCHEMA_VERSION = "1.3.0-frozen-2026-06-05"
+SCHEMA_VERSION = "1.4.0-frozen-2026-06-05"
 
 
 class EmitterStatus(str, Enum):
@@ -185,16 +185,19 @@ CANONICAL_TELEMETRY_FIELDS: tuple[TelemetryField, ...] = (
         canonical_name="consent_projection_id",
         value_type="string",
         source_subsystem="consent_projection (WS9)",
-        status=EmitterStatus.needs_wiring,
-        sdk_anchor="bridge_sdk.consent_projection.ConsentProjection.to_token_claim",
+        status=EmitterStatus.sdk_contract,
+        sdk_anchor="bridge_sdk.consent_projection.ConsentProjection.projection_id",
         in_handoff_eight=True,
-        normalization="derive id = f'{consent_reference}@v{consent_version}'",
+        normalization="consent_projection_id() derives f'{consent_reference}@v{consent_version}'",
         notes=(
-            "to_token_claim() emits consent_reference + consent_version, never a "
-            "consent_projection_id. A stable id must be derived from the pair so "
-            "consent-denial-correctness can be joined to the projection that "
-            "decided it. WS4 provenance carries consent_artefact (the reference) "
-            "but not the versioned projection id."
+            "WIRED 2026-06-05: consent_projection_id() (one canonical derivation) + "
+            "ConsentProjection.projection_id; to_token_claim() now emits "
+            "consent_projection_id so it travels on the persona token + every task. "
+            "A live route also records consent decisions with it: POST "
+            "/agent/step/consent (audit_route.py, mounted on agent_manager) lands an "
+            "allow/deny + reason + projection_id in the audit trail, real-ASGI "
+            "tested. Kept sdk_contract: no production consent gate emits decisions "
+            "via it yet. Was needs_wiring (only consent_reference + version existed)."
         ),
     ),
     TelemetryField(

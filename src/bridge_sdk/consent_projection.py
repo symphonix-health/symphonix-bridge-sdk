@@ -35,8 +35,21 @@ __all__ = [
     "ConsentDenied",
     "ConsentProjection",
     "ConsentProjectionError",
+    "consent_projection_id",
     "project_consent",
 ]
+
+
+def consent_projection_id(consent_reference: str, consent_version: int) -> str:
+    """The stable id of a consent projection (measurement backlog item 5).
+
+    A projection is identified by its consent reference AND its version, because
+    a mid-task revocation bumps the version (a new projection). Deriving the id
+    in ONE place lets the consent-policy denial-correctness KPI join a denial or
+    an allow back to the exact projection that decided it. References only --
+    never clinical content (FR-PC-002).
+    """
+    return f"{consent_reference}@v{consent_version}"
 
 
 class ConsentProjectionError(Exception):
@@ -72,13 +85,21 @@ class ConsentProjection:
     consent_version: int              # bumps on withdraw; stale version => revoked
     active: bool = True
 
+    @property
+    def projection_id(self) -> str:
+        """Stable id (``consent_reference@v{version}``) -- the KPI join key."""
+        return consent_projection_id(self.consent_reference, self.consent_version)
+
     def to_token_claim(self) -> dict[str, Any]:
         """Compact claim attached to the persona token + every task (FR-PC-001).
 
-        Carries references + permissions only -- no clinical payload.
+        Carries references + permissions only -- no clinical payload. Includes the
+        derived ``consent_projection_id`` so a later consent decision joins back to
+        this exact projection (measurement backlog item 5).
         """
         return {
             "consent_reference": self.consent_reference,
+            "consent_projection_id": self.projection_id,
             "patient_reference": self.patient_reference,
             "purposes": sorted(self.permitted_purposes),
             "resource_types": sorted(self.permitted_resource_types),

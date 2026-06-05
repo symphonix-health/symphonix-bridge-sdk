@@ -7,6 +7,7 @@ from bridge_sdk.consent_projection import (
     ConsentDenied,
     ConsentProjectionError,
     claim_is_references_only,
+    consent_projection_id,
     project_consent,
 )
 
@@ -151,3 +152,23 @@ def test_denial_reasons_are_machine_readable(kw, reason) -> None:
     with pytest.raises(ConsentDenied) as ei:
         p.authorise(**kw)
     assert ei.value.reason == reason
+
+
+# ---- consent_projection_id (measurement backlog item 5) ----------------
+
+def test_projection_id_is_reference_at_version() -> None:
+    assert _proj(consent_version=3).projection_id == "Consent/abc@v3"
+    assert consent_projection_id("Consent/xyz", 9) == "Consent/xyz@v9"
+
+
+def test_projection_id_changes_with_version() -> None:
+    # A mid-task revocation bumps the version -> a new projection id, so a denial
+    # joins to the right projection generation.
+    assert _proj(consent_version=3).projection_id != _proj(consent_version=4).projection_id
+
+
+def test_token_claim_includes_projection_id_and_stays_references_only() -> None:
+    claim = _proj(consent_version=3).to_token_claim()
+    assert claim["consent_projection_id"] == "Consent/abc@v3"
+    # FR-PC-002: the id is a reference, not clinical content.
+    assert claim_is_references_only(claim)

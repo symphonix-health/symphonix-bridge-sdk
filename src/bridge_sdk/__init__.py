@@ -56,6 +56,7 @@ from bridge_sdk.consent_projection import (
     ConsentProjection,
     ConsentProjectionError,
     claim_is_references_only,
+    consent_projection_id,
     project_consent,
 )
 from bridge_sdk.concurrency import (
@@ -160,6 +161,7 @@ __all__ = [
     "ConsentProjection",
     "ConsentProjectionError",
     "claim_is_references_only",
+    "consent_projection_id",
     "project_consent",
     "ArenaError",
     "ArenaResult",

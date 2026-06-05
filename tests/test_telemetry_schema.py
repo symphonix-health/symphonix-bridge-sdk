@@ -27,7 +27,7 @@ from bridge_sdk.agent_contract import (
     ResolverDecision,
     ResolverPath,
 )
-from bridge_sdk.consent_projection import project_consent
+from bridge_sdk.consent_projection import claim_is_references_only, project_consent
 from bridge_sdk.human_handoff import (
     HandoffInbox,
     HandoffPackage,
@@ -154,7 +154,9 @@ def test_policy_version_now_exists_as_an_optional_provenance_field() -> None:
     assert "policy_version" not in REQUIRED_PROVENANCE_FIELDS
 
 
-def test_consent_projection_emits_reference_not_projection_id() -> None:
+def test_consent_projection_now_emits_a_derived_projection_id() -> None:
+    # WIRED 2026-06-05: to_token_claim() emits the derived consent_projection_id
+    # (consent_reference@v{version}). Was: only the reference + version.
     projection = project_consent(
         consent_reference="Consent/abc",
         patient_reference="Patient/123",
@@ -165,11 +167,31 @@ def test_consent_projection_emits_reference_not_projection_id() -> None:
         consent_version=3,
     )
     claim = projection.to_token_claim()
-    # The pieces needed to DERIVE the id are emitted...
     assert claim["consent_reference"] == "Consent/abc"
     assert claim["consent_version"] == 3
-    # ...but the canonical consent_projection_id is NOT emitted directly.
-    assert "consent_projection_id" not in claim
+    assert claim["consent_projection_id"] == "Consent/abc@v3"
+    # The id is references-only -- no clinical content leaked (FR-PC-002).
+    assert claim_is_references_only(claim)
+
+
+def test_consent_projection_id_status_is_backed_by_a_real_contract() -> None:
+    field = next(
+        f
+        for f in CANONICAL_TELEMETRY_FIELDS
+        if f.canonical_name == "consent_projection_id"
+    )
+    assert field.status is EmitterStatus.sdk_contract
+    p = project_consent(
+        consent_reference="Consent/x",
+        patient_reference="Patient/1",
+        is_active=True,
+        permitted_purposes=["triage"],
+        permitted_resource_types=["Task"],
+        approved_jurisdictions=["GB"],
+        consent_version=7,
+    )
+    assert p.projection_id == "Consent/x@v7"
+    assert field.status is not EmitterStatus.live
 
 
 def test_reviewer_outcome_grade_is_distinct_from_the_disposition() -> None:
