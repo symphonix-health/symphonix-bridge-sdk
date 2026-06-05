@@ -92,6 +92,25 @@ def test_all_seven_provenance_fields_present() -> None:
     assert r.provenance["agent"][0]["onBehalfOf"]["identifier"]["value"] == "user-clinician-1"
 
 
+def test_split_prompt_variant_and_policy_version_land_in_extension() -> None:
+    # Measurement backlog item 4: the split fields ride in the provenance
+    # extension alongside the retained combined prompt_policy_version surrogate.
+    r = _compose(
+        fields=_fields(prompt_variant="appeal-letter-B", policy_version="policy-2026-06")
+    )
+    ext = r.provenance["extension"]
+    assert ext["prompt_variant"] == "appeal-letter-B"
+    assert ext["policy_version"] == "policy-2026-06"
+    assert ext["prompt_policy_version"] == "prompt-v12"  # combined surrogate kept
+
+
+def test_split_fields_default_empty_and_are_not_required() -> None:
+    # Additive + optional: an existing caller that omits them still validates.
+    r = _compose()  # _fields() supplies no split fields
+    assert r.provenance["extension"]["prompt_variant"] == ""
+    assert r.provenance["extension"]["policy_version"] == ""
+
+
 @pytest.mark.parametrize("missing_field", REQUIRED_PROVENANCE_FIELDS)
 def test_missing_provenance_field_fails_validation(missing_field) -> None:
     # FR-AU-002-AC01: a provenance record missing any required field fails.

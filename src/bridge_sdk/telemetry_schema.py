@@ -38,7 +38,7 @@ __all__ = [
     "verified_live",
 ]
 
-SCHEMA_VERSION = "1.2.0-frozen-2026-06-05"
+SCHEMA_VERSION = "1.3.0-frozen-2026-06-05"
 
 
 class EmitterStatus(str, Enum):
@@ -148,33 +148,37 @@ CANONICAL_TELEMETRY_FIELDS: tuple[TelemetryField, ...] = (
     TelemetryField(
         canonical_name="prompt_variant",
         value_type="string",
-        source_subsystem="prompt-engine",
-        status=EmitterStatus.needs_wiring,
-        sdk_anchor=None,
+        source_subsystem="prompt-engine -> agent_audit provenance",
+        status=EmitterStatus.sdk_contract,
+        sdk_anchor="bridge_sdk.agent_audit.ProvenanceFields.prompt_variant",
         in_handoff_eight=True,
         notes=(
-            "prompt-engine healthcare RenderResult.variant is emitted to a metrics "
-            "hook per render, but the GENERIC PromptEngine.assemble() does not "
-            "surface spec.version/variant, and NOTHING joins the variant to an "
-            "agent-action record. ProvenanceFields has no prompt_variant; it only "
-            "carries the conflated prompt_policy_version. Must be wired through."
+            "WIRED 2026-06-05: ProvenanceFields now has a standalone prompt_variant "
+            "(additive, optional), emitted in the provenance extension, and "
+            "audit_route accepts it. The upstream source to populate it is "
+            "prompt-engine healthcare RenderResult.variant (emitted to a metrics "
+            "hook per render). Kept sdk_contract: no production prompt path yet "
+            "joins the variant onto the agent action. Was needs_wiring (no field)."
         ),
     ),
     TelemetryField(
         canonical_name="policy_version",
         value_type="string",
         source_subsystem="agent_audit provenance",
-        status=EmitterStatus.partial,
-        sdk_anchor="bridge_sdk.agent_audit.ProvenanceFields.prompt_policy_version",
+        status=EmitterStatus.sdk_contract,
+        sdk_anchor="bridge_sdk.agent_audit.ProvenanceFields.policy_version",
         in_handoff_eight=True,
         normalization=(
-            "split the single prompt_policy_version into prompt_variant + "
-            "policy_version, or keep it as the combined policy_version surrogate"
+            "standalone policy_version now exists alongside the legacy combined "
+            "prompt_policy_version surrogate; populate it to attribute policy "
+            "changes apart from prompt variants"
         ),
         notes=(
-            "Only prompt_policy_version exists, conflating the prompt variant and "
-            "the policy version into one string. The schema wants them separable "
-            "so prompt A/B effects and policy changes can be attributed apart."
+            "WIRED 2026-06-05: ProvenanceFields gained a standalone policy_version "
+            "(additive, optional), emitted in the provenance extension; the legacy "
+            "prompt_policy_version is retained as the combined surrogate so no "
+            "consumer breaks. Kept sdk_contract: no production caller populates the "
+            "split fields yet. Was partial (only the conflated field existed)."
         ),
     ),
     TelemetryField(

@@ -103,8 +103,9 @@ def test_execution_mode_resolver_path_has_exactly_four_values() -> None:
     assert {p.value for p in ResolverPath} == {"api", "nexus", "ui_fallback", "browser"}
 
 
-def test_policy_version_only_exists_as_conflated_prompt_policy_version() -> None:
-    # PARTIAL is justified: prompt_policy_version is present...
+def test_prompt_policy_version_retained_as_combined_surrogate() -> None:
+    # The legacy combined field stays REQUIRED so no consumer breaks when the
+    # split fields (prompt_variant / policy_version) are added additively.
     assert "prompt_policy_version" in REQUIRED_PROVENANCE_FIELDS
 
 
@@ -137,15 +138,19 @@ def test_autonomy_level_enum_matches_schema() -> None:
 # --------------------------------------------------------------------------- #
 # GAP side: the canonical field is genuinely ABSENT (the status is honest)
 # --------------------------------------------------------------------------- #
-def test_prompt_variant_is_absent_from_provenance() -> None:
-    # needs_wiring is justified: there is no prompt_variant field.
-    assert "prompt_variant" not in REQUIRED_PROVENANCE_FIELDS
+def test_prompt_variant_now_exists_as_an_optional_provenance_field() -> None:
+    # WIRED 2026-06-05: prompt_variant is a standalone field, added additively --
+    # present on ProvenanceFields but NOT in REQUIRED (existing callers stay valid).
     prov_field_names = {f.name for f in dataclasses.fields(ProvenanceFields)}
-    assert "prompt_variant" not in prov_field_names
+    assert "prompt_variant" in prov_field_names
+    assert "prompt_variant" not in REQUIRED_PROVENANCE_FIELDS
 
 
-def test_policy_version_is_not_a_standalone_field() -> None:
-    # The standalone policy_version the schema wants does not exist yet.
+def test_policy_version_now_exists_as_an_optional_provenance_field() -> None:
+    # WIRED 2026-06-05: standalone policy_version split out from the combined
+    # prompt_policy_version surrogate; additive, so not in REQUIRED.
+    prov_field_names = {f.name for f in dataclasses.fields(ProvenanceFields)}
+    assert "policy_version" in prov_field_names
     assert "policy_version" not in REQUIRED_PROVENANCE_FIELDS
 
 

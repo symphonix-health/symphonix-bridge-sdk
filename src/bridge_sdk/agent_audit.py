@@ -69,9 +69,15 @@ class ProvenanceFields:
     sponsor: str                  # user or organisation on whose behalf (act.sub)
     consent_artefact: str         # reference to the consent projection
     route_admission: str          # route-admission evidence id
-    prompt_policy_version: str    # prompt/policy version used
+    prompt_policy_version: str    # legacy COMBINED prompt+policy version (required)
     model_version: str            # model version that decided
     action_path: str              # resolved intent / UI action path
+    # Split granularity (measurement backlog item 4): attribute prompt A/B
+    # effects and policy changes apart. Optional + additive so existing callers
+    # stay valid; prefer populating these and keeping prompt_policy_version as the
+    # combined surrogate. Not in REQUIRED_PROVENANCE_FIELDS (additive, not mandated).
+    prompt_variant: str = ""      # which prompt variant / A-B arm
+    policy_version: str = ""      # which policy version
 
     def missing(self) -> list[str]:
         """Return the names of any required fields that are empty."""
@@ -193,6 +199,8 @@ def compose_step_audit(
             "consent_artefact": fields.consent_artefact,
             "route_admission": fields.route_admission,
             "prompt_policy_version": fields.prompt_policy_version,
+            "prompt_variant": fields.prompt_variant,
+            "policy_version": fields.policy_version,
             "model_version": fields.model_version,
             "action_path": fields.action_path,
         },
