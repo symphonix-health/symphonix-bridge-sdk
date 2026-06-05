@@ -124,6 +124,16 @@ from bridge_sdk.persona_delegation import (
     unify_scope,
     verify_persona_token,
 )
+from bridge_sdk.telemetry_schema import (
+    CANONICAL_TELEMETRY_FIELDS,
+    SCHEMA_VERSION,
+    EmitterStatus,
+    TelemetryField,
+    fields_by_status,
+    freeze_fingerprint,
+    needs_wiring,
+    verified_live,
+)
 
 __version__ = "0.1.0"
 __all__ = [
@@ -214,6 +224,14 @@ __all__ = [
     "mint_persona_token",
     "unify_scope",
     "verify_persona_token",
+    "CANONICAL_TELEMETRY_FIELDS",
+    "SCHEMA_VERSION",
+    "EmitterStatus",
+    "TelemetryField",
+    "fields_by_status",
+    "freeze_fingerprint",
+    "needs_wiring",
+    "verified_live",
     "BridgeEngine",
     "CanonicalEnvelope",
     "PatientIdentifier",
