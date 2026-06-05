@@ -103,9 +103,11 @@ CANONICAL_TELEMETRY_FIELDS: tuple[TelemetryField, ...] = (
         in_handoff_eight=False,
         notes=(
             "The join key for every other field. The HTTP X-Correlation-ID "
-            "middleware is live platform-wide, but the AGENT-STEP triple is bound "
-            "by correlation_id only inside the tested emit_step_audit helper "
-            "(bullettrain/agent_native/audit_bridge.py); no live route calls it."
+            "middleware is live platform-wide. The AGENT-STEP triple is bound by "
+            "correlation_id in the emit_step_audit helper, now reachable via the "
+            "live POST /agent/step/audit route (audit_route.py, mounted on "
+            "agent_manager); the route takes the correlation id from the request. "
+            "Kept tested_helper until a production agent flow calls that route."
         ),
     ),
     TelemetryField(
@@ -201,12 +203,16 @@ CANONICAL_TELEMETRY_FIELDS: tuple[TelemetryField, ...] = (
         notes=(
             "compose_step_audit() builds the linked Task+Provenance+AuditEvent with "
             "a shared correlation_id and a tamper-evident link_hash, and "
-            "emit_step_audit() lands it in the real hash-chained AuditLogger -- but "
-            "ONLY in the tested bridge; grep confirms no live route imports "
-            "bullettrain.agent_native. Separately, bullettrain_fhir/audit.py builds "
-            "Provenance and AuditEvent with INDEPENDENT uuids (not linked). Audit "
-            "completeness cannot reach the >99.5% KPI target until a live path emits "
-            "the linked triple per action."
+            "emit_step_audit() lands it in the real hash-chained AuditLogger. A LIVE "
+            "route now exists (wired 2026-06-05): POST /agent/step/audit "
+            "(bullettrain/agent_native/audit_route.py, mounted on the agent_manager "
+            "service), proven by a real-ASGI test against the production AuditLogger. "
+            "Kept tested_helper, not live, because no production agent flow CALLS it "
+            "yet -- auto-emission per /v1/workflow step is the remaining adoption. "
+            "Separately, bullettrain_fhir/audit.py still builds Provenance and "
+            "AuditEvent with INDEPENDENT uuids (not linked). Audit completeness "
+            "reaches the >99.5% KPI target once production callers emit the triple "
+            "per action."
         ),
     ),
     TelemetryField(
