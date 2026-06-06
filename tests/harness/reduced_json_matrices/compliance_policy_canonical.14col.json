@@ -219,13 +219,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-001-AC01",
+          "FR-BSDK-001-AC02",
+          "FR-BSDK-001-AC03",
+          "BSDK-001-AC01",
+          "BSDK-001-AC02",
+          "BSDK-001-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0001",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -235,7 +244,13 @@
         "FR-BSDK-001",
         "BSDK-001",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-001-AC01",
+        "AC:FR-BSDK-001-AC02",
+        "AC:FR-BSDK-001-AC03",
+        "AC:BSDK-001-AC01",
+        "AC:BSDK-001-AC02",
+        "AC:BSDK-001-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -323,13 +338,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-002-AC01",
+          "FR-BSDK-002-AC02",
+          "FR-BSDK-002-AC03",
+          "BSDK-002-AC01",
+          "BSDK-002-AC02",
+          "BSDK-002-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0002",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -339,7 +363,13 @@
         "FR-BSDK-002",
         "BSDK-002",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-002-AC01",
+        "AC:FR-BSDK-002-AC02",
+        "AC:FR-BSDK-002-AC03",
+        "AC:BSDK-002-AC01",
+        "AC:BSDK-002-AC02",
+        "AC:BSDK-002-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -427,13 +457,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-003-AC01",
+          "FR-BSDK-003-AC02",
+          "FR-BSDK-003-AC03",
+          "BSDK-003-AC01",
+          "BSDK-003-AC02",
+          "BSDK-003-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0003",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -443,7 +482,13 @@
         "FR-BSDK-003",
         "BSDK-003",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-003-AC01",
+        "AC:FR-BSDK-003-AC02",
+        "AC:FR-BSDK-003-AC03",
+        "AC:BSDK-003-AC01",
+        "AC:BSDK-003-AC02",
+        "AC:BSDK-003-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -531,13 +576,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-004-AC01",
+          "FR-BSDK-004-AC02",
+          "FR-BSDK-004-AC03",
+          "BSDK-101-AC01",
+          "BSDK-101-AC02",
+          "BSDK-101-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0004",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -547,7 +601,13 @@
         "FR-BSDK-004",
         "BSDK-101",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-004-AC01",
+        "AC:FR-BSDK-004-AC02",
+        "AC:FR-BSDK-004-AC03",
+        "AC:BSDK-101-AC01",
+        "AC:BSDK-101-AC02",
+        "AC:BSDK-101-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -635,13 +695,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-005-AC01",
+          "FR-BSDK-005-AC02",
+          "FR-BSDK-005-AC03",
+          "BSDK-102-AC01",
+          "BSDK-102-AC02",
+          "BSDK-102-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0005",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -651,7 +720,13 @@
         "FR-BSDK-005",
         "BSDK-102",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-005-AC01",
+        "AC:FR-BSDK-005-AC02",
+        "AC:FR-BSDK-005-AC03",
+        "AC:BSDK-102-AC01",
+        "AC:BSDK-102-AC02",
+        "AC:BSDK-102-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -739,13 +814,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-006-AC01",
+          "FR-BSDK-006-AC02",
+          "FR-BSDK-006-AC03",
+          "BSDK-103-AC01",
+          "BSDK-103-AC02",
+          "BSDK-103-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0006",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -755,7 +839,13 @@
         "FR-BSDK-006",
         "BSDK-103",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-006-AC01",
+        "AC:FR-BSDK-006-AC02",
+        "AC:FR-BSDK-006-AC03",
+        "AC:BSDK-103-AC01",
+        "AC:BSDK-103-AC02",
+        "AC:BSDK-103-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -843,13 +933,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-007-AC01",
+          "FR-BSDK-007-AC02",
+          "FR-BSDK-007-AC03",
+          "BSDK-104-AC01",
+          "BSDK-104-AC02",
+          "BSDK-104-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0007",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -859,7 +958,13 @@
         "FR-BSDK-007",
         "BSDK-104",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-007-AC01",
+        "AC:FR-BSDK-007-AC02",
+        "AC:FR-BSDK-007-AC03",
+        "AC:BSDK-104-AC01",
+        "AC:BSDK-104-AC02",
+        "AC:BSDK-104-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -947,13 +1052,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-008-AC01",
+          "FR-BSDK-008-AC02",
+          "FR-BSDK-008-AC03",
+          "BSDK-105-AC01",
+          "BSDK-105-AC02",
+          "BSDK-105-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0008",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -963,7 +1077,13 @@
         "FR-BSDK-008",
         "BSDK-105",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-008-AC01",
+        "AC:FR-BSDK-008-AC02",
+        "AC:FR-BSDK-008-AC03",
+        "AC:BSDK-105-AC01",
+        "AC:BSDK-105-AC02",
+        "AC:BSDK-105-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -1051,13 +1171,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-001-AC01",
+          "FR-BSDK-001-AC02",
+          "FR-BSDK-001-AC03",
+          "BSDK-106-AC01",
+          "BSDK-106-AC02",
+          "BSDK-106-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0009",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -1067,7 +1196,13 @@
         "FR-BSDK-001",
         "BSDK-106",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-001-AC01",
+        "AC:FR-BSDK-001-AC02",
+        "AC:FR-BSDK-001-AC03",
+        "AC:BSDK-106-AC01",
+        "AC:BSDK-106-AC02",
+        "AC:BSDK-106-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -1155,13 +1290,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-002-AC01",
+          "FR-BSDK-002-AC02",
+          "FR-BSDK-002-AC03",
+          "BSDK-107-AC01",
+          "BSDK-107-AC02",
+          "BSDK-107-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0010",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -1171,7 +1315,13 @@
         "FR-BSDK-002",
         "BSDK-107",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-002-AC01",
+        "AC:FR-BSDK-002-AC02",
+        "AC:FR-BSDK-002-AC03",
+        "AC:BSDK-107-AC01",
+        "AC:BSDK-107-AC02",
+        "AC:BSDK-107-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -1259,13 +1409,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-003-AC01",
+          "FR-BSDK-003-AC02",
+          "FR-BSDK-003-AC03",
+          "BSDK-108-AC01",
+          "BSDK-108-AC02",
+          "BSDK-108-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0011",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -1275,7 +1434,13 @@
         "FR-BSDK-003",
         "BSDK-108",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-003-AC01",
+        "AC:FR-BSDK-003-AC02",
+        "AC:FR-BSDK-003-AC03",
+        "AC:BSDK-108-AC01",
+        "AC:BSDK-108-AC02",
+        "AC:BSDK-108-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -1363,13 +1528,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-004-AC01",
+          "FR-BSDK-004-AC02",
+          "FR-BSDK-004-AC03",
+          "BSDK-109-AC01",
+          "BSDK-109-AC02",
+          "BSDK-109-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0012",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -1379,7 +1553,13 @@
         "FR-BSDK-004",
         "BSDK-109",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-004-AC01",
+        "AC:FR-BSDK-004-AC02",
+        "AC:FR-BSDK-004-AC03",
+        "AC:BSDK-109-AC01",
+        "AC:BSDK-109-AC02",
+        "AC:BSDK-109-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -1467,13 +1647,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-005-AC01",
+          "FR-BSDK-005-AC02",
+          "FR-BSDK-005-AC03",
+          "BSDK-110-AC01",
+          "BSDK-110-AC02",
+          "BSDK-110-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0013",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -1483,7 +1672,13 @@
         "FR-BSDK-005",
         "BSDK-110",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-005-AC01",
+        "AC:FR-BSDK-005-AC02",
+        "AC:FR-BSDK-005-AC03",
+        "AC:BSDK-110-AC01",
+        "AC:BSDK-110-AC02",
+        "AC:BSDK-110-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -1571,13 +1766,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-006-AC01",
+          "FR-BSDK-006-AC02",
+          "FR-BSDK-006-AC03",
+          "BSDK-111-AC01",
+          "BSDK-111-AC02",
+          "BSDK-111-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0014",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -1587,7 +1791,13 @@
         "FR-BSDK-006",
         "BSDK-111",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-006-AC01",
+        "AC:FR-BSDK-006-AC02",
+        "AC:FR-BSDK-006-AC03",
+        "AC:BSDK-111-AC01",
+        "AC:BSDK-111-AC02",
+        "AC:BSDK-111-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -1675,13 +1885,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-007-AC01",
+          "FR-BSDK-007-AC02",
+          "FR-BSDK-007-AC03",
+          "BSDK-112-AC01",
+          "BSDK-112-AC02",
+          "BSDK-112-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0015",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -1691,7 +1910,13 @@
         "FR-BSDK-007",
         "BSDK-112",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-007-AC01",
+        "AC:FR-BSDK-007-AC02",
+        "AC:FR-BSDK-007-AC03",
+        "AC:BSDK-112-AC01",
+        "AC:BSDK-112-AC02",
+        "AC:BSDK-112-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -1779,13 +2004,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-008-AC01",
+          "FR-BSDK-008-AC02",
+          "FR-BSDK-008-AC03",
+          "BSDK-113-AC01",
+          "BSDK-113-AC02",
+          "BSDK-113-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0016",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -1795,7 +2029,13 @@
         "FR-BSDK-008",
         "BSDK-113",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-008-AC01",
+        "AC:FR-BSDK-008-AC02",
+        "AC:FR-BSDK-008-AC03",
+        "AC:BSDK-113-AC01",
+        "AC:BSDK-113-AC02",
+        "AC:BSDK-113-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -1883,13 +2123,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-001-AC01",
+          "FR-BSDK-001-AC02",
+          "FR-BSDK-001-AC03",
+          "BSDK-114-AC01",
+          "BSDK-114-AC02",
+          "BSDK-114-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0017",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -1899,7 +2148,13 @@
         "FR-BSDK-001",
         "BSDK-114",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-001-AC01",
+        "AC:FR-BSDK-001-AC02",
+        "AC:FR-BSDK-001-AC03",
+        "AC:BSDK-114-AC01",
+        "AC:BSDK-114-AC02",
+        "AC:BSDK-114-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -1987,13 +2242,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-002-AC01",
+          "FR-BSDK-002-AC02",
+          "FR-BSDK-002-AC03",
+          "BSDK-115-AC01",
+          "BSDK-115-AC02",
+          "BSDK-115-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0018",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -2003,7 +2267,13 @@
         "FR-BSDK-002",
         "BSDK-115",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-002-AC01",
+        "AC:FR-BSDK-002-AC02",
+        "AC:FR-BSDK-002-AC03",
+        "AC:BSDK-115-AC01",
+        "AC:BSDK-115-AC02",
+        "AC:BSDK-115-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -2091,13 +2361,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-003-AC01",
+          "FR-BSDK-003-AC02",
+          "FR-BSDK-003-AC03",
+          "BSDK-116-AC01",
+          "BSDK-116-AC02",
+          "BSDK-116-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0019",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -2107,7 +2386,13 @@
         "FR-BSDK-003",
         "BSDK-116",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-003-AC01",
+        "AC:FR-BSDK-003-AC02",
+        "AC:FR-BSDK-003-AC03",
+        "AC:BSDK-116-AC01",
+        "AC:BSDK-116-AC02",
+        "AC:BSDK-116-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -2195,13 +2480,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-004-AC01",
+          "FR-BSDK-004-AC02",
+          "FR-BSDK-004-AC03",
+          "BSDK-117-AC01",
+          "BSDK-117-AC02",
+          "BSDK-117-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0020",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -2211,7 +2505,13 @@
         "FR-BSDK-004",
         "BSDK-117",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-004-AC01",
+        "AC:FR-BSDK-004-AC02",
+        "AC:FR-BSDK-004-AC03",
+        "AC:BSDK-117-AC01",
+        "AC:BSDK-117-AC02",
+        "AC:BSDK-117-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -2299,13 +2599,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-005-AC01",
+          "FR-BSDK-005-AC02",
+          "FR-BSDK-005-AC03",
+          "BSDK-118-AC01",
+          "BSDK-118-AC02",
+          "BSDK-118-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0021",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -2315,7 +2624,13 @@
         "FR-BSDK-005",
         "BSDK-118",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-005-AC01",
+        "AC:FR-BSDK-005-AC02",
+        "AC:FR-BSDK-005-AC03",
+        "AC:BSDK-118-AC01",
+        "AC:BSDK-118-AC02",
+        "AC:BSDK-118-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -2403,13 +2718,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-006-AC01",
+          "FR-BSDK-006-AC02",
+          "FR-BSDK-006-AC03",
+          "BSDK-119-AC01",
+          "BSDK-119-AC02",
+          "BSDK-119-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0022",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -2419,7 +2743,13 @@
         "FR-BSDK-006",
         "BSDK-119",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-006-AC01",
+        "AC:FR-BSDK-006-AC02",
+        "AC:FR-BSDK-006-AC03",
+        "AC:BSDK-119-AC01",
+        "AC:BSDK-119-AC02",
+        "AC:BSDK-119-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -2507,13 +2837,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-007-AC01",
+          "FR-BSDK-007-AC02",
+          "FR-BSDK-007-AC03",
+          "BSDK-120-AC01",
+          "BSDK-120-AC02",
+          "BSDK-120-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0023",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -2523,7 +2862,13 @@
         "FR-BSDK-007",
         "BSDK-120",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-007-AC01",
+        "AC:FR-BSDK-007-AC02",
+        "AC:FR-BSDK-007-AC03",
+        "AC:BSDK-120-AC01",
+        "AC:BSDK-120-AC02",
+        "AC:BSDK-120-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -2611,13 +2956,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-008-AC01",
+          "FR-BSDK-008-AC02",
+          "FR-BSDK-008-AC03",
+          "BSDK-121-AC01",
+          "BSDK-121-AC02",
+          "BSDK-121-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0024",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -2627,7 +2981,13 @@
         "FR-BSDK-008",
         "BSDK-121",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-008-AC01",
+        "AC:FR-BSDK-008-AC02",
+        "AC:FR-BSDK-008-AC03",
+        "AC:BSDK-121-AC01",
+        "AC:BSDK-121-AC02",
+        "AC:BSDK-121-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -2715,13 +3075,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-001-AC01",
+          "FR-BSDK-001-AC02",
+          "FR-BSDK-001-AC03",
+          "BSDK-122-AC01",
+          "BSDK-122-AC02",
+          "BSDK-122-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0025",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -2731,7 +3100,13 @@
         "FR-BSDK-001",
         "BSDK-122",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-001-AC01",
+        "AC:FR-BSDK-001-AC02",
+        "AC:FR-BSDK-001-AC03",
+        "AC:BSDK-122-AC01",
+        "AC:BSDK-122-AC02",
+        "AC:BSDK-122-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -2819,13 +3194,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-002-AC01",
+          "FR-BSDK-002-AC02",
+          "FR-BSDK-002-AC03",
+          "BSDK-123-AC01",
+          "BSDK-123-AC02",
+          "BSDK-123-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0026",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -2835,7 +3219,13 @@
         "FR-BSDK-002",
         "BSDK-123",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-002-AC01",
+        "AC:FR-BSDK-002-AC02",
+        "AC:FR-BSDK-002-AC03",
+        "AC:BSDK-123-AC01",
+        "AC:BSDK-123-AC02",
+        "AC:BSDK-123-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -2923,13 +3313,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-003-AC01",
+          "FR-BSDK-003-AC02",
+          "FR-BSDK-003-AC03",
+          "BSDK-124-AC01",
+          "BSDK-124-AC02",
+          "BSDK-124-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0027",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -2939,7 +3338,13 @@
         "FR-BSDK-003",
         "BSDK-124",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-003-AC01",
+        "AC:FR-BSDK-003-AC02",
+        "AC:FR-BSDK-003-AC03",
+        "AC:BSDK-124-AC01",
+        "AC:BSDK-124-AC02",
+        "AC:BSDK-124-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -3027,13 +3432,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-004-AC01",
+          "FR-BSDK-004-AC02",
+          "FR-BSDK-004-AC03",
+          "BSDK-125-AC01",
+          "BSDK-125-AC02",
+          "BSDK-125-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0028",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -3043,7 +3457,13 @@
         "FR-BSDK-004",
         "BSDK-125",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-004-AC01",
+        "AC:FR-BSDK-004-AC02",
+        "AC:FR-BSDK-004-AC03",
+        "AC:BSDK-125-AC01",
+        "AC:BSDK-125-AC02",
+        "AC:BSDK-125-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -3131,13 +3551,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-005-AC01",
+          "FR-BSDK-005-AC02",
+          "FR-BSDK-005-AC03",
+          "BSDK-126-AC01",
+          "BSDK-126-AC02",
+          "BSDK-126-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0029",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -3147,7 +3576,13 @@
         "FR-BSDK-005",
         "BSDK-126",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-005-AC01",
+        "AC:FR-BSDK-005-AC02",
+        "AC:FR-BSDK-005-AC03",
+        "AC:BSDK-126-AC01",
+        "AC:BSDK-126-AC02",
+        "AC:BSDK-126-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -3235,13 +3670,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-006-AC01",
+          "FR-BSDK-006-AC02",
+          "FR-BSDK-006-AC03",
+          "BSDK-127-AC01",
+          "BSDK-127-AC02",
+          "BSDK-127-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0030",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -3251,7 +3695,13 @@
         "FR-BSDK-006",
         "BSDK-127",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-006-AC01",
+        "AC:FR-BSDK-006-AC02",
+        "AC:FR-BSDK-006-AC03",
+        "AC:BSDK-127-AC01",
+        "AC:BSDK-127-AC02",
+        "AC:BSDK-127-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -3339,13 +3789,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-007-AC01",
+          "FR-BSDK-007-AC02",
+          "FR-BSDK-007-AC03",
+          "BSDK-128-AC01",
+          "BSDK-128-AC02",
+          "BSDK-128-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0031",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -3355,7 +3814,13 @@
         "FR-BSDK-007",
         "BSDK-128",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-007-AC01",
+        "AC:FR-BSDK-007-AC02",
+        "AC:FR-BSDK-007-AC03",
+        "AC:BSDK-128-AC01",
+        "AC:BSDK-128-AC02",
+        "AC:BSDK-128-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -3443,13 +3908,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-008-AC01",
+          "FR-BSDK-008-AC02",
+          "FR-BSDK-008-AC03",
+          "BSDK-129-AC01",
+          "BSDK-129-AC02",
+          "BSDK-129-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0032",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -3459,7 +3933,13 @@
         "FR-BSDK-008",
         "BSDK-129",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-008-AC01",
+        "AC:FR-BSDK-008-AC02",
+        "AC:FR-BSDK-008-AC03",
+        "AC:BSDK-129-AC01",
+        "AC:BSDK-129-AC02",
+        "AC:BSDK-129-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -3547,13 +4027,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-001-AC01",
+          "FR-BSDK-001-AC02",
+          "FR-BSDK-001-AC03",
+          "BSDK-130-AC01",
+          "BSDK-130-AC02",
+          "BSDK-130-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0033",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -3563,7 +4052,13 @@
         "FR-BSDK-001",
         "BSDK-130",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-001-AC01",
+        "AC:FR-BSDK-001-AC02",
+        "AC:FR-BSDK-001-AC03",
+        "AC:BSDK-130-AC01",
+        "AC:BSDK-130-AC02",
+        "AC:BSDK-130-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -3651,13 +4146,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-002-AC01",
+          "FR-BSDK-002-AC02",
+          "FR-BSDK-002-AC03",
+          "BSDK-131-AC01",
+          "BSDK-131-AC02",
+          "BSDK-131-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0034",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -3667,7 +4171,13 @@
         "FR-BSDK-002",
         "BSDK-131",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-002-AC01",
+        "AC:FR-BSDK-002-AC02",
+        "AC:FR-BSDK-002-AC03",
+        "AC:BSDK-131-AC01",
+        "AC:BSDK-131-AC02",
+        "AC:BSDK-131-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -3755,13 +4265,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-003-AC01",
+          "FR-BSDK-003-AC02",
+          "FR-BSDK-003-AC03",
+          "BSDK-132-AC01",
+          "BSDK-132-AC02",
+          "BSDK-132-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0035",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -3771,7 +4290,13 @@
         "FR-BSDK-003",
         "BSDK-132",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-003-AC01",
+        "AC:FR-BSDK-003-AC02",
+        "AC:FR-BSDK-003-AC03",
+        "AC:BSDK-132-AC01",
+        "AC:BSDK-132-AC02",
+        "AC:BSDK-132-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -3859,13 +4384,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-004-AC01",
+          "FR-BSDK-004-AC02",
+          "FR-BSDK-004-AC03",
+          "BSDK-133-AC01",
+          "BSDK-133-AC02",
+          "BSDK-133-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0036",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -3875,7 +4409,13 @@
         "FR-BSDK-004",
         "BSDK-133",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-004-AC01",
+        "AC:FR-BSDK-004-AC02",
+        "AC:FR-BSDK-004-AC03",
+        "AC:BSDK-133-AC01",
+        "AC:BSDK-133-AC02",
+        "AC:BSDK-133-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -3963,13 +4503,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-005-AC01",
+          "FR-BSDK-005-AC02",
+          "FR-BSDK-005-AC03",
+          "BSDK-134-AC01",
+          "BSDK-134-AC02",
+          "BSDK-134-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0037",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -3979,7 +4528,13 @@
         "FR-BSDK-005",
         "BSDK-134",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-005-AC01",
+        "AC:FR-BSDK-005-AC02",
+        "AC:FR-BSDK-005-AC03",
+        "AC:BSDK-134-AC01",
+        "AC:BSDK-134-AC02",
+        "AC:BSDK-134-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -4067,13 +4622,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-006-AC01",
+          "FR-BSDK-006-AC02",
+          "FR-BSDK-006-AC03",
+          "BSDK-135-AC01",
+          "BSDK-135-AC02",
+          "BSDK-135-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0038",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -4083,7 +4647,13 @@
         "FR-BSDK-006",
         "BSDK-135",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-006-AC01",
+        "AC:FR-BSDK-006-AC02",
+        "AC:FR-BSDK-006-AC03",
+        "AC:BSDK-135-AC01",
+        "AC:BSDK-135-AC02",
+        "AC:BSDK-135-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -4171,13 +4741,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-007-AC01",
+          "FR-BSDK-007-AC02",
+          "FR-BSDK-007-AC03",
+          "BSDK-136-AC01",
+          "BSDK-136-AC02",
+          "BSDK-136-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0039",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -4187,7 +4766,13 @@
         "FR-BSDK-007",
         "BSDK-136",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-007-AC01",
+        "AC:FR-BSDK-007-AC02",
+        "AC:FR-BSDK-007-AC03",
+        "AC:BSDK-136-AC01",
+        "AC:BSDK-136-AC02",
+        "AC:BSDK-136-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -4275,13 +4860,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-008-AC01",
+          "FR-BSDK-008-AC02",
+          "FR-BSDK-008-AC03",
+          "BSDK-137-AC01",
+          "BSDK-137-AC02",
+          "BSDK-137-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0040",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -4291,7 +4885,13 @@
         "FR-BSDK-008",
         "BSDK-137",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-008-AC01",
+        "AC:FR-BSDK-008-AC02",
+        "AC:FR-BSDK-008-AC03",
+        "AC:BSDK-137-AC01",
+        "AC:BSDK-137-AC02",
+        "AC:BSDK-137-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -4379,13 +4979,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-001-AC01",
+          "FR-BSDK-001-AC02",
+          "FR-BSDK-001-AC03",
+          "BSDK-138-AC01",
+          "BSDK-138-AC02",
+          "BSDK-138-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0041",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -4395,7 +5004,13 @@
         "FR-BSDK-001",
         "BSDK-138",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-001-AC01",
+        "AC:FR-BSDK-001-AC02",
+        "AC:FR-BSDK-001-AC03",
+        "AC:BSDK-138-AC01",
+        "AC:BSDK-138-AC02",
+        "AC:BSDK-138-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -4483,13 +5098,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-002-AC01",
+          "FR-BSDK-002-AC02",
+          "FR-BSDK-002-AC03",
+          "BSDK-139-AC01",
+          "BSDK-139-AC02",
+          "BSDK-139-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0042",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -4499,7 +5123,13 @@
         "FR-BSDK-002",
         "BSDK-139",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-002-AC01",
+        "AC:FR-BSDK-002-AC02",
+        "AC:FR-BSDK-002-AC03",
+        "AC:BSDK-139-AC01",
+        "AC:BSDK-139-AC02",
+        "AC:BSDK-139-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -4587,13 +5217,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-003-AC01",
+          "FR-BSDK-003-AC02",
+          "FR-BSDK-003-AC03",
+          "BSDK-140-AC01",
+          "BSDK-140-AC02",
+          "BSDK-140-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0043",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -4603,7 +5242,13 @@
         "FR-BSDK-003",
         "BSDK-140",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-003-AC01",
+        "AC:FR-BSDK-003-AC02",
+        "AC:FR-BSDK-003-AC03",
+        "AC:BSDK-140-AC01",
+        "AC:BSDK-140-AC02",
+        "AC:BSDK-140-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -4691,13 +5336,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-004-AC01",
+          "FR-BSDK-004-AC02",
+          "FR-BSDK-004-AC03",
+          "BSDK-141-AC01",
+          "BSDK-141-AC02",
+          "BSDK-141-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0044",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -4707,7 +5361,13 @@
         "FR-BSDK-004",
         "BSDK-141",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-004-AC01",
+        "AC:FR-BSDK-004-AC02",
+        "AC:FR-BSDK-004-AC03",
+        "AC:BSDK-141-AC01",
+        "AC:BSDK-141-AC02",
+        "AC:BSDK-141-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -4795,13 +5455,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-005-AC01",
+          "FR-BSDK-005-AC02",
+          "FR-BSDK-005-AC03",
+          "BSDK-142-AC01",
+          "BSDK-142-AC02",
+          "BSDK-142-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0045",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -4811,7 +5480,13 @@
         "FR-BSDK-005",
         "BSDK-142",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-005-AC01",
+        "AC:FR-BSDK-005-AC02",
+        "AC:FR-BSDK-005-AC03",
+        "AC:BSDK-142-AC01",
+        "AC:BSDK-142-AC02",
+        "AC:BSDK-142-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -4899,13 +5574,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-006-AC01",
+          "FR-BSDK-006-AC02",
+          "FR-BSDK-006-AC03",
+          "BSDK-143-AC01",
+          "BSDK-143-AC02",
+          "BSDK-143-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0046",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -4915,7 +5599,13 @@
         "FR-BSDK-006",
         "BSDK-143",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-006-AC01",
+        "AC:FR-BSDK-006-AC02",
+        "AC:FR-BSDK-006-AC03",
+        "AC:BSDK-143-AC01",
+        "AC:BSDK-143-AC02",
+        "AC:BSDK-143-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -5003,13 +5693,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-007-AC01",
+          "FR-BSDK-007-AC02",
+          "FR-BSDK-007-AC03",
+          "BSDK-144-AC01",
+          "BSDK-144-AC02",
+          "BSDK-144-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0047",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -5019,7 +5718,13 @@
         "FR-BSDK-007",
         "BSDK-144",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-007-AC01",
+        "AC:FR-BSDK-007-AC02",
+        "AC:FR-BSDK-007-AC03",
+        "AC:BSDK-144-AC01",
+        "AC:BSDK-144-AC02",
+        "AC:BSDK-144-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -5107,13 +5812,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-008-AC01",
+          "FR-BSDK-008-AC02",
+          "FR-BSDK-008-AC03",
+          "BSDK-145-AC01",
+          "BSDK-145-AC02",
+          "BSDK-145-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0048",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -5123,7 +5837,13 @@
         "FR-BSDK-008",
         "BSDK-145",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-008-AC01",
+        "AC:FR-BSDK-008-AC02",
+        "AC:FR-BSDK-008-AC03",
+        "AC:BSDK-145-AC01",
+        "AC:BSDK-145-AC02",
+        "AC:BSDK-145-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -5211,13 +5931,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-001-AC01",
+          "FR-BSDK-001-AC02",
+          "FR-BSDK-001-AC03",
+          "BSDK-146-AC01",
+          "BSDK-146-AC02",
+          "BSDK-146-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0049",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -5227,7 +5956,13 @@
         "FR-BSDK-001",
         "BSDK-146",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-001-AC01",
+        "AC:FR-BSDK-001-AC02",
+        "AC:FR-BSDK-001-AC03",
+        "AC:BSDK-146-AC01",
+        "AC:BSDK-146-AC02",
+        "AC:BSDK-146-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -5315,13 +6050,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-002-AC01",
+          "FR-BSDK-002-AC02",
+          "FR-BSDK-002-AC03",
+          "BSDK-147-AC01",
+          "BSDK-147-AC02",
+          "BSDK-147-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0050",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -5331,7 +6075,13 @@
         "FR-BSDK-002",
         "BSDK-147",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-002-AC01",
+        "AC:FR-BSDK-002-AC02",
+        "AC:FR-BSDK-002-AC03",
+        "AC:BSDK-147-AC01",
+        "AC:BSDK-147-AC02",
+        "AC:BSDK-147-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -5419,13 +6169,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-003-AC01",
+          "FR-BSDK-003-AC02",
+          "FR-BSDK-003-AC03",
+          "BSDK-148-AC01",
+          "BSDK-148-AC02",
+          "BSDK-148-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0051",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -5435,7 +6194,13 @@
         "FR-BSDK-003",
         "BSDK-148",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-003-AC01",
+        "AC:FR-BSDK-003-AC02",
+        "AC:FR-BSDK-003-AC03",
+        "AC:BSDK-148-AC01",
+        "AC:BSDK-148-AC02",
+        "AC:BSDK-148-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -5523,13 +6288,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-004-AC01",
+          "FR-BSDK-004-AC02",
+          "FR-BSDK-004-AC03",
+          "BSDK-149-AC01",
+          "BSDK-149-AC02",
+          "BSDK-149-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0052",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -5539,7 +6313,13 @@
         "FR-BSDK-004",
         "BSDK-149",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-004-AC01",
+        "AC:FR-BSDK-004-AC02",
+        "AC:FR-BSDK-004-AC03",
+        "AC:BSDK-149-AC01",
+        "AC:BSDK-149-AC02",
+        "AC:BSDK-149-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -5627,13 +6407,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-005-AC01",
+          "FR-BSDK-005-AC02",
+          "FR-BSDK-005-AC03",
+          "BSDK-150-AC01",
+          "BSDK-150-AC02",
+          "BSDK-150-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0053",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -5643,7 +6432,13 @@
         "FR-BSDK-005",
         "BSDK-150",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-005-AC01",
+        "AC:FR-BSDK-005-AC02",
+        "AC:FR-BSDK-005-AC03",
+        "AC:BSDK-150-AC01",
+        "AC:BSDK-150-AC02",
+        "AC:BSDK-150-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -5731,13 +6526,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-006-AC01",
+          "FR-BSDK-006-AC02",
+          "FR-BSDK-006-AC03",
+          "BSDK-151-AC01",
+          "BSDK-151-AC02",
+          "BSDK-151-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0054",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -5747,7 +6551,13 @@
         "FR-BSDK-006",
         "BSDK-151",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-006-AC01",
+        "AC:FR-BSDK-006-AC02",
+        "AC:FR-BSDK-006-AC03",
+        "AC:BSDK-151-AC01",
+        "AC:BSDK-151-AC02",
+        "AC:BSDK-151-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -5835,13 +6645,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-007-AC01",
+          "FR-BSDK-007-AC02",
+          "FR-BSDK-007-AC03",
+          "BSDK-152-AC01",
+          "BSDK-152-AC02",
+          "BSDK-152-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0055",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -5851,7 +6670,13 @@
         "FR-BSDK-007",
         "BSDK-152",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-007-AC01",
+        "AC:FR-BSDK-007-AC02",
+        "AC:FR-BSDK-007-AC03",
+        "AC:BSDK-152-AC01",
+        "AC:BSDK-152-AC02",
+        "AC:BSDK-152-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -5939,13 +6764,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-008-AC01",
+          "FR-BSDK-008-AC02",
+          "FR-BSDK-008-AC03",
+          "BSDK-153-AC01",
+          "BSDK-153-AC02",
+          "BSDK-153-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0056",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -5955,7 +6789,13 @@
         "FR-BSDK-008",
         "BSDK-153",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-008-AC01",
+        "AC:FR-BSDK-008-AC02",
+        "AC:FR-BSDK-008-AC03",
+        "AC:BSDK-153-AC01",
+        "AC:BSDK-153-AC02",
+        "AC:BSDK-153-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -6043,13 +6883,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-001-AC01",
+          "FR-BSDK-001-AC02",
+          "FR-BSDK-001-AC03",
+          "BSDK-154-AC01",
+          "BSDK-154-AC02",
+          "BSDK-154-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0057",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -6059,7 +6908,13 @@
         "FR-BSDK-001",
         "BSDK-154",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-001-AC01",
+        "AC:FR-BSDK-001-AC02",
+        "AC:FR-BSDK-001-AC03",
+        "AC:BSDK-154-AC01",
+        "AC:BSDK-154-AC02",
+        "AC:BSDK-154-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -6147,13 +7002,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-002-AC01",
+          "FR-BSDK-002-AC02",
+          "FR-BSDK-002-AC03",
+          "BSDK-155-AC01",
+          "BSDK-155-AC02",
+          "BSDK-155-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0058",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -6163,7 +7027,13 @@
         "FR-BSDK-002",
         "BSDK-155",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-002-AC01",
+        "AC:FR-BSDK-002-AC02",
+        "AC:FR-BSDK-002-AC03",
+        "AC:BSDK-155-AC01",
+        "AC:BSDK-155-AC02",
+        "AC:BSDK-155-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -6251,13 +7121,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-003-AC01",
+          "FR-BSDK-003-AC02",
+          "FR-BSDK-003-AC03",
+          "BSDK-156-AC01",
+          "BSDK-156-AC02",
+          "BSDK-156-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0059",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -6267,7 +7146,13 @@
         "FR-BSDK-003",
         "BSDK-156",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-003-AC01",
+        "AC:FR-BSDK-003-AC02",
+        "AC:FR-BSDK-003-AC03",
+        "AC:BSDK-156-AC01",
+        "AC:BSDK-156-AC02",
+        "AC:BSDK-156-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -6355,13 +7240,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-004-AC01",
+          "FR-BSDK-004-AC02",
+          "FR-BSDK-004-AC03",
+          "BSDK-157-AC01",
+          "BSDK-157-AC02",
+          "BSDK-157-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0060",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -6371,7 +7265,13 @@
         "FR-BSDK-004",
         "BSDK-157",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-004-AC01",
+        "AC:FR-BSDK-004-AC02",
+        "AC:FR-BSDK-004-AC03",
+        "AC:BSDK-157-AC01",
+        "AC:BSDK-157-AC02",
+        "AC:BSDK-157-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -6459,13 +7359,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-005-AC01",
+          "FR-BSDK-005-AC02",
+          "FR-BSDK-005-AC03",
+          "BSDK-158-AC01",
+          "BSDK-158-AC02",
+          "BSDK-158-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0061",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -6475,7 +7384,13 @@
         "FR-BSDK-005",
         "BSDK-158",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-005-AC01",
+        "AC:FR-BSDK-005-AC02",
+        "AC:FR-BSDK-005-AC03",
+        "AC:BSDK-158-AC01",
+        "AC:BSDK-158-AC02",
+        "AC:BSDK-158-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -6563,13 +7478,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-006-AC01",
+          "FR-BSDK-006-AC02",
+          "FR-BSDK-006-AC03",
+          "BSDK-159-AC01",
+          "BSDK-159-AC02",
+          "BSDK-159-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0062",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -6579,7 +7503,13 @@
         "FR-BSDK-006",
         "BSDK-159",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-006-AC01",
+        "AC:FR-BSDK-006-AC02",
+        "AC:FR-BSDK-006-AC03",
+        "AC:BSDK-159-AC01",
+        "AC:BSDK-159-AC02",
+        "AC:BSDK-159-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -6667,13 +7597,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-007-AC01",
+          "FR-BSDK-007-AC02",
+          "FR-BSDK-007-AC03",
+          "BSDK-160-AC01",
+          "BSDK-160-AC02",
+          "BSDK-160-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0063",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -6683,7 +7622,13 @@
         "FR-BSDK-007",
         "BSDK-160",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-007-AC01",
+        "AC:FR-BSDK-007-AC02",
+        "AC:FR-BSDK-007-AC03",
+        "AC:BSDK-160-AC01",
+        "AC:BSDK-160-AC02",
+        "AC:BSDK-160-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -6771,13 +7716,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-008-AC01",
+          "FR-BSDK-008-AC02",
+          "FR-BSDK-008-AC03",
+          "BSDK-161-AC01",
+          "BSDK-161-AC02",
+          "BSDK-161-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0064",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -6787,7 +7741,13 @@
         "FR-BSDK-008",
         "BSDK-161",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-008-AC01",
+        "AC:FR-BSDK-008-AC02",
+        "AC:FR-BSDK-008-AC03",
+        "AC:BSDK-161-AC01",
+        "AC:BSDK-161-AC02",
+        "AC:BSDK-161-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -6875,13 +7835,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-001-AC01",
+          "FR-BSDK-001-AC02",
+          "FR-BSDK-001-AC03",
+          "BSDK-162-AC01",
+          "BSDK-162-AC02",
+          "BSDK-162-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0065",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -6891,7 +7860,13 @@
         "FR-BSDK-001",
         "BSDK-162",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-001-AC01",
+        "AC:FR-BSDK-001-AC02",
+        "AC:FR-BSDK-001-AC03",
+        "AC:BSDK-162-AC01",
+        "AC:BSDK-162-AC02",
+        "AC:BSDK-162-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -6979,13 +7954,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-002-AC01",
+          "FR-BSDK-002-AC02",
+          "FR-BSDK-002-AC03",
+          "BSDK-163-AC01",
+          "BSDK-163-AC02",
+          "BSDK-163-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0066",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -6995,7 +7979,13 @@
         "FR-BSDK-002",
         "BSDK-163",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-002-AC01",
+        "AC:FR-BSDK-002-AC02",
+        "AC:FR-BSDK-002-AC03",
+        "AC:BSDK-163-AC01",
+        "AC:BSDK-163-AC02",
+        "AC:BSDK-163-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -7083,13 +8073,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-003-AC01",
+          "FR-BSDK-003-AC02",
+          "FR-BSDK-003-AC03",
+          "BSDK-164-AC01",
+          "BSDK-164-AC02",
+          "BSDK-164-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0067",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -7099,7 +8098,13 @@
         "FR-BSDK-003",
         "BSDK-164",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-003-AC01",
+        "AC:FR-BSDK-003-AC02",
+        "AC:FR-BSDK-003-AC03",
+        "AC:BSDK-164-AC01",
+        "AC:BSDK-164-AC02",
+        "AC:BSDK-164-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -7187,13 +8192,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-004-AC01",
+          "FR-BSDK-004-AC02",
+          "FR-BSDK-004-AC03",
+          "BSDK-165-AC01",
+          "BSDK-165-AC02",
+          "BSDK-165-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0068",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -7203,7 +8217,13 @@
         "FR-BSDK-004",
         "BSDK-165",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-004-AC01",
+        "AC:FR-BSDK-004-AC02",
+        "AC:FR-BSDK-004-AC03",
+        "AC:BSDK-165-AC01",
+        "AC:BSDK-165-AC02",
+        "AC:BSDK-165-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -7291,13 +8311,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-005-AC01",
+          "FR-BSDK-005-AC02",
+          "FR-BSDK-005-AC03",
+          "BSDK-166-AC01",
+          "BSDK-166-AC02",
+          "BSDK-166-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0069",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -7307,7 +8336,13 @@
         "FR-BSDK-005",
         "BSDK-166",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-005-AC01",
+        "AC:FR-BSDK-005-AC02",
+        "AC:FR-BSDK-005-AC03",
+        "AC:BSDK-166-AC01",
+        "AC:BSDK-166-AC02",
+        "AC:BSDK-166-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -7395,13 +8430,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-006-AC01",
+          "FR-BSDK-006-AC02",
+          "FR-BSDK-006-AC03",
+          "BSDK-167-AC01",
+          "BSDK-167-AC02",
+          "BSDK-167-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0070",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -7411,7 +8455,13 @@
         "FR-BSDK-006",
         "BSDK-167",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-006-AC01",
+        "AC:FR-BSDK-006-AC02",
+        "AC:FR-BSDK-006-AC03",
+        "AC:BSDK-167-AC01",
+        "AC:BSDK-167-AC02",
+        "AC:BSDK-167-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -7499,13 +8549,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-007-AC01",
+          "FR-BSDK-007-AC02",
+          "FR-BSDK-007-AC03",
+          "BSDK-168-AC01",
+          "BSDK-168-AC02",
+          "BSDK-168-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0071",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -7515,7 +8574,13 @@
         "FR-BSDK-007",
         "BSDK-168",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-007-AC01",
+        "AC:FR-BSDK-007-AC02",
+        "AC:FR-BSDK-007-AC03",
+        "AC:BSDK-168-AC01",
+        "AC:BSDK-168-AC02",
+        "AC:BSDK-168-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -7603,13 +8668,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-008-AC01",
+          "FR-BSDK-008-AC02",
+          "FR-BSDK-008-AC03",
+          "BSDK-169-AC01",
+          "BSDK-169-AC02",
+          "BSDK-169-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0072",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -7619,7 +8693,13 @@
         "FR-BSDK-008",
         "BSDK-169",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-008-AC01",
+        "AC:FR-BSDK-008-AC02",
+        "AC:FR-BSDK-008-AC03",
+        "AC:BSDK-169-AC01",
+        "AC:BSDK-169-AC02",
+        "AC:BSDK-169-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -7707,13 +8787,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-001-AC01",
+          "FR-BSDK-001-AC02",
+          "FR-BSDK-001-AC03",
+          "BSDK-170-AC01",
+          "BSDK-170-AC02",
+          "BSDK-170-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0073",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -7723,7 +8812,13 @@
         "FR-BSDK-001",
         "BSDK-170",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-001-AC01",
+        "AC:FR-BSDK-001-AC02",
+        "AC:FR-BSDK-001-AC03",
+        "AC:BSDK-170-AC01",
+        "AC:BSDK-170-AC02",
+        "AC:BSDK-170-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -7811,13 +8906,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-002-AC01",
+          "FR-BSDK-002-AC02",
+          "FR-BSDK-002-AC03",
+          "BSDK-171-AC01",
+          "BSDK-171-AC02",
+          "BSDK-171-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0074",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -7827,7 +8931,13 @@
         "FR-BSDK-002",
         "BSDK-171",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-002-AC01",
+        "AC:FR-BSDK-002-AC02",
+        "AC:FR-BSDK-002-AC03",
+        "AC:BSDK-171-AC01",
+        "AC:BSDK-171-AC02",
+        "AC:BSDK-171-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -7915,13 +9025,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-003-AC01",
+          "FR-BSDK-003-AC02",
+          "FR-BSDK-003-AC03",
+          "BSDK-172-AC01",
+          "BSDK-172-AC02",
+          "BSDK-172-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0075",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -7931,7 +9050,13 @@
         "FR-BSDK-003",
         "BSDK-172",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-003-AC01",
+        "AC:FR-BSDK-003-AC02",
+        "AC:FR-BSDK-003-AC03",
+        "AC:BSDK-172-AC01",
+        "AC:BSDK-172-AC02",
+        "AC:BSDK-172-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -8019,13 +9144,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-004-AC01",
+          "FR-BSDK-004-AC02",
+          "FR-BSDK-004-AC03",
+          "BSDK-173-AC01",
+          "BSDK-173-AC02",
+          "BSDK-173-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0076",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -8035,7 +9169,13 @@
         "FR-BSDK-004",
         "BSDK-173",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-004-AC01",
+        "AC:FR-BSDK-004-AC02",
+        "AC:FR-BSDK-004-AC03",
+        "AC:BSDK-173-AC01",
+        "AC:BSDK-173-AC02",
+        "AC:BSDK-173-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -8123,13 +9263,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-005-AC01",
+          "FR-BSDK-005-AC02",
+          "FR-BSDK-005-AC03",
+          "BSDK-174-AC01",
+          "BSDK-174-AC02",
+          "BSDK-174-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0077",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -8139,7 +9288,13 @@
         "FR-BSDK-005",
         "BSDK-174",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-005-AC01",
+        "AC:FR-BSDK-005-AC02",
+        "AC:FR-BSDK-005-AC03",
+        "AC:BSDK-174-AC01",
+        "AC:BSDK-174-AC02",
+        "AC:BSDK-174-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -8227,13 +9382,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-006-AC01",
+          "FR-BSDK-006-AC02",
+          "FR-BSDK-006-AC03",
+          "BSDK-175-AC01",
+          "BSDK-175-AC02",
+          "BSDK-175-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0078",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -8243,7 +9407,13 @@
         "FR-BSDK-006",
         "BSDK-175",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-006-AC01",
+        "AC:FR-BSDK-006-AC02",
+        "AC:FR-BSDK-006-AC03",
+        "AC:BSDK-175-AC01",
+        "AC:BSDK-175-AC02",
+        "AC:BSDK-175-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -8331,13 +9501,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-007-AC01",
+          "FR-BSDK-007-AC02",
+          "FR-BSDK-007-AC03",
+          "BSDK-176-AC01",
+          "BSDK-176-AC02",
+          "BSDK-176-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0079",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -8347,7 +9526,13 @@
         "FR-BSDK-007",
         "BSDK-176",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-007-AC01",
+        "AC:FR-BSDK-007-AC02",
+        "AC:FR-BSDK-007-AC03",
+        "AC:BSDK-176-AC01",
+        "AC:BSDK-176-AC02",
+        "AC:BSDK-176-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -8435,13 +9620,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-008-AC01",
+          "FR-BSDK-008-AC02",
+          "FR-BSDK-008-AC03",
+          "BSDK-177-AC01",
+          "BSDK-177-AC02",
+          "BSDK-177-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0080",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -8451,7 +9645,13 @@
         "FR-BSDK-008",
         "BSDK-177",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-008-AC01",
+        "AC:FR-BSDK-008-AC02",
+        "AC:FR-BSDK-008-AC03",
+        "AC:BSDK-177-AC01",
+        "AC:BSDK-177-AC02",
+        "AC:BSDK-177-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -8539,13 +9739,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-001-AC01",
+          "FR-BSDK-001-AC02",
+          "FR-BSDK-001-AC03",
+          "BSDK-178-AC01",
+          "BSDK-178-AC02",
+          "BSDK-178-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0081",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -8555,7 +9764,13 @@
         "FR-BSDK-001",
         "BSDK-178",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-001-AC01",
+        "AC:FR-BSDK-001-AC02",
+        "AC:FR-BSDK-001-AC03",
+        "AC:BSDK-178-AC01",
+        "AC:BSDK-178-AC02",
+        "AC:BSDK-178-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -8643,13 +9858,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-002-AC01",
+          "FR-BSDK-002-AC02",
+          "FR-BSDK-002-AC03",
+          "BSDK-179-AC01",
+          "BSDK-179-AC02",
+          "BSDK-179-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0082",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -8659,7 +9883,13 @@
         "FR-BSDK-002",
         "BSDK-179",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-002-AC01",
+        "AC:FR-BSDK-002-AC02",
+        "AC:FR-BSDK-002-AC03",
+        "AC:BSDK-179-AC01",
+        "AC:BSDK-179-AC02",
+        "AC:BSDK-179-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -8747,13 +9977,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-003-AC01",
+          "FR-BSDK-003-AC02",
+          "FR-BSDK-003-AC03",
+          "BSDK-180-AC01",
+          "BSDK-180-AC02",
+          "BSDK-180-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0083",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -8763,7 +10002,13 @@
         "FR-BSDK-003",
         "BSDK-180",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-003-AC01",
+        "AC:FR-BSDK-003-AC02",
+        "AC:FR-BSDK-003-AC03",
+        "AC:BSDK-180-AC01",
+        "AC:BSDK-180-AC02",
+        "AC:BSDK-180-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -8851,13 +10096,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-004-AC01",
+          "FR-BSDK-004-AC02",
+          "FR-BSDK-004-AC03",
+          "BSDK-181-AC01",
+          "BSDK-181-AC02",
+          "BSDK-181-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0084",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -8867,7 +10121,13 @@
         "FR-BSDK-004",
         "BSDK-181",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-004-AC01",
+        "AC:FR-BSDK-004-AC02",
+        "AC:FR-BSDK-004-AC03",
+        "AC:BSDK-181-AC01",
+        "AC:BSDK-181-AC02",
+        "AC:BSDK-181-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -8955,13 +10215,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-005-AC01",
+          "FR-BSDK-005-AC02",
+          "FR-BSDK-005-AC03",
+          "BSDK-182-AC01",
+          "BSDK-182-AC02",
+          "BSDK-182-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_POS_0085",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -8971,7 +10240,13 @@
         "FR-BSDK-005",
         "BSDK-182",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-005-AC01",
+        "AC:FR-BSDK-005-AC02",
+        "AC:FR-BSDK-005-AC03",
+        "AC:BSDK-182-AC01",
+        "AC:BSDK-182-AC02",
+        "AC:BSDK-182-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -9059,13 +10334,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "NFR-BSDK-001-AC01",
+          "NFR-BSDK-001-AC02",
+          "NFR-BSDK-001-AC03",
+          "BSDK-183-AC01",
+          "BSDK-183-AC02",
+          "BSDK-183-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_NEG_0086",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -9075,7 +10359,13 @@
         "NFR-BSDK-001",
         "BSDK-183",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:NFR-BSDK-001-AC01",
+        "AC:NFR-BSDK-001-AC02",
+        "AC:NFR-BSDK-001-AC03",
+        "AC:BSDK-183-AC01",
+        "AC:BSDK-183-AC02",
+        "AC:BSDK-183-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -9163,13 +10453,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "NFR-BSDK-002-AC01",
+          "NFR-BSDK-002-AC02",
+          "NFR-BSDK-002-AC03",
+          "BSDK-184-AC01",
+          "BSDK-184-AC02",
+          "BSDK-184-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_NEG_0087",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -9179,7 +10478,13 @@
         "NFR-BSDK-002",
         "BSDK-184",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:NFR-BSDK-002-AC01",
+        "AC:NFR-BSDK-002-AC02",
+        "AC:NFR-BSDK-002-AC03",
+        "AC:BSDK-184-AC01",
+        "AC:BSDK-184-AC02",
+        "AC:BSDK-184-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -9267,13 +10572,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "NFR-BSDK-003-AC01",
+          "NFR-BSDK-003-AC02",
+          "NFR-BSDK-003-AC03",
+          "BSDK-185-AC01",
+          "BSDK-185-AC02",
+          "BSDK-185-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_NEG_0088",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -9283,7 +10597,13 @@
         "NFR-BSDK-003",
         "BSDK-185",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:NFR-BSDK-003-AC01",
+        "AC:NFR-BSDK-003-AC02",
+        "AC:NFR-BSDK-003-AC03",
+        "AC:BSDK-185-AC01",
+        "AC:BSDK-185-AC02",
+        "AC:BSDK-185-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -9371,13 +10691,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "NFR-BSDK-004-AC01",
+          "NFR-BSDK-004-AC02",
+          "NFR-BSDK-004-AC03",
+          "BSDK-186-AC01",
+          "BSDK-186-AC02",
+          "BSDK-186-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_NEG_0089",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -9387,7 +10716,13 @@
         "NFR-BSDK-004",
         "BSDK-186",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:NFR-BSDK-004-AC01",
+        "AC:NFR-BSDK-004-AC02",
+        "AC:NFR-BSDK-004-AC03",
+        "AC:BSDK-186-AC01",
+        "AC:BSDK-186-AC02",
+        "AC:BSDK-186-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -9475,13 +10810,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "NFR-BSDK-001-AC01",
+          "NFR-BSDK-001-AC02",
+          "NFR-BSDK-001-AC03",
+          "BSDK-187-AC01",
+          "BSDK-187-AC02",
+          "BSDK-187-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_NEG_0090",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -9491,7 +10835,13 @@
         "NFR-BSDK-001",
         "BSDK-187",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:NFR-BSDK-001-AC01",
+        "AC:NFR-BSDK-001-AC02",
+        "AC:NFR-BSDK-001-AC03",
+        "AC:BSDK-187-AC01",
+        "AC:BSDK-187-AC02",
+        "AC:BSDK-187-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -9579,13 +10929,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "NFR-BSDK-002-AC01",
+          "NFR-BSDK-002-AC02",
+          "NFR-BSDK-002-AC03",
+          "BSDK-188-AC01",
+          "BSDK-188-AC02",
+          "BSDK-188-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_NEG_0091",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -9595,7 +10954,13 @@
         "NFR-BSDK-002",
         "BSDK-188",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:NFR-BSDK-002-AC01",
+        "AC:NFR-BSDK-002-AC02",
+        "AC:NFR-BSDK-002-AC03",
+        "AC:BSDK-188-AC01",
+        "AC:BSDK-188-AC02",
+        "AC:BSDK-188-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -9683,13 +11048,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "NFR-BSDK-003-AC01",
+          "NFR-BSDK-003-AC02",
+          "NFR-BSDK-003-AC03",
+          "BSDK-189-AC01",
+          "BSDK-189-AC02",
+          "BSDK-189-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_NEG_0092",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -9699,7 +11073,13 @@
         "NFR-BSDK-003",
         "BSDK-189",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:NFR-BSDK-003-AC01",
+        "AC:NFR-BSDK-003-AC02",
+        "AC:NFR-BSDK-003-AC03",
+        "AC:BSDK-189-AC01",
+        "AC:BSDK-189-AC02",
+        "AC:BSDK-189-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -9787,13 +11167,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "NFR-BSDK-004-AC01",
+          "NFR-BSDK-004-AC02",
+          "NFR-BSDK-004-AC03",
+          "BSDK-190-AC01",
+          "BSDK-190-AC02",
+          "BSDK-190-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_NEG_0093",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -9803,7 +11192,13 @@
         "NFR-BSDK-004",
         "BSDK-190",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:NFR-BSDK-004-AC01",
+        "AC:NFR-BSDK-004-AC02",
+        "AC:NFR-BSDK-004-AC03",
+        "AC:BSDK-190-AC01",
+        "AC:BSDK-190-AC02",
+        "AC:BSDK-190-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -9891,13 +11286,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "NFR-BSDK-001-AC01",
+          "NFR-BSDK-001-AC02",
+          "NFR-BSDK-001-AC03",
+          "BSDK-191-AC01",
+          "BSDK-191-AC02",
+          "BSDK-191-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_NEG_0094",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -9907,7 +11311,13 @@
         "NFR-BSDK-001",
         "BSDK-191",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:NFR-BSDK-001-AC01",
+        "AC:NFR-BSDK-001-AC02",
+        "AC:NFR-BSDK-001-AC03",
+        "AC:BSDK-191-AC01",
+        "AC:BSDK-191-AC02",
+        "AC:BSDK-191-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -9995,13 +11405,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "NFR-BSDK-002-AC01",
+          "NFR-BSDK-002-AC02",
+          "NFR-BSDK-002-AC03",
+          "BSDK-192-AC01",
+          "BSDK-192-AC02",
+          "BSDK-192-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_NEG_0095",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -10011,7 +11430,13 @@
         "NFR-BSDK-002",
         "BSDK-192",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:NFR-BSDK-002-AC01",
+        "AC:NFR-BSDK-002-AC02",
+        "AC:NFR-BSDK-002-AC03",
+        "AC:BSDK-192-AC01",
+        "AC:BSDK-192-AC02",
+        "AC:BSDK-192-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -10099,13 +11524,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-005-AC01",
+          "FR-BSDK-005-AC02",
+          "FR-BSDK-005-AC03",
+          "BSDK-193-AC01",
+          "BSDK-193-AC02",
+          "BSDK-193-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_EDG_0096",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -10115,7 +11549,13 @@
         "FR-BSDK-005",
         "BSDK-193",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-005-AC01",
+        "AC:FR-BSDK-005-AC02",
+        "AC:FR-BSDK-005-AC03",
+        "AC:BSDK-193-AC01",
+        "AC:BSDK-193-AC02",
+        "AC:BSDK-193-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -10203,13 +11643,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-006-AC01",
+          "FR-BSDK-006-AC02",
+          "FR-BSDK-006-AC03",
+          "BSDK-194-AC01",
+          "BSDK-194-AC02",
+          "BSDK-194-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_EDG_0097",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -10219,7 +11668,13 @@
         "FR-BSDK-006",
         "BSDK-194",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-006-AC01",
+        "AC:FR-BSDK-006-AC02",
+        "AC:FR-BSDK-006-AC03",
+        "AC:BSDK-194-AC01",
+        "AC:BSDK-194-AC02",
+        "AC:BSDK-194-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -10307,13 +11762,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-007-AC01",
+          "FR-BSDK-007-AC02",
+          "FR-BSDK-007-AC03",
+          "BSDK-195-AC01",
+          "BSDK-195-AC02",
+          "BSDK-195-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_EDG_0098",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -10323,7 +11787,13 @@
         "FR-BSDK-007",
         "BSDK-195",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-007-AC01",
+        "AC:FR-BSDK-007-AC02",
+        "AC:FR-BSDK-007-AC03",
+        "AC:BSDK-195-AC01",
+        "AC:BSDK-195-AC02",
+        "AC:BSDK-195-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -10411,13 +11881,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-008-AC01",
+          "FR-BSDK-008-AC02",
+          "FR-BSDK-008-AC03",
+          "BSDK-196-AC01",
+          "BSDK-196-AC02",
+          "BSDK-196-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_EDG_0099",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -10427,7 +11906,13 @@
         "FR-BSDK-008",
         "BSDK-196",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-008-AC01",
+        "AC:FR-BSDK-008-AC02",
+        "AC:FR-BSDK-008-AC03",
+        "AC:BSDK-196-AC01",
+        "AC:BSDK-196-AC02",
+        "AC:BSDK-196-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",
@@ -10515,13 +12000,22 @@
           ],
           "transport": "mTLS",
           "expected_auth_result": "ALLOW"
-        }
+        },
+        "acceptance_criteria_ids": [
+          "FR-BSDK-005-AC01",
+          "FR-BSDK-005-AC02",
+          "FR-BSDK-005-AC03",
+          "BSDK-001-AC01",
+          "BSDK-001-AC02",
+          "BSDK-001-AC03"
+        ]
       },
       "validation_rules": [
         "source_matrix:tests/harness/canonical_matrices/compliance_policy_canonical.json",
         "source_use_case_id:compliance_policy_EDG_0100",
         "requirement_ids trace to tests/harness/requirements_matrix.json",
-        "expected outputs are preserved from the source matrix"
+        "expected outputs are preserved from the source matrix",
+        "acceptance_criteria_ids trace to tests/harness/requirements_matrix.json"
       ],
       "dependencies": [
         "filesystem",
@@ -10531,7 +12025,13 @@
         "FR-BSDK-005",
         "BSDK-001",
         "compliance_policy_canonical",
-        "BT_CANONICAL_MATRIX_V1_14COL"
+        "BT_CANONICAL_MATRIX_V1_14COL",
+        "AC:FR-BSDK-005-AC01",
+        "AC:FR-BSDK-005-AC02",
+        "AC:FR-BSDK-005-AC03",
+        "AC:BSDK-001-AC01",
+        "AC:BSDK-001-AC02",
+        "AC:BSDK-001-AC03"
       ],
       "estimated_duration": 1,
       "automation_status": "automated",

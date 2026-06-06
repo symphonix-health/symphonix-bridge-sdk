@@ -24,1332 +24,2662 @@
     {
       "requirement_id": "BSDK-001",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-001-AC01",
+        "BSDK-001-AC02",
+        "BSDK-001-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-002",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-002-AC01",
+        "BSDK-002-AC02",
+        "BSDK-002-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-003",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-003-AC01",
+        "BSDK-003-AC02",
+        "BSDK-003-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-101",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-101-AC01",
+        "BSDK-101-AC02",
+        "BSDK-101-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-102",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-102-AC01",
+        "BSDK-102-AC02",
+        "BSDK-102-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-103",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-103-AC01",
+        "BSDK-103-AC02",
+        "BSDK-103-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-104",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-104-AC01",
+        "BSDK-104-AC02",
+        "BSDK-104-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-105",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-105-AC01",
+        "BSDK-105-AC02",
+        "BSDK-105-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-106",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-106-AC01",
+        "BSDK-106-AC02",
+        "BSDK-106-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-107",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-107-AC01",
+        "BSDK-107-AC02",
+        "BSDK-107-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-108",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-108-AC01",
+        "BSDK-108-AC02",
+        "BSDK-108-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-109",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-109-AC01",
+        "BSDK-109-AC02",
+        "BSDK-109-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-110",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-110-AC01",
+        "BSDK-110-AC02",
+        "BSDK-110-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-111",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-111-AC01",
+        "BSDK-111-AC02",
+        "BSDK-111-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-112",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-112-AC01",
+        "BSDK-112-AC02",
+        "BSDK-112-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-113",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-113-AC01",
+        "BSDK-113-AC02",
+        "BSDK-113-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-114",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-114-AC01",
+        "BSDK-114-AC02",
+        "BSDK-114-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-115",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-115-AC01",
+        "BSDK-115-AC02",
+        "BSDK-115-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-116",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-116-AC01",
+        "BSDK-116-AC02",
+        "BSDK-116-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-117",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-117-AC01",
+        "BSDK-117-AC02",
+        "BSDK-117-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-118",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-118-AC01",
+        "BSDK-118-AC02",
+        "BSDK-118-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-119",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-119-AC01",
+        "BSDK-119-AC02",
+        "BSDK-119-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-120",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-120-AC01",
+        "BSDK-120-AC02",
+        "BSDK-120-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-121",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-121-AC01",
+        "BSDK-121-AC02",
+        "BSDK-121-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-122",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-122-AC01",
+        "BSDK-122-AC02",
+        "BSDK-122-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-123",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-123-AC01",
+        "BSDK-123-AC02",
+        "BSDK-123-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-124",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-124-AC01",
+        "BSDK-124-AC02",
+        "BSDK-124-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-125",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-125-AC01",
+        "BSDK-125-AC02",
+        "BSDK-125-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-126",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-126-AC01",
+        "BSDK-126-AC02",
+        "BSDK-126-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-127",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-127-AC01",
+        "BSDK-127-AC02",
+        "BSDK-127-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-128",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-128-AC01",
+        "BSDK-128-AC02",
+        "BSDK-128-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-129",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-129-AC01",
+        "BSDK-129-AC02",
+        "BSDK-129-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-130",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-130-AC01",
+        "BSDK-130-AC02",
+        "BSDK-130-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-131",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-131-AC01",
+        "BSDK-131-AC02",
+        "BSDK-131-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-132",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-132-AC01",
+        "BSDK-132-AC02",
+        "BSDK-132-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-133",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-133-AC01",
+        "BSDK-133-AC02",
+        "BSDK-133-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-134",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-134-AC01",
+        "BSDK-134-AC02",
+        "BSDK-134-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-135",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-135-AC01",
+        "BSDK-135-AC02",
+        "BSDK-135-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-136",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-136-AC01",
+        "BSDK-136-AC02",
+        "BSDK-136-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-137",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-137-AC01",
+        "BSDK-137-AC02",
+        "BSDK-137-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-138",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-138-AC01",
+        "BSDK-138-AC02",
+        "BSDK-138-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-139",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-139-AC01",
+        "BSDK-139-AC02",
+        "BSDK-139-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-140",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-140-AC01",
+        "BSDK-140-AC02",
+        "BSDK-140-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-141",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-141-AC01",
+        "BSDK-141-AC02",
+        "BSDK-141-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-142",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-142-AC01",
+        "BSDK-142-AC02",
+        "BSDK-142-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-143",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-143-AC01",
+        "BSDK-143-AC02",
+        "BSDK-143-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-144",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-144-AC01",
+        "BSDK-144-AC02",
+        "BSDK-144-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-145",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-145-AC01",
+        "BSDK-145-AC02",
+        "BSDK-145-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-146",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-146-AC01",
+        "BSDK-146-AC02",
+        "BSDK-146-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-147",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-147-AC01",
+        "BSDK-147-AC02",
+        "BSDK-147-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-148",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-148-AC01",
+        "BSDK-148-AC02",
+        "BSDK-148-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-149",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-149-AC01",
+        "BSDK-149-AC02",
+        "BSDK-149-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-150",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-150-AC01",
+        "BSDK-150-AC02",
+        "BSDK-150-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-151",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-151-AC01",
+        "BSDK-151-AC02",
+        "BSDK-151-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-152",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-152-AC01",
+        "BSDK-152-AC02",
+        "BSDK-152-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-153",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-153-AC01",
+        "BSDK-153-AC02",
+        "BSDK-153-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-154",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-154-AC01",
+        "BSDK-154-AC02",
+        "BSDK-154-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-155",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-155-AC01",
+        "BSDK-155-AC02",
+        "BSDK-155-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-156",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-156-AC01",
+        "BSDK-156-AC02",
+        "BSDK-156-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-157",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-157-AC01",
+        "BSDK-157-AC02",
+        "BSDK-157-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-158",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-158-AC01",
+        "BSDK-158-AC02",
+        "BSDK-158-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-159",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-159-AC01",
+        "BSDK-159-AC02",
+        "BSDK-159-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-160",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-160-AC01",
+        "BSDK-160-AC02",
+        "BSDK-160-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-161",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-161-AC01",
+        "BSDK-161-AC02",
+        "BSDK-161-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-162",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-162-AC01",
+        "BSDK-162-AC02",
+        "BSDK-162-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-163",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-163-AC01",
+        "BSDK-163-AC02",
+        "BSDK-163-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-164",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-164-AC01",
+        "BSDK-164-AC02",
+        "BSDK-164-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-165",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-165-AC01",
+        "BSDK-165-AC02",
+        "BSDK-165-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-166",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-166-AC01",
+        "BSDK-166-AC02",
+        "BSDK-166-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-167",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-167-AC01",
+        "BSDK-167-AC02",
+        "BSDK-167-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-168",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-168-AC01",
+        "BSDK-168-AC02",
+        "BSDK-168-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-169",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-169-AC01",
+        "BSDK-169-AC02",
+        "BSDK-169-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-170",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-170-AC01",
+        "BSDK-170-AC02",
+        "BSDK-170-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-171",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-171-AC01",
+        "BSDK-171-AC02",
+        "BSDK-171-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-172",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-172-AC01",
+        "BSDK-172-AC02",
+        "BSDK-172-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-173",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-173-AC01",
+        "BSDK-173-AC02",
+        "BSDK-173-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-174",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-174-AC01",
+        "BSDK-174-AC02",
+        "BSDK-174-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-175",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-175-AC01",
+        "BSDK-175-AC02",
+        "BSDK-175-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-176",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-176-AC01",
+        "BSDK-176-AC02",
+        "BSDK-176-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-177",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-177-AC01",
+        "BSDK-177-AC02",
+        "BSDK-177-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-178",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-178-AC01",
+        "BSDK-178-AC02",
+        "BSDK-178-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-179",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-179-AC01",
+        "BSDK-179-AC02",
+        "BSDK-179-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-180",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-180-AC01",
+        "BSDK-180-AC02",
+        "BSDK-180-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-181",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-181-AC01",
+        "BSDK-181-AC02",
+        "BSDK-181-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-182",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-182-AC01",
+        "BSDK-182-AC02",
+        "BSDK-182-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-183",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-183-AC01",
+        "BSDK-183-AC02",
+        "BSDK-183-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-184",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-184-AC01",
+        "BSDK-184-AC02",
+        "BSDK-184-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-185",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-185-AC01",
+        "BSDK-185-AC02",
+        "BSDK-185-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-186",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-186-AC01",
+        "BSDK-186-AC02",
+        "BSDK-186-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-187",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-187-AC01",
+        "BSDK-187-AC02",
+        "BSDK-187-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-188",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-188-AC01",
+        "BSDK-188-AC02",
+        "BSDK-188-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-189",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-189-AC01",
+        "BSDK-189-AC02",
+        "BSDK-189-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-190",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-190-AC01",
+        "BSDK-190-AC02",
+        "BSDK-190-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-191",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-191-AC01",
+        "BSDK-191-AC02",
+        "BSDK-191-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-192",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-192-AC01",
+        "BSDK-192-AC02",
+        "BSDK-192-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-193",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-193-AC01",
+        "BSDK-193-AC02",
+        "BSDK-193-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-194",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-194-AC01",
+        "BSDK-194-AC02",
+        "BSDK-194-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-195",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-195-AC01",
+        "BSDK-195-AC02",
+        "BSDK-195-AC03"
+      ]
     },
     {
       "requirement_id": "BSDK-196",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "BSDK-196-AC01",
+        "BSDK-196-AC02",
+        "BSDK-196-AC03"
+      ]
     },
     {
       "requirement_id": "DS-001",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-001-AC01",
+        "DS-001-AC02",
+        "DS-001-AC03"
+      ]
     },
     {
       "requirement_id": "DS-002",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-002-AC01",
+        "DS-002-AC02",
+        "DS-002-AC03"
+      ]
     },
     {
       "requirement_id": "DS-003",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-003-AC01",
+        "DS-003-AC02",
+        "DS-003-AC03"
+      ]
     },
     {
       "requirement_id": "DS-101",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-101-AC01",
+        "DS-101-AC02",
+        "DS-101-AC03"
+      ]
     },
     {
       "requirement_id": "DS-102",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-102-AC01",
+        "DS-102-AC02",
+        "DS-102-AC03"
+      ]
     },
     {
       "requirement_id": "DS-103",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-103-AC01",
+        "DS-103-AC02",
+        "DS-103-AC03"
+      ]
     },
     {
       "requirement_id": "DS-104",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-104-AC01",
+        "DS-104-AC02",
+        "DS-104-AC03"
+      ]
     },
     {
       "requirement_id": "DS-105",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-105-AC01",
+        "DS-105-AC02",
+        "DS-105-AC03"
+      ]
     },
     {
       "requirement_id": "DS-106",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-106-AC01",
+        "DS-106-AC02",
+        "DS-106-AC03"
+      ]
     },
     {
       "requirement_id": "DS-107",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-107-AC01",
+        "DS-107-AC02",
+        "DS-107-AC03"
+      ]
     },
     {
       "requirement_id": "DS-108",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-108-AC01",
+        "DS-108-AC02",
+        "DS-108-AC03"
+      ]
     },
     {
       "requirement_id": "DS-109",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-109-AC01",
+        "DS-109-AC02",
+        "DS-109-AC03"
+      ]
     },
     {
       "requirement_id": "DS-110",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-110-AC01",
+        "DS-110-AC02",
+        "DS-110-AC03"
+      ]
     },
     {
       "requirement_id": "DS-111",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-111-AC01",
+        "DS-111-AC02",
+        "DS-111-AC03"
+      ]
     },
     {
       "requirement_id": "DS-112",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-112-AC01",
+        "DS-112-AC02",
+        "DS-112-AC03"
+      ]
     },
     {
       "requirement_id": "DS-113",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-113-AC01",
+        "DS-113-AC02",
+        "DS-113-AC03"
+      ]
     },
     {
       "requirement_id": "DS-114",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-114-AC01",
+        "DS-114-AC02",
+        "DS-114-AC03"
+      ]
     },
     {
       "requirement_id": "DS-115",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-115-AC01",
+        "DS-115-AC02",
+        "DS-115-AC03"
+      ]
     },
     {
       "requirement_id": "DS-116",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-116-AC01",
+        "DS-116-AC02",
+        "DS-116-AC03"
+      ]
     },
     {
       "requirement_id": "DS-117",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-117-AC01",
+        "DS-117-AC02",
+        "DS-117-AC03"
+      ]
     },
     {
       "requirement_id": "DS-118",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-118-AC01",
+        "DS-118-AC02",
+        "DS-118-AC03"
+      ]
     },
     {
       "requirement_id": "DS-119",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-119-AC01",
+        "DS-119-AC02",
+        "DS-119-AC03"
+      ]
     },
     {
       "requirement_id": "DS-120",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-120-AC01",
+        "DS-120-AC02",
+        "DS-120-AC03"
+      ]
     },
     {
       "requirement_id": "DS-121",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-121-AC01",
+        "DS-121-AC02",
+        "DS-121-AC03"
+      ]
     },
     {
       "requirement_id": "DS-122",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-122-AC01",
+        "DS-122-AC02",
+        "DS-122-AC03"
+      ]
     },
     {
       "requirement_id": "DS-123",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-123-AC01",
+        "DS-123-AC02",
+        "DS-123-AC03"
+      ]
     },
     {
       "requirement_id": "DS-124",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-124-AC01",
+        "DS-124-AC02",
+        "DS-124-AC03"
+      ]
     },
     {
       "requirement_id": "DS-125",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-125-AC01",
+        "DS-125-AC02",
+        "DS-125-AC03"
+      ]
     },
     {
       "requirement_id": "DS-126",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-126-AC01",
+        "DS-126-AC02",
+        "DS-126-AC03"
+      ]
     },
     {
       "requirement_id": "DS-127",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-127-AC01",
+        "DS-127-AC02",
+        "DS-127-AC03"
+      ]
     },
     {
       "requirement_id": "DS-128",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-128-AC01",
+        "DS-128-AC02",
+        "DS-128-AC03"
+      ]
     },
     {
       "requirement_id": "DS-129",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-129-AC01",
+        "DS-129-AC02",
+        "DS-129-AC03"
+      ]
     },
     {
       "requirement_id": "DS-130",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-130-AC01",
+        "DS-130-AC02",
+        "DS-130-AC03"
+      ]
     },
     {
       "requirement_id": "DS-131",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-131-AC01",
+        "DS-131-AC02",
+        "DS-131-AC03"
+      ]
     },
     {
       "requirement_id": "DS-132",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-132-AC01",
+        "DS-132-AC02",
+        "DS-132-AC03"
+      ]
     },
     {
       "requirement_id": "DS-133",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-133-AC01",
+        "DS-133-AC02",
+        "DS-133-AC03"
+      ]
     },
     {
       "requirement_id": "DS-134",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-134-AC01",
+        "DS-134-AC02",
+        "DS-134-AC03"
+      ]
     },
     {
       "requirement_id": "DS-135",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-135-AC01",
+        "DS-135-AC02",
+        "DS-135-AC03"
+      ]
     },
     {
       "requirement_id": "DS-136",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-136-AC01",
+        "DS-136-AC02",
+        "DS-136-AC03"
+      ]
     },
     {
       "requirement_id": "DS-137",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-137-AC01",
+        "DS-137-AC02",
+        "DS-137-AC03"
+      ]
     },
     {
       "requirement_id": "DS-138",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-138-AC01",
+        "DS-138-AC02",
+        "DS-138-AC03"
+      ]
     },
     {
       "requirement_id": "DS-139",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-139-AC01",
+        "DS-139-AC02",
+        "DS-139-AC03"
+      ]
     },
     {
       "requirement_id": "DS-140",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-140-AC01",
+        "DS-140-AC02",
+        "DS-140-AC03"
+      ]
     },
     {
       "requirement_id": "DS-141",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-141-AC01",
+        "DS-141-AC02",
+        "DS-141-AC03"
+      ]
     },
     {
       "requirement_id": "DS-142",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-142-AC01",
+        "DS-142-AC02",
+        "DS-142-AC03"
+      ]
     },
     {
       "requirement_id": "DS-143",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-143-AC01",
+        "DS-143-AC02",
+        "DS-143-AC03"
+      ]
     },
     {
       "requirement_id": "DS-144",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-144-AC01",
+        "DS-144-AC02",
+        "DS-144-AC03"
+      ]
     },
     {
       "requirement_id": "DS-145",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-145-AC01",
+        "DS-145-AC02",
+        "DS-145-AC03"
+      ]
     },
     {
       "requirement_id": "DS-146",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-146-AC01",
+        "DS-146-AC02",
+        "DS-146-AC03"
+      ]
     },
     {
       "requirement_id": "DS-147",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-147-AC01",
+        "DS-147-AC02",
+        "DS-147-AC03"
+      ]
     },
     {
       "requirement_id": "DS-148",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-148-AC01",
+        "DS-148-AC02",
+        "DS-148-AC03"
+      ]
     },
     {
       "requirement_id": "DS-149",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-149-AC01",
+        "DS-149-AC02",
+        "DS-149-AC03"
+      ]
     },
     {
       "requirement_id": "DS-150",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-150-AC01",
+        "DS-150-AC02",
+        "DS-150-AC03"
+      ]
     },
     {
       "requirement_id": "DS-151",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-151-AC01",
+        "DS-151-AC02",
+        "DS-151-AC03"
+      ]
     },
     {
       "requirement_id": "DS-152",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-152-AC01",
+        "DS-152-AC02",
+        "DS-152-AC03"
+      ]
     },
     {
       "requirement_id": "DS-153",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-153-AC01",
+        "DS-153-AC02",
+        "DS-153-AC03"
+      ]
     },
     {
       "requirement_id": "DS-154",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-154-AC01",
+        "DS-154-AC02",
+        "DS-154-AC03"
+      ]
     },
     {
       "requirement_id": "DS-155",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-155-AC01",
+        "DS-155-AC02",
+        "DS-155-AC03"
+      ]
     },
     {
       "requirement_id": "DS-156",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-156-AC01",
+        "DS-156-AC02",
+        "DS-156-AC03"
+      ]
     },
     {
       "requirement_id": "DS-157",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-157-AC01",
+        "DS-157-AC02",
+        "DS-157-AC03"
+      ]
     },
     {
       "requirement_id": "DS-158",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-158-AC01",
+        "DS-158-AC02",
+        "DS-158-AC03"
+      ]
     },
     {
       "requirement_id": "DS-159",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-159-AC01",
+        "DS-159-AC02",
+        "DS-159-AC03"
+      ]
     },
     {
       "requirement_id": "DS-160",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-160-AC01",
+        "DS-160-AC02",
+        "DS-160-AC03"
+      ]
     },
     {
       "requirement_id": "DS-161",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-161-AC01",
+        "DS-161-AC02",
+        "DS-161-AC03"
+      ]
     },
     {
       "requirement_id": "DS-162",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-162-AC01",
+        "DS-162-AC02",
+        "DS-162-AC03"
+      ]
     },
     {
       "requirement_id": "DS-163",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-163-AC01",
+        "DS-163-AC02",
+        "DS-163-AC03"
+      ]
     },
     {
       "requirement_id": "DS-164",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-164-AC01",
+        "DS-164-AC02",
+        "DS-164-AC03"
+      ]
     },
     {
       "requirement_id": "DS-165",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-165-AC01",
+        "DS-165-AC02",
+        "DS-165-AC03"
+      ]
     },
     {
       "requirement_id": "DS-166",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-166-AC01",
+        "DS-166-AC02",
+        "DS-166-AC03"
+      ]
     },
     {
       "requirement_id": "DS-167",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-167-AC01",
+        "DS-167-AC02",
+        "DS-167-AC03"
+      ]
     },
     {
       "requirement_id": "DS-168",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-168-AC01",
+        "DS-168-AC02",
+        "DS-168-AC03"
+      ]
     },
     {
       "requirement_id": "DS-169",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-169-AC01",
+        "DS-169-AC02",
+        "DS-169-AC03"
+      ]
     },
     {
       "requirement_id": "DS-170",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-170-AC01",
+        "DS-170-AC02",
+        "DS-170-AC03"
+      ]
     },
     {
       "requirement_id": "DS-171",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-171-AC01",
+        "DS-171-AC02",
+        "DS-171-AC03"
+      ]
     },
     {
       "requirement_id": "DS-172",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-172-AC01",
+        "DS-172-AC02",
+        "DS-172-AC03"
+      ]
     },
     {
       "requirement_id": "DS-173",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-173-AC01",
+        "DS-173-AC02",
+        "DS-173-AC03"
+      ]
     },
     {
       "requirement_id": "DS-174",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-174-AC01",
+        "DS-174-AC02",
+        "DS-174-AC03"
+      ]
     },
     {
       "requirement_id": "DS-175",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-175-AC01",
+        "DS-175-AC02",
+        "DS-175-AC03"
+      ]
     },
     {
       "requirement_id": "DS-176",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-176-AC01",
+        "DS-176-AC02",
+        "DS-176-AC03"
+      ]
     },
     {
       "requirement_id": "DS-177",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-177-AC01",
+        "DS-177-AC02",
+        "DS-177-AC03"
+      ]
     },
     {
       "requirement_id": "DS-178",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-178-AC01",
+        "DS-178-AC02",
+        "DS-178-AC03"
+      ]
     },
     {
       "requirement_id": "DS-179",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-179-AC01",
+        "DS-179-AC02",
+        "DS-179-AC03"
+      ]
     },
     {
       "requirement_id": "DS-180",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-180-AC01",
+        "DS-180-AC02",
+        "DS-180-AC03"
+      ]
     },
     {
       "requirement_id": "DS-181",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-181-AC01",
+        "DS-181-AC02",
+        "DS-181-AC03"
+      ]
     },
     {
       "requirement_id": "DS-182",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-182-AC01",
+        "DS-182-AC02",
+        "DS-182-AC03"
+      ]
     },
     {
       "requirement_id": "DS-183",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-183-AC01",
+        "DS-183-AC02",
+        "DS-183-AC03"
+      ]
     },
     {
       "requirement_id": "DS-184",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-184-AC01",
+        "DS-184-AC02",
+        "DS-184-AC03"
+      ]
     },
     {
       "requirement_id": "DS-185",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-185-AC01",
+        "DS-185-AC02",
+        "DS-185-AC03"
+      ]
     },
     {
       "requirement_id": "DS-186",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-186-AC01",
+        "DS-186-AC02",
+        "DS-186-AC03"
+      ]
     },
     {
       "requirement_id": "DS-187",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-187-AC01",
+        "DS-187-AC02",
+        "DS-187-AC03"
+      ]
     },
     {
       "requirement_id": "DS-188",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-188-AC01",
+        "DS-188-AC02",
+        "DS-188-AC03"
+      ]
     },
     {
       "requirement_id": "DS-189",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-189-AC01",
+        "DS-189-AC02",
+        "DS-189-AC03"
+      ]
     },
     {
       "requirement_id": "DS-190",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-190-AC01",
+        "DS-190-AC02",
+        "DS-190-AC03"
+      ]
     },
     {
       "requirement_id": "DS-191",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-191-AC01",
+        "DS-191-AC02",
+        "DS-191-AC03"
+      ]
     },
     {
       "requirement_id": "DS-192",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-192-AC01",
+        "DS-192-AC02",
+        "DS-192-AC03"
+      ]
     },
     {
       "requirement_id": "DS-193",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-193-AC01",
+        "DS-193-AC02",
+        "DS-193-AC03"
+      ]
     },
     {
       "requirement_id": "DS-194",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-194-AC01",
+        "DS-194-AC02",
+        "DS-194-AC03"
+      ]
     },
     {
       "requirement_id": "DS-195",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-195-AC01",
+        "DS-195-AC02",
+        "DS-195-AC03"
+      ]
     },
     {
       "requirement_id": "DS-196",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "DS-196-AC01",
+        "DS-196-AC02",
+        "DS-196-AC03"
+      ]
     },
     {
       "requirement_id": "FR-001",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-001-AC01",
+        "FR-001-AC02",
+        "FR-001-AC03"
+      ]
     },
     {
       "requirement_id": "FR-002",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-002-AC01",
+        "FR-002-AC02",
+        "FR-002-AC03"
+      ]
     },
     {
       "requirement_id": "FR-003",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-003-AC01",
+        "FR-003-AC02",
+        "FR-003-AC03"
+      ]
     },
     {
       "requirement_id": "FR-004",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-004-AC01",
+        "FR-004-AC02",
+        "FR-004-AC03"
+      ]
     },
     {
       "requirement_id": "FR-005",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-005-AC01",
+        "FR-005-AC02",
+        "FR-005-AC03"
+      ]
     },
     {
       "requirement_id": "FR-006",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-006-AC01",
+        "FR-006-AC02",
+        "FR-006-AC03"
+      ]
     },
     {
       "requirement_id": "FR-007",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-007-AC01",
+        "FR-007-AC02",
+        "FR-007-AC03"
+      ]
     },
     {
       "requirement_id": "FR-008",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-008-AC01",
+        "FR-008-AC02",
+        "FR-008-AC03"
+      ]
     },
     {
       "requirement_id": "FR-009",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-009-AC01",
+        "FR-009-AC02",
+        "FR-009-AC03"
+      ]
     },
     {
       "requirement_id": "FR-010",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-010-AC01",
+        "FR-010-AC02",
+        "FR-010-AC03"
+      ]
     },
     {
       "requirement_id": "FR-011",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-011-AC01",
+        "FR-011-AC02",
+        "FR-011-AC03"
+      ]
     },
     {
       "requirement_id": "FR-012",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-012-AC01",
+        "FR-012-AC02",
+        "FR-012-AC03"
+      ]
     },
     {
       "requirement_id": "FR-013",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-013-AC01",
+        "FR-013-AC02",
+        "FR-013-AC03"
+      ]
     },
     {
       "requirement_id": "FR-014",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-014-AC01",
+        "FR-014-AC02",
+        "FR-014-AC03"
+      ]
     },
     {
       "requirement_id": "FR-015",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-015-AC01",
+        "FR-015-AC02",
+        "FR-015-AC03"
+      ]
     },
     {
       "requirement_id": "FR-016",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-016-AC01",
+        "FR-016-AC02",
+        "FR-016-AC03"
+      ]
     },
     {
       "requirement_id": "FR-BSDK-001",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-BSDK-001-AC01",
+        "FR-BSDK-001-AC02",
+        "FR-BSDK-001-AC03"
+      ]
     },
     {
       "requirement_id": "FR-BSDK-002",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-BSDK-002-AC01",
+        "FR-BSDK-002-AC02",
+        "FR-BSDK-002-AC03"
+      ]
     },
     {
       "requirement_id": "FR-BSDK-003",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-BSDK-003-AC01",
+        "FR-BSDK-003-AC02",
+        "FR-BSDK-003-AC03"
+      ]
     },
     {
       "requirement_id": "FR-BSDK-004",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-BSDK-004-AC01",
+        "FR-BSDK-004-AC02",
+        "FR-BSDK-004-AC03"
+      ]
     },
     {
       "requirement_id": "FR-BSDK-005",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-BSDK-005-AC01",
+        "FR-BSDK-005-AC02",
+        "FR-BSDK-005-AC03"
+      ]
     },
     {
       "requirement_id": "FR-BSDK-006",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-BSDK-006-AC01",
+        "FR-BSDK-006-AC02",
+        "FR-BSDK-006-AC03"
+      ]
     },
     {
       "requirement_id": "FR-BSDK-007",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-BSDK-007-AC01",
+        "FR-BSDK-007-AC02",
+        "FR-BSDK-007-AC03"
+      ]
     },
     {
       "requirement_id": "FR-BSDK-008",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "FR-BSDK-008-AC01",
+        "FR-BSDK-008-AC02",
+        "FR-BSDK-008-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-001",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-001-AC01",
+        "NFR-001-AC02",
+        "NFR-001-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-002",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-002-AC01",
+        "NFR-002-AC02",
+        "NFR-002-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-BSDK-001",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-BSDK-001-AC01",
+        "NFR-BSDK-001-AC02",
+        "NFR-BSDK-001-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-BSDK-002",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-BSDK-002-AC01",
+        "NFR-BSDK-002-AC02",
+        "NFR-BSDK-002-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-BSDK-003",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-BSDK-003-AC01",
+        "NFR-BSDK-003-AC02",
+        "NFR-BSDK-003-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-BSDK-004",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-BSDK-004-AC01",
+        "NFR-BSDK-004-AC02",
+        "NFR-BSDK-004-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-CO-001",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-CO-001-AC01",
+        "NFR-CO-001-AC02",
+        "NFR-CO-001-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-CO-002",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-CO-002-AC01",
+        "NFR-CO-002-AC02",
+        "NFR-CO-002-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-FL-001",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-FL-001-AC01",
+        "NFR-FL-001-AC02",
+        "NFR-FL-001-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-FL-002",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-FL-002-AC01",
+        "NFR-FL-002-AC02",
+        "NFR-FL-002-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-IC-001",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-IC-001-AC01",
+        "NFR-IC-001-AC02",
+        "NFR-IC-001-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-MA-001",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-MA-001-AC01",
+        "NFR-MA-001-AC02",
+        "NFR-MA-001-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-MA-002",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-MA-002-AC01",
+        "NFR-MA-002-AC02",
+        "NFR-MA-002-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-MA-003",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-MA-003-AC01",
+        "NFR-MA-003-AC02",
+        "NFR-MA-003-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-MA-004",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-MA-004-AC01",
+        "NFR-MA-004-AC02",
+        "NFR-MA-004-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-PE-001",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-PE-001-AC01",
+        "NFR-PE-001-AC02",
+        "NFR-PE-001-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-RE-001",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-RE-001-AC01",
+        "NFR-RE-001-AC02",
+        "NFR-RE-001-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-RE-002",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-RE-002-AC01",
+        "NFR-RE-002-AC02",
+        "NFR-RE-002-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-RE-003",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-RE-003-AC01",
+        "NFR-RE-003-AC02",
+        "NFR-RE-003-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-SA-001",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-SA-001-AC01",
+        "NFR-SA-001-AC02",
+        "NFR-SA-001-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-SA-002",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-SA-002-AC01",
+        "NFR-SA-002-AC02",
+        "NFR-SA-002-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-SE-001",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-SE-001-AC01",
+        "NFR-SE-001-AC02",
+        "NFR-SE-001-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-SE-002",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-SE-002-AC01",
+        "NFR-SE-002-AC02",
+        "NFR-SE-002-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-SE-003",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-SE-003-AC01",
+        "NFR-SE-003-AC02",
+        "NFR-SE-003-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-SE-004",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-SE-004-AC01",
+        "NFR-SE-004-AC02",
+        "NFR-SE-004-AC03"
+      ]
     },
     {
       "requirement_id": "NFR-SE-005",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "NFR-SE-005-AC01",
+        "NFR-SE-005-AC02",
+        "NFR-SE-005-AC03"
+      ]
     },
     {
       "requirement_id": "SPID-FR-001",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "SPID-FR-001-AC01",
+        "SPID-FR-001-AC02",
+        "SPID-FR-001-AC03"
+      ]
     },
     {
       "requirement_id": "SPID-FR-002",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "SPID-FR-002-AC01",
+        "SPID-FR-002-AC02",
+        "SPID-FR-002-AC03"
+      ]
     },
     {
       "requirement_id": "SPID-FR-003",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "SPID-FR-003-AC01",
+        "SPID-FR-003-AC02",
+        "SPID-FR-003-AC03"
+      ]
     },
     {
       "requirement_id": "SPID-FR-004",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "SPID-FR-004-AC01",
+        "SPID-FR-004-AC02",
+        "SPID-FR-004-AC03"
+      ]
     },
     {
       "requirement_id": "SPID-FR-005",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "SPID-FR-005-AC01",
+        "SPID-FR-005-AC02",
+        "SPID-FR-005-AC03"
+      ]
     },
     {
       "requirement_id": "SPID-FR-006",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "SPID-FR-006-AC01",
+        "SPID-FR-006-AC02",
+        "SPID-FR-006-AC03"
+      ]
     },
     {
       "requirement_id": "SPID-FR-007",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "SPID-FR-007-AC01",
+        "SPID-FR-007-AC02",
+        "SPID-FR-007-AC03"
+      ]
     },
     {
       "requirement_id": "SPID-FR-008",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "SPID-FR-008-AC01",
+        "SPID-FR-008-AC02",
+        "SPID-FR-008-AC03"
+      ]
     },
     {
       "requirement_id": "SPID-FR-009",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "SPID-FR-009-AC01",
+        "SPID-FR-009-AC02",
+        "SPID-FR-009-AC03"
+      ]
     },
     {
       "requirement_id": "SPID-FR-010",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "SPID-FR-010-AC01",
+        "SPID-FR-010-AC02",
+        "SPID-FR-010-AC03"
+      ]
     },
     {
       "requirement_id": "SPID-FR-011",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "SPID-FR-011-AC01",
+        "SPID-FR-011-AC02",
+        "SPID-FR-011-AC03"
+      ]
     },
     {
       "requirement_id": "SPID-FR-012",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "SPID-FR-012-AC01",
+        "SPID-FR-012-AC02",
+        "SPID-FR-012-AC03"
+      ]
     },
     {
       "requirement_id": "SPID-FR-013",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "SPID-FR-013-AC01",
+        "SPID-FR-013-AC02",
+        "SPID-FR-013-AC03"
+      ]
     },
     {
       "requirement_id": "SPID-FR-014",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "SPID-FR-014-AC01",
+        "SPID-FR-014-AC02",
+        "SPID-FR-014-AC03"
+      ]
     },
     {
       "requirement_id": "SPID-FR-015",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "SPID-FR-015-AC01",
+        "SPID-FR-015-AC02",
+        "SPID-FR-015-AC03"
+      ]
     },
     {
       "requirement_id": "SPID-FR-016",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "SPID-FR-016-AC01",
+        "SPID-FR-016-AC02",
+        "SPID-FR-016-AC03"
+      ]
     },
     {
       "requirement_id": "SPID-NFR-001",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "SPID-NFR-001-AC01",
+        "SPID-NFR-001-AC02",
+        "SPID-NFR-001-AC03"
+      ]
     },
     {
       "requirement_id": "SPID-NFR-002",
       "seed_profile_id": "generic-healthcare-tenant",
-      "seeded_scope": "tenant, role, care-setting, and policy profile evidence"
+      "seeded_scope": "tenant, role, care-setting, and policy profile evidence",
+      "acceptance_criteria_ids": [
+        "SPID-NFR-002-AC01",
+        "SPID-NFR-002-AC02",
+        "SPID-NFR-002-AC03"
+      ]
     }
   ]
 }
