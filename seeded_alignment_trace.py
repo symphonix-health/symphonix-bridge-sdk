@@ -278,7 +278,11 @@ REQUIREMENT_IDS = [
 ]
 EVIDENCE_PATHS = {
     "specification_paths": [
-        "docs/specifications/seeded-requirement-traceability.md"
+        "docs/specifications/seeded-requirement-traceability.md",
+        "docs/specifications/functional-requirements.md",
+        "docs/specifications/non-functional-requirements.md",
+        "docs/specifications/design-specification.md",
+        "docs/specifications/architecture-specification.md"
     ],
     "use_case_paths": [
         "tests/harness/reduced_json_matrices/seeded_alignment_trace.14col.json"
@@ -299,13 +303,16 @@ EVIDENCE_PATHS = {
         "src/bridge_sdk/adapters/kafka_adapter.py"
     ],
     "test_paths": [
-        "tests/test_seeded_alignment_traceability.py"
+        "tests/test_seeded_alignment_traceability.py",
+        "tests/test_specification_alignment.py"
     ],
     "seed_paths": [
         "seed_data/seeded_requirement_traceability.json"
     ],
     "documentation_paths": [
-        "docs/architecture-setup-operations-testing-seeding.md"
+        "docs/architecture-setup-operations-testing-seeding.md",
+        "docs/specifications/architecture-specification.md",
+        "docs/specifications/design-specification.md"
     ]
 }
 TRACEABILITY = {requirement_id: EVIDENCE_PATHS for requirement_id in REQUIREMENT_IDS}
