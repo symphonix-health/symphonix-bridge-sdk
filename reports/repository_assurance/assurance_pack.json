@@ -1,0 +1,435 @@
+{
+  "domain_results": [
+    {
+      "evidence_paths": [
+        "tests/harness/requirements_matrix.json",
+        "tests/harness/healthcare_requirements_superset.json",
+        "docs/specifications/functional-requirements.md",
+        "docs/specifications/non-functional-requirements.md"
+      ],
+      "gap_count": 0,
+      "metrics": {
+        "functional": 192,
+        "non_functional": 54,
+        "requirements": 266
+      },
+      "name": "requirements_completeness",
+      "status": "PASS"
+    },
+    {
+      "evidence_paths": [
+        "tests/harness/requirements_matrix.json",
+        "docs/specifications/seeded-requirement-traceability.md",
+        "tests/harness/reduced_json_matrices/*.14col.json"
+      ],
+      "gap_count": 0,
+      "metrics": {
+        "matrix_rows": 466,
+        "requirements_total": 266,
+        "requirements_traced": 266
+      },
+      "name": "requirements_traceability",
+      "status": "PASS"
+    },
+    {
+      "evidence_paths": [
+        "tests/harness/reduced_json_matrices/*.14col.json",
+        "tests/harness/requirements_matrix.json"
+      ],
+      "gap_count": 0,
+      "metrics": {
+        "scenario_categories": [
+          "edge",
+          "negative",
+          "positive"
+        ],
+        "use_cases": 466
+      },
+      "name": "canonical_use_case_alignment",
+      "status": "PASS"
+    },
+    {
+      "evidence_paths": [
+        "seeded_alignment_trace.py",
+        "seed_data/seeded_requirement_traceability.json",
+        "docs/specifications/design-specification.md"
+      ],
+      "gap_count": 0,
+      "metrics": {
+        "service_evidence_policy": "library_or_protocol",
+        "service_paths": [
+          "src"
+        ]
+      },
+      "name": "implementation_alignment",
+      "status": "PASS"
+    },
+    {
+      "evidence_paths": [
+        "tests/test_requirement_acceptance_alignment.py",
+        "tests/test_specification_alignment.py",
+        "tests/test_acceptance_alignment.py",
+        "tests/harness/reduced_json_matrices/*.14col.json"
+      ],
+      "gap_count": 1,
+      "metrics": {
+        "matrix_rows": 466,
+        "scenario_execution_status": "BLOCKED",
+        "scenario_rows_passed": 0,
+        "test_files": 24
+      },
+      "name": "testing_completeness",
+      "status": "BLOCKED"
+    },
+    {
+      "evidence_paths": [
+        "README.md",
+        "docs/specifications"
+      ],
+      "gap_count": 7,
+      "metrics": {
+        "sections": {
+          "architecture": true,
+          "configuration": false,
+          "dependencies": true,
+          "deployment": false,
+          "environment variables": false,
+          "installation": true,
+          "links to specifications": false,
+          "purpose": false,
+          "running locally": false,
+          "testing": true,
+          "troubleshooting": false
+        }
+      },
+      "name": "documentation_completeness",
+      "status": "BLOCKED"
+    },
+    {
+      "evidence_paths": [
+        "tests/harness/healthcare_requirements_superset.json",
+        "tests/harness/requirements_matrix.json",
+        "docs/specifications"
+      ],
+      "gap_count": 2,
+      "metrics": {
+        "baseline_domains": [
+          "un_sdg3_uhc_equity",
+          "who_digital_health_governance",
+          "interoperability_and_standards",
+          "privacy_security_consent",
+          "clinical_safety_and_quality",
+          "public_health_resilience",
+          "workforce_and_operational_readiness",
+          "accessibility_and_inclusion",
+          "country_configurability"
+        ],
+        "capabilities": {
+          "audit": true,
+          "care_coordination": true,
+          "claims_billing": true,
+          "clinical_records": true,
+          "consent": true,
+          "identity_management": true,
+          "interoperability": true,
+          "orders": true,
+          "patient_administration": true,
+          "referrals": false,
+          "reporting": true,
+          "results": true,
+          "scheduling": true,
+          "security": true
+        },
+        "care_settings": {
+          "clinics": true,
+          "community_care": true,
+          "hospitals": true,
+          "laboratories": true,
+          "payers": true,
+          "pharmacies": true,
+          "public_health": true,
+          "telehealth": true
+        },
+        "standards": {
+          "gdpr": true,
+          "hipaa": true,
+          "hl7_fhir": true,
+          "icd_10_11": true,
+          "openhie": false,
+          "snomed": true
+        }
+      },
+      "name": "healthcare_superset_validation",
+      "status": "BLOCKED"
+    },
+    {
+      "evidence_paths": [
+        "seed_data",
+        "seeded_alignment_trace.py",
+        "tests/harness/persona_journeys",
+        "tests/harness/browser_states",
+        "tests/harness/signalbox"
+      ],
+      "gap_count": 1,
+      "metrics": {
+        "browser_states": false,
+        "fixtures_or_factories": true,
+        "personas": true,
+        "roles_permissions": true,
+        "seed_data": true,
+        "seeded_trace": true,
+        "signalbox": true
+      },
+      "name": "repository_seeding_completion",
+      "status": "BLOCKED"
+    }
+  ],
+  "gaps": [
+    {
+      "acceptance_criteria_ids": [],
+      "blocking": true,
+      "domain": "testing_completeness",
+      "evidence_checked": [
+        "reports/repository_assurance/scenario_execution.json",
+        "tests/harness/reduced_json_matrices/*.14col.json"
+      ],
+      "fpfn_decision": "requires_review",
+      "gap_id": "GAP-SYMPHONIX_BRIDGE_SDK-001",
+      "remediation_owner": "repo-owner",
+      "requirement_ids": [],
+      "title": "Canonical scenario matrix execution evidence is incomplete",
+      "use_case_ids": [
+        "compliance-policy_scenarios.14col-compliance-policy_scenarios-compliance_policy_EDG_0096",
+        "compliance-policy_scenarios.14col-compliance-policy_scenarios-compliance_policy_EDG_0097",
+        "compliance-policy_scenarios.14col-compliance-policy_scenarios-compliance_policy_EDG_0098",
+        "compliance-policy_scenarios.14col-compliance-policy_scenarios-compliance_policy_EDG_0099",
+        "compliance-policy_scenarios.14col-compliance-policy_scenarios-compliance_policy_EDG_0100",
+        "compliance-policy_scenarios.14col-compliance-policy_scenarios-compliance_policy_NEG_0086",
+        "compliance-policy_scenarios.14col-compliance-policy_scenarios-compliance_policy_NEG_0087",
+        "compliance-policy_scenarios.14col-compliance-policy_scenarios-compliance_policy_NEG_0088",
+        "compliance-policy_scenarios.14col-compliance-policy_scenarios-compliance_policy_NEG_0089",
+        "compliance-policy_scenarios.14col-compliance-policy_scenarios-compliance_policy_NEG_0090",
+        "compliance-policy_scenarios.14col-compliance-policy_scenarios-compliance_policy_NEG_0091",
+        "compliance-policy_scenarios.14col-compliance-policy_scenarios-compliance_policy_NEG_0092",
+        "compliance-policy_scenarios.14col-compliance-policy_scenarios-compliance_policy_NEG_0093",
+        "compliance-policy_scenarios.14col-compliance-policy_scenarios-compliance_policy_NEG_0094",
+        "compliance-policy_scenarios.14col-compliance-policy_scenarios-compliance_policy_NEG_0095",
+        "compliance-policy_scenarios.14col-compliance-policy_scenarios-compliance_policy_POS_0001",
+        "compliance-policy_scenarios.14col-compliance-policy_scenarios-compliance_policy_POS_0002",
+        "compliance-policy_scenarios.14col-compliance-policy_scenarios-compliance_policy_POS_0003",
+        "compliance-policy_scenarios.14col-compliance-policy_scenarios-compliance_policy_POS_0004",
+        "compliance-policy_scenarios.14col-compliance-policy_scenarios-compliance_policy_POS_0005"
+      ]
+    },
+    {
+      "acceptance_criteria_ids": [],
+      "blocking": true,
+      "domain": "documentation_completeness",
+      "evidence_checked": [
+        "README.md",
+        "docs/specifications"
+      ],
+      "fpfn_decision": "requires_review",
+      "gap_id": "GAP-SYMPHONIX_BRIDGE_SDK-002",
+      "remediation_owner": "repo-owner",
+      "requirement_ids": [],
+      "title": "README missing required section or link: purpose",
+      "use_case_ids": []
+    },
+    {
+      "acceptance_criteria_ids": [],
+      "blocking": true,
+      "domain": "documentation_completeness",
+      "evidence_checked": [
+        "README.md",
+        "docs/specifications"
+      ],
+      "fpfn_decision": "requires_review",
+      "gap_id": "GAP-SYMPHONIX_BRIDGE_SDK-003",
+      "remediation_owner": "repo-owner",
+      "requirement_ids": [],
+      "title": "README missing required section or link: configuration",
+      "use_case_ids": []
+    },
+    {
+      "acceptance_criteria_ids": [],
+      "blocking": true,
+      "domain": "documentation_completeness",
+      "evidence_checked": [
+        "README.md",
+        "docs/specifications"
+      ],
+      "fpfn_decision": "requires_review",
+      "gap_id": "GAP-SYMPHONIX_BRIDGE_SDK-004",
+      "remediation_owner": "repo-owner",
+      "requirement_ids": [],
+      "title": "README missing required section or link: environment variables",
+      "use_case_ids": []
+    },
+    {
+      "acceptance_criteria_ids": [],
+      "blocking": true,
+      "domain": "documentation_completeness",
+      "evidence_checked": [
+        "README.md",
+        "docs/specifications"
+      ],
+      "fpfn_decision": "requires_review",
+      "gap_id": "GAP-SYMPHONIX_BRIDGE_SDK-005",
+      "remediation_owner": "repo-owner",
+      "requirement_ids": [],
+      "title": "README missing required section or link: running locally",
+      "use_case_ids": []
+    },
+    {
+      "acceptance_criteria_ids": [],
+      "blocking": true,
+      "domain": "documentation_completeness",
+      "evidence_checked": [
+        "README.md",
+        "docs/specifications"
+      ],
+      "fpfn_decision": "requires_review",
+      "gap_id": "GAP-SYMPHONIX_BRIDGE_SDK-006",
+      "remediation_owner": "repo-owner",
+      "requirement_ids": [],
+      "title": "README missing required section or link: deployment",
+      "use_case_ids": []
+    },
+    {
+      "acceptance_criteria_ids": [],
+      "blocking": true,
+      "domain": "documentation_completeness",
+      "evidence_checked": [
+        "README.md",
+        "docs/specifications"
+      ],
+      "fpfn_decision": "requires_review",
+      "gap_id": "GAP-SYMPHONIX_BRIDGE_SDK-007",
+      "remediation_owner": "repo-owner",
+      "requirement_ids": [],
+      "title": "README missing required section or link: troubleshooting",
+      "use_case_ids": []
+    },
+    {
+      "acceptance_criteria_ids": [],
+      "blocking": true,
+      "domain": "documentation_completeness",
+      "evidence_checked": [
+        "README.md",
+        "docs/specifications"
+      ],
+      "fpfn_decision": "requires_review",
+      "gap_id": "GAP-SYMPHONIX_BRIDGE_SDK-008",
+      "remediation_owner": "repo-owner",
+      "requirement_ids": [],
+      "title": "README missing required section or link: links to specifications",
+      "use_case_ids": []
+    },
+    {
+      "acceptance_criteria_ids": [],
+      "blocking": true,
+      "domain": "healthcare_superset_validation",
+      "evidence_checked": [
+        "tests/harness/healthcare_requirements_superset.json",
+        "tests/harness/requirements_matrix.json",
+        "docs/specifications"
+      ],
+      "fpfn_decision": "requires_review",
+      "gap_id": "GAP-SYMPHONIX_BRIDGE_SDK-009",
+      "remediation_owner": "repo-owner",
+      "requirement_ids": [],
+      "title": "Healthcare capability coverage evidence is incomplete",
+      "use_case_ids": []
+    },
+    {
+      "acceptance_criteria_ids": [],
+      "blocking": true,
+      "domain": "healthcare_superset_validation",
+      "evidence_checked": [
+        "tests/harness/healthcare_requirements_superset.json",
+        "tests/harness/requirements_matrix.json",
+        "docs/specifications"
+      ],
+      "fpfn_decision": "requires_review",
+      "gap_id": "GAP-SYMPHONIX_BRIDGE_SDK-010",
+      "remediation_owner": "repo-owner",
+      "requirement_ids": [],
+      "title": "Healthcare standard or regulatory evidence is incomplete",
+      "use_case_ids": []
+    },
+    {
+      "acceptance_criteria_ids": [],
+      "blocking": true,
+      "domain": "repository_seeding_completion",
+      "evidence_checked": [
+        "seed_data",
+        "seeded_alignment_trace.py",
+        "tests/harness/persona_journeys",
+        "tests/harness/browser_states",
+        "tests/harness/signalbox"
+      ],
+      "fpfn_decision": "requires_review",
+      "gap_id": "GAP-SYMPHONIX_BRIDGE_SDK-011",
+      "remediation_owner": "repo-owner",
+      "requirement_ids": [],
+      "title": "Seeding evidence missing or not discoverable: browser_states",
+      "use_case_ids": []
+    },
+    {
+      "acceptance_criteria_ids": [],
+      "blocking": true,
+      "domain": "testing_completeness",
+      "evidence_checked": [
+        "pytest",
+        "CAID FP/FN",
+        "seeding alignment gate"
+      ],
+      "fpfn_decision": "requires_review",
+      "gap_id": "GAP-SYMPHONIX_BRIDGE_SDK-012",
+      "remediation_owner": "repo-owner",
+      "requirement_ids": [],
+      "title": "Required runtime verification command failed",
+      "use_case_ids": []
+    }
+  ],
+  "generated_at": "2026-06-07T10:42:05Z",
+  "repo": "symphonix-bridge-sdk",
+  "repo_path": "C:\\Users\\hgeec\\github\\symphonix-bridge-sdk",
+  "runtime_gates": {
+    "commands": [
+      {
+        "command": "python -m pytest tests/test_requirement_acceptance_alignment.py tests/test_specification_alignment.py -q",
+        "cwd": "C:\\Users\\hgeec\\github\\symphonix-bridge-sdk",
+        "exit_code": 0,
+        "stderr_tail": "",
+        "stdout_tail": "..........                                                               [100%]\n10 passed in 0.37s\n"
+      },
+      {
+        "command": "python -m caid.cli fpfn-audit --repo C:\\Users\\hgeec\\github\\symphonix-bridge-sdk --format text --fail-on none",
+        "cwd": "C:\\Users\\hgeec\\github\\caid-agent",
+        "exit_code": 0,
+        "stderr_tail": "",
+        "stdout_tail": "FP/FN audit: C:\\Users\\hgeec\\github\\symphonix-bridge-sdk\nVerdict: PASS\nCounts: {'PASS': 2, 'FAIL': 0, 'PARTIAL': 0, 'BLOCKED': 0}\n\n- PASS package bridge_sdk (active)\n  direct_tests: tests/test_agent_arena.py, tests/test_agent_audit.py, tests/test_agent_contract.py, tests/test_clinical_safety_case.py, tests/test_concurrency.py, tests/test_consent_projection.py, tests/test_error_envelope.py, tests/test_execution_ledger.py, tests/test_gharra_registration.py, tests/test_human_handoff.py, tests/test_observability.py, tests/test_patient_identity.py, tests/test_persona_delegation.py, tests/test_rollout.py, tests/test_smoke_import.py, tests/test_telemetry_schema.py\n  notes: direct component-matched test evidence found\n- PASS package symphonix_bridge_sdk (active)\n  direct_tests: tests/test_observability.py, tests/test_smoke_import.py\n  notes: direct component-matched test evidence found\n"
+      },
+      {
+        "command": "python C:\\Users\\hgeec\\github\\caid-agent\\scripts\\check_seeding_alignment.py --project-dir C:\\Users\\hgeec\\github\\symphonix-bridge-sdk --report-dir C:\\Users\\hgeec\\github\\symphonix-bridge-sdk\\reports",
+        "cwd": "C:\\Users\\hgeec\\github\\symphonix-bridge-sdk",
+        "exit_code": 1,
+        "stderr_tail": "",
+        "stdout_tail": "[SEEDING-ALIGNMENT-GATE] decision=FAIL\n[SEEDING-ALIGNMENT-GATE] functional_testing_permitted=NO\n[SEEDING-ALIGNMENT-GATE] rationale=One or more rows flagged ORPHAN / MISSING -- requirement, spec, use-case, and seed must be aligned before functional testing fires.\n[SEEDING-ALIGNMENT-GATE] rows=466 blocking=254 orphan_seed=0 missing_seed=0 partial_seeding=0\n[SEEDING-ALIGNMENT-GATE] Functional testing is blocked because the Seeding Alignment Gate has not passed.\n"
+      }
+    ],
+    "status": "BLOCKED"
+  },
+  "scenario_execution_status": "BLOCKED",
+  "schema_version": "SH_REPOSITORY_ASSURANCE_PACK_V1",
+  "service_evidence_policy": "library_or_protocol",
+  "summary": {
+    "gap_count": 12,
+    "matrix_files": 3,
+    "matrix_rows": 466,
+    "requirements": 266
+  },
+  "verdict": "BLOCKED"
+}
