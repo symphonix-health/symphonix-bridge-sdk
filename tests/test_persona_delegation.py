@@ -3,6 +3,7 @@
 Uses a REAL RSA keypair (cryptography lib) + REAL PyJWT sign/verify -- no mocks.
 Skips honestly if PyJWT or cryptography are absent in the interpreter.
 """
+
 from __future__ import annotations
 
 import importlib.util
@@ -66,6 +67,7 @@ def _claims(**over) -> PersonaTokenClaims:
 
 # ---- FR-ID-002: scope unification --------------------------------------
 
+
 def test_unify_scope_maps_legacy_gharra_scopes() -> None:
     assert unify_scope("gharra:read") is PersonaScope.api_read
     assert unify_scope("gharra:*") is PersonaScope.api_write
@@ -79,40 +81,58 @@ def test_unify_scope_rejects_unknown_scope() -> None:
 
 # ---- FR-ID-001: mint carries all six bindings + TTL --------------------
 
+
 def test_minted_token_carries_all_six_bindings(rsa_keys) -> None:
     priv, pub = rsa_keys
     tok = mint_persona_token(
-        _claims(), private_key=priv, algorithm="RS256",
-        issued_at=NOW, ttl_seconds=300,
+        _claims(
+            token_id="jti-test-1",
+            contract_id="spc-doctor-ie-test",
+            contract_version="1.0.0",
+        ),
+        private_key=priv,
+        algorithm="RS256",
+        issued_at=NOW,
+        ttl_seconds=300,
     )
     payload = verify_persona_token(tok.jwt, public_key=pub, now=NOW + 10)
     assert payload["persona"] == "triage-intake-agent"
-    assert payload["patient_context"] == "Patient/123"           # 1
-    assert payload["purpose_of_use"] == "treatment"              # 2
+    assert payload["patient_context"] == "Patient/123"  # 1
+    assert payload["purpose_of_use"] == "treatment"  # 2
     assert payload["allowed_systems"] == ["triage-api", "appointment-system"]  # 3
-    assert payload["max_concurrency"] == 3                       # 4
-    assert payload["emergency"] is False                         # 5
-    assert payload["scope"] == "api:read task:execute"           # 6
-    assert payload["act"] == {"sub": "user-clinician-1"}         # RFC 8693 delegation
-    assert payload["exp"] == NOW + 300                           # short-lived TTL
+    assert payload["max_concurrency"] == 3  # 4
+    assert payload["emergency"] is False  # 5
+    assert payload["scope"] == "api:read task:execute"  # 6
+    assert payload["act"] == {"sub": "user-clinician-1"}  # RFC 8693 delegation
+    assert payload["jti"] == "jti-test-1"
+    assert payload["contract_id"] == "spc-doctor-ie-test"
+    assert payload["contract_version"] == "1.0.0"
+    assert payload["exp"] == NOW + 300  # short-lived TTL
 
 
 def test_zero_ttl_rejected(rsa_keys) -> None:
     priv, _ = rsa_keys
     with pytest.raises(DelegationError):
         mint_persona_token(
-            _claims(), private_key=priv, algorithm="RS256",
-            issued_at=NOW, ttl_seconds=0,
+            _claims(),
+            private_key=priv,
+            algorithm="RS256",
+            issued_at=NOW,
+            ttl_seconds=0,
         )
 
 
 # ---- FR-ID + NFR-ID-002: asymmetric-only (HS256 refused) ---------------
 
+
 def test_mint_refuses_hs256() -> None:
     with pytest.raises(DelegationError):
         mint_persona_token(
-            _claims(), private_key=b"symmetric-secret", algorithm="HS256",
-            issued_at=NOW, ttl_seconds=300,
+            _claims(),
+            private_key=b"symmetric-secret",
+            algorithm="HS256",
+            issued_at=NOW,
+            ttl_seconds=300,
         )
 
 
@@ -125,8 +145,11 @@ def test_allowed_algorithms_exclude_symmetric_and_none() -> None:
 def test_verify_refuses_to_accept_symmetric_algorithm(rsa_keys) -> None:
     priv, pub = rsa_keys
     tok = mint_persona_token(
-        _claims(), private_key=priv, algorithm="RS256",
-        issued_at=NOW, ttl_seconds=300,
+        _claims(),
+        private_key=priv,
+        algorithm="RS256",
+        issued_at=NOW,
+        ttl_seconds=300,
     )
     with pytest.raises(DelegationError):
         verify_persona_token(tok.jwt, public_key=pub, algorithms=["HS256"], now=NOW + 1)
@@ -134,27 +157,39 @@ def test_verify_refuses_to_accept_symmetric_algorithm(rsa_keys) -> None:
 
 # ---- FR-ID-003: high-risk requires DPoP/mTLS ---------------------------
 
+
 def test_high_risk_requires_binding(rsa_keys) -> None:
     priv, _ = rsa_keys
     with pytest.raises(DelegationError):
         mint_persona_token(
-            _claims(), private_key=priv, algorithm="RS256",
-            issued_at=NOW, ttl_seconds=300,
-            binding=TokenBindingType.none, high_risk=True,
+            _claims(),
+            private_key=priv,
+            algorithm="RS256",
+            issued_at=NOW,
+            ttl_seconds=300,
+            binding=TokenBindingType.none,
+            high_risk=True,
         )
 
 
 def test_mtls_binding_roundtrip_matches_cnf(rsa_keys) -> None:
     priv, pub = rsa_keys
     tok = mint_persona_token(
-        _claims(), private_key=priv, algorithm="RS256",
-        issued_at=NOW, ttl_seconds=300,
+        _claims(),
+        private_key=priv,
+        algorithm="RS256",
+        issued_at=NOW,
+        ttl_seconds=300,
         binding=TokenBindingType.mtls_cnf_x5t_s256,
-        cert_thumbprint="THUMB-abc", high_risk=True,
+        cert_thumbprint="THUMB-abc",
+        high_risk=True,
     )
     assert tok.cnf == {"x5t#S256": "THUMB-abc"}
     payload = verify_persona_token(
-        tok.jwt, public_key=pub, now=NOW + 5, cert_thumbprint="THUMB-abc",
+        tok.jwt,
+        public_key=pub,
+        now=NOW + 5,
+        cert_thumbprint="THUMB-abc",
         require_binding=True,
     )
     assert payload["cnf"]["x5t#S256"] == "THUMB-abc"
@@ -163,14 +198,21 @@ def test_mtls_binding_roundtrip_matches_cnf(rsa_keys) -> None:
 def test_mtls_binding_rejects_wrong_thumbprint(rsa_keys) -> None:
     priv, pub = rsa_keys
     tok = mint_persona_token(
-        _claims(), private_key=priv, algorithm="RS256",
-        issued_at=NOW, ttl_seconds=300,
+        _claims(),
+        private_key=priv,
+        algorithm="RS256",
+        issued_at=NOW,
+        ttl_seconds=300,
         binding=TokenBindingType.mtls_cnf_x5t_s256,
-        cert_thumbprint="THUMB-abc", high_risk=True,
+        cert_thumbprint="THUMB-abc",
+        high_risk=True,
     )
     with pytest.raises(DelegationError):  # confused-deputy / stolen-token
         verify_persona_token(
-            tok.jwt, public_key=pub, now=NOW + 5, cert_thumbprint="THUMB-WRONG",
+            tok.jwt,
+            public_key=pub,
+            now=NOW + 5,
+            cert_thumbprint="THUMB-WRONG",
         )
 
 
@@ -178,8 +220,11 @@ def test_mtls_binding_requires_material_at_mint(rsa_keys) -> None:
     priv, _ = rsa_keys
     with pytest.raises(DelegationError):
         mint_persona_token(
-            _claims(), private_key=priv, algorithm="RS256",
-            issued_at=NOW, ttl_seconds=300,
+            _claims(),
+            private_key=priv,
+            algorithm="RS256",
+            issued_at=NOW,
+            ttl_seconds=300,
             binding=TokenBindingType.mtls_cnf_x5t_s256,  # no cert_thumbprint
         )
 
@@ -187,24 +232,37 @@ def test_mtls_binding_requires_material_at_mint(rsa_keys) -> None:
 def test_dpop_binding_roundtrip(rsa_keys) -> None:
     priv, pub = rsa_keys
     tok = mint_persona_token(
-        _claims(), private_key=priv, algorithm="RS256",
-        issued_at=NOW, ttl_seconds=300,
-        binding=TokenBindingType.dpop, dpop_jkt="JKT-xyz", high_risk=True,
+        _claims(),
+        private_key=priv,
+        algorithm="RS256",
+        issued_at=NOW,
+        ttl_seconds=300,
+        binding=TokenBindingType.dpop,
+        dpop_jkt="JKT-xyz",
+        high_risk=True,
     )
     assert tok.cnf == {"jkt": "JKT-xyz"}
     payload = verify_persona_token(
-        tok.jwt, public_key=pub, now=NOW + 5, dpop_jkt="JKT-xyz", require_binding=True,
+        tok.jwt,
+        public_key=pub,
+        now=NOW + 5,
+        dpop_jkt="JKT-xyz",
+        require_binding=True,
     )
     assert payload["cnf"]["jkt"] == "JKT-xyz"
 
 
 # ---- NFR-ID-001: fail-closed (expiry, replay, missing binding) ---------
 
+
 def test_expired_token_rejected(rsa_keys) -> None:
     priv, pub = rsa_keys
     tok = mint_persona_token(
-        _claims(), private_key=priv, algorithm="RS256",
-        issued_at=NOW, ttl_seconds=300,
+        _claims(),
+        private_key=priv,
+        algorithm="RS256",
+        issued_at=NOW,
+        ttl_seconds=300,
     )
     with pytest.raises(DelegationError):
         verify_persona_token(tok.jwt, public_key=pub, now=NOW + 301)  # past exp
@@ -213,8 +271,12 @@ def test_expired_token_rejected(rsa_keys) -> None:
 def test_require_binding_rejects_unbound_token(rsa_keys) -> None:
     priv, pub = rsa_keys
     tok = mint_persona_token(
-        _claims(), private_key=priv, algorithm="RS256",
-        issued_at=NOW, ttl_seconds=300, binding=TokenBindingType.none,
+        _claims(),
+        private_key=priv,
+        algorithm="RS256",
+        issued_at=NOW,
+        ttl_seconds=300,
+        binding=TokenBindingType.none,
     )
     with pytest.raises(DelegationError):
         verify_persona_token(tok.jwt, public_key=pub, now=NOW + 5, require_binding=True)
@@ -223,8 +285,11 @@ def test_require_binding_rejects_unbound_token(rsa_keys) -> None:
 def test_tampered_token_rejected(rsa_keys) -> None:
     priv, pub = rsa_keys
     tok = mint_persona_token(
-        _claims(), private_key=priv, algorithm="RS256",
-        issued_at=NOW, ttl_seconds=300,
+        _claims(),
+        private_key=priv,
+        algorithm="RS256",
+        issued_at=NOW,
+        ttl_seconds=300,
     )
     # Flip a character in the signature segment.
     head, payload_seg, sig = tok.jwt.split(".")
@@ -236,5 +301,7 @@ def test_tampered_token_rejected(rsa_keys) -> None:
 def test_token_binding_values_match_gharra() -> None:
     # Must equal gharra.core.models.TokenBinding string values (models.py:75).
     assert {b.value for b in TokenBindingType} == {
-        "none", "mtls_cnf_x5t_s256", "dpop",
+        "none",
+        "mtls_cnf_x5t_s256",
+        "dpop",
     }

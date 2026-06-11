@@ -1,4 +1,5 @@
 """Tests for the Symphonix Agent Arena (Workstream 7, FR-SI-*/NFR-SI-*)."""
+
 from __future__ import annotations
 
 import pytest
@@ -14,7 +15,8 @@ from bridge_sdk.agent_arena import (
 )
 
 PATIENT = SyntheticPatient(
-    patient_id="Patient/SYN-001", cohort="triage-chest-pain",
+    patient_id="Patient/SYN-001",
+    cohort="triage-chest-pain",
     attributes={"age": 58, "presenting": "chest pain"},
 )
 
@@ -26,11 +28,15 @@ def _golden_runner(step: str) -> dict[str, object]:
 
 def _script(steps: tuple[str, ...], golden: int = 3) -> TaskScript:
     return TaskScript(
-        task_id="t-1", patient=PATIENT, golden_path_steps=golden, steps=steps,
+        task_id="t-1",
+        patient=PATIENT,
+        golden_path_steps=golden,
+        steps=steps,
     )
 
 
 # ---- FR-SI-001 / FR-SI-003: arena run + seven metrics ------------------
+
 
 def test_arena_run_completes_and_emits_all_seven_metrics() -> None:
     script = _script(("triage.start", "appointment.book", "result.retrieve"))
@@ -78,6 +84,7 @@ def test_human_handoff_rate_counted() -> None:
 
 # ---- NFR-SI-002: deterministic replay ----------------------------------
 
+
 def test_replay_is_deterministic() -> None:
     script = _script(("triage.start", "appointment.book", "result.retrieve"))
     a = run_arena(script, _golden_runner)
@@ -87,6 +94,7 @@ def test_replay_is_deterministic() -> None:
 
 
 # ---- NFR-SI-001 / FR-SI-001: release gate ------------------------------
+
 
 def test_gate_promotes_clean_run() -> None:
     script = _script(("triage.start", "appointment.book", "result.retrieve"))
@@ -98,7 +106,10 @@ def test_gate_promotes_clean_run() -> None:
 
 def test_gate_blocks_run_with_unsafe_action_and_names_criterion() -> None:
     def runner(step: str) -> dict[str, object]:
-        return {"unsafe": step == "triage.start", "completed": step == "result.retrieve"}
+        return {
+            "unsafe": step == "triage.start",
+            "completed": step == "result.retrieve",
+        }
 
     res = run_arena(_script(("triage.start", "result.retrieve")), runner)
     decision = ReleaseGate().evaluate(res.metrics)

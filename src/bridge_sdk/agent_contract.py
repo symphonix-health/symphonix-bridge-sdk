@@ -28,6 +28,7 @@ placeholders, corrected here (not silently):
   ``tool-library`` is a civic tool-lending app used to stress-test the CAID
   pipeline, not a shared library.
 """
+
 from __future__ import annotations
 
 from enum import Enum
@@ -65,9 +66,9 @@ class ManifestError(ValueError):
 class SafetyClass(str, Enum):
     """Clinical-safety classification governing autonomy and auth requirements."""
 
-    routine = "routine"          # low-risk, deterministic, no patient data
-    sensitive = "sensitive"      # patient-data touching; consent + scope gated
-    high_risk = "high_risk"      # clinically influential; DPoP/mTLS + safety case
+    routine = "routine"  # low-risk, deterministic, no patient data
+    sensitive = "sensitive"  # patient-data touching; consent + scope gated
+    high_risk = "high_risk"  # clinically influential; DPoP/mTLS + safety case
 
 
 class AutonomyLevel(str, Enum):
@@ -81,10 +82,10 @@ class AutonomyLevel(str, Enum):
 class ResolverPath(str, Enum):
     """Execution path chosen by the action resolver, in preference order."""
 
-    api = "api"                  # typed domain API
-    nexus = "nexus"              # Nexus A2A task
+    api = "api"  # typed domain API
+    nexus = "nexus"  # Nexus A2A task
     ui_fallback = "ui_fallback"  # semantic-UI action (no typed manifest entry)
-    browser = "browser"          # raw browser control (last resort)
+    browser = "browser"  # raw browser control (last resort)
 
 
 class ExecutionMode(str, Enum):
@@ -123,7 +124,7 @@ class FieldType(str, Enum):
     boolean = "boolean"
     date = "date"
     datetime = "datetime"
-    reference = "reference"      # FHIR reference, e.g. "Patient/123"
+    reference = "reference"  # FHIR reference, e.g. "Patient/123"
     code = "code"
     object = "object"
 
@@ -169,7 +170,7 @@ class Condition(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    expression: str               # e.g. "consent.permits('triage')"
+    expression: str  # e.g. "consent.permits('triage')"
     description: str = ""
 
 
@@ -178,16 +179,16 @@ class ActionIntent(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    intent: str                   # dotted name, e.g. "triage.start"
+    intent: str  # dotted name, e.g. "triage.start"
     title: str
-    component: str                # owning service, e.g. "triage-api"
+    component: str  # owning service, e.g. "triage-api"
     safety_class: SafetyClass
     autonomy_default: AutonomyLevel = AutonomyLevel.advisory
     input: IOContract = Field(default_factory=IOContract)
     output: IOContract = Field(default_factory=IOContract)
     preconditions: list[Condition] = Field(default_factory=list)
     postconditions: list[Condition] = Field(default_factory=list)
-    fhir_task_code: str           # Task.code.text for this intent
+    fhir_task_code: str  # Task.code.text for this intent
     fhir_task_intent: str = "order"  # FHIR Task.intent value
 
     def validate_payload(self, payload: dict[str, Any]) -> dict[str, Any]:
@@ -198,9 +199,7 @@ class ActionIntent(BaseModel):
         with a typed error rather than being handed to a browser.
         """
         if not isinstance(payload, dict):
-            raise ManifestError(
-                f"intent '{self.intent}' payload must be an object"
-            )
+            raise ManifestError(f"intent '{self.intent}' payload must be an object")
         spec = self.input.field_map()
         unknown = set(payload) - set(spec)
         if unknown:
@@ -255,12 +254,8 @@ class ActionIntent(BaseModel):
                     {"type": {"text": name}, "valueReference": {"reference": value}}
                 )
             else:
-                task_input.append(
-                    {"type": {"text": name}, "valueString": str(value)}
-                )
-        extension: list[dict[str, Any]] = [
-            {"url": _AUTONOMY_EXT, "valueCode": level}
-        ]
+                task_input.append({"type": {"text": name}, "valueString": str(value)})
+        extension: list[dict[str, Any]] = [{"url": _AUTONOMY_EXT, "valueCode": level}]
         if evidence_bundle:
             extension.append({"url": _EVIDENCE_EXT, "valueUri": evidence_bundle})
         task: dict[str, Any] = {
@@ -327,7 +322,7 @@ class ResolverDecision(BaseModel):
     path: ResolverPath
     component: str | None = None
     manifest_backed: bool = False
-    reason: str | None = None     # required when path is ui_fallback / browser
+    reason: str | None = None  # required when path is ui_fallback / browser
 
     @computed_field  # type: ignore[prop-decorator]
     @property
@@ -428,9 +423,7 @@ REFERENCE_MANIFESTS: dict[str, AgentActionManifest] = {
                     )
                 ],
                 postconditions=[
-                    Condition(
-                        expression="task.status in {'in-progress','completed'}"
-                    )
+                    Condition(expression="task.status in {'in-progress','completed'}")
                 ],
                 fhir_task_code="agent-triage-start",
             ),

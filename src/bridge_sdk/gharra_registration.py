@@ -19,6 +19,7 @@ GHARRA facts this module encodes (verified against the live models):
 - Discovery filters on ``Capabilities.protocols`` (a list of capability
   strings); unrecognised keys fold into ``Capabilities.custom``.
 """
+
 from __future__ import annotations
 
 from typing import Any

@@ -1,4 +1,5 @@
 """Tests for human handoff + deferred HITL (WS11, FR-HH-*/NFR-HH-*)."""
+
 from __future__ import annotations
 
 import pytest
@@ -40,6 +41,7 @@ def _package(**over) -> HandoffPackage:
 
 
 # ---- FR-HH-001: needs_human_review is terminal-but-resumable -----------
+
 
 def test_ledger_has_needs_human_review_state() -> None:
     assert WorkflowState.needs_human_review.value == "needs_human_review"
@@ -91,6 +93,7 @@ def test_illegal_jump_out_of_needs_human_review_rejected() -> None:
 
 # ---- FR-HH-002: Handoff Inbox one-click resume -------------------------
 
+
 def test_inbox_enqueue_and_one_click_resume() -> None:
     inbox = HandoffInbox()
     inbox.enqueue(_package())
@@ -123,11 +126,15 @@ def test_amend_requires_note_and_cancel_requires_reason() -> None:
 
 # ---- FR-HH-003: package validation -------------------------------------
 
+
 @pytest.mark.parametrize(
     "missing",
     [
-        "task_summary", "provenance_ref", "audit_chain_ref",
-        "decision_rationale", "recommended_next_action",
+        "task_summary",
+        "provenance_ref",
+        "audit_chain_ref",
+        "decision_rationale",
+        "recommended_next_action",
     ],
 )
 def test_package_missing_required_element_fails(missing) -> None:
@@ -152,6 +159,7 @@ def test_complete_package_carries_all_review_context() -> None:
 
 # ---- FR-HH-004: deterministic triggers ---------------------------------
 
+
 @pytest.mark.parametrize(
     "trigger",
     [
@@ -170,6 +178,7 @@ def test_each_trigger_creates_a_routable_package(trigger) -> None:
 
 # ---- NFR-HH-001: resume fidelity ---------------------------------------
 
+
 def test_resume_fidelity_returns_exact_pre_handoff_state() -> None:
     inbox = HandoffInbox()
     inbox.enqueue(_package(workflow_id="wf-x", pre_handoff_state="waiting_for_input"))
@@ -185,12 +194,13 @@ def test_double_enqueue_rejected() -> None:
 
 # ---- reviewer rubric grade (measurement backlog item 3) ----------------
 
+
 def test_grade_is_recorded_and_distinct_from_disposition() -> None:
     inbox = HandoffInbox()
     inbox.enqueue(_package())
     inbox.resume("wf-1", outcome=ReviewerOutcome.correct)
-    assert inbox.resolution_of("wf-1") == "resume"               # what reviewer did
-    assert inbox.outcome_of("wf-1") is ReviewerOutcome.correct   # the rubric grade
+    assert inbox.resolution_of("wf-1") == "resume"  # what reviewer did
+    assert inbox.outcome_of("wf-1") is ReviewerOutcome.correct  # the rubric grade
 
 
 def test_grade_can_be_set_independently_of_a_disposition() -> None:

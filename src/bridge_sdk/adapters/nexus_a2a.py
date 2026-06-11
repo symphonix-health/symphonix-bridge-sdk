@@ -16,9 +16,9 @@ from bridge_sdk.canonical import CanonicalEnvelope
 
 
 class DispatchMode(str, Enum):
-    SYNC = "sync"        # POST tasks/send, wait for HTTP response
-    STREAM = "stream"    # POST tasks/sendSubscribe, read SSE checkpoints
-    ASYNC = "async"      # POST tasks/send with callback_url, return task_id
+    SYNC = "sync"  # POST tasks/send, wait for HTTP response
+    STREAM = "stream"  # POST tasks/sendSubscribe, read SSE checkpoints
+    ASYNC = "async"  # POST tasks/send with callback_url, return task_id
 
 
 class NexusA2aAdapter(ProtocolAdapter):
@@ -36,7 +36,9 @@ class NexusA2aAdapter(ProtocolAdapter):
                 return 0.85
         return 0.0
 
-    async def to_canonical(self, raw: Any, metadata: dict[str, Any] | None = None) -> CanonicalEnvelope:
+    async def to_canonical(
+        self, raw: Any, metadata: dict[str, Any] | None = None
+    ) -> CanonicalEnvelope:
         meta = metadata or {}
         envelope = CanonicalEnvelope(
             source_protocol=self.protocol.value,
@@ -54,9 +56,18 @@ class NexusA2aAdapter(ProtocolAdapter):
                 "intent": "order",
                 "owner": {"display": task_result.get("agent_id", "")},
             }
-            for key in ("assessment", "discharge_data", "findings", "claim", "lab_order", "summary"):
+            for key in (
+                "assessment",
+                "discharge_data",
+                "findings",
+                "claim",
+                "lab_order",
+                "summary",
+            ):
                 if key in task_result:
-                    fhir_task["input"] = [{"type": {"text": key}, "valueString": str(task_result[key])}]
+                    fhir_task["input"] = [
+                        {"type": {"text": key}, "valueString": str(task_result[key])}
+                    ]
                     break
             envelope.fhir_resources = [fhir_task]
         envelope.extract_loinc_codes()
@@ -74,7 +85,11 @@ class NexusA2aAdapter(ProtocolAdapter):
         """
         config = target_config or {}
         endpoint = config.get("endpoint", self.default_endpoint)
-        mode = DispatchMode(envelope.dispatch_mode) if envelope.dispatch_mode else DispatchMode.SYNC
+        mode = (
+            DispatchMode(envelope.dispatch_mode)
+            if envelope.dispatch_mode
+            else DispatchMode.SYNC
+        )
 
         # Build JSON-RPC 2.0 payload
         task_id = f"task-{uuid.uuid4().hex[:12]}"
@@ -83,7 +98,9 @@ class NexusA2aAdapter(ProtocolAdapter):
         payload: dict[str, Any] = {
             "jsonrpc": "2.0",
             "id": envelope.envelope_id,
-            "method": "tasks/sendSubscribe" if mode == DispatchMode.STREAM else "tasks/send",
+            "method": "tasks/sendSubscribe"
+            if mode == DispatchMode.STREAM
+            else "tasks/send",
             "params": {
                 "id": task_id,
                 "correlation_id": envelope.correlation_id,
@@ -103,7 +120,9 @@ class NexusA2aAdapter(ProtocolAdapter):
 
         # Async mode: include callback_url
         if mode == DispatchMode.ASYNC and self.callback_base_url:
-            envelope.callback_url = f"{self.callback_base_url}/internal/bridge/callback/{task_id}"
+            envelope.callback_url = (
+                f"{self.callback_base_url}/internal/bridge/callback/{task_id}"
+            )
             payload["params"]["callback_url"] = envelope.callback_url
 
         if not endpoint:
@@ -173,9 +192,13 @@ class NexusA2aAdapter(ProtocolAdapter):
                 "agent_rejected": False,
                 "status_code": resp.status_code,
                 "callback_url": envelope.callback_url,
-                "poll_url": f"{self.callback_base_url}/api/v1/tasks/{task_id}/status" if self.callback_base_url else None,
+                "poll_url": f"{self.callback_base_url}/api/v1/tasks/{task_id}/status"
+                if self.callback_base_url
+                else None,
             }
 
 
 def _map_a2a_status(status: str) -> str:
-    return {"completed": "completed", "failed": "failed", "cancelled": "cancelled"}.get(status, "requested")
+    return {"completed": "completed", "failed": "failed", "cancelled": "cancelled"}.get(
+        status, "requested"
+    )

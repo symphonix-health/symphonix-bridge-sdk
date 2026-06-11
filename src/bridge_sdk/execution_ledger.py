@@ -32,6 +32,7 @@ What is genuinely NEW here and absent from the repo:
 Requirements: FR-LE-001..004, NFR-LE-001..002
 (``BulletTrain/docs/EXECUTION_LEDGER_REQUIREMENTS.md``).
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -178,8 +179,8 @@ class LedgerHealth:
 
     workflows: int
     events: int
-    stuck_workflows: int          # in a non-terminal wait state
-    compensation_count: int       # events that entered compensating
+    stuck_workflows: int  # in a non-terminal wait state
+    compensation_count: int  # events that entered compensating
     duplicate_events_ignored: int
 
 
@@ -216,7 +217,10 @@ class ExecutionLedger:
     # ---- append -------------------------------------------------------
 
     def admit(
-        self, workflow_id: str, event_id: str, timestamp: str,
+        self,
+        workflow_id: str,
+        event_id: str,
+        timestamp: str,
         payload: dict[str, Any] | None = None,
     ) -> LedgerEvent:
         """Open a new workflow in the ``admitted`` state."""
@@ -227,8 +231,12 @@ class ExecutionLedger:
         )
 
     def record(
-        self, workflow_id: str, event_id: str, to_state: WorkflowState,
-        timestamp: str, payload: dict[str, Any] | None = None,
+        self,
+        workflow_id: str,
+        event_id: str,
+        to_state: WorkflowState,
+        timestamp: str,
+        payload: dict[str, Any] | None = None,
     ) -> LedgerEvent | None:
         """Record a transition for an existing workflow.
 
@@ -250,8 +258,12 @@ class ExecutionLedger:
         return self._append(workflow_id, event_id, to_state, timestamp, payload or {})
 
     def _append(
-        self, workflow_id: str, event_id: str, to_state: WorkflowState,
-        timestamp: str, payload: dict[str, Any],
+        self,
+        workflow_id: str,
+        event_id: str,
+        to_state: WorkflowState,
+        timestamp: str,
+        payload: dict[str, Any],
     ) -> LedgerEvent:
         seq = len(self._events)
         previous_hash = self._events[-1].entry_hash if self._events else _GENESIS_HASH

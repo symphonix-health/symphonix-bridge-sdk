@@ -20,6 +20,7 @@ conform to, not behaviour. ``tests/test_telemetry_schema.py`` ground-truths the
 ``sdk_anchor`` / ``status`` of each field against the real SDK classes by
 introspection, so the verified-vs-assumed split cannot silently rot.
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -70,12 +71,12 @@ class TelemetryField:
     """One field in the frozen canonical telemetry schema."""
 
     canonical_name: str
-    value_type: str                 # "string" | "enum:a|b" | "object" | "int"
-    source_subsystem: str           # which subsystem owns the emission
+    value_type: str  # "string" | "enum:a|b" | "object" | "int"
+    source_subsystem: str  # which subsystem owns the emission
     status: EmitterStatus
-    sdk_anchor: str | None          # real SDK symbol backing the claim, or None
-    in_handoff_eight: bool          # one of the eight fields the handoff froze
-    normalization: str = ""         # how to derive the canonical field, if needed
+    sdk_anchor: str | None  # real SDK symbol backing the claim, or None
+    in_handoff_eight: bool  # one of the eight fields the handoff froze
+    normalization: str = ""  # how to derive the canonical field, if needed
     notes: str = ""
 
     def to_dict(self) -> dict[str, object]:

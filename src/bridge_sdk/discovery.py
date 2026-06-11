@@ -30,7 +30,9 @@ class ResolvedEndpoint:
         self.rate_limit_rps: int = bp.get("rate_limit_rps", 0)
 
     def __repr__(self) -> str:
-        return f"ResolvedEndpoint({self.url}, proto={self.protocol}, pri={self.priority})"
+        return (
+            f"ResolvedEndpoint({self.url}, proto={self.protocol}, pri={self.priority})"
+        )
 
 
 class DiscoveryResult:
@@ -168,7 +170,9 @@ class GharraDiscoveryClient:
             # G10: Sort by endpoint priority/weight
             for agent in results:
                 endpoints = agent.get("endpoints", [])
-                endpoints.sort(key=lambda ep: (ep.get("priority", 100), -ep.get("weight", 100)))
+                endpoints.sort(
+                    key=lambda ep: (ep.get("priority", 100), -ep.get("weight", 100))
+                )
 
             self._cache[cache_key] = (time.monotonic() + self._cache_ttl, results)
             self._fallback_cache[cache_key] = results  # G14: persist for fallback
@@ -179,7 +183,9 @@ class GharraDiscoveryClient:
             # G14: Return stale fallback if available
             fallback = self._fallback_cache.get(cache_key)
             if fallback:
-                logger.info("Returning %d stale agents from fallback cache", len(fallback))
+                logger.info(
+                    "Returning %d stale agents from fallback cache", len(fallback)
+                )
                 return fallback
             raise
 
@@ -204,7 +210,9 @@ class GharraDiscoveryClient:
 
         agent = agents[0]
         endpoints = agent.get("endpoints", [])
-        primary, alternatives = select_endpoint(endpoints, preferred_protocol, preferred_region)
+        primary, alternatives = select_endpoint(
+            endpoints, preferred_protocol, preferred_region
+        )
         if not primary:
             return None
 

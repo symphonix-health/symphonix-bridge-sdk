@@ -1,4 +1,5 @@
 """Canonical matrix integrity tests — delegates to caid.matrices shared suite."""
+
 import sys
 from pathlib import Path
 
@@ -9,6 +10,7 @@ if _SIBLING_CAID.exists() and str(_SIBLING_CAID) not in sys.path:
     sys.path.insert(0, str(_SIBLING_CAID))
 
 import caid.matrices._integrity_tests as _suite
+
 _suite._REPO_ROOT = Path(__file__).parent.parent
 _suite._cfg_cache = None  # clear cache in case module was imported earlier
 from caid.matrices._integrity_tests import *  # noqa: F401, F403, E402

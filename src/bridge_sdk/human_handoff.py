@@ -19,6 +19,7 @@ state with no data loss).
 Requirements: FR-HH-001..004, NFR-HH-001
 (``BulletTrain/docs/HUMAN_HANDOFF_REQUIREMENTS.md``).
 """
+
 from __future__ import annotations
 
 from collections.abc import Iterable
@@ -68,10 +69,10 @@ class ReviewerOutcome(str, Enum):
     parity, and calibration KPIs all depend on this grade.
     """
 
-    unsafe = "unsafe"                          # unsafe had it executed; blocker
+    unsafe = "unsafe"  # unsafe had it executed; blocker
     incorrect_harmless = "incorrect_harmless"  # wrong, but no harm
     correct_suboptimal = "correct_suboptimal"  # right outcome, poor path
-    correct = "correct"                        # safe, correct, appropriate
+    correct = "correct"  # safe, correct, appropriate
 
     @property
     def is_unsafe(self) -> bool:
@@ -148,11 +149,11 @@ class HandoffPackage:
     workflow_id: str
     trigger: HandoffTrigger
     task_summary: str
-    provenance_ref: str               # -> WS4 Provenance record
-    audit_chain_ref: str              # -> WS4 audit chain / correlation id
+    provenance_ref: str  # -> WS4 Provenance record
+    audit_chain_ref: str  # -> WS4 audit chain / correlation id
     decision_rationale: str
     recommended_next_action: str
-    pre_handoff_state: str            # the WS2 ledger state to resume from
+    pre_handoff_state: str  # the WS2 ledger state to resume from
     pending_inputs: list[str] = field(default_factory=list)
 
     def validate(self) -> None:
@@ -181,7 +182,7 @@ class HandoffPackage:
 class _InboxEntry:
     package: HandoffPackage
     resolved: bool = False
-    resolution: str | None = None     # resume | amend | cancel (the disposition)
+    resolution: str | None = None  # resume | amend | cancel (the disposition)
     resumed_to_state: str | None = None
     reviewer_outcome: ReviewerOutcome | None = None  # the 4-class rubric grade
 

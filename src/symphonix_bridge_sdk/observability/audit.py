@@ -41,4 +41,3 @@ class AuditLogger:
         if details:
             event["_details"] = details
         _audit_log.info(json.dumps(event, separators=(",", ":")))
-

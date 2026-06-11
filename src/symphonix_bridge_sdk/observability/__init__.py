@@ -22,4 +22,3 @@ __all__ = [
     "set_correlation_id",
     "traced",
 ]
-

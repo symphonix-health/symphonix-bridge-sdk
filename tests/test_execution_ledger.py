@@ -6,6 +6,7 @@ SDK ledger builds an identical chain for identical inputs, so the two ledger
 faces cannot silently diverge. It skips (honestly) only when BulletTrain is not
 on the path in the current interpreter.
 """
+
 from __future__ import annotations
 
 import importlib.util
@@ -45,8 +46,16 @@ def test_all_lifecycle_states_present() -> None:
     # FR-LE-002: the agent lifecycle states the plan specifies, PLUS the WS11
     # needs_human_review terminal-but-resumable HITL state (FR-HH-001).
     assert {s.value for s in WorkflowState} == {
-        "admitted", "running", "waiting_for_input", "needs_consent", "blocked",
-        "compensating", "needs_human_review", "completed", "escalated", "cancelled",
+        "admitted",
+        "running",
+        "waiting_for_input",
+        "needs_consent",
+        "blocked",
+        "compensating",
+        "needs_human_review",
+        "completed",
+        "escalated",
+        "cancelled",
     }
 
 
@@ -133,14 +142,26 @@ def test_task_view_projects_fhir_status() -> None:
 
 
 def test_all_states_map_to_valid_fhir_task_status() -> None:
-    valid = {"draft", "requested", "received", "accepted", "rejected", "ready",
-             "cancelled", "in-progress", "on-hold", "failed", "completed",
-             "entered-in-error"}
+    valid = {
+        "draft",
+        "requested",
+        "received",
+        "accepted",
+        "rejected",
+        "ready",
+        "cancelled",
+        "in-progress",
+        "on-hold",
+        "failed",
+        "completed",
+        "entered-in-error",
+    }
     for s in WorkflowState:
         led = ExecutionLedger()
         led.admit(f"wf-{s.value}", "e0", TS)
         # Walk to the state where reachable; assert mapping is a valid code.
         from bridge_sdk.execution_ledger import _FHIR_TASK_STATUS  # type: ignore
+
         assert _FHIR_TASK_STATUS[s] in valid
 
 
@@ -153,6 +174,7 @@ def test_chain_integrity_holds_then_breaks_on_tamper() -> None:
 
     # Tamper with a committed event's payload; chain must detect it.
     from dataclasses import replace
+
     led._events[1] = replace(led._events[1], payload={"tampered": True})  # type: ignore
     ok2, idx2 = led.verify_integrity()
     assert ok2 is False and idx2 == 1

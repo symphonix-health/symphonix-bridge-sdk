@@ -37,4 +37,3 @@ class CorrelationIdMiddleware(BaseHTTPMiddleware):
             _correlation_id.reset(token)
         response.headers[self.HEADER] = cid
         return response
-

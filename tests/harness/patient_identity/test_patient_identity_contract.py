@@ -75,7 +75,10 @@ def _is_valid_modulus_11(value: str) -> bool:
         return False
     if len(set(value)) == 1:
         return False
-    total = sum(int(digit) * weight for digit, weight in zip(value[:9], range(10, 1, -1), strict=True))
+    total = sum(
+        int(digit) * weight
+        for digit, weight in zip(value[:9], range(10, 1, -1), strict=True)
+    )
     check_digit = 11 - (total % 11)
     if check_digit == 11:
         check_digit = 0
@@ -111,7 +114,17 @@ def _scan_repo_with_rg(repo: Path) -> list[str] | None:
         "!test-results/**",
         "!venv/**",
     ]
-    suffix_globs = ["*.py", "*.ts", "*.tsx", "*.js", "*.jsx", "*.md", "*.json", "*.yaml", "*.yml"]
+    suffix_globs = [
+        "*.py",
+        "*.ts",
+        "*.tsx",
+        "*.js",
+        "*.jsx",
+        "*.md",
+        "*.json",
+        "*.yaml",
+        "*.yml",
+    ]
     command = [
         rg,
         "--files-with-matches",
@@ -155,7 +168,17 @@ def _scan_repo_with_rg(repo: Path) -> list[str] | None:
 
 
 def _scan_repo_with_git_grep(repo: Path) -> list[str] | None:
-    suffix_globs = ["*.py", "*.ts", "*.tsx", "*.js", "*.jsx", "*.md", "*.json", "*.yaml", "*.yml"]
+    suffix_globs = [
+        "*.py",
+        "*.ts",
+        "*.tsx",
+        "*.js",
+        "*.jsx",
+        "*.md",
+        "*.json",
+        "*.yaml",
+        "*.yml",
+    ]
     command = [
         "git",
         "-C",
@@ -241,14 +264,20 @@ def _discover_symphonix_patient_data_repos() -> list[Path]:
         candidates.setdefault(f"{owner.lower()}/{remote_repo.lower()}", []).append(repo)
 
     selected: list[Path] = []
-    for remote_key, repos in sorted(candidates.items(), key=lambda item: item[0].lower()):
+    for remote_key, repos in sorted(
+        candidates.items(), key=lambda item: item[0].lower()
+    ):
         slug = remote_key.rsplit("/", 1)[-1]
-        canonical = next((repo for repo in repos if repo.name.lower() == slug), repos[0])
+        canonical = next(
+            (repo for repo in repos if repo.name.lower() == slug), repos[0]
+        )
         selected.append(canonical)
     return selected
 
 
-def test_patient_identity_static_repo_discovery_covers_local_symphonix_health_repos() -> None:
+def test_patient_identity_static_repo_discovery_covers_local_symphonix_health_repos() -> (
+    None
+):
     candidates: dict[str, list[Path]] = {}
     for repo in sorted(WORKSPACE.iterdir(), key=lambda path: path.name.lower()):
         if not repo.is_dir() or not (repo / ".git").exists() or repo == ROOT:
@@ -259,9 +288,13 @@ def test_patient_identity_static_repo_discovery_covers_local_symphonix_health_re
         candidates.setdefault(f"{owner.lower()}/{remote_repo.lower()}", []).append(repo)
 
     expected: list[str] = []
-    for remote_key, repos in sorted(candidates.items(), key=lambda item: item[0].lower()):
+    for remote_key, repos in sorted(
+        candidates.items(), key=lambda item: item[0].lower()
+    ):
         slug = remote_key.rsplit("/", 1)[-1]
-        canonical = next((repo for repo in repos if repo.name.lower() == slug), repos[0])
+        canonical = next(
+            (repo for repo in repos if repo.name.lower() == slug), repos[0]
+        )
         expected.append(canonical.name)
 
     discovered = [repo.name for repo in _discover_symphonix_patient_data_repos()]
@@ -299,9 +332,15 @@ def test_patient_identity_scenarios_follow_canonical_matrix_shape() -> None:
     distribution = payload["metadata"]["distribution"]
 
     assert payload["metadata"]["scenario_count"] == len(scenarios)
-    assert distribution["positive"] == sum(s["scenario_category"] == "Positive" for s in scenarios)
-    assert distribution["negative"] == sum(s["scenario_category"] == "Negative" for s in scenarios)
-    assert distribution["edge"] == sum(s["scenario_category"] == "Edge" for s in scenarios)
+    assert distribution["positive"] == sum(
+        s["scenario_category"] == "Positive" for s in scenarios
+    )
+    assert distribution["negative"] == sum(
+        s["scenario_category"] == "Negative" for s in scenarios
+    )
+    assert distribution["edge"] == sum(
+        s["scenario_category"] == "Edge" for s in scenarios
+    )
 
     for scenario in scenarios:
         assert CANONICAL_COLUMNS.issubset(scenario.keys()), scenario["use_case_id"]
@@ -311,35 +350,64 @@ def test_patient_identity_scenarios_follow_canonical_matrix_shape() -> None:
         assert scenario["security_profile"]["expected_auth_result"] in {"ALLOW", "DENY"}
 
 
-def test_patient_identity_scenarios_use_spid_fields_not_internal_nhs_number_fields() -> None:
+def test_patient_identity_scenarios_use_spid_fields_not_internal_nhs_number_fields() -> (
+    None
+):
     scenarios = _load_json(SCENARIOS_PATH)["scenarios"]
-    forbidden_internal_keys = {"nhs_number", "nhsNumber", "patient_nhs_number", "nationalID"}
+    forbidden_internal_keys = {
+        "nhs_number",
+        "nhsNumber",
+        "patient_nhs_number",
+        "nationalID",
+    }
 
     for scenario in scenarios:
         for value in _walk(scenario):
             if isinstance(value, dict):
-                assert forbidden_internal_keys.isdisjoint(value.keys()), scenario["use_case_id"]
+                assert forbidden_internal_keys.isdisjoint(value.keys()), scenario[
+                    "use_case_id"
+                ]
                 if value.get("identifier_system"):
                     assert value["identifier_system"] == CANONICAL_PATIENT_SYSTEM
                 if value.get("system") == NHS_NUMBER_SYSTEM:
-                    assert "external" in scenario["description"].lower() or "alias" in scenario["description"].lower()
+                    assert (
+                        "external" in scenario["description"].lower()
+                        or "alias" in scenario["description"].lower()
+                    )
 
 
 def test_patient_identity_scenario_patient_ids_are_modulus_11_valid() -> None:
     scenarios = _load_json(SCENARIOS_PATH)["scenarios"]
-    patient_id_keys = {"patient_id", "candidate_patient_id", "source_patient_id", "target_patient_id"}
+    patient_id_keys = {
+        "patient_id",
+        "candidate_patient_id",
+        "source_patient_id",
+        "target_patient_id",
+    }
 
     for scenario in scenarios:
-        expects_invalid_checksum = scenario["fault_profile"]["mode"] == "invalid_check_digit"
+        expects_invalid_checksum = (
+            scenario["fault_profile"]["mode"] == "invalid_check_digit"
+        )
         for value in _walk(scenario):
             if isinstance(value, dict):
                 for key in patient_id_keys.intersection(value.keys()):
                     patient_id = value[key]
-                    if isinstance(patient_id, str) and re.fullmatch(r"\d{10}", patient_id):
+                    if isinstance(patient_id, str) and re.fullmatch(
+                        r"\d{10}", patient_id
+                    ):
                         if expects_invalid_checksum:
-                            assert not _is_valid_modulus_11(patient_id), (scenario["use_case_id"], key, patient_id)
+                            assert not _is_valid_modulus_11(patient_id), (
+                                scenario["use_case_id"],
+                                key,
+                                patient_id,
+                            )
                         else:
-                            assert _is_valid_modulus_11(patient_id), (scenario["use_case_id"], key, patient_id)
+                            assert _is_valid_modulus_11(patient_id), (
+                                scenario["use_case_id"],
+                                key,
+                                patient_id,
+                            )
 
 
 @pytest.mark.contract

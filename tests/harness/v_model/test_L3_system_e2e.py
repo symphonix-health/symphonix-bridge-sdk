@@ -1,4 +1,5 @@
 """V-Model L3 system/e2e coverage for canonical harness contracts."""
+
 from __future__ import annotations
 
 import json

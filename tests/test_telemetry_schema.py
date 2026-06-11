@@ -14,6 +14,7 @@ If someone upgrades a status to ``live`` without wiring the emitter, or renames
 an SDK field out from under the schema, these assertions fail. The schema cannot
 silently drift away from the code.
 """
+
 from __future__ import annotations
 
 import dataclasses
@@ -66,7 +67,9 @@ def test_field_names_are_unique() -> None:
 
 
 def test_handoff_eight_are_all_present() -> None:
-    flagged = {f.canonical_name for f in CANONICAL_TELEMETRY_FIELDS if f.in_handoff_eight}
+    flagged = {
+        f.canonical_name for f in CANONICAL_TELEMETRY_FIELDS if f.in_handoff_eight
+    }
     assert flagged == HANDOFF_EIGHT
 
 

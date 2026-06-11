@@ -1,5 +1,6 @@
 """Workspace-root conftest.py — hydrates User-scope env vars."""
 
+
 def _hydrate_user_scope_secrets() -> None:
     """Pull persistent User-scope env vars into the current process env.
 
@@ -12,20 +13,29 @@ def _hydrate_user_scope_secrets() -> None:
     Reads only — never logs values. No-op on non-Windows.
     """
     import os
+
     if os.name != "nt":
         return
     keys = (
-        "STRIPE_SECRET_KEY", "STRIPE_PUBLISHABLE_KEY", "STRIPE_WEBHOOK_SECRET",
-        "BT_FHIR_BASE_URL", "BT_FHIR_TOKEN",
-        "FHIR_BASE_URL", "FHIR_AUTH_TOKEN",
-        "ANTHROPIC_API_KEY", "OPENAI_API_KEY",
-        "TWILIO_ACCOUNT_SID", "TWILIO_AUTH_TOKEN",
-        "MPESA_CONSUMER_KEY", "MPESA_CONSUMER_SECRET",
+        "STRIPE_SECRET_KEY",
+        "STRIPE_PUBLISHABLE_KEY",
+        "STRIPE_WEBHOOK_SECRET",
+        "BT_FHIR_BASE_URL",
+        "BT_FHIR_TOKEN",
+        "FHIR_BASE_URL",
+        "FHIR_AUTH_TOKEN",
+        "ANTHROPIC_API_KEY",
+        "OPENAI_API_KEY",
+        "TWILIO_ACCOUNT_SID",
+        "TWILIO_AUTH_TOKEN",
+        "MPESA_CONSUMER_KEY",
+        "MPESA_CONSUMER_SECRET",
     )
     if all(os.environ.get(k) for k in keys):
         return
     try:
         import winreg
+
         with winreg.OpenKey(winreg.HKEY_CURRENT_USER, "Environment") as h:
             for key in keys:
                 if os.environ.get(key):

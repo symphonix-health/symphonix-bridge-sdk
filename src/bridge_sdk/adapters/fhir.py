@@ -25,7 +25,9 @@ class FhirAdapter(ProtocolAdapter):
             return 0.9
         return 0.0
 
-    async def to_canonical(self, raw: Any, metadata: dict[str, Any] | None = None) -> CanonicalEnvelope:
+    async def to_canonical(
+        self, raw: Any, metadata: dict[str, Any] | None = None
+    ) -> CanonicalEnvelope:
         meta = metadata or {}
         envelope = CanonicalEnvelope(
             source_protocol=self.protocol.value,
@@ -42,7 +44,9 @@ class FhirAdapter(ProtocolAdapter):
         envelope.extract_snomed_codes()
         return envelope
 
-    async def from_canonical(self, envelope: CanonicalEnvelope, target_config: dict[str, Any] | None = None) -> Any:
+    async def from_canonical(
+        self, envelope: CanonicalEnvelope, target_config: dict[str, Any] | None = None
+    ) -> Any:
         """Write FHIR resources to the FHIR server."""
         config = target_config or {}
         base = config.get("fhir_base_url", self.fhir_base_url)
@@ -56,11 +60,15 @@ class FhirAdapter(ProtocolAdapter):
                 }
                 if envelope.idempotency_key:
                     headers["X-Idempotency-Key"] = envelope.idempotency_key
-                resp = await client.post(f"{base}/{rtype}", json=resource, headers=headers)
-                results.append({
-                    "status": resp.status_code,
-                    "resource_type": rtype,
-                    "location": resp.headers.get("Location", ""),
-                    "etag": resp.headers.get("ETag", ""),
-                })
+                resp = await client.post(
+                    f"{base}/{rtype}", json=resource, headers=headers
+                )
+                results.append(
+                    {
+                        "status": resp.status_code,
+                        "resource_type": rtype,
+                        "location": resp.headers.get("Location", ""),
+                        "etag": resp.headers.get("ETag", ""),
+                    }
+                )
         return results

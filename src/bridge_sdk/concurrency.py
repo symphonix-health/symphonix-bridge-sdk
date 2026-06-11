@@ -27,6 +27,7 @@ and the break-glass approved-category gate.
 Requirements: FR-CC-001..003, NFR-CC-001..002
 (``BulletTrain/docs/CONCURRENCY_REQUIREMENTS.md``).
 """
+
 from __future__ import annotations
 
 import heapq
@@ -105,7 +106,8 @@ class PersonaExecutionBudget:
             if current >= self._limits.max_concurrent_workflows:
                 self._breaches[persona] = self._breaches.get(persona, 0) + 1
                 raise BudgetExceeded(
-                    persona, "max_concurrent_workflows",
+                    persona,
+                    "max_concurrent_workflows",
                     self._limits.max_concurrent_workflows,
                 )
             self._concurrent[persona] = current + 1
@@ -115,8 +117,12 @@ class PersonaExecutionBudget:
             self._concurrent[persona] = max(0, self._concurrent.get(persona, 0) - 1)
 
     def _charge(
-        self, store: dict[str, int], persona: str, amount: int,
-        dimension: str, limit: int,
+        self,
+        store: dict[str, int],
+        persona: str,
+        amount: int,
+        dimension: str,
+        limit: int,
     ) -> None:
         with self._lock:
             new = store.get(persona, 0) + amount
@@ -126,20 +132,36 @@ class PersonaExecutionBudget:
             store[persona] = new
 
     def charge_action(self, persona: str, n: int = 1) -> None:
-        self._charge(self._actions, persona, n, "max_screen_actions_per_min",
-                     self._limits.max_screen_actions_per_min)
+        self._charge(
+            self._actions,
+            persona,
+            n,
+            "max_screen_actions_per_min",
+            self._limits.max_screen_actions_per_min,
+        )
 
     def charge_tokens(self, persona: str, n: int) -> None:
-        self._charge(self._tokens, persona, n, "max_model_tokens",
-                     self._limits.max_model_tokens)
+        self._charge(
+            self._tokens, persona, n, "max_model_tokens", self._limits.max_model_tokens
+        )
 
     def charge_write(self, persona: str, n: int = 1) -> None:
-        self._charge(self._writes, persona, n, "max_downstream_writes",
-                     self._limits.max_downstream_writes)
+        self._charge(
+            self._writes,
+            persona,
+            n,
+            "max_downstream_writes",
+            self._limits.max_downstream_writes,
+        )
 
     def open_escalation(self, persona: str) -> None:
-        self._charge(self._escalations, persona, 1, "max_unresolved_escalations",
-                     self._limits.max_unresolved_escalations)
+        self._charge(
+            self._escalations,
+            persona,
+            1,
+            "max_unresolved_escalations",
+            self._limits.max_unresolved_escalations,
+        )
 
     def resolve_escalation(self, persona: str) -> None:
         with self._lock:

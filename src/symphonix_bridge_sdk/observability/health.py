@@ -28,4 +28,3 @@ def make_health_router(service_name: str, version: str = "unknown") -> APIRouter
         return HealthResponse(status="ok", service=service_name, version=version)
 
     return router
-

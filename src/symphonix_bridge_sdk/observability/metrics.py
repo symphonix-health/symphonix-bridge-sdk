@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 
-from prometheus_client import CollectorRegistry, Counter, Gauge, Histogram, make_asgi_app
+from prometheus_client import (
+    CollectorRegistry,
+    Counter,
+    Gauge,
+    Histogram,
+    make_asgi_app,
+)
 
 _registry = CollectorRegistry(auto_describe=True)
 _collectors: dict[tuple[str, str], object] = {}
@@ -65,4 +71,3 @@ class PrometheusMetrics:
         """Mount at /metrics via `app.mount('/metrics', metrics.metrics_app())`."""
 
         return make_asgi_app(registry=_registry)
-

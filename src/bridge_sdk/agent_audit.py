@@ -28,6 +28,7 @@ What is genuinely NEW (FR-AU-*):
 Requirements: FR-AU-001..003, NFR-AU-001..002
 (``BulletTrain/docs/AGENT_AUDIT_REQUIREMENTS.md``).
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -65,19 +66,19 @@ class AuditCompositionError(Exception):
 class ProvenanceFields:
     """The mandated authorship/derivation fields for a single agent step."""
 
-    persona: str                  # acting persona key
-    sponsor: str                  # user or organisation on whose behalf (act.sub)
-    consent_artefact: str         # reference to the consent projection
-    route_admission: str          # route-admission evidence id
-    prompt_policy_version: str    # legacy COMBINED prompt+policy version (required)
-    model_version: str            # model version that decided
-    action_path: str              # resolved intent / UI action path
+    persona: str  # acting persona key
+    sponsor: str  # user or organisation on whose behalf (act.sub)
+    consent_artefact: str  # reference to the consent projection
+    route_admission: str  # route-admission evidence id
+    prompt_policy_version: str  # legacy COMBINED prompt+policy version (required)
+    model_version: str  # model version that decided
+    action_path: str  # resolved intent / UI action path
     # Split granularity (measurement backlog item 4): attribute prompt A/B
     # effects and policy changes apart. Optional + additive so existing callers
     # stay valid; prefer populating these and keeping prompt_policy_version as the
     # combined surrogate. Not in REQUIRED_PROVENANCE_FIELDS (additive, not mandated).
-    prompt_variant: str = ""      # which prompt variant / A-B arm
-    policy_version: str = ""      # which policy version
+    prompt_variant: str = ""  # which prompt variant / A-B arm
+    policy_version: str = ""  # which policy version
 
     def missing(self) -> list[str]:
         """Return the names of any required fields that are empty."""
@@ -94,10 +95,10 @@ class StepAuditRecords:
     """The three linked records produced for one agent step (FR-AU-001)."""
 
     correlation_id: str
-    task_ref: dict[str, Any]      # reference to the WS2 Task state update
-    provenance: dict[str, Any]    # FHIR Provenance (who/what produced the change)
-    audit_event: dict[str, Any]   # FHIR AuditEvent (the access/security event)
-    link_hash: str                # tamper-evident hash over the triple
+    task_ref: dict[str, Any]  # reference to the WS2 Task state update
+    provenance: dict[str, Any]  # FHIR Provenance (who/what produced the change)
+    audit_event: dict[str, Any]  # FHIR AuditEvent (the access/security event)
+    link_hash: str  # tamper-evident hash over the triple
 
     def all_cross_referenced(self) -> bool:
         """True iff all three records carry the same correlation_id (FR-AU-001-AC01)."""
@@ -110,9 +111,12 @@ class StepAuditRecords:
 
     def verify_link(self) -> bool:
         """Recompute the link hash and confirm it is intact (NFR-AU-002)."""
-        return _compute_link_hash(
-            self.correlation_id, self.task_ref, self.provenance, self.audit_event
-        ) == self.link_hash
+        return (
+            _compute_link_hash(
+                self.correlation_id, self.task_ref, self.provenance, self.audit_event
+            )
+            == self.link_hash
+        )
 
 
 def _compute_link_hash(
@@ -165,9 +169,7 @@ def compose_step_audit(
         )
 
     target_ref = (
-        patient_reference
-        if patient_reference
-        else f"{resource_type}/{workflow_id}"
+        patient_reference if patient_reference else f"{resource_type}/{workflow_id}"
     )
 
     task_ref = {
@@ -223,9 +225,7 @@ def compose_step_audit(
         "entity": [{"what": {"reference": target_ref}}],
     }
 
-    link_hash = _compute_link_hash(
-        correlation_id, task_ref, provenance, audit_event
-    )
+    link_hash = _compute_link_hash(correlation_id, task_ref, provenance, audit_event)
     return StepAuditRecords(
         correlation_id=correlation_id,
         task_ref=task_ref,
@@ -279,7 +279,9 @@ def decision_card(
         )
         if v
     ]
-    evidence = evidence_references if evidence_references is not None else default_evidence
+    evidence = (
+        evidence_references if evidence_references is not None else default_evidence
+    )
     return DecisionCard(
         correlation_id=records.correlation_id,
         persona=records.provenance["agent"][0]["who"]["identifier"]["value"],

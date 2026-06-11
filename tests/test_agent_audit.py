@@ -1,4 +1,5 @@
 """Tests for the agent audit composer (Workstream 4, FR-AU-*/NFR-AU-*)."""
+
 from __future__ import annotations
 
 import pytest
@@ -78,8 +79,13 @@ def test_all_seven_provenance_fields_present() -> None:
     # FR-AU-002: persona, sponsor, consent, route-admission, prompt/policy
     # version, model version, action path.
     assert set(REQUIRED_PROVENANCE_FIELDS) == {
-        "persona", "sponsor", "consent_artefact", "route_admission",
-        "prompt_policy_version", "model_version", "action_path",
+        "persona",
+        "sponsor",
+        "consent_artefact",
+        "route_admission",
+        "prompt_policy_version",
+        "model_version",
+        "action_path",
     }
     r = _compose()
     ext = r.provenance["extension"]
@@ -88,15 +94,22 @@ def test_all_seven_provenance_fields_present() -> None:
     assert ext["prompt_policy_version"] == "prompt-v12"
     assert ext["model_version"] == "model-2026-06"
     assert ext["action_path"] == "patient.intake.submit"
-    assert r.provenance["agent"][0]["who"]["identifier"]["value"] == "triage-intake-agent"
-    assert r.provenance["agent"][0]["onBehalfOf"]["identifier"]["value"] == "user-clinician-1"
+    assert (
+        r.provenance["agent"][0]["who"]["identifier"]["value"] == "triage-intake-agent"
+    )
+    assert (
+        r.provenance["agent"][0]["onBehalfOf"]["identifier"]["value"]
+        == "user-clinician-1"
+    )
 
 
 def test_split_prompt_variant_and_policy_version_land_in_extension() -> None:
     # Measurement backlog item 4: the split fields ride in the provenance
     # extension alongside the retained combined prompt_policy_version surrogate.
     r = _compose(
-        fields=_fields(prompt_variant="appeal-letter-B", policy_version="policy-2026-06")
+        fields=_fields(
+            prompt_variant="appeal-letter-B", policy_version="policy-2026-06"
+        )
     )
     ext = r.provenance["extension"]
     assert ext["prompt_variant"] == "appeal-letter-B"
@@ -157,6 +170,10 @@ def test_decision_card_serialisable() -> None:
     r = _compose()
     d = decision_card(r, rationale="ok").to_dict()
     assert set(d) == {
-        "correlation_id", "persona", "action_path", "outcome",
-        "rationale", "evidence_references",
+        "correlation_id",
+        "persona",
+        "action_path",
+        "outcome",
+        "rationale",
+        "evidence_references",
     }

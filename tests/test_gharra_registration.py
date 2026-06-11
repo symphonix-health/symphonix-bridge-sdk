@@ -9,6 +9,7 @@ Two layers, no mocks:
   interpreter (it needs GHARRA's own venv for the ``ulid`` dependency); when it
   runs it is a genuine cross-repo contract check, not a stub.
 """
+
 from __future__ import annotations
 
 import importlib.util
@@ -42,7 +43,7 @@ def test_registration_payload_minimal_shape() -> None:
     assert len(payload["endpoints"]) == 1
     ep = payload["endpoints"][0]
     assert ep["protocol"] == GHARRA_PROTOCOL_REST  # http-rest, not "rest"
-    assert ep["url"] == "http://triage-api.local"   # trailing slash stripped
+    assert ep["url"] == "http://triage-api.local"  # trailing slash stripped
     assert ep["agent_card_url"].endswith("/.well-known/agent-card.json")
 
 
@@ -64,6 +65,4 @@ def test_payload_validates_against_real_gharra_agentrecord() -> None:
     record = AgentRecord.model_validate(payload)
     assert record.display_name == "triage-api"
     assert "triage.start" in record.capabilities.protocols
-    assert record.endpoints[0].agent_card_url.endswith(
-        "/.well-known/agent-card.json"
-    )
+    assert record.endpoints[0].agent_card_url.endswith("/.well-known/agent-card.json")

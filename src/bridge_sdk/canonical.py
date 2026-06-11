@@ -55,7 +55,9 @@ class CanonicalEnvelope(BaseModel):
 
     # --- Phase 4 (G4, G16, G17): Consent + PHI + residency ---
     consent_token: str | None = None
-    phi_classification: str = "none"  # none | public | internal | restricted | sensitive
+    phi_classification: str = (
+        "none"  # none | public | internal | restricted | sensitive
+    )
     data_residency: list[str] = Field(default_factory=list)  # ISO country codes
     purpose_of_use: str = "treatment"  # treatment | emergency | research | operations
 
@@ -73,12 +75,14 @@ class CanonicalEnvelope(BaseModel):
         return self.envelope_hash
 
     def add_hop(self, protocol: str, adapter: str, latency_ms: float) -> None:
-        self.hops.append({
-            "protocol": protocol,
-            "adapter": adapter,
-            "latency_ms": latency_ms,
-            "timestamp": datetime.now(UTC).isoformat(),
-        })
+        self.hops.append(
+            {
+                "protocol": protocol,
+                "adapter": adapter,
+                "latency_ms": latency_ms,
+                "timestamp": datetime.now(UTC).isoformat(),
+            }
+        )
         self.hop_count = len(self.hops)
 
     def extract_loinc_codes(self) -> list[dict[str, str]]:
@@ -114,7 +118,13 @@ class CanonicalEnvelope(BaseModel):
     def _walk_codings(obj: Any, out: list, system: str) -> None:
         if isinstance(obj, dict):
             if obj.get("system") == system and "code" in obj:
-                out.append({"code": obj["code"], "system": system, "display": obj.get("display", "")})
+                out.append(
+                    {
+                        "code": obj["code"],
+                        "system": system,
+                        "display": obj.get("display", ""),
+                    }
+                )
             for v in obj.values():
                 CanonicalEnvelope._walk_codings(v, out, system)
         elif isinstance(obj, list):
@@ -127,11 +137,13 @@ class CanonicalEnvelope(BaseModel):
         if isinstance(obj, dict):
             # Look for loinc_code / loinc_display pattern (Kafka events, REST payloads)
             if system_hint == "loinc" and obj.get("loinc_code"):
-                out.append({
-                    "code": str(obj["loinc_code"]),
-                    "system": "http://loinc.org",
-                    "display": obj.get("loinc_display", ""),
-                })
+                out.append(
+                    {
+                        "code": str(obj["loinc_code"]),
+                        "system": "http://loinc.org",
+                        "display": obj.get("loinc_display", ""),
+                    }
+                )
             for v in obj.values():
                 CanonicalEnvelope._walk_bare_codes(v, out, system_hint)
         elif isinstance(obj, list):

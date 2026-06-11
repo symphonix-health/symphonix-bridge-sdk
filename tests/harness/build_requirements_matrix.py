@@ -6,6 +6,7 @@ that exercise it. The original 30 REQ-GAR-001..030 are anchored by the
 existing executable scenarios; the global-standards extension reqs are
 covered by the canonical-overlay slice + the compliance-policy matrix.
 """
+
 from __future__ import annotations
 
 import json
@@ -19,7 +20,9 @@ OUT = ROOT / "tests" / "harness" / "requirements_matrix.json"
 
 def main() -> None:
     superset = json.loads(SUPERSET.read_text(encoding="utf-8"))
-    coverage: dict[str, list[dict]] = {r["requirement_id"]: [] for r in superset["requirements"]}
+    coverage: dict[str, list[dict]] = {
+        r["requirement_id"]: [] for r in superset["requirements"]
+    }
 
     for path in sorted(CANON_DIR.glob("*_canonical.json")):
         m = json.loads(path.read_text(encoding="utf-8"))
@@ -27,28 +30,32 @@ def main() -> None:
         for s in m["scenarios"]:
             for rid in s.get("requirement_ids", []):
                 if rid in coverage:
-                    coverage[rid].append({
-                        "matrix": path.name,
-                        "subsystem": subsystem,
-                        "use_case_id": s["use_case_id"],
-                        "scenario_category": s["scenario_category"],
-                    })
+                    coverage[rid].append(
+                        {
+                            "matrix": path.name,
+                            "subsystem": subsystem,
+                            "use_case_id": s["use_case_id"],
+                            "scenario_category": s["scenario_category"],
+                        }
+                    )
 
     rows = []
     for r in superset["requirements"]:
         rid = r["requirement_id"]
         scenarios = coverage[rid]
-        rows.append({
-            "requirement_id": rid,
-            "family": r["family"],
-            "title": r["title"],
-            "statement": r["statement"],
-            "category": r["category"],
-            "source": r["source"],
-            "coverage_status": "covered" if scenarios else "uncovered",
-            "scenario_count": len(scenarios),
-            "scenarios": scenarios[:20],
-        })
+        rows.append(
+            {
+                "requirement_id": rid,
+                "family": r["family"],
+                "title": r["title"],
+                "statement": r["statement"],
+                "category": r["category"],
+                "source": r["source"],
+                "coverage_status": "covered" if scenarios else "uncovered",
+                "scenario_count": len(scenarios),
+                "scenarios": scenarios[:20],
+            }
+        )
 
     uncovered = [r for r in rows if r["coverage_status"] != "covered"]
     payload = {
@@ -63,7 +70,9 @@ def main() -> None:
         "requirements": rows,
     }
     OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"[OK] {OUT.name} — {payload['metadata']['covered_count']}/{len(rows)} covered")
+    print(
+        f"[OK] {OUT.name} — {payload['metadata']['covered_count']}/{len(rows)} covered"
+    )
     if uncovered:
         print("  uncovered:", [u["requirement_id"] for u in uncovered])
 

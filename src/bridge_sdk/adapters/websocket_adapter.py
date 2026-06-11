@@ -17,25 +17,36 @@ class WebSocketAdapter(ProtocolAdapter):
             return 0.85
         return 0.0
 
-    async def to_canonical(self, raw: Any, metadata: dict[str, Any] | None = None) -> CanonicalEnvelope:
+    async def to_canonical(
+        self, raw: Any, metadata: dict[str, Any] | None = None
+    ) -> CanonicalEnvelope:
         meta = metadata or {}
         envelope = CanonicalEnvelope(
             source_protocol=self.protocol.value,
             correlation_id=meta.get("correlation_id", ""),
-            raw_source=raw, raw_source_type="WebSocket",
+            raw_source=raw,
+            raw_source_type="WebSocket",
         )
         frame = raw.get("ws_frame", raw) if isinstance(raw, dict) else {"data": raw}
-        envelope.fhir_resources = [{
-            "resourceType": "Communication",
-            "id": f"ws-{envelope.envelope_id[:8]}",
-            "status": "in-progress",
-            "payload": [{"contentString": frame.get("query", frame.get("data", str(frame)))}],
-            "sender": {"display": frame.get("clinician_id", "")},
-            "extension": [{"url": "ws-session", "valueString": frame.get("session_id", "")}],
-        }]
+        envelope.fhir_resources = [
+            {
+                "resourceType": "Communication",
+                "id": f"ws-{envelope.envelope_id[:8]}",
+                "status": "in-progress",
+                "payload": [
+                    {"contentString": frame.get("query", frame.get("data", str(frame)))}
+                ],
+                "sender": {"display": frame.get("clinician_id", "")},
+                "extension": [
+                    {"url": "ws-session", "valueString": frame.get("session_id", "")}
+                ],
+            }
+        ]
         return envelope
 
-    async def from_canonical(self, envelope: CanonicalEnvelope, target_config: dict[str, Any] | None = None) -> Any:
+    async def from_canonical(
+        self, envelope: CanonicalEnvelope, target_config: dict[str, Any] | None = None
+    ) -> Any:
         return {
             "type": "bridge_response",
             "correlation_id": envelope.correlation_id,

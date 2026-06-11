@@ -1,4 +1,5 @@
 """V-Model L2 integration coverage for canonical harness traceability."""
+
 from __future__ import annotations
 
 import json

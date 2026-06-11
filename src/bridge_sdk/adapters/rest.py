@@ -25,7 +25,9 @@ class RestAdapter(ProtocolAdapter):
                 return 0.7
         return 0.1
 
-    async def to_canonical(self, raw: Any, metadata: dict[str, Any] | None = None) -> CanonicalEnvelope:
+    async def to_canonical(
+        self, raw: Any, metadata: dict[str, Any] | None = None
+    ) -> CanonicalEnvelope:
         meta = metadata or {}
         envelope = CanonicalEnvelope(
             source_protocol=self.protocol.value,
@@ -56,14 +58,18 @@ class RestAdapter(ProtocolAdapter):
                 fhir_resource["reasonCode"] = [{"text": referral["reason"]}]
 
             if patient.get("dob"):
-                fhir_resource.setdefault("contained", []).append({
-                    "resourceType": "Patient",
-                    "id": patient.get("patient_id", "unknown"),
-                    "birthDate": patient["dob"],
-                    "name": [{"text": patient.get("name", "")}],
-                })
+                fhir_resource.setdefault("contained", []).append(
+                    {
+                        "resourceType": "Patient",
+                        "id": patient.get("patient_id", "unknown"),
+                        "birthDate": patient["dob"],
+                        "name": [{"text": patient.get("name", "")}],
+                    }
+                )
             if patient.get("mrn"):
-                fhir_resource["identifier"] = [{"system": "urn:mrn", "value": patient["mrn"]}]
+                fhir_resource["identifier"] = [
+                    {"system": "urn:mrn", "value": patient["mrn"]}
+                ]
 
             # G5: Extract LOINC/SNOMED codes from anywhere in the payload
             # and embed them as proper FHIR coding elements
@@ -88,7 +94,9 @@ class RestAdapter(ProtocolAdapter):
         envelope.extract_loinc_codes()
         return envelope
 
-    async def from_canonical(self, envelope: CanonicalEnvelope, target_config: dict[str, Any] | None = None) -> Any:
+    async def from_canonical(
+        self, envelope: CanonicalEnvelope, target_config: dict[str, Any] | None = None
+    ) -> Any:
         result: dict[str, Any] = {
             "correlation_id": envelope.correlation_id,
             "agent_response": "task_completed",
@@ -116,26 +124,32 @@ def _walk_for_codes(obj: Any, out: list[dict[str, str]]) -> None:
     if isinstance(obj, dict):
         # Standard FHIR coding: {system, code, display}
         if obj.get("system") and obj.get("code"):
-            out.append({
-                "system": str(obj["system"]),
-                "code": str(obj["code"]),
-                "display": str(obj.get("display", "")),
-            })
+            out.append(
+                {
+                    "system": str(obj["system"]),
+                    "code": str(obj["code"]),
+                    "display": str(obj.get("display", "")),
+                }
+            )
         # Bare loinc_code pattern (Kafka events, flat REST)
         if obj.get("loinc_code"):
-            out.append({
-                "system": "http://loinc.org",
-                "code": str(obj["loinc_code"]),
-                "display": str(obj.get("loinc_display", "")),
-            })
+            out.append(
+                {
+                    "system": "http://loinc.org",
+                    "code": str(obj["loinc_code"]),
+                    "display": str(obj.get("loinc_display", "")),
+                }
+            )
         # Bare observation_id pattern (HL7v2 JSON)
         obs_id = obj.get("observation_id")
         if isinstance(obs_id, dict) and obs_id.get("code"):
-            out.append({
-                "system": obs_id.get("system", "http://loinc.org"),
-                "code": str(obs_id["code"]),
-                "display": str(obs_id.get("display", "")),
-            })
+            out.append(
+                {
+                    "system": obs_id.get("system", "http://loinc.org"),
+                    "code": str(obs_id["code"]),
+                    "display": str(obs_id.get("display", "")),
+                }
+            )
         for v in obj.values():
             _walk_for_codes(v, out)
     elif isinstance(obj, list):

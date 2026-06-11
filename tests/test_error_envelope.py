@@ -1,4 +1,5 @@
 """Tests for the error envelope + preconditions (Workstream 5, FR-ER-*/NFR-ER-*)."""
+
 from __future__ import annotations
 
 import importlib.util
@@ -17,6 +18,7 @@ from bridge_sdk.error_envelope import (
 
 
 # ---- FR-ER-001: standard envelope shape --------------------------------
+
 
 def test_envelope_carries_all_standard_fields() -> None:
     env = AgentErrorEnvelope(
@@ -46,7 +48,9 @@ def test_envelope_requires_stable_code() -> None:
 def test_retryable_must_carry_retry_after_ms() -> None:
     with pytest.raises(EnvelopeError):
         AgentErrorEnvelope(
-            code="c", message="m", retryable=True,
+            code="c",
+            message="m",
+            retryable=True,
             clinician_safety_severity=ClinicianSafetySeverity.low,
         )  # missing retry_after_ms
 
@@ -54,7 +58,9 @@ def test_retryable_must_carry_retry_after_ms() -> None:
 def test_non_retryable_must_not_carry_retry_after_ms() -> None:
     with pytest.raises(EnvelopeError):
         AgentErrorEnvelope(
-            code="c", message="m", retryable=False,
+            code="c",
+            message="m",
+            retryable=False,
             clinician_safety_severity=ClinicianSafetySeverity.low,
             retry_after_ms=100,
         )
@@ -67,6 +73,7 @@ def test_retryable_failure_factory_sets_backoff() -> None:
 
 
 # ---- FR-ER-003: compensation pairs -------------------------------------
+
 
 @pytest.mark.parametrize(
     "forward,expected",
@@ -89,7 +96,9 @@ def test_unknown_forward_action_has_no_silent_compensation() -> None:
 
 def test_terminal_failure_attaches_compensation() -> None:
     env = AgentErrorEnvelope.terminal_failure(
-        "booking_rejected", "slot gone", forward_action="book",
+        "booking_rejected",
+        "slot gone",
+        forward_action="book",
     )
     assert env.retryable is False
     assert env.compensating_action == "cancel"
@@ -102,6 +111,7 @@ def test_terminal_failure_without_forward_action_has_no_compensation() -> None:
 
 
 # ---- backoff matches RetryPolicy semantics -----------------------------
+
 
 def test_backoff_is_exponential_and_capped() -> None:
     assert backoff_after(0) == 100
@@ -126,14 +136,29 @@ def test_backoff_defaults_match_real_retrypolicy() -> None:
     from bullettrain.resilience import RetryPolicy  # type: ignore
 
     rp = RetryPolicy()
-    assert backoff_after(0, base_ms=rp.backoff_base_ms, max_ms=rp.backoff_max_ms,
-                         multiplier=rp.backoff_multiplier) == rp.backoff_base_ms
+    assert (
+        backoff_after(
+            0,
+            base_ms=rp.backoff_base_ms,
+            max_ms=rp.backoff_max_ms,
+            multiplier=rp.backoff_multiplier,
+        )
+        == rp.backoff_base_ms
+    )
     # Cap matches.
-    assert backoff_after(99, base_ms=rp.backoff_base_ms, max_ms=rp.backoff_max_ms,
-                         multiplier=rp.backoff_multiplier) == rp.backoff_max_ms
+    assert (
+        backoff_after(
+            99,
+            base_ms=rp.backoff_base_ms,
+            max_ms=rp.backoff_max_ms,
+            multiplier=rp.backoff_multiplier,
+        )
+        == rp.backoff_max_ms
+    )
 
 
 # ---- FR-ER-002: ETag / If-Match optimistic concurrency -----------------
+
 
 def test_precondition_passes_on_matching_etag() -> None:
     pre = Precondition(current_etag="v3")

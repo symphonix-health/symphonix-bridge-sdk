@@ -17,22 +17,29 @@ class SseAdapter(ProtocolAdapter):
             return 0.85
         return 0.0
 
-    async def to_canonical(self, raw: Any, metadata: dict[str, Any] | None = None) -> CanonicalEnvelope:
+    async def to_canonical(
+        self, raw: Any, metadata: dict[str, Any] | None = None
+    ) -> CanonicalEnvelope:
         meta = metadata or {}
         envelope = CanonicalEnvelope(
             source_protocol=self.protocol.value,
             correlation_id=meta.get("correlation_id", ""),
-            raw_source=raw, raw_source_type="SSE",
+            raw_source=raw,
+            raw_source_type="SSE",
         )
         event = raw.get("sse_event", raw) if isinstance(raw, dict) else {}
-        envelope.fhir_resources = [{
-            "resourceType": "Communication",
-            "id": f"sse-{envelope.envelope_id[:8]}",
-            "status": "completed",
-            "topic": [{"text": event.get("event", "unknown")}],
-            "payload": [{"contentString": str(event.get("data", {}))}],
-        }]
+        envelope.fhir_resources = [
+            {
+                "resourceType": "Communication",
+                "id": f"sse-{envelope.envelope_id[:8]}",
+                "status": "completed",
+                "topic": [{"text": event.get("event", "unknown")}],
+                "payload": [{"contentString": str(event.get("data", {}))}],
+            }
+        ]
         return envelope
 
-    async def from_canonical(self, envelope: CanonicalEnvelope, target_config: dict[str, Any] | None = None) -> Any:
+    async def from_canonical(
+        self, envelope: CanonicalEnvelope, target_config: dict[str, Any] | None = None
+    ) -> Any:
         return f"event: bridge_response\ndata: {envelope.model_dump_json()}\n\n"

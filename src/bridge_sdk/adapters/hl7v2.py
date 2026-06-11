@@ -15,14 +15,20 @@ class Hl7v2Adapter(ProtocolAdapter):
         if isinstance(raw, str) and raw.startswith("MSH|"):
             return 0.99
         if isinstance(raw, dict):
-            if raw.get("hl7v2_message") or raw.get("type", "").startswith("ADT") or raw.get("type", "").startswith("ORU"):
+            if (
+                raw.get("hl7v2_message")
+                or raw.get("type", "").startswith("ADT")
+                or raw.get("type", "").startswith("ORU")
+            ):
                 return 0.9
         meta = metadata or {}
         if meta.get("protocol") == "HL7v2" or meta.get("port") == 2575:
             return 0.85
         return 0.0
 
-    async def to_canonical(self, raw: Any, metadata: dict[str, Any] | None = None) -> CanonicalEnvelope:
+    async def to_canonical(
+        self, raw: Any, metadata: dict[str, Any] | None = None
+    ) -> CanonicalEnvelope:
         meta = metadata or {}
         envelope = CanonicalEnvelope(
             source_protocol=self.protocol.value,
@@ -44,12 +50,20 @@ class Hl7v2Adapter(ProtocolAdapter):
             envelope.fhir_resources = self._orm_to_fhir(hl7)
         else:
             # Generic — wrap as Basic
-            envelope.fhir_resources = [{"resourceType": "Basic", "code": {"text": msg_type}, "extension": [{"url": "hl7v2-payload", "valueString": str(hl7)}]}]
+            envelope.fhir_resources = [
+                {
+                    "resourceType": "Basic",
+                    "code": {"text": msg_type},
+                    "extension": [{"url": "hl7v2-payload", "valueString": str(hl7)}],
+                }
+            ]
 
         envelope.extract_loinc_codes()
         return envelope
 
-    async def from_canonical(self, envelope: CanonicalEnvelope, target_config: dict[str, Any] | None = None) -> Any:
+    async def from_canonical(
+        self, envelope: CanonicalEnvelope, target_config: dict[str, Any] | None = None
+    ) -> Any:
         """Generate HL7v2 message from FHIR resources."""
         config = target_config or {}
         msg_type = config.get("message_type", "ADT^A08")
@@ -62,7 +76,9 @@ class Hl7v2Adapter(ProtocolAdapter):
             if rtype == "Patient":
                 segments.append(self._fhir_patient_to_pid(resource))
             elif rtype in ("Encounter", "ServiceRequest"):
-                segments.append(f"PV1|1|{resource.get('class', {}).get('code', 'I')}|||||||||||||||")
+                segments.append(
+                    f"PV1|1|{resource.get('class', {}).get('code', 'I')}|||||||||||||||"
+                )
             elif rtype == "Observation":
                 segments.append(self._fhir_observation_to_obx(resource))
 
@@ -87,7 +103,11 @@ class Hl7v2Adapter(ProtocolAdapter):
             "status": "in-progress",
             "class": {"code": pv1.get("patient_class", "IMP")},
             "subject": {"reference": f"Patient/{pid.get('patient_id', 'unknown')}"},
-            "participant": [{"individual": {"display": pv1.get("attending_doctor", "")}}] if pv1.get("attending_doctor") else [],
+            "participant": [
+                {"individual": {"display": pv1.get("attending_doctor", "")}}
+            ]
+            if pv1.get("attending_doctor")
+            else [],
         }
         return [patient, encounter]
 
@@ -105,31 +125,42 @@ class Hl7v2Adapter(ProtocolAdapter):
                 "id": f"obs-{obs_id.get('code', 'unknown')}",
                 "status": "final" if obx.get("status") == "F" else "preliminary",
                 "code": {
-                    "coding": [{
-                        "system": obs_id.get("system", "http://loinc.org"),
-                        "code": obs_id.get("code", ""),
-                        "display": obs_id.get("display", ""),
-                    }]
+                    "coding": [
+                        {
+                            "system": obs_id.get("system", "http://loinc.org"),
+                            "code": obs_id.get("code", ""),
+                            "display": obs_id.get("display", ""),
+                        }
+                    ]
                 },
-                "subject": {"reference": f"Patient/{pid.get('patient_id', hl7.get('pid', {}).get('patient_id', 'unknown'))}"},
+                "subject": {
+                    "reference": f"Patient/{pid.get('patient_id', hl7.get('pid', {}).get('patient_id', 'unknown'))}"
+                },
             }
             if "value" in obx:
                 if isinstance(obx["value"], (int, float)):
-                    observation["valueQuantity"] = {"value": obx["value"], "unit": obx.get("unit", "")}
+                    observation["valueQuantity"] = {
+                        "value": obx["value"],
+                        "unit": obx.get("unit", ""),
+                    }
                 else:
                     observation["valueString"] = str(obx["value"])
             if obx.get("abnormal_flag"):
-                observation["interpretation"] = [{"coding": [{"code": obx["abnormal_flag"]}]}]
+                observation["interpretation"] = [
+                    {"coding": [{"code": obx["abnormal_flag"]}]}
+                ]
             resources.append(observation)
         return resources
 
     def _orm_to_fhir(self, hl7: dict) -> list[dict]:
-        return [{"resourceType": "ServiceRequest", "status": "active", "intent": "order"}]
+        return [
+            {"resourceType": "ServiceRequest", "status": "active", "intent": "order"}
+        ]
 
     # --- FHIR -> HL7v2 mappings ---
 
     def _build_msh(self, envelope: CanonicalEnvelope, msg_type: str) -> str:
-        return f"MSH|^~\\&|BRIDGE|BULLETTRAIN|TARGET|TARGET_FAC|{envelope.timestamp[:14].replace('-','').replace('T','').replace(':','')}||{msg_type}|{envelope.correlation_id}|P|2.5.1"
+        return f"MSH|^~\\&|BRIDGE|BULLETTRAIN|TARGET|TARGET_FAC|{envelope.timestamp[:14].replace('-', '').replace('T', '').replace(':', '')}||{msg_type}|{envelope.correlation_id}|P|2.5.1"
 
     def _fhir_patient_to_pid(self, patient: dict) -> str:
         pid = patient.get("id", "")

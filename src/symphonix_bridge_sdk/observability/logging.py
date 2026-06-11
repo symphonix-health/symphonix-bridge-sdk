@@ -6,16 +6,27 @@ import logging
 import json
 from datetime import datetime, timezone
 
+# python-json-logger moved JsonFormatter from `pythonjsonlogger.jsonlogger`
+# (<=2.x) to `pythonjsonlogger.json` (>=3.x), and dropped the legacy
+# `jsonlogger.JsonFormatter` attribute entirely in 4.x. Resolve the class
+# from whichever location the installed version provides; fall back to None
+# so configure_logging() uses the stdlib-only formatter.
+_JsonFormatter = None
 try:
-    from pythonjsonlogger import jsonlogger
+    from pythonjsonlogger.json import JsonFormatter as _JsonFormatter
 except ModuleNotFoundError:
-    jsonlogger = None
+    try:
+        from pythonjsonlogger.jsonlogger import JsonFormatter as _JsonFormatter
+    except (ModuleNotFoundError, ImportError):
+        _JsonFormatter = None
 
 
 class _FallbackJsonFormatter(logging.Formatter):
     def format(self, record: logging.LogRecord) -> str:
         payload = {
-            "timestamp": datetime.fromtimestamp(record.created, timezone.utc).isoformat(),
+            "timestamp": datetime.fromtimestamp(
+                record.created, timezone.utc
+            ).isoformat(),
             "service": getattr(record, "service", ""),
             "logger": record.name,
             "level": record.levelname,
@@ -51,7 +62,9 @@ class _ObservabilityFilter(logging.Filter):
 
             span_context = trace.get_current_span().get_span_context()
             if span_context.is_valid:
-                record.trace_id = record.trace_id or format(span_context.trace_id, "032x")
+                record.trace_id = record.trace_id or format(
+                    span_context.trace_id, "032x"
+                )
                 record.span_id = record.span_id or format(span_context.span_id, "016x")
         except Exception:
             pass
@@ -61,12 +74,16 @@ class _ObservabilityFilter(logging.Filter):
 def configure_logging(service_name: str, level: str = "INFO") -> None:
     handler = logging.StreamHandler()
     handler.addFilter(_ObservabilityFilter(service_name))
-    if jsonlogger is None:
+    if _JsonFormatter is None:
         formatter = _FallbackJsonFormatter()
     else:
-        formatter = jsonlogger.JsonFormatter(
+        formatter = _JsonFormatter(
             "%(asctime)s %(service)s %(name)s %(levelname)s %(message)s %(trace_id)s %(span_id)s %(correlation_id)s",
-            rename_fields={"asctime": "timestamp", "levelname": "level", "name": "logger"},
+            rename_fields={
+                "asctime": "timestamp",
+                "levelname": "level",
+                "name": "logger",
+            },
         )
     handler.setFormatter(formatter)
 

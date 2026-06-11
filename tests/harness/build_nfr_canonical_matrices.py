@@ -8,6 +8,7 @@ one BT_CANONICAL_MATRIX_V1_14COL file per NFR into
 Run after refreshing the FRs (build_requirements_superset.py) and the
 derived NFRs (build_derived_nfrs.py).
 """
+
 from __future__ import annotations
 
 import json
@@ -29,7 +30,8 @@ if _SIBLING_CAID_SRC.exists() and str(_SIBLING_CAID_SRC) not in sys.path:
 def main() -> None:
     try:
         from caid.nfr_canonical_matrix import (
-            build_all_nfr_matrices, write_matrices,
+            build_all_nfr_matrices,
+            write_matrices,
         )
         from caid.task_spec import RequirementLink, AcceptanceCriterion
     except ImportError as exc:
@@ -40,9 +42,7 @@ def main() -> None:
         ) from exc
 
     if not DERIVED.exists():
-        raise SystemExit(
-            f"missing {DERIVED} — run build_derived_nfrs.py first"
-        )
+        raise SystemExit(f"missing {DERIVED} — run build_derived_nfrs.py first")
     if not SUPERSET.exists():
         raise SystemExit(
             f"missing {SUPERSET} — run build_requirements_superset.py first"
@@ -67,21 +67,23 @@ def main() -> None:
             )
             for a in raw.get("acceptance_criteria", [])
         ]
-        nfrs.append(RequirementLink(
-            req_id=raw["requirement_id"],
-            title=raw.get("title", ""),
-            statement=raw.get("statement", ""),
-            rationale=raw.get("rationale", ""),
-            category=raw.get("category", "non-functional"),
-            priority=raw.get("priority", "HIGH"),
-            nfr_aspects=[
-                raw.get("iso_25010_characteristic", ""),
-                raw.get("iso_25010_subcharacteristic", ""),
-            ],
-            regulatory_ref=raw.get("regulatory_ref", ""),
-            trace_links=raw.get("trace_links", []),
-            acceptance_criteria=acs,
-        ))
+        nfrs.append(
+            RequirementLink(
+                req_id=raw["requirement_id"],
+                title=raw.get("title", ""),
+                statement=raw.get("statement", ""),
+                rationale=raw.get("rationale", ""),
+                category=raw.get("category", "non-functional"),
+                priority=raw.get("priority", "HIGH"),
+                nfr_aspects=[
+                    raw.get("iso_25010_characteristic", ""),
+                    raw.get("iso_25010_subcharacteristic", ""),
+                ],
+                regulatory_ref=raw.get("regulatory_ref", ""),
+                trace_links=raw.get("trace_links", []),
+                acceptance_criteria=acs,
+            )
+        )
 
     if not nfrs:
         print("[INFO] no NFRs to materialise (empty derived_nfrs.json)")

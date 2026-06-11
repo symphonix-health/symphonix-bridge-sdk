@@ -22,6 +22,7 @@ What is genuinely NEW (FR-CS-*, verified ABSENT):
 Requirements: FR-CS-001..003, NFR-CS-001..002
 (``BulletTrain/docs/CLINICAL_SAFETY_REQUIREMENTS.md``).
 """
+
 from __future__ import annotations
 
 import ipaddress
@@ -101,11 +102,12 @@ class ClinicalSafetyCase:
     contraindicated_behaviours: list[str] = field(default_factory=list)
     override_rules: list[str] = field(default_factory=list)
     rollout_constraints: list[str] = field(default_factory=list)
-    approved_by: str | None = None    # named approver; None => not approved
+    approved_by: str | None = None  # named approver; None => not approved
 
     def uncontrolled_critical_hazards(self) -> list[Hazard]:
         return [
-            h for h in self.hazards
+            h
+            for h in self.hazards
             if h.severity is HazardSeverity.critical and not h.controlled
         ]
 

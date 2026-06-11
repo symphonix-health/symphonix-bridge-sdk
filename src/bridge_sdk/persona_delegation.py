@@ -29,6 +29,7 @@ This module degrades gracefully without PyJWT: ``mint``/``verify`` raise a clear
 ``DelegationError`` if ``pyjwt`` is not installed, but the binding model,
 scope-unification, and fail-closed checks are pure-python and always available.
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -118,15 +119,18 @@ def unify_scope(raw: str) -> PersonaScope:
 class PersonaTokenClaims:
     """The six mandated bindings carried by every persona token (FR-ID-001)."""
 
-    persona: str                      # persona key, e.g. "triage-intake-agent"
-    patient_context: str | None       # 1. patient context (FHIR ref) or None
-    purpose_of_use: str               # 2. purpose of use (treatment/emergency/...)
+    persona: str  # persona key, e.g. "triage-intake-agent"
+    patient_context: str | None  # 1. patient context (FHIR ref) or None
+    purpose_of_use: str  # 2. purpose of use (treatment/emergency/...)
     allowed_systems: tuple[str, ...]  # 3. allowed systems (component ids)
-    max_concurrency: int              # 4. max concurrent workflows
-    emergency: bool                   # 5. emergency (break-glass) flag
+    max_concurrency: int  # 4. max concurrent workflows
+    emergency: bool  # 5. emergency (break-glass) flag
     scopes: tuple[PersonaScope, ...]  # 6. UI/API action scopes
-    subject: str = "agent"            # the delegated principal (the agent)
-    actor: str | None = None          # RFC 8693 act: who delegated (the user)
+    subject: str = "agent"  # the delegated principal (the agent)
+    actor: str | None = None  # RFC 8693 act: who delegated (the user)
+    token_id: str | None = None  # JWT ID for audit without storing the token
+    contract_id: str | None = None  # Superpersona contract binding
+    contract_version: str | None = None
 
     def to_jwt_payload(self, *, issued_at: int, ttl_seconds: int) -> dict[str, Any]:
         """Build the JWT claim set, including RFC 8693 ``act`` and ``exp``."""
@@ -144,6 +148,12 @@ class PersonaTokenClaims:
             "iat": issued_at,
             "exp": issued_at + ttl_seconds,
         }
+        if self.token_id is not None:
+            payload["jti"] = self.token_id
+        if self.contract_id is not None:
+            payload["contract_id"] = self.contract_id
+        if self.contract_version is not None:
+            payload["contract_version"] = self.contract_version
         if self.actor is not None:
             # RFC 8693 delegation: the token acts on behalf of `actor`.
             payload["act"] = {"sub": self.actor}
@@ -246,7 +256,9 @@ def verify_persona_token(
     allowed = algorithms or sorted(ALLOWED_ALGORITHMS)
     bad = set(allowed) - ALLOWED_ALGORITHMS
     if bad:
-        raise DelegationError(f"verify refuses non-asymmetric algorithms: {sorted(bad)}")
+        raise DelegationError(
+            f"verify refuses non-asymmetric algorithms: {sorted(bad)}"
+        )
 
     try:
         import jwt  # PyJWT
@@ -294,7 +306,9 @@ def jkt_from_jwk(jwk: dict[str, str]) -> str:
     import json
 
     # RFC 7638: lexicographically-ordered required members, no whitespace.
-    members = {k: jwk[k] for k in sorted(jwk) if k in {"crv", "e", "kty", "n", "x", "y"}}
+    members = {
+        k: jwk[k] for k in sorted(jwk) if k in {"crv", "e", "kty", "n", "x", "y"}
+    }
     canonical = json.dumps(members, separators=(",", ":"), sort_keys=True)
     digest = hashlib.sha256(canonical.encode("utf-8")).digest()
     return base64.urlsafe_b64encode(digest).rstrip(b"=").decode("ascii")

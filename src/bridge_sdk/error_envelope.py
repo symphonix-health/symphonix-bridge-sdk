@@ -24,6 +24,7 @@ ABSENT (the genuine WS5 build, verified by grep):
 Requirements: FR-ER-001..003, NFR-ER-001..002
 (``BulletTrain/docs/ERROR_ENVELOPE_REQUIREMENTS.md``).
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -53,11 +54,11 @@ class PreconditionFailed(Exception):
 class ClinicianSafetySeverity(str, Enum):
     """Clinician-facing severity carried on every domain error (FR-ER-001)."""
 
-    none = "none"            # operational only, no clinical bearing
-    low = "low"             # minor; clinician informed, no action needed
-    moderate = "moderate"   # clinician review advised
-    high = "high"           # clinician action required before proceeding
-    critical = "critical"   # patient-safety relevant; escalate immediately
+    none = "none"  # operational only, no clinical bearing
+    low = "low"  # minor; clinician informed, no action needed
+    moderate = "moderate"  # clinician review advised
+    high = "high"  # clinician action required before proceeding
+    critical = "critical"  # patient-safety relevant; escalate immediately
 
 
 # Forward action -> registered compensation (FR-ER-003). Mirrors the plan's
@@ -65,7 +66,7 @@ class ClinicianSafetySeverity(str, Enum):
 # bullettrain.resilience.saga.SagaCompensator; this is the vocabulary.
 _COMPENSATIONS: dict[str, str] = {
     "book": "cancel",
-    "create": "update",          # forward create compensated by a corrective update
+    "create": "update",  # forward create compensated by a corrective update
     "reserve": "release",
     "claim": "void",
     "order": "retract",

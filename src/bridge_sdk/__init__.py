@@ -130,6 +130,17 @@ from bridge_sdk.persona_delegation import (
     unify_scope,
     verify_persona_token,
 )
+from bridge_sdk.superpersona_contract import (
+    EvalPackRef,
+    IntuitionDecision,
+    RuntimeBudgetPolicy,
+    SkillPackRef,
+    SuperpersonaContract,
+    ToolBinding,
+    ToolProtocol,
+    build_superpersona_contract,
+    reference_superpersona_contract,
+)
 from bridge_sdk.telemetry_schema import (
     CANONICAL_TELEMETRY_FIELDS,
     SCHEMA_VERSION,
@@ -236,6 +247,15 @@ __all__ = [
     "mint_persona_token",
     "unify_scope",
     "verify_persona_token",
+    "EvalPackRef",
+    "IntuitionDecision",
+    "RuntimeBudgetPolicy",
+    "SkillPackRef",
+    "SuperpersonaContract",
+    "ToolBinding",
+    "ToolProtocol",
+    "build_superpersona_contract",
+    "reference_superpersona_contract",
     "CANONICAL_TELEMETRY_FIELDS",
     "SCHEMA_VERSION",
     "EmitterStatus",

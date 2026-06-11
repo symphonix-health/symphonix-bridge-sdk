@@ -1,4 +1,5 @@
 """Tests for the Agent Execution Contract manifests (Workstream 1, FR-AEC-*)."""
+
 from __future__ import annotations
 
 import pytest
@@ -179,8 +180,12 @@ def test_execution_mode_normalisation_covers_every_path() -> None:
 def test_resolver_decision_exposes_normalised_execution_mode() -> None:
     api = ResolverDecision(intent="claim.submit", path=ResolverPath.api)
     nexus = ResolverDecision(intent="lab.order", path=ResolverPath.nexus)
-    ui = ResolverDecision(intent="legacy.x", path=ResolverPath.ui_fallback, reason="no entry")
-    browser = ResolverDecision(intent="legacy.y", path=ResolverPath.browser, reason="no entry")
+    ui = ResolverDecision(
+        intent="legacy.x", path=ResolverPath.ui_fallback, reason="no entry"
+    )
+    browser = ResolverDecision(
+        intent="legacy.y", path=ResolverPath.browser, reason="no entry"
+    )
     assert api.execution_mode is ExecutionMode.typed_api
     assert nexus.execution_mode is ExecutionMode.typed_api
     assert ui.execution_mode is ExecutionMode.semantic_ui

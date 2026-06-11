@@ -88,5 +88,6 @@ def test_nhs_number_system_is_blocked_as_internal_identifier() -> None:
     with pytest.raises(PatientIdentityError):
         assert_not_nhs_identifier({"system": NHS_NUMBER_SYSTEM, "value": "9434765919"})
 
-    assert_not_nhs_identifier({"system": SYMPHONIX_PATIENT_ID_SYSTEM, "value": "9000000009"})
-
+    assert_not_nhs_identifier(
+        {"system": SYMPHONIX_PATIENT_ID_SYSTEM, "value": "9000000009"}
+    )

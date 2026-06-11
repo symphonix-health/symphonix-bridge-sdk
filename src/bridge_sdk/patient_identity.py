@@ -60,7 +60,10 @@ def is_valid_patient_id(value: str | int) -> bool:
     if len(set(digits)) == 1:
         return False
 
-    total = sum(int(digit) * weight for digit, weight in zip(digits[:9], range(10, 1, -1), strict=True))
+    total = sum(
+        int(digit) * weight
+        for digit, weight in zip(digits[:9], range(10, 1, -1), strict=True)
+    )
     check_digit = 11 - (total % 11)
     if check_digit == 11:
         check_digit = 0
@@ -119,7 +122,9 @@ def extract_patient_id_from_fhir(resource: dict[str, Any]) -> str | None:
         nested = resource.get(key)
         if isinstance(nested, dict):
             reference = nested.get("reference")
-            if isinstance(reference, str) and reference.startswith(PATIENT_REFERENCE_PREFIX):
+            if isinstance(reference, str) and reference.startswith(
+                PATIENT_REFERENCE_PREFIX
+            ):
                 candidate = reference.removeprefix(PATIENT_REFERENCE_PREFIX)
                 if is_valid_patient_id(candidate):
                     return normalize_patient_id(candidate)
@@ -134,4 +139,3 @@ def assert_not_nhs_identifier(identifier: dict[str, Any]) -> None:
         raise PatientIdentityError(
             "NHS Number identifiers are external aliases and must not be used as the Symphonix Patient Identifier"
         )
-

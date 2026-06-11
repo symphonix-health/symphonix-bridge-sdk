@@ -64,9 +64,13 @@ def init_tracer(service_name: str, otlp_endpoint: str | None = None) -> trace.Tr
         endpoint = otlp_endpoint or os.getenv("OTEL_EXPORTER_OTLP_ENDPOINT")
         if endpoint and _endpoint_is_usable(endpoint):
             try:
-                from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+                from opentelemetry.exporter.otlp.proto.http.trace_exporter import (
+                    OTLPSpanExporter,
+                )
 
-                provider.add_span_processor(BatchSpanProcessor(OTLPSpanExporter(endpoint=endpoint)))
+                provider.add_span_processor(
+                    BatchSpanProcessor(OTLPSpanExporter(endpoint=endpoint))
+                )
             except Exception:
                 pass
         trace.set_tracer_provider(provider)

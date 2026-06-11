@@ -19,6 +19,7 @@ reimplementation (FR-RO-003 / NFR-RO-001).
 Requirements: FR-RO-001..003, NFR-RO-001..002
 (``BulletTrain/docs/ROLLOUT_REQUIREMENTS.md``).
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -41,13 +42,13 @@ __all__ = [
 # Reusing these -- rather than re-implementing per app -- is what keeps onboarding
 # bounded. The names map to the WS1-11 modules.
 REQUIRED_SHARED_CAPABILITIES: tuple[str, ...] = (
-    "agent_contract",       # WS1 AgentActionManifest
-    "execution_ledger",     # WS2
-    "persona_delegation",   # WS3
-    "agent_audit",          # WS4
-    "error_envelope",       # WS5
-    "consent_projection",   # WS9
-    "human_handoff",        # WS11
+    "agent_contract",  # WS1 AgentActionManifest
+    "execution_ledger",  # WS2
+    "persona_delegation",  # WS3
+    "agent_audit",  # WS4
+    "error_envelope",  # WS5
+    "consent_projection",  # WS9
+    "human_handoff",  # WS11
 )
 
 # Ladder ordering (mirrors clinical_safety_case._STAGE_ORDER).
@@ -120,7 +121,9 @@ class PromotionOrchestrator:
     (FR-RO-002-AC01). Shadow is always permitted (the starting rung).
     """
 
-    def __init__(self, *, release_gate: ReleaseGate, safety_case: ClinicalSafetyCase) -> None:
+    def __init__(
+        self, *, release_gate: ReleaseGate, safety_case: ClinicalSafetyCase
+    ) -> None:
         self._gate = release_gate
         self._safety = safety_case
 
@@ -174,7 +177,9 @@ class SiblingOnboarding:
     reimplemented: set[str] = field(default_factory=set)  # forbidden; must stay empty
 
     def missing(self) -> list[str]:
-        return [c for c in REQUIRED_SHARED_CAPABILITIES if c not in self.wired_capabilities]
+        return [
+            c for c in REQUIRED_SHARED_CAPABILITIES if c not in self.wired_capabilities
+        ]
 
     def validate(self) -> None:
         """Raise ``OnboardingError`` on a missing or forked capability."""

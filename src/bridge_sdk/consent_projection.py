@@ -26,6 +26,7 @@ version stamp (so a later revocation invalidates it).
 Requirements: FR-PC-001..003, NFR-PC-001..002
 (``BulletTrain/docs/CONSENT_PROJECTION_REQUIREMENTS.md``).
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -77,12 +78,12 @@ class ConsentProjection:
     references, never clinical content (FR-PC-002).
     """
 
-    consent_reference: str            # e.g. "Consent/abc" -- a reference, not content
-    patient_reference: str            # e.g. "Patient/123"
+    consent_reference: str  # e.g. "Consent/abc" -- a reference, not content
+    patient_reference: str  # e.g. "Patient/123"
     permitted_purposes: frozenset[str]
     permitted_resource_types: frozenset[str]
     approved_jurisdictions: frozenset[str]
-    consent_version: int              # bumps on withdraw; stale version => revoked
+    consent_version: int  # bumps on withdraw; stale version => revoked
     active: bool = True
 
     @property

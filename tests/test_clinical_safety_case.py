@@ -1,4 +1,5 @@
 """Tests for the clinical safety case + MCP transport guard (WS10, FR-CS-*/NFR-CS-*)."""
+
 from __future__ import annotations
 
 import pytest
@@ -19,8 +20,13 @@ def _case(**over) -> ClinicalSafetyCase:
     base = dict(
         persona="triage-intake-agent",
         hazards=[
-            Hazard("HAZ-1", "under-triage of chest pain", HazardSeverity.critical,
-                   "mandatory red-flag escalation", controlled=True),
+            Hazard(
+                "HAZ-1",
+                "under-triage of chest pain",
+                HazardSeverity.critical,
+                "mandatory red-flag escalation",
+                controlled=True,
+            ),
         ],
         contraindicated_behaviours=["auto-discharge without clinician sign-off"],
         override_rules=["clinician may override urgency band with reason"],
@@ -32,6 +38,7 @@ def _case(**over) -> ClinicalSafetyCase:
 
 
 # ---- FR-CS-001: promotion gated by an approved safety case -------------
+
 
 def test_shadow_allowed_without_approval() -> None:
     case = _case(approved_by=None)
@@ -49,9 +56,17 @@ def test_promotion_past_shadow_requires_approved_case() -> None:
 
 
 def test_uncontrolled_critical_hazard_blocks_promotion() -> None:
-    case = _case(hazards=[
-        Hazard("HAZ-2", "missed sepsis", HazardSeverity.critical, "screen", controlled=False),
-    ])
+    case = _case(
+        hazards=[
+            Hazard(
+                "HAZ-2",
+                "missed sepsis",
+                HazardSeverity.critical,
+                "screen",
+                controlled=False,
+            ),
+        ]
+    )
     assert case.uncontrolled_critical_hazards()
     with pytest.raises(SafetyCaseError):
         case.assert_promotion(AutonomyStage.bounded_auto)
@@ -65,6 +80,7 @@ def test_approved_case_promotes() -> None:
 
 
 # ---- FR-CS-002: hazard log + mandatory post-event review ---------------
+
 
 def test_case_carries_hazard_log_linked_to_persona() -> None:
     case = _case()
@@ -90,6 +106,7 @@ def test_break_glass_review_requires_named_reviewer() -> None:
 
 # ---- FR-CS-003 + NFR-CS-002: MCP transport lockdown --------------------
 
+
 def test_consent_required_and_client_bound() -> None:
     g = McpTransportGuard(granted_scopes=frozenset({"task:execute"}))
     with pytest.raises(McpTransportError) as ei:
@@ -112,11 +129,11 @@ def test_token_passthrough_rejected() -> None:
 @pytest.mark.parametrize(
     "url",
     [
-        "http://169.254.169.254/latest/meta-data/",   # cloud metadata
-        "http://localhost:8000/admin",                 # loopback by name
-        "http://127.0.0.1:9000/",                      # loopback IP
-        "http://10.0.0.5/internal",                    # private
-        "http://[::1]/",                               # ipv6 loopback
+        "http://169.254.169.254/latest/meta-data/",  # cloud metadata
+        "http://localhost:8000/admin",  # loopback by name
+        "http://127.0.0.1:9000/",  # loopback IP
+        "http://10.0.0.5/internal",  # private
+        "http://[::1]/",  # ipv6 loopback
     ],
 )
 def test_ssrf_blocks_internal_targets(url) -> None:

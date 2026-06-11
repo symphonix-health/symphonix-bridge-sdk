@@ -1,4 +1,5 @@
 """Tests for concurrency/budgets/isolation (Workstream 6, FR-CC-*/NFR-CC-*)."""
+
 from __future__ import annotations
 
 import threading
@@ -19,6 +20,7 @@ from bridge_sdk.concurrency import (
 
 
 # ---- FR-CC-001: per-persona execution budgets --------------------------
+
 
 def test_concurrent_workflow_budget_blocks_over_limit() -> None:
     b = PersonaExecutionBudget(ExecutionBudgetLimits(max_concurrent_workflows=2))
@@ -42,12 +44,21 @@ def test_budget_is_per_persona_not_global() -> None:
 @pytest.mark.parametrize(
     "charge,dimension,limits",
     [
-        (lambda b: b.charge_action("p", 200), "max_screen_actions_per_min",
-         ExecutionBudgetLimits(max_screen_actions_per_min=120)),
-        (lambda b: b.charge_tokens("p", 300_000), "max_model_tokens",
-         ExecutionBudgetLimits(max_model_tokens=200_000)),
-        (lambda b: b.charge_write("p", 100), "max_downstream_writes",
-         ExecutionBudgetLimits(max_downstream_writes=50)),
+        (
+            lambda b: b.charge_action("p", 200),
+            "max_screen_actions_per_min",
+            ExecutionBudgetLimits(max_screen_actions_per_min=120),
+        ),
+        (
+            lambda b: b.charge_tokens("p", 300_000),
+            "max_model_tokens",
+            ExecutionBudgetLimits(max_model_tokens=200_000),
+        ),
+        (
+            lambda b: b.charge_write("p", 100),
+            "max_downstream_writes",
+            ExecutionBudgetLimits(max_downstream_writes=50),
+        ),
     ],
 )
 def test_each_budget_dimension_blocks(charge, dimension, limits) -> None:
@@ -77,6 +88,7 @@ def test_saturation_reports_breaches() -> None:
 
 
 # ---- FR-CC-002: single-writer for mutable patient workflows ------------
+
 
 def test_single_writer_blocks_second_writer() -> None:
     lock = SingleWriterLock()
@@ -117,6 +129,7 @@ def test_single_writer_concurrent_race_yields_one_winner() -> None:
 
 
 # ---- FR-CC-003: urgency queue + emergency override ---------------------
+
 
 def test_urgency_queue_dequeues_critical_first() -> None:
     q = UrgencyQueue()

@@ -14,6 +14,7 @@ Usage::
 The engine is loaded from ``../caid-agent/src`` (workspace-sibling)
 or from an installed ``caid`` package, whichever is found first.
 """
+
 from __future__ import annotations
 
 import json
@@ -39,8 +40,14 @@ def _scale_tier_for_subsystem(subsystem: str) -> str:
     defaults to 'production'.
     """
     sovereign = {
-        "eps", "etps", "global-agent-registry", "kenya-uhc-implementation",
-        "clinical-pathways", "signalbox-mcp", "csaa", "triage-api",
+        "eps",
+        "etps",
+        "global-agent-registry",
+        "kenya-uhc-implementation",
+        "clinical-pathways",
+        "signalbox-mcp",
+        "csaa",
+        "triage-api",
     }
     return "sovereign" if subsystem in sovereign else "production"
 
@@ -49,8 +56,11 @@ def _project_type_for_subsystem(subsystem: str) -> str:
     """Heuristic project-type per workspace."""
     if subsystem in {"design-system"}:
         return "design_system"
-    if subsystem in {"symphonix-public", "healthcare-pain-points-plan",
-                     "symphonix-eps-ig"}:
+    if subsystem in {
+        "symphonix-public",
+        "healthcare-pain-points-plan",
+        "symphonix-eps-ig",
+    }:
         return "docs_site"
     if subsystem in {"symphonix-bridge-sdk"}:
         return "sdk"
@@ -60,15 +70,24 @@ def _project_type_for_subsystem(subsystem: str) -> str:
 def _regulatory_regime_for_subsystem(subsystem: str) -> list[str]:
     """Heuristic regulatory regime per workspace."""
     base = ["ISO_27001", "ISO_27701"]
-    if subsystem in {"eps", "etps", "clinical-pathways", "signalbox-mcp",
-                     "csaa", "triage-api"}:
+    if subsystem in {
+        "eps",
+        "etps",
+        "clinical-pathways",
+        "signalbox-mcp",
+        "csaa",
+        "triage-api",
+    }:
         base += ["NHS_DCB", "MHRA_SAMD", "GDPR"]
     if subsystem == "kenya-uhc-implementation":
         base += ["KENYA_DPA"]
     if subsystem == "global-agent-registry":
         base += ["EU_AI_ACT", "ISO_42001"]
-    if subsystem in {"appointment-system", "scheduling-gateway",
-                     "symphonix-bridge-sdk"}:
+    if subsystem in {
+        "appointment-system",
+        "scheduling-gateway",
+        "symphonix-bridge-sdk",
+    }:
         base += ["HIPAA", "GDPR"]
     return base
 
@@ -131,9 +150,9 @@ def main() -> None:
             "project_type": _project_type_for_subsystem(subsystem),
             "regulatory_regime": _regulatory_regime_for_subsystem(subsystem),
             "scale_tier": _scale_tier_for_subsystem(subsystem),
-            "characteristics_covered": sorted({
-                n.nfr_aspects[0] for n in derived if n.nfr_aspects
-            }),
+            "characteristics_covered": sorted(
+                {n.nfr_aspects[0] for n in derived if n.nfr_aspects}
+            ),
         },
         "derived_nfrs": [
             {
@@ -143,9 +162,7 @@ def main() -> None:
                 "rationale": n.rationale,
                 "category": n.category,
                 "priority": n.priority,
-                "iso_25010_characteristic": (
-                    n.nfr_aspects[0] if n.nfr_aspects else ""
-                ),
+                "iso_25010_characteristic": (n.nfr_aspects[0] if n.nfr_aspects else ""),
                 "iso_25010_subcharacteristic": (
                     n.nfr_aspects[1] if len(n.nfr_aspects) > 1 else ""
                 ),
@@ -165,8 +182,7 @@ def main() -> None:
             for n in derived
         ],
     }
-    OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False),
-                   encoding="utf-8")
+    OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
     chars = ", ".join(payload["metadata"]["characteristics_covered"])
     print(f"[OK] {OUT.name} — {len(derived)} NFRs from {len(frs)} FRs")
     print(f"     characteristics: {chars}")

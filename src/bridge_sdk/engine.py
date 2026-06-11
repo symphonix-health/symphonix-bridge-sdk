@@ -8,12 +8,11 @@ Fixes: G1 (response mechanism), G4 (consent propagation), G6 (agent rejection),
 from __future__ import annotations
 
 import asyncio
-import hashlib
 import logging
 import time
 from typing import Any
 
-from bridge_sdk.canonical import CanonicalEnvelope, TranslationDirection
+from bridge_sdk.canonical import TranslationDirection
 from bridge_sdk.adapters.base import ProtocolAdapter, ProtocolType
 
 logger = logging.getLogger(__name__)
@@ -42,7 +41,9 @@ class BridgeCircuitBreaker:
         self.last_failure_time = time.monotonic()
         if self.failure_count >= self.failure_threshold:
             self.state = CircuitState.OPEN
-            logger.warning("Circuit breaker OPENED after %d failures", self.failure_count)
+            logger.warning(
+                "Circuit breaker OPENED after %d failures", self.failure_count
+            )
 
     def allow_request(self) -> bool:
         if self.state == CircuitState.CLOSED:
@@ -98,7 +99,9 @@ class BridgeEngine:
         for ptype, cls in self._adapter_classes.items():
             try:
                 if ptype == ProtocolType.NEXUS_A2A:
-                    self._adapter_instances[ptype] = cls(callback_base_url=callback_base_url)
+                    self._adapter_instances[ptype] = cls(
+                        callback_base_url=callback_base_url
+                    )
                 else:
                     self._adapter_instances[ptype] = cls()
             except TypeError:
@@ -109,7 +112,9 @@ class BridgeEngine:
             raise ValueError(f"No adapter registered for {protocol}")
         return self._adapter_instances[protocol]
 
-    def detect_protocol(self, raw: Any, metadata: dict[str, Any] | None = None) -> ProtocolType:
+    def detect_protocol(
+        self, raw: Any, metadata: dict[str, Any] | None = None
+    ) -> ProtocolType:
         best_score = 0.0
         best_protocol = ProtocolType.REST
         for ptype, adapter in self._adapter_instances.items():
@@ -179,7 +184,11 @@ class BridgeEngine:
         # 4. GHARRA discovery (FR-003)
         agent_info = None
         discovery_result = None
-        if self._discovery and target_protocol in (ProtocolType.NEXUS_A2A, ProtocolType.FHIR_R4, ProtocolType.GRPC):
+        if self._discovery and target_protocol in (
+            ProtocolType.NEXUS_A2A,
+            ProtocolType.FHIR_R4,
+            ProtocolType.GRPC,
+        ):
             capability = meta.get("target_capability", "")
             if capability:
                 try:
@@ -188,7 +197,9 @@ class BridgeEngine:
                         discovery_result = await self._discovery.discover_and_resolve(
                             capability=capability,
                             jurisdiction=meta.get("jurisdiction"),
-                            preferred_protocol=target_protocol.value if target_protocol else None,
+                            preferred_protocol=target_protocol.value
+                            if target_protocol
+                            else None,
                             correlation_id=envelope.correlation_id,
                             purpose_of_use=envelope.purpose_of_use,
                         )
@@ -200,13 +211,16 @@ class BridgeEngine:
                             envelope.agent_trust = discovery_result.trust
                             # G17: Check data residency
                             if envelope.data_residency and discovery_result.residency:
-                                allowed = set(envelope.data_residency) & set(discovery_result.residency)
+                                allowed = set(envelope.data_residency) & set(
+                                    discovery_result.residency
+                                )
                                 if not allowed:
                                     envelope.error = "DATA_RESIDENCY_VIOLATION"
                                     envelope.error_code = "DATA_RESIDENCY_VIOLATION"
                                     logger.warning(
                                         "Residency violation: patient=%s, agent=%s",
-                                        envelope.data_residency, discovery_result.residency,
+                                        envelope.data_residency,
+                                        discovery_result.residency,
                                     )
                     else:
                         # Fallback to simple discover
@@ -251,17 +265,29 @@ class BridgeEngine:
                         endpoints_to_try.append({"endpoint": alt.url})
 
                 last_error = None
-                for attempt, ep_config in enumerate(endpoints_to_try[:self._max_retries]):
+                for attempt, ep_config in enumerate(
+                    endpoints_to_try[: self._max_retries]
+                ):
                     try:
                         async with bp:
                             dispatch_start = time.monotonic()
-                            dispatch_result = await target_adapter.from_canonical(envelope, ep_config)
+                            dispatch_result = await target_adapter.from_canonical(
+                                envelope, ep_config
+                            )
                             dispatch_ms = (time.monotonic() - dispatch_start) * 1000
-                            envelope.add_hop(target_protocol.value, target_adapter.__class__.__name__, dispatch_ms)
+                            envelope.add_hop(
+                                target_protocol.value,
+                                target_adapter.__class__.__name__,
+                                dispatch_ms,
+                            )
 
                         # G6: Check for agent rejection in dispatch result
-                        if isinstance(dispatch_result, dict) and dispatch_result.get("agent_rejected"):
-                            envelope.error = f"Agent rejected: {dispatch_result.get('error', '')}"
+                        if isinstance(dispatch_result, dict) and dispatch_result.get(
+                            "agent_rejected"
+                        ):
+                            envelope.error = (
+                                f"Agent rejected: {dispatch_result.get('error', '')}"
+                            )
                             envelope.error_code = "AGENT_REJECTED"
                             cb.record_failure()
                         else:
@@ -274,7 +300,9 @@ class BridgeEngine:
                         cb.record_failure()
                         logger.warning("Dispatch attempt %d failed: %s", attempt + 1, e)
                         if attempt < len(endpoints_to_try) - 1:
-                            await asyncio.sleep(0.5 * (2 ** attempt))  # Exponential backoff
+                            await asyncio.sleep(
+                                0.5 * (2**attempt)
+                            )  # Exponential backoff
 
                 if last_error:
                     envelope.error = str(last_error)

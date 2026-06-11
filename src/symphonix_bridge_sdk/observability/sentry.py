@@ -43,4 +43,3 @@ def init_sentry(service_name: str, environment: str = "production") -> None:
         traces_sample_rate=float(os.getenv("SENTRY_TRACES_SAMPLE_RATE", "0.1")),
         before_send=_before_send,
     )
-

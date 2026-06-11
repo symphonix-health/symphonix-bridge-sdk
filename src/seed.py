@@ -79,6 +79,7 @@ from typing import Any
 # arc: rows POS_0001..POS_0085).
 # ---------------------------------------------------------------------------
 
+
 # CAID-SEED-REQ: FR-BSDK-001, FR-BSDK-002
 # CAID-SEED-PK: id=BSDK-PIVOT-001
 @dataclass
@@ -203,7 +204,9 @@ class BsdkR5TransitionPolicySeed:
     active_pivot: str = "R4"
     r4_behaviour_stable: bool = True
     r5_transition_adr: str = "docs/architecture/r5-transition-plan.md"
-    traceability_matrix: str = "tests/harness/json_matrices/compliance-policy_scenarios.json"
+    traceability_matrix: str = (
+        "tests/harness/json_matrices/compliance-policy_scenarios.json"
+    )
 
     @classmethod
     def fixture(cls) -> "BsdkR5TransitionPolicySeed":
@@ -213,6 +216,7 @@ class BsdkR5TransitionPolicySeed:
 # ---------------------------------------------------------------------------
 # Non-functional anchors
 # ---------------------------------------------------------------------------
+
 
 # CAID-SEED-REQ: NFR-BSDK-001
 # CAID-SEED-PK: id=BSDK-IMPORT-STABILITY-001
@@ -340,6 +344,7 @@ class BsdkDeterministicSerialisationSeed:
 # tokens from the 100 compliance_policy_*_NNNN use-case IDs. Each record
 # also explicitly declares the FR/NFR it is bound to via CAID-SEED-REQ.
 # ---------------------------------------------------------------------------
+
 
 # CAID-SEED-REQ: FR-BSDK-001, FR-BSDK-002, FR-BSDK-003, FR-BSDK-004, FR-BSDK-005, FR-BSDK-006, FR-BSDK-007, FR-BSDK-008
 # CAID-SEED-PK: id=BSDK-COMPLIANCE-POLICY-POS
