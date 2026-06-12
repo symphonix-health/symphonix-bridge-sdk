@@ -2,7 +2,7 @@
   "schema_version": "BT_REQUIREMENTS_SUPERSET_V1",
   "metadata": {
     "subsystem": "symphonix-bridge-sdk",
-    "requirement_count": 111,
+    "requirement_count": 266,
     "families": [
       "A_PROMPT_PRESERVED",
       "B_FHIR_PIVOT",
@@ -14,7 +14,8 @@
       "H_OBSERVABILITY",
       "I_SECURITY",
       "J_REA_BASELINE",
-      "K_CROSS_CUTTING_NFR"
+      "K_CROSS_CUTTING_NFR",
+      "MATRIX_TRACEABILITY"
     ]
   },
   "requirements": [
@@ -905,6 +906,1246 @@
       "statement": "Envelope serialisation MUST be deterministic (stable field ordering for audit replay).",
       "category": "non-functional",
       "source": "docs/REQUIREMENTS.md"
+    },
+    {
+      "requirement_id": "DS-001",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-001",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-002",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-002",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-003",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-003",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-101",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-101",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-102",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-102",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-103",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-103",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-104",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-104",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-105",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-105",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-106",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-106",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-107",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-107",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-108",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-108",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-109",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-109",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-110",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-110",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-111",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-111",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-112",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-112",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-113",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-113",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-114",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-114",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-115",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-115",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-116",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-116",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-117",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-117",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-118",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-118",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-119",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-119",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-120",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-120",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-121",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-121",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-122",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-122",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-123",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-123",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-124",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-124",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-125",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-125",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-126",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-126",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-127",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-127",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-128",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-128",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-129",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-129",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-130",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-130",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-131",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-131",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-132",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-132",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-133",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-133",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-134",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-134",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-135",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-135",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-136",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-136",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-137",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-137",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-138",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-138",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-139",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-139",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-140",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-140",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-141",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-141",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-142",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-142",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-143",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-143",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-144",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-144",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-145",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-145",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-146",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-146",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-147",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-147",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-148",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-148",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-149",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-149",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-150",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-150",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-151",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-151",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-152",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-152",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-153",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-153",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-154",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-154",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-155",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-155",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-156",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-156",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-157",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-157",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-158",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-158",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-159",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-159",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-160",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-160",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-161",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-161",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-162",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-162",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-163",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-163",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-164",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-164",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-165",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-165",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-166",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-166",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-167",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-167",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-168",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-168",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-169",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-169",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-170",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-170",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-171",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-171",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-172",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-172",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-173",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-173",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-174",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-174",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-175",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-175",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-176",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-176",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-177",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-177",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-178",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-178",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-179",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-179",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-180",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-180",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-181",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-181",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-182",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-182",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-183",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-183",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-184",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-184",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-185",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-185",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-186",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-186",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-187",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-187",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-188",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-188",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-189",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-189",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-190",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-190",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-191",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-191",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-192",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-192",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-193",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-193",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-194",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-194",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-195",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-195",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "DS-196",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for DS-196",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "FR-001",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for FR-001",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "FR-002",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for FR-002",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "FR-003",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for FR-003",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "FR-004",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for FR-004",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "FR-005",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for FR-005",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "FR-006",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for FR-006",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "FR-007",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for FR-007",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "FR-008",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for FR-008",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "FR-009",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for FR-009",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "FR-010",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for FR-010",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "FR-011",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for FR-011",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "FR-012",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for FR-012",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "FR-013",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for FR-013",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "FR-014",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for FR-014",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "FR-015",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for FR-015",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "FR-016",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for FR-016",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-001",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-001",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-002",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-002",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-CO-001",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-CO-001",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-CO-002",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-CO-002",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-FL-001",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-FL-001",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-FL-002",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-FL-002",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-IC-001",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-IC-001",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-MA-001",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-MA-001",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-MA-002",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-MA-002",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-MA-003",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-MA-003",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-MA-004",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-MA-004",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-PE-001",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-PE-001",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-RE-001",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-RE-001",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-RE-002",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-RE-002",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-RE-003",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-RE-003",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-SA-001",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-SA-001",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-SA-002",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-SA-002",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-SE-001",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-SE-001",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-SE-002",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-SE-002",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-SE-003",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-SE-003",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-SE-004",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-SE-004",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "NFR-SE-005",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for NFR-SE-005",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "SPID-FR-001",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for SPID-FR-001",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "SPID-FR-002",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for SPID-FR-002",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "SPID-FR-003",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for SPID-FR-003",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "SPID-FR-004",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for SPID-FR-004",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "SPID-FR-005",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for SPID-FR-005",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "SPID-FR-006",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for SPID-FR-006",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "SPID-FR-007",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for SPID-FR-007",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "SPID-FR-008",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for SPID-FR-008",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "SPID-FR-009",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for SPID-FR-009",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "SPID-FR-010",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for SPID-FR-010",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "SPID-FR-011",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for SPID-FR-011",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "SPID-FR-012",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for SPID-FR-012",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "SPID-FR-013",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for SPID-FR-013",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "SPID-FR-014",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for SPID-FR-014",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "SPID-FR-015",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for SPID-FR-015",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "SPID-FR-016",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for SPID-FR-016",
+      "category": "functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "SPID-NFR-001",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for SPID-NFR-001",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
+    },
+    {
+      "requirement_id": "SPID-NFR-002",
+      "family": "MATRIX_TRACEABILITY",
+      "title": "",
+      "statement": "Seeded alignment evidence for SPID-NFR-002",
+      "category": "non-functional",
+      "source": "seed_data/seeded_requirement_traceability.json"
     }
   ]
 }
