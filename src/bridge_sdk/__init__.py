@@ -151,6 +151,23 @@ from bridge_sdk.telemetry_schema import (
     needs_wiring,
     verified_live,
 )
+from bridge_sdk.signal_governance import (
+    CONFIDENCE_BYPASS_THRESHOLD,
+    GovernanceTier,
+    GovernedDecision,
+    PerceivedSignal,
+    evaluate_signal_action,
+)
+from bridge_sdk.agent_skills import (
+    AGENT_ONLY_SKILLS,
+    AgentOnlySkill,
+    AgentSenseFacet,
+    HumanUseRefused,
+    agent_only_skills,
+    assert_non_human,
+    attach_agent_only_skills,
+    skill_pack_refs,
+)
 
 __version__ = "0.1.0"
 __all__ = [
@@ -264,6 +281,19 @@ __all__ = [
     "freeze_fingerprint",
     "needs_wiring",
     "verified_live",
+    "CONFIDENCE_BYPASS_THRESHOLD",
+    "GovernanceTier",
+    "GovernedDecision",
+    "PerceivedSignal",
+    "evaluate_signal_action",
+    "AGENT_ONLY_SKILLS",
+    "AgentOnlySkill",
+    "AgentSenseFacet",
+    "HumanUseRefused",
+    "agent_only_skills",
+    "assert_non_human",
+    "attach_agent_only_skills",
+    "skill_pack_refs",
     "BridgeEngine",
     "CanonicalEnvelope",
     "PatientIdentifier",
