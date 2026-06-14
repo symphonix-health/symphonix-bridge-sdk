@@ -168,6 +168,13 @@ from bridge_sdk.agent_skills import (
     attach_agent_only_skills,
     skill_pack_refs,
 )
+from bridge_sdk.evidence import (
+    EvidenceResolver,
+    NullEvidenceResolver,
+    ResolvedEvidence,
+    StaticEvidenceResolver,
+    signal_from_evidence,
+)
 
 __version__ = "0.1.0"
 __all__ = [
@@ -294,6 +301,11 @@ __all__ = [
     "assert_non_human",
     "attach_agent_only_skills",
     "skill_pack_refs",
+    "EvidenceResolver",
+    "NullEvidenceResolver",
+    "ResolvedEvidence",
+    "StaticEvidenceResolver",
+    "signal_from_evidence",
     "BridgeEngine",
     "CanonicalEnvelope",
     "PatientIdentifier",
