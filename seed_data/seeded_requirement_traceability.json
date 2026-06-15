@@ -1,5 +1,7 @@
 {
   "schema_version": "BT_SEEDED_REQUIREMENT_TRACEABILITY_V1",
+  "_not_seed_coverage": true,
+  "_coverage_disclaimer": "HUMAN-ONLY requirement->seed-profile traceability aid. NOT per-requirement seed coverage and NOT proof a requirement is seeded/tested/implemented. Do NOT feed to the seeding-alignment gate (caid-agent/scripts/check_seeding_alignment.py) or any readiness/coverage check; real coverage is verified from discovered seeders (src/seed.py, tests/harness/seed_canonical.py, fixtures), not this ledger.",
   "repo": "symphonix-bridge-sdk",
   "seed_profiles": [
     {
