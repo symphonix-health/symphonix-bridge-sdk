@@ -18,7 +18,8 @@ discovers (src/seed.py, tests/harness/seed_canonical.py, tests/fixtures,
 from __future__ import annotations
 
 REPO = "symphonix-bridge-sdk"
-REQUIREMENT_IDS = [
+# Requirement-level ids (FR/NFR/DS/REQ-*); AC ids are split out below.
+requirement_ids = [
     "BSDK-001",
     "BSDK-002",
     "BSDK-003",
@@ -284,8 +285,18 @@ REQUIREMENT_IDS = [
     "SPID-FR-015",
     "SPID-FR-016",
     "SPID-NFR-001",
-    "SPID-NFR-002"
+    "SPID-NFR-002",
 ]
+
+# Acceptance-criterion ids (each <parent>-AC<NN>; parent is a requirement id).
+acceptance_criterion_ids = [
+]
+
+# BACKWARD-COMPAT ALIAS (deprecated; removed in Phase D). Set-equals the
+# historical REQUIREMENT_IDS, so the rubber-stamp guard's blanket
+# TRACEABILITY comprehension keeps matching and every importer of
+# REQUIREMENT_IDS is preserved. Order is free; set-equality is the contract.
+REQUIREMENT_IDS = [*requirement_ids, *acceptance_criterion_ids]
 EVIDENCE_PATHS = {
     "specification_paths": [
         "docs/specifications/seeded-requirement-traceability.md",
