@@ -1,0 +1,71 @@
+{
+  "files_scanned": 86,
+  "findings": [
+    {
+      "rule_id": "POST-01",
+      "severity": "HIGH",
+      "category": "deployment",
+      "file": "symphonix-bridge-sdk",
+      "line": null,
+      "message": "caid-output project has engineer-authored code but the pipeline convergence artefacts are missing: CODE_REVIEW_FINDINGS.json (Phase 4b), ARCHIVIST_DRAFTS.json (Phase 6a). Run `caid post-build --project-dir <path>` to close the L-219/L-222/L-224 self-improvement loop.",
+      "handoff_role": "qa",
+      "handoff_phase": "report",
+      "proposed_lesson_title": "Pipeline convergence artefacts missing after engineer-authored build \u2014 self-improvement loop skipped"
+    },
+    {
+      "rule_id": "INT-02",
+      "severity": "HIGH",
+      "category": "architecture",
+      "file": "src\\bridge_sdk\\adapters\\fhir.py",
+      "line": null,
+      "message": "Integration connector touches an external system without declaring required controls: audit, schema validation, retry policy, error normalisation, observability/tracing, security policy.",
+      "handoff_role": "backend",
+      "handoff_phase": "delegate",
+      "proposed_lesson_title": "External integration connectors must carry governance controls"
+    },
+    {
+      "rule_id": "INT-02",
+      "severity": "HIGH",
+      "category": "architecture",
+      "file": "src\\bridge_sdk\\adapters\\hl7v2.py",
+      "line": null,
+      "message": "Integration connector touches an external system without declaring required controls: audit, schema validation, retry policy, timeout policy, error normalisation, observability/tracing, security policy.",
+      "handoff_role": "backend",
+      "handoff_phase": "delegate",
+      "proposed_lesson_title": "External integration connectors must carry governance controls"
+    },
+    {
+      "rule_id": "INT-02",
+      "severity": "HIGH",
+      "category": "architecture",
+      "file": "src\\bridge_sdk\\adapters\\kafka_adapter.py",
+      "line": null,
+      "message": "Integration connector touches an external system without declaring required controls: audit, schema validation, retry policy, error normalisation, observability/tracing, security policy.",
+      "handoff_role": "backend",
+      "handoff_phase": "delegate",
+      "proposed_lesson_title": "External integration connectors must carry governance controls"
+    },
+    {
+      "rule_id": "INT-02",
+      "severity": "HIGH",
+      "category": "architecture",
+      "file": "src\\bridge_sdk\\adapters\\nexus_a2a.py",
+      "line": null,
+      "message": "Integration connector touches an external system without declaring required controls: audit, schema validation, retry policy, error normalisation, observability/tracing, security policy.",
+      "handoff_role": "backend",
+      "handoff_phase": "delegate",
+      "proposed_lesson_title": "External integration connectors must carry governance controls"
+    },
+    {
+      "rule_id": "INT-02",
+      "severity": "HIGH",
+      "category": "architecture",
+      "file": "src\\bridge_sdk\\adapters\\rest.py",
+      "line": null,
+      "message": "Integration connector touches an external system without declaring required controls: audit, schema validation, retry policy, timeout policy, error normalisation, observability/tracing, security policy.",
+      "handoff_role": "backend",
+      "handoff_phase": "delegate",
+      "proposed_lesson_title": "External integration connectors must carry governance controls"
+    }
+  ]
+}

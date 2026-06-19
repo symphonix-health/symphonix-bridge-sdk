@@ -1,0 +1,57 @@
+{
+  "drafts": [
+    {
+      "proposed_id": "L-360",
+      "proposed_title": "feat: add standalone compliance review workflow",
+      "severity": "HIGH",
+      "category": "security",
+      "tags": [
+        "consent"
+      ],
+      "similar_existing": [],
+      "researcher_persona": "Healthcare security researcher. Authored sections of the OWASP ASVS healthcare supplement; holds CISSP + CHISL. Expert in HIPAA + NIST SP 800-63B + NHS DSPT; fluent in Ed25519 key derivation and session-management pitfalls.",
+      "literature_backing": [
+        "OWASP ASVS v4 \u2014 authentication + session management",
+        "NIST SP 800-63B \u2014 digital identity guidelines",
+        "HIPAA Security Rule \u2014 administrative/physical/technical"
+      ]
+    },
+    {
+      "proposed_id": "L-361",
+      "proposed_title": "feat(L-342): gate parser fixes + caid-agent self-audit alignment",
+      "severity": "HIGH",
+      "category": "security",
+      "tags": [
+        "audit"
+      ],
+      "similar_existing": [
+        "L-342"
+      ],
+      "researcher_persona": "Healthcare security researcher. Authored sections of the OWASP ASVS healthcare supplement; holds CISSP + CHISL. Expert in HIPAA + NIST SP 800-63B + NHS DSPT; fluent in Ed25519 key derivation and session-management pitfalls.",
+      "literature_backing": [
+        "OWASP ASVS v4 \u2014 authentication + session management",
+        "NIST SP 800-63B \u2014 digital identity guidelines",
+        "HIPAA Security Rule \u2014 administrative/physical/technical"
+      ]
+    },
+    {
+      "proposed_id": "L-362",
+      "proposed_title": "INT-02 src\\bridge_sdk\\adapters\\hl7v2.py:None -- Integration connector touches an external system without declaring requi",
+      "severity": "HIGH",
+      "category": "testing",
+      "tags": [
+        "timeout"
+      ],
+      "similar_existing": [],
+      "researcher_persona": "Principal SRE + QA research lead. Published on postmortem culture, flaky-test taxonomy, and gate-authoring. Has lived through the 'green CI, red production' class of incident. Allergic to retry-without-diagnosis.",
+      "literature_backing": [
+        "Femmer et al. JSS 2017 \u2014 12 requirements-smell detectors",
+        "ISO/IEC/IEEE 29119 \u2014 test scenario V-model",
+        "Hackbarth et al. IEEE TSE 2021 \u2014 eating your own dog food",
+        "Google SRE Book Ch. 15 \u2014 postmortem culture"
+      ]
+    }
+  ],
+  "rejections": [],
+  "next_id": "L-360"
+}
