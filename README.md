@@ -8,6 +8,25 @@
 # Symphonix Bridge SDK
 
 
+<!-- symphonix-health-ecosystem:start -->
+## Symphonix Health ecosystem
+
+<p>
+  <a href="https://github.com/symphonix-health"><img alt="Symphonix Health" src="https://img.shields.io/badge/Symphonix_Health-platform_spine-4DD0E1?style=flat-square" /></a>
+  <a href="https://github.com/symphonix-health/symphonix-health.github.io/blob/main/docs/system-catalogue.md"><img alt="System catalogue" src="https://img.shields.io/badge/catalogue-51_repos-14919B?style=flat-square" /></a>
+  <a href="https://github.com/symphonix-health/design-system"><img alt="Design system" src="https://img.shields.io/badge/design_system-dark_first-6366F1?style=flat-square" /></a>
+</p>
+
+| Field | Value |
+|---|---|
+| Organisation | `Symphonix-Health` |
+| Ecosystem layer | Platform spine |
+| Repository role | Protocol translation SDK using FHIR R4 as the canonical clinical pivot. |
+| Catalogue | [Symphonix system catalogue](https://github.com/symphonix-health/symphonix-health.github.io/blob/main/docs/system-catalogue.md) |
+| Design system | [Symphonix Health design system](https://github.com/symphonix-health/design-system) |
+| Evidence rule | Catalogue presence is orientation only. Use repo-local tests, CAID artefacts, seeded data, and runbooks for readiness claims. |
+<!-- symphonix-health-ecosystem:end -->
+
 ## Recent Enhancements
 
 - `b80d7be` Add V-model L2/L3 integration tests
