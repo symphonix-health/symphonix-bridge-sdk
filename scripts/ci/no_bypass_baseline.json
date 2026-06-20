@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "note": "Grandfathered no-bypass violations. New violations (fingerprints not listed here) fail enforce_no_bypass --strict. Drive this list DOWN; never up. Regenerate with: python scripts/ci/enforce_no_bypass.py --write-baseline <this file>",
+  "fingerprints": [
+    "hardcoded_endpoint|src/bridge_sdk/adapters/fhir.py|0ab6e685863a",
+    "hardcoded_endpoint|src/bridge_sdk/adapters/kafka_adapter.py|85a360269894",
+    "hardcoded_endpoint|src/bridge_sdk/discovery.py|781a485595b5",
+    "hardcoded_endpoint|tests/test_clinical_safety_case.py|113ddaaedf19",
+    "hardcoded_endpoint|tests/test_clinical_safety_case.py|24652b0bbc57"
+  ]
+}
