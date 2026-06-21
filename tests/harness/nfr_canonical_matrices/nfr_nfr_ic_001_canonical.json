@@ -38,7 +38,8 @@
     "derived_from_nfr_statement": "Citizen / patient-facing content SHALL be translatable; language preference SHALL be selectable per BCP-47 tag and respected in all subsequent responses.",
     "trace_links": [
       "BSDK-003",
-      "BSDK-151"
+      "BSDK-151",
+      "FR-BSDK-004"
     ]
   },
   "scenarios": [
@@ -48,7 +49,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — en-GB / WCAG 2.2 AA scan / desktop 1080p",
@@ -122,7 +124,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:en_gb",
+        "payload:wcag_2_2_aa_scan",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_002",
@@ -130,7 +143,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — en-GB / WCAG 2.2 AA scan / mobile 360w",
@@ -204,7 +218,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:en_gb",
+        "payload:wcag_2_2_aa_scan",
+        "environment:mobile_360w"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_003",
@@ -212,7 +237,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — en-GB / WCAG 2.2 AA scan / low-bandwidth (50 kbps)",
@@ -286,7 +312,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:en_gb",
+        "payload:wcag_2_2_aa_scan",
+        "environment:low_bandwidth_50_kbps"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_004",
@@ -294,7 +331,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — en-GB / WCAG 2.2 AA scan / USSD",
@@ -368,7 +406,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:en_gb",
+        "payload:wcag_2_2_aa_scan",
+        "environment:ussd"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_005",
@@ -376,7 +425,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — en-GB / screen reader nav / desktop 1080p",
@@ -450,7 +500,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:en_gb",
+        "payload:screen_reader_nav",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_006",
@@ -458,7 +519,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — en-GB / screen reader nav / mobile 360w",
@@ -532,7 +594,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:en_gb",
+        "payload:screen_reader_nav",
+        "environment:mobile_360w"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_007",
@@ -540,7 +613,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — en-GB / screen reader nav / low-bandwidth (50 kbps)",
@@ -614,7 +688,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:en_gb",
+        "payload:screen_reader_nav",
+        "environment:low_bandwidth_50_kbps"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_008",
@@ -622,7 +707,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — en-GB / screen reader nav / USSD",
@@ -696,7 +782,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:en_gb",
+        "payload:screen_reader_nav",
+        "environment:ussd"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_009",
@@ -704,7 +801,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — en-GB / keyboard-only / desktop 1080p",
@@ -778,7 +876,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:en_gb",
+        "payload:keyboard_only",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_010",
@@ -786,7 +895,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — en-GB / keyboard-only / mobile 360w",
@@ -860,7 +970,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:en_gb",
+        "payload:keyboard_only",
+        "environment:mobile_360w"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_011",
@@ -868,7 +989,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — en-GB / keyboard-only / low-bandwidth (50 kbps)",
@@ -942,7 +1064,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:en_gb",
+        "payload:keyboard_only",
+        "environment:low_bandwidth_50_kbps"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_012",
@@ -950,7 +1083,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — en-GB / keyboard-only / USSD",
@@ -1024,7 +1158,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:en_gb",
+        "payload:keyboard_only",
+        "environment:ussd"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_013",
@@ -1032,7 +1177,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — en-GB / high-contrast mode / desktop 1080p",
@@ -1106,7 +1252,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:en_gb",
+        "payload:high_contrast_mode",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_014",
@@ -1114,7 +1271,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — en-GB / high-contrast mode / mobile 360w",
@@ -1188,7 +1346,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:en_gb",
+        "payload:high_contrast_mode",
+        "environment:mobile_360w"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_015",
@@ -1196,7 +1365,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — en-GB / high-contrast mode / low-bandwidth (50 kbps)",
@@ -1270,7 +1440,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:en_gb",
+        "payload:high_contrast_mode",
+        "environment:low_bandwidth_50_kbps"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_016",
@@ -1278,7 +1459,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — en-GB / high-contrast mode / USSD",
@@ -1352,7 +1534,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:en_gb",
+        "payload:high_contrast_mode",
+        "environment:ussd"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_017",
@@ -1360,7 +1553,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — en-GB / reduced-motion / desktop 1080p",
@@ -1434,7 +1628,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:en_gb",
+        "payload:reduced_motion",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_018",
@@ -1442,7 +1647,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — en-GB / reduced-motion / mobile 360w",
@@ -1516,7 +1722,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:en_gb",
+        "payload:reduced_motion",
+        "environment:mobile_360w"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_019",
@@ -1524,7 +1741,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — en-GB / reduced-motion / low-bandwidth (50 kbps)",
@@ -1598,7 +1816,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:en_gb",
+        "payload:reduced_motion",
+        "environment:low_bandwidth_50_kbps"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_020",
@@ -1606,7 +1835,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — en-GB / reduced-motion / USSD",
@@ -1680,7 +1910,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:en_gb",
+        "payload:reduced_motion",
+        "environment:ussd"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_021",
@@ -1688,7 +1929,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — sw / WCAG 2.2 AA scan / desktop 1080p",
@@ -1762,7 +2004,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:sw",
+        "payload:wcag_2_2_aa_scan",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_022",
@@ -1770,7 +2023,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — sw / WCAG 2.2 AA scan / mobile 360w",
@@ -1844,7 +2098,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:sw",
+        "payload:wcag_2_2_aa_scan",
+        "environment:mobile_360w"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_023",
@@ -1852,7 +2117,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — sw / WCAG 2.2 AA scan / low-bandwidth (50 kbps)",
@@ -1926,7 +2192,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:sw",
+        "payload:wcag_2_2_aa_scan",
+        "environment:low_bandwidth_50_kbps"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_024",
@@ -1934,7 +2211,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — sw / WCAG 2.2 AA scan / USSD",
@@ -2008,7 +2286,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:sw",
+        "payload:wcag_2_2_aa_scan",
+        "environment:ussd"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_025",
@@ -2016,7 +2305,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — sw / screen reader nav / desktop 1080p",
@@ -2090,7 +2380,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:sw",
+        "payload:screen_reader_nav",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_026",
@@ -2098,7 +2399,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — sw / screen reader nav / mobile 360w",
@@ -2172,7 +2474,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:sw",
+        "payload:screen_reader_nav",
+        "environment:mobile_360w"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_027",
@@ -2180,7 +2493,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — sw / screen reader nav / low-bandwidth (50 kbps)",
@@ -2254,7 +2568,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:sw",
+        "payload:screen_reader_nav",
+        "environment:low_bandwidth_50_kbps"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_028",
@@ -2262,7 +2587,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — sw / screen reader nav / USSD",
@@ -2336,7 +2662,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:sw",
+        "payload:screen_reader_nav",
+        "environment:ussd"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_029",
@@ -2344,7 +2681,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — sw / keyboard-only / desktop 1080p",
@@ -2418,7 +2756,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:sw",
+        "payload:keyboard_only",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_030",
@@ -2426,7 +2775,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — sw / keyboard-only / mobile 360w",
@@ -2500,7 +2850,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:sw",
+        "payload:keyboard_only",
+        "environment:mobile_360w"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_031",
@@ -2508,7 +2869,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — sw / keyboard-only / low-bandwidth (50 kbps)",
@@ -2582,7 +2944,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:sw",
+        "payload:keyboard_only",
+        "environment:low_bandwidth_50_kbps"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_032",
@@ -2590,7 +2963,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — sw / keyboard-only / USSD",
@@ -2664,7 +3038,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:sw",
+        "payload:keyboard_only",
+        "environment:ussd"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_033",
@@ -2672,7 +3057,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — sw / high-contrast mode / desktop 1080p",
@@ -2746,7 +3132,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:sw",
+        "payload:high_contrast_mode",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_034",
@@ -2754,7 +3151,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — sw / high-contrast mode / mobile 360w",
@@ -2828,7 +3226,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:sw",
+        "payload:high_contrast_mode",
+        "environment:mobile_360w"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_035",
@@ -2836,7 +3245,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — sw / high-contrast mode / low-bandwidth (50 kbps)",
@@ -2910,7 +3320,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:sw",
+        "payload:high_contrast_mode",
+        "environment:low_bandwidth_50_kbps"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_036",
@@ -2918,7 +3339,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — sw / high-contrast mode / USSD",
@@ -2992,7 +3414,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:sw",
+        "payload:high_contrast_mode",
+        "environment:ussd"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_037",
@@ -3000,7 +3433,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — sw / reduced-motion / desktop 1080p",
@@ -3074,7 +3508,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:sw",
+        "payload:reduced_motion",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_038",
@@ -3082,7 +3527,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — sw / reduced-motion / mobile 360w",
@@ -3156,7 +3602,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:sw",
+        "payload:reduced_motion",
+        "environment:mobile_360w"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_039",
@@ -3164,7 +3621,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — sw / reduced-motion / low-bandwidth (50 kbps)",
@@ -3238,7 +3696,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:sw",
+        "payload:reduced_motion",
+        "environment:low_bandwidth_50_kbps"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_040",
@@ -3246,7 +3715,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — sw / reduced-motion / USSD",
@@ -3320,7 +3790,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:sw",
+        "payload:reduced_motion",
+        "environment:ussd"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_041",
@@ -3328,7 +3809,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — ki / WCAG 2.2 AA scan / desktop 1080p",
@@ -3402,7 +3884,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:ki",
+        "payload:wcag_2_2_aa_scan",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_042",
@@ -3410,7 +3903,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — ki / WCAG 2.2 AA scan / mobile 360w",
@@ -3484,7 +3978,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:ki",
+        "payload:wcag_2_2_aa_scan",
+        "environment:mobile_360w"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_043",
@@ -3492,7 +3997,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — ki / WCAG 2.2 AA scan / low-bandwidth (50 kbps)",
@@ -3566,7 +4072,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:ki",
+        "payload:wcag_2_2_aa_scan",
+        "environment:low_bandwidth_50_kbps"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_044",
@@ -3574,7 +4091,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — ki / WCAG 2.2 AA scan / USSD",
@@ -3648,7 +4166,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:ki",
+        "payload:wcag_2_2_aa_scan",
+        "environment:ussd"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_045",
@@ -3656,7 +4185,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — ki / screen reader nav / desktop 1080p",
@@ -3730,7 +4260,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:ki",
+        "payload:screen_reader_nav",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_046",
@@ -3738,7 +4279,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — ki / screen reader nav / mobile 360w",
@@ -3812,7 +4354,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:ki",
+        "payload:screen_reader_nav",
+        "environment:mobile_360w"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_047",
@@ -3820,7 +4373,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — ki / screen reader nav / low-bandwidth (50 kbps)",
@@ -3894,7 +4448,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:ki",
+        "payload:screen_reader_nav",
+        "environment:low_bandwidth_50_kbps"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_048",
@@ -3902,7 +4467,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — ki / screen reader nav / USSD",
@@ -3976,7 +4542,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:ki",
+        "payload:screen_reader_nav",
+        "environment:ussd"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_049",
@@ -3984,7 +4561,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — ki / keyboard-only / desktop 1080p",
@@ -4058,7 +4636,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:ki",
+        "payload:keyboard_only",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_050",
@@ -4066,7 +4655,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — ki / keyboard-only / mobile 360w",
@@ -4140,7 +4730,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:ki",
+        "payload:keyboard_only",
+        "environment:mobile_360w"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_051",
@@ -4148,7 +4749,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — ki / keyboard-only / low-bandwidth (50 kbps)",
@@ -4222,7 +4824,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:ki",
+        "payload:keyboard_only",
+        "environment:low_bandwidth_50_kbps"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_052",
@@ -4230,7 +4843,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — ki / keyboard-only / USSD",
@@ -4304,7 +4918,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:ki",
+        "payload:keyboard_only",
+        "environment:ussd"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_053",
@@ -4312,7 +4937,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — ki / high-contrast mode / desktop 1080p",
@@ -4386,7 +5012,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:ki",
+        "payload:high_contrast_mode",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_054",
@@ -4394,7 +5031,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — ki / high-contrast mode / mobile 360w",
@@ -4468,7 +5106,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:ki",
+        "payload:high_contrast_mode",
+        "environment:mobile_360w"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_055",
@@ -4476,7 +5125,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — ki / high-contrast mode / low-bandwidth (50 kbps)",
@@ -4550,7 +5200,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:ki",
+        "payload:high_contrast_mode",
+        "environment:low_bandwidth_50_kbps"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_056",
@@ -4558,7 +5219,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — ki / high-contrast mode / USSD",
@@ -4632,7 +5294,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:ki",
+        "payload:high_contrast_mode",
+        "environment:ussd"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_057",
@@ -4640,7 +5313,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — ki / reduced-motion / desktop 1080p",
@@ -4714,7 +5388,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:ki",
+        "payload:reduced_motion",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_058",
@@ -4722,7 +5407,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — ki / reduced-motion / mobile 360w",
@@ -4796,7 +5482,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:ki",
+        "payload:reduced_motion",
+        "environment:mobile_360w"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_059",
@@ -4804,7 +5501,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — ki / reduced-motion / low-bandwidth (50 kbps)",
@@ -4878,7 +5576,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:ki",
+        "payload:reduced_motion",
+        "environment:low_bandwidth_50_kbps"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_060",
@@ -4886,7 +5595,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — ki / reduced-motion / USSD",
@@ -4960,7 +5670,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:ki",
+        "payload:reduced_motion",
+        "environment:ussd"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_061",
@@ -4968,7 +5689,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — lu / WCAG 2.2 AA scan / desktop 1080p",
@@ -5042,7 +5764,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:lu",
+        "payload:wcag_2_2_aa_scan",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_062",
@@ -5050,7 +5783,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — lu / WCAG 2.2 AA scan / mobile 360w",
@@ -5124,7 +5858,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:lu",
+        "payload:wcag_2_2_aa_scan",
+        "environment:mobile_360w"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_063",
@@ -5132,7 +5877,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — lu / WCAG 2.2 AA scan / low-bandwidth (50 kbps)",
@@ -5206,7 +5952,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:lu",
+        "payload:wcag_2_2_aa_scan",
+        "environment:low_bandwidth_50_kbps"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_064",
@@ -5214,7 +5971,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — lu / WCAG 2.2 AA scan / USSD",
@@ -5288,7 +6046,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:lu",
+        "payload:wcag_2_2_aa_scan",
+        "environment:ussd"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_065",
@@ -5296,7 +6065,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — lu / screen reader nav / desktop 1080p",
@@ -5370,7 +6140,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:lu",
+        "payload:screen_reader_nav",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_066",
@@ -5378,7 +6159,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — lu / screen reader nav / mobile 360w",
@@ -5452,7 +6234,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:lu",
+        "payload:screen_reader_nav",
+        "environment:mobile_360w"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_067",
@@ -5460,7 +6253,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — lu / screen reader nav / low-bandwidth (50 kbps)",
@@ -5534,7 +6328,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:lu",
+        "payload:screen_reader_nav",
+        "environment:low_bandwidth_50_kbps"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_068",
@@ -5542,7 +6347,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — lu / screen reader nav / USSD",
@@ -5616,7 +6422,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:lu",
+        "payload:screen_reader_nav",
+        "environment:ussd"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_069",
@@ -5624,7 +6441,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — lu / keyboard-only / desktop 1080p",
@@ -5698,7 +6516,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:lu",
+        "payload:keyboard_only",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_070",
@@ -5706,7 +6535,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — lu / keyboard-only / mobile 360w",
@@ -5780,7 +6610,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:lu",
+        "payload:keyboard_only",
+        "environment:mobile_360w"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_071",
@@ -5788,7 +6629,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — lu / keyboard-only / low-bandwidth (50 kbps)",
@@ -5862,7 +6704,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:lu",
+        "payload:keyboard_only",
+        "environment:low_bandwidth_50_kbps"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_072",
@@ -5870,7 +6723,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — lu / keyboard-only / USSD",
@@ -5944,7 +6798,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:lu",
+        "payload:keyboard_only",
+        "environment:ussd"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_073",
@@ -5952,7 +6817,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — lu / high-contrast mode / desktop 1080p",
@@ -6026,7 +6892,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:lu",
+        "payload:high_contrast_mode",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_074",
@@ -6034,7 +6911,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — lu / high-contrast mode / mobile 360w",
@@ -6108,7 +6986,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:lu",
+        "payload:high_contrast_mode",
+        "environment:mobile_360w"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_075",
@@ -6116,7 +7005,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — lu / high-contrast mode / low-bandwidth (50 kbps)",
@@ -6190,7 +7080,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:lu",
+        "payload:high_contrast_mode",
+        "environment:low_bandwidth_50_kbps"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_076",
@@ -6198,7 +7099,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — lu / high-contrast mode / USSD",
@@ -6272,7 +7174,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:lu",
+        "payload:high_contrast_mode",
+        "environment:ussd"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_077",
@@ -6280,7 +7193,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — lu / reduced-motion / desktop 1080p",
@@ -6354,7 +7268,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:lu",
+        "payload:reduced_motion",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_078",
@@ -6362,7 +7287,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — lu / reduced-motion / mobile 360w",
@@ -6436,7 +7362,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:lu",
+        "payload:reduced_motion",
+        "environment:mobile_360w"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_079",
@@ -6444,7 +7381,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — lu / reduced-motion / low-bandwidth (50 kbps)",
@@ -6518,7 +7456,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:lu",
+        "payload:reduced_motion",
+        "environment:low_bandwidth_50_kbps"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_080",
@@ -6526,7 +7475,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — lu / reduced-motion / USSD",
@@ -6600,7 +7550,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:lu",
+        "payload:reduced_motion",
+        "environment:ussd"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_081",
@@ -6608,7 +7569,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — es / WCAG 2.2 AA scan / desktop 1080p",
@@ -6682,7 +7644,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:es",
+        "payload:wcag_2_2_aa_scan",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_082",
@@ -6690,7 +7663,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — es / WCAG 2.2 AA scan / mobile 360w",
@@ -6764,7 +7738,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:es",
+        "payload:wcag_2_2_aa_scan",
+        "environment:mobile_360w"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_083",
@@ -6772,7 +7757,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — es / WCAG 2.2 AA scan / low-bandwidth (50 kbps)",
@@ -6846,7 +7832,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:es",
+        "payload:wcag_2_2_aa_scan",
+        "environment:low_bandwidth_50_kbps"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_084",
@@ -6854,7 +7851,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — es / WCAG 2.2 AA scan / USSD",
@@ -6928,7 +7926,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:es",
+        "payload:wcag_2_2_aa_scan",
+        "environment:ussd"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_POS_085",
@@ -6936,7 +7945,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Positive",
       "title": "Multilingual operability (BCP-47) — es / screen reader nav / desktop 1080p",
@@ -7010,7 +8020,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:positive",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "load:es",
+        "payload:screen_reader_nav",
+        "environment:desktop_1080p"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_NEG_001",
@@ -7018,7 +8039,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Negative",
       "title": "Multilingual operability (BCP-47) — boundary violation: axe-core WCAG AA violation",
@@ -7089,7 +8111,16 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:negative",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "boundary:axe_core_wcag_aa_violation"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_NEG_002",
@@ -7097,7 +8128,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Negative",
       "title": "Multilingual operability (BCP-47) — boundary violation: keyboard trap detected",
@@ -7168,7 +8200,16 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:negative",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "boundary:keyboard_trap_detected"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_NEG_003",
@@ -7176,7 +8217,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Negative",
       "title": "Multilingual operability (BCP-47) — boundary violation: alt text missing on meaningful image",
@@ -7247,7 +8289,16 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:negative",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "boundary:alt_text_missing_on_meaningful_image"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_NEG_004",
@@ -7255,7 +8306,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Negative",
       "title": "Multilingual operability (BCP-47) — boundary violation: contrast 4.4:1 (under threshold)",
@@ -7326,7 +8378,16 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:negative",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "boundary:contrast_4_4_1_under_threshold"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_NEG_005",
@@ -7334,7 +8395,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Negative",
       "title": "Multilingual operability (BCP-47) — boundary violation: language tag malformed",
@@ -7405,7 +8467,16 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:negative",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "boundary:language_tag_malformed"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_NEG_006",
@@ -7413,7 +8484,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Negative",
       "title": "Multilingual operability (BCP-47) — boundary violation: screen-reader nav stuck",
@@ -7484,7 +8556,16 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:negative",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "boundary:screen_reader_nav_stuck"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_NEG_007",
@@ -7492,7 +8573,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Negative",
       "title": "Multilingual operability (BCP-47) — boundary violation: focus indicator hidden by CSS",
@@ -7563,7 +8645,16 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:negative",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "boundary:focus_indicator_hidden_by_css"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_NEG_008",
@@ -7571,7 +8662,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Negative",
       "title": "Multilingual operability (BCP-47) — boundary violation: form label not associated",
@@ -7642,7 +8734,16 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:negative",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "boundary:form_label_not_associated"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_NEG_009",
@@ -7650,7 +8751,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Negative",
       "title": "Multilingual operability (BCP-47) — boundary violation: reduced-motion ignored",
@@ -7721,7 +8823,16 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:negative",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "boundary:reduced_motion_ignored"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_NEG_010",
@@ -7729,7 +8840,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Negative",
       "title": "Multilingual operability (BCP-47) — boundary violation: form error not announced",
@@ -7800,7 +8912,16 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:negative",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "boundary:form_error_not_announced"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_EDG_001",
@@ -7808,7 +8929,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Edge",
       "title": "Multilingual operability (BCP-47) — edge condition: WCAG contrast exactly 4.5:1",
@@ -7879,7 +9001,16 @@
       "priority": "P2",
       "automation_status": "automated",
       "estimated_duration_seconds": 10,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:edge",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "edge:wcag_contrast_exactly_4_5_1"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_EDG_002",
@@ -7887,7 +9018,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Edge",
       "title": "Multilingual operability (BCP-47) — edge condition: viewport at 360w landmark",
@@ -7958,7 +9090,16 @@
       "priority": "P2",
       "automation_status": "automated",
       "estimated_duration_seconds": 10,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:edge",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "edge:viewport_at_360w_landmark"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_EDG_003",
@@ -7966,7 +9107,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Edge",
       "title": "Multilingual operability (BCP-47) — edge condition: focus on first/last interactive",
@@ -8037,7 +9179,16 @@
       "priority": "P2",
       "automation_status": "automated",
       "estimated_duration_seconds": 10,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:edge",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "edge:focus_on_first_last_interactive"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_EDG_004",
@@ -8045,7 +9196,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Edge",
       "title": "Multilingual operability (BCP-47) — edge condition: language fallback chain length 3",
@@ -8116,7 +9268,16 @@
       "priority": "P2",
       "automation_status": "automated",
       "estimated_duration_seconds": 10,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:edge",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "edge:language_fallback_chain_length_3"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_ic_001_EDG_005",
@@ -8124,7 +9285,8 @@
       "requirement_ids": [
         "NFR-IC-001",
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "scenario_category": "Edge",
       "title": "Multilingual operability (BCP-47) — edge condition: ARIA live polite/assertive boundary",
@@ -8195,7 +9357,16 @@
       "priority": "P2",
       "automation_status": "automated",
       "estimated_duration_seconds": 10,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-ic-001",
+        "category:edge",
+        "priority:high",
+        "iso25010:interaction_capability",
+        "iso25010-sub:operability",
+        "edge:aria_live_polite_assertive_boundary"
+      ]
     }
   ]
 }

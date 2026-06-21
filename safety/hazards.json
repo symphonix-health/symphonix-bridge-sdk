@@ -1,0 +1,179 @@
+{
+  "project": "symphonix-bridge-sdk",
+  "scope": {
+    "scope": "clinical_workflow",
+    "matched_signals": [
+      "consent and data",
+      "fhir",
+      "hl7",
+      "clinical safety"
+    ],
+    "rationale": "clinical-workflow signals present: ['consent and data', 'fhir', 'hl7', 'clinical safety']. Full DCB0129 + DCB0160 pack required; DPIA required.",
+    "requires_csaa_invocation": true,
+    "requires_mhra_review": false,
+    "requires_dpia": true
+  },
+  "hazards": [
+    {
+      "hazard_id": "HZ-CLIN-001",
+      "title": "Wrong-patient context bleed across sessions",
+      "description": "Patient demographic or clinical summary cached across sessions displays prior patient's record to a new user (shared workstation, tab reuse, stale JWT).",
+      "clinical_effect": "Clinical action (prescribe / note / refer) recorded against the wrong patient, causing treatment error.",
+      "causes": [
+        "shared workstation",
+        "session-token reuse",
+        "tab collision",
+        "stale JWT on server restart"
+      ],
+      "initial_severity": "catastrophic",
+      "initial_likelihood": "low",
+      "initial_risk": 3,
+      "existing_controls": [
+        "RBAC",
+        "session expiry",
+        "patient-banner hard check"
+      ],
+      "additional_controls": [],
+      "residual_severity": "catastrophic",
+      "residual_likelihood": "very_low",
+      "residual_risk": 3,
+      "owner": "CSAA",
+      "status": "open",
+      "dcb_mode": "DCB0129",
+      "evidence_refs": []
+    },
+    {
+      "hazard_id": "HZ-CLIN-002",
+      "title": "Stale clinical data propagation",
+      "description": "Cached chart data served after the upstream system of record updates, causing the clinician to act on obsolete allergies / medications / results.",
+      "clinical_effect": "Prescribing against an outdated allergy list leads to anaphylaxis; acting on stale results delays diagnosis.",
+      "causes": [
+        "long cache TTL",
+        "failed cache invalidation",
+        "network partition with fallback-to-cache"
+      ],
+      "initial_severity": "major",
+      "initial_likelihood": "medium",
+      "initial_risk": 3,
+      "existing_controls": [
+        "short cache TTL",
+        "etag validation",
+        "explicit 'last-refreshed' timestamp"
+      ],
+      "additional_controls": [],
+      "residual_severity": "major",
+      "residual_likelihood": "very_low",
+      "residual_risk": 2,
+      "owner": "CSAA",
+      "status": "open",
+      "dcb_mode": "DCB0129",
+      "evidence_refs": []
+    },
+    {
+      "hazard_id": "HZ-CLIN-003",
+      "title": "Unavailable downstream service with unsafe fallback",
+      "description": "When consent-service / terminology / patient-registry is unavailable, the app continues with a permissive default instead of failing closed.",
+      "clinical_effect": "Patient data accessed without valid consent; wrong medication dispensed because SNOMED lookup fell back to string match.",
+      "causes": [
+        "circuit-breaker mis-configuration",
+        "silent ConnectionError swallow",
+        "default-to-allow on timeout"
+      ],
+      "initial_severity": "major",
+      "initial_likelihood": "medium",
+      "initial_risk": 3,
+      "existing_controls": [
+        "fail-closed default",
+        "explicit user-facing degraded-mode banner"
+      ],
+      "additional_controls": [],
+      "residual_severity": "major",
+      "residual_likelihood": "very_low",
+      "residual_risk": 2,
+      "owner": "CSAA",
+      "status": "open",
+      "dcb_mode": "DCB0129",
+      "evidence_refs": []
+    },
+    {
+      "hazard_id": "HZ-CLIN-004",
+      "title": "Silent truncation of clinical text",
+      "description": "Clinical notes, allergy descriptions, or medication instructions truncated at the backend storage layer without surfacing to the user.",
+      "clinical_effect": "Key clinical information (e.g. 'NOT to be given with warfarin') lost; subsequent clinician misses contra-indication.",
+      "causes": [
+        "VARCHAR length mismatch",
+        "Unicode surrogate-pair splitting",
+        "overly aggressive input sanitiser"
+      ],
+      "initial_severity": "major",
+      "initial_likelihood": "low",
+      "initial_risk": 3,
+      "existing_controls": [
+        "server-side length validation",
+        "explicit client-side character counter"
+      ],
+      "additional_controls": [],
+      "residual_severity": "major",
+      "residual_likelihood": "very_low",
+      "residual_risk": 2,
+      "owner": "CSAA",
+      "status": "open",
+      "dcb_mode": "DCB0129",
+      "evidence_refs": []
+    },
+    {
+      "hazard_id": "HZ-CLIN-005",
+      "title": "Unresolvable duplicate identifier",
+      "description": "Two patient records map to the same NHI due to data-entry error OR two NHIs for the same patient due to demographic drift.",
+      "clinical_effect": "Records merged or split incorrectly, losing history; clinician acts on partial timeline.",
+      "causes": [
+        "demographic matching threshold too loose",
+        "NHI reassignment after initial registration",
+        "MPI sync delay"
+      ],
+      "initial_severity": "major",
+      "initial_likelihood": "low",
+      "initial_risk": 3,
+      "existing_controls": [
+        "NHI fingerprint cross-check",
+        "demographic-match threshold >= 0.98",
+        "manual merge requires clinical safety review"
+      ],
+      "additional_controls": [],
+      "residual_severity": "major",
+      "residual_likelihood": "very_low",
+      "residual_risk": 2,
+      "owner": "CSAA",
+      "status": "open",
+      "dcb_mode": "DCB0129",
+      "evidence_refs": []
+    },
+    {
+      "hazard_id": "HZ-CLIN-006",
+      "title": "Audit-chain break undetected",
+      "description": "The per-patient or per-actor tamper-evident audit chain breaks (hash mismatch) without alerting the CSO.",
+      "clinical_effect": "Regulatory investigation (GMC / HCPC / GPhC) cannot verify sequence of actions; potential patient-safety incident cannot be reconstructed.",
+      "causes": [
+        "dual-chain race on concurrent writes",
+        "migration that drops hash_prev column",
+        "silent exception on hash computation"
+      ],
+      "initial_severity": "major",
+      "initial_likelihood": "low",
+      "initial_risk": 3,
+      "existing_controls": [
+        "chain-verify job on every release",
+        "immediate CSO page on detected break"
+      ],
+      "additional_controls": [],
+      "residual_severity": "major",
+      "residual_likelihood": "very_low",
+      "residual_risk": 2,
+      "owner": "CSAA",
+      "status": "open",
+      "dcb_mode": "DCB0129",
+      "evidence_refs": []
+    }
+  ],
+  "csaa_version": "0.1.0"
+}

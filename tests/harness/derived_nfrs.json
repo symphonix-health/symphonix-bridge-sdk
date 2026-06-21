@@ -3,8 +3,8 @@
   "iso_model": "ISO/IEC 25010:2023",
   "metadata": {
     "subsystem": "symphonix-bridge-sdk",
-    "fr_count": 73,
-    "derived_nfr_count": 20,
+    "fr_count": 212,
+    "derived_nfr_count": 21,
     "project_type": "sdk",
     "regulatory_regime": [
       "ISO_27001",
@@ -29,7 +29,7 @@
       "requirement_id": "NFR-PE-001",
       "title": "API time behaviour (p95 latency)",
       "statement": "The system SHALL respond to mutating + read requests within 50ms (p95) under nominal load.",
-      "rationale": "ISO/IEC 25010:2023 Performance Efficiency / time_behaviour. Derived because the project exposes 73 functional endpoint(s); without a quantified latency target the SRS is unverifiable per Eckhardt 2016.",
+      "rationale": "ISO/IEC 25010:2023 Performance Efficiency / time_behaviour. Derived because the project exposes 212 functional endpoint(s); without a quantified latency target the SRS is unverifiable per Eckhardt 2016.",
       "category": "non-functional",
       "priority": "HIGH",
       "iso_25010_characteristic": "Performance Efficiency",
@@ -363,7 +363,8 @@
       "regulatory_ref": "",
       "trace_links": [
         "BSDK-003",
-        "BSDK-151"
+        "BSDK-151",
+        "FR-BSDK-004"
       ],
       "acceptance_criteria": [
         {
@@ -535,6 +536,31 @@
           "when": "the response path runs",
           "then": "a human-in-the-loop escalation is emitted instead of an auto-recommendation",
           "test_type": "Positive"
+        }
+      ]
+    },
+    {
+      "requirement_id": "NFR-SE-006",
+      "title": "Clinical telemetry zero-PHI evidence boundary",
+      "statement": "Clinical telemetry ingestion SHALL preserve PHI inside helixcare-telemetry-intake and emit only zero-PHI evidence summaries with provenance, audit, replay, freshness, and trust controls.",
+      "rationale": "ISO/IEC 25010:2023 Security / confidentiality. Derived because FHIR device and human-submitted observations can carry PHI while GHARRA remains a zero-PHI capability evidence graph.",
+      "category": "non-functional",
+      "priority": "CRITICAL",
+      "iso_25010_characteristic": "Security",
+      "iso_25010_subcharacteristic": "confidentiality",
+      "regulatory_ref": "ISO/IEC 27701 (PIMS)",
+      "trace_links": [
+        "BSDK-101",
+        "FR-BSDK-001",
+        "FR-BSDK-005"
+      ],
+      "acceptance_criteria": [
+        {
+          "ac_id": "NFR-SE-006-AC01",
+          "given": "a device or human telemetry payload reaches the intake boundary",
+          "when": "consent, patient match, provenance, audit event, trusted device status, freshness, or replay protection is missing",
+          "then": "the payload is rejected and GHARRA receives no raw patient identifier",
+          "test_type": "Negative"
         }
       ]
     }

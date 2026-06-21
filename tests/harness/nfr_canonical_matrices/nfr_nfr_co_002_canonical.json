@@ -120,7 +120,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r4_input",
+        "payload:minimal_profile",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_002",
@@ -201,7 +212,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r4_input",
+        "payload:minimal_profile",
+        "environment:v2_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_003",
@@ -282,7 +304,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r4_input",
+        "payload:minimal_profile",
+        "environment:current_openapi_doc"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_004",
@@ -363,7 +396,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r4_input",
+        "payload:minimal_profile",
+        "environment:downstream_bahmni"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_005",
@@ -444,7 +488,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r4_input",
+        "payload:extended_profile",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_006",
@@ -525,7 +580,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r4_input",
+        "payload:extended_profile",
+        "environment:v2_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_007",
@@ -606,7 +672,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r4_input",
+        "payload:extended_profile",
+        "environment:current_openapi_doc"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_008",
@@ -687,7 +764,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r4_input",
+        "payload:extended_profile",
+        "environment:downstream_bahmni"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_009",
@@ -768,7 +856,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r4_input",
+        "payload:with_extensions",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_010",
@@ -849,7 +948,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r4_input",
+        "payload:with_extensions",
+        "environment:v2_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_011",
@@ -930,7 +1040,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r4_input",
+        "payload:with_extensions",
+        "environment:current_openapi_doc"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_012",
@@ -1011,7 +1132,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r4_input",
+        "payload:with_extensions",
+        "environment:downstream_bahmni"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_013",
@@ -1092,7 +1224,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r4_input",
+        "payload:stripped_extensions",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_014",
@@ -1173,7 +1316,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r4_input",
+        "payload:stripped_extensions",
+        "environment:v2_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_015",
@@ -1254,7 +1408,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r4_input",
+        "payload:stripped_extensions",
+        "environment:current_openapi_doc"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_016",
@@ -1335,7 +1500,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r4_input",
+        "payload:stripped_extensions",
+        "environment:downstream_bahmni"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_017",
@@ -1416,7 +1592,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r4_input",
+        "payload:vendor_flavoured",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_018",
@@ -1497,7 +1684,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r4_input",
+        "payload:vendor_flavoured",
+        "environment:v2_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_019",
@@ -1578,7 +1776,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r4_input",
+        "payload:vendor_flavoured",
+        "environment:current_openapi_doc"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_020",
@@ -1659,7 +1868,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r4_input",
+        "payload:vendor_flavoured",
+        "environment:downstream_bahmni"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_021",
@@ -1740,7 +1960,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r5_input",
+        "payload:minimal_profile",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_022",
@@ -1821,7 +2052,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r5_input",
+        "payload:minimal_profile",
+        "environment:v2_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_023",
@@ -1902,7 +2144,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r5_input",
+        "payload:minimal_profile",
+        "environment:current_openapi_doc"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_024",
@@ -1983,7 +2236,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r5_input",
+        "payload:minimal_profile",
+        "environment:downstream_bahmni"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_025",
@@ -2064,7 +2328,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r5_input",
+        "payload:extended_profile",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_026",
@@ -2145,7 +2420,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r5_input",
+        "payload:extended_profile",
+        "environment:v2_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_027",
@@ -2226,7 +2512,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r5_input",
+        "payload:extended_profile",
+        "environment:current_openapi_doc"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_028",
@@ -2307,7 +2604,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r5_input",
+        "payload:extended_profile",
+        "environment:downstream_bahmni"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_029",
@@ -2388,7 +2696,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r5_input",
+        "payload:with_extensions",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_030",
@@ -2469,7 +2788,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r5_input",
+        "payload:with_extensions",
+        "environment:v2_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_031",
@@ -2550,7 +2880,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r5_input",
+        "payload:with_extensions",
+        "environment:current_openapi_doc"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_032",
@@ -2631,7 +2972,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r5_input",
+        "payload:with_extensions",
+        "environment:downstream_bahmni"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_033",
@@ -2712,7 +3064,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r5_input",
+        "payload:stripped_extensions",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_034",
@@ -2793,7 +3156,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r5_input",
+        "payload:stripped_extensions",
+        "environment:v2_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_035",
@@ -2874,7 +3248,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r5_input",
+        "payload:stripped_extensions",
+        "environment:current_openapi_doc"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_036",
@@ -2955,7 +3340,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r5_input",
+        "payload:stripped_extensions",
+        "environment:downstream_bahmni"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_037",
@@ -3036,7 +3432,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r5_input",
+        "payload:vendor_flavoured",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_038",
@@ -3117,7 +3524,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r5_input",
+        "payload:vendor_flavoured",
+        "environment:v2_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_039",
@@ -3198,7 +3616,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r5_input",
+        "payload:vendor_flavoured",
+        "environment:current_openapi_doc"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_040",
@@ -3279,7 +3708,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:fhir_r5_input",
+        "payload:vendor_flavoured",
+        "environment:downstream_bahmni"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_041",
@@ -3360,7 +3800,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:hl7_v2_adt",
+        "payload:minimal_profile",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_042",
@@ -3441,7 +3892,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:hl7_v2_adt",
+        "payload:minimal_profile",
+        "environment:v2_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_043",
@@ -3522,7 +3984,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:hl7_v2_adt",
+        "payload:minimal_profile",
+        "environment:current_openapi_doc"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_044",
@@ -3603,7 +4076,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:hl7_v2_adt",
+        "payload:minimal_profile",
+        "environment:downstream_bahmni"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_045",
@@ -3684,7 +4168,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:hl7_v2_adt",
+        "payload:extended_profile",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_046",
@@ -3765,7 +4260,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:hl7_v2_adt",
+        "payload:extended_profile",
+        "environment:v2_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_047",
@@ -3846,7 +4352,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:hl7_v2_adt",
+        "payload:extended_profile",
+        "environment:current_openapi_doc"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_048",
@@ -3927,7 +4444,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:hl7_v2_adt",
+        "payload:extended_profile",
+        "environment:downstream_bahmni"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_049",
@@ -4008,7 +4536,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:hl7_v2_adt",
+        "payload:with_extensions",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_050",
@@ -4089,7 +4628,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:hl7_v2_adt",
+        "payload:with_extensions",
+        "environment:v2_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_051",
@@ -4170,7 +4720,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:hl7_v2_adt",
+        "payload:with_extensions",
+        "environment:current_openapi_doc"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_052",
@@ -4251,7 +4812,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:hl7_v2_adt",
+        "payload:with_extensions",
+        "environment:downstream_bahmni"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_053",
@@ -4332,7 +4904,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:hl7_v2_adt",
+        "payload:stripped_extensions",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_054",
@@ -4413,7 +4996,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:hl7_v2_adt",
+        "payload:stripped_extensions",
+        "environment:v2_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_055",
@@ -4494,7 +5088,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:hl7_v2_adt",
+        "payload:stripped_extensions",
+        "environment:current_openapi_doc"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_056",
@@ -4575,7 +5180,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:hl7_v2_adt",
+        "payload:stripped_extensions",
+        "environment:downstream_bahmni"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_057",
@@ -4656,7 +5272,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:hl7_v2_adt",
+        "payload:vendor_flavoured",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_058",
@@ -4737,7 +5364,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:hl7_v2_adt",
+        "payload:vendor_flavoured",
+        "environment:v2_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_059",
@@ -4818,7 +5456,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:hl7_v2_adt",
+        "payload:vendor_flavoured",
+        "environment:current_openapi_doc"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_060",
@@ -4899,7 +5548,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:hl7_v2_adt",
+        "payload:vendor_flavoured",
+        "environment:downstream_bahmni"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_061",
@@ -4980,7 +5640,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:x12_837",
+        "payload:minimal_profile",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_062",
@@ -5061,7 +5732,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:x12_837",
+        "payload:minimal_profile",
+        "environment:v2_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_063",
@@ -5142,7 +5824,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:x12_837",
+        "payload:minimal_profile",
+        "environment:current_openapi_doc"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_064",
@@ -5223,7 +5916,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:x12_837",
+        "payload:minimal_profile",
+        "environment:downstream_bahmni"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_065",
@@ -5304,7 +6008,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:x12_837",
+        "payload:extended_profile",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_066",
@@ -5385,7 +6100,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:x12_837",
+        "payload:extended_profile",
+        "environment:v2_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_067",
@@ -5466,7 +6192,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:x12_837",
+        "payload:extended_profile",
+        "environment:current_openapi_doc"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_068",
@@ -5547,7 +6284,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:x12_837",
+        "payload:extended_profile",
+        "environment:downstream_bahmni"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_069",
@@ -5628,7 +6376,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:x12_837",
+        "payload:with_extensions",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_070",
@@ -5709,7 +6468,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:x12_837",
+        "payload:with_extensions",
+        "environment:v2_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_071",
@@ -5790,7 +6560,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:x12_837",
+        "payload:with_extensions",
+        "environment:current_openapi_doc"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_072",
@@ -5871,7 +6652,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:x12_837",
+        "payload:with_extensions",
+        "environment:downstream_bahmni"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_073",
@@ -5952,7 +6744,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:x12_837",
+        "payload:stripped_extensions",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_074",
@@ -6033,7 +6836,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:x12_837",
+        "payload:stripped_extensions",
+        "environment:v2_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_075",
@@ -6114,7 +6928,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:x12_837",
+        "payload:stripped_extensions",
+        "environment:current_openapi_doc"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_076",
@@ -6195,7 +7020,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:x12_837",
+        "payload:stripped_extensions",
+        "environment:downstream_bahmni"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_077",
@@ -6276,7 +7112,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:x12_837",
+        "payload:vendor_flavoured",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_078",
@@ -6357,7 +7204,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:x12_837",
+        "payload:vendor_flavoured",
+        "environment:v2_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_079",
@@ -6438,7 +7296,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:x12_837",
+        "payload:vendor_flavoured",
+        "environment:current_openapi_doc"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_080",
@@ -6519,7 +7388,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:x12_837",
+        "payload:vendor_flavoured",
+        "environment:downstream_bahmni"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_081",
@@ -6600,7 +7480,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:dicom_c_find",
+        "payload:minimal_profile",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_082",
@@ -6681,7 +7572,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:dicom_c_find",
+        "payload:minimal_profile",
+        "environment:v2_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_083",
@@ -6762,7 +7664,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:dicom_c_find",
+        "payload:minimal_profile",
+        "environment:current_openapi_doc"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_084",
@@ -6843,7 +7756,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:dicom_c_find",
+        "payload:minimal_profile",
+        "environment:downstream_bahmni"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_POS_085",
@@ -6924,7 +7848,18 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:positive",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "load:dicom_c_find",
+        "payload:extended_profile",
+        "environment:v1_api"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_NEG_001",
@@ -7002,7 +7937,16 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:negative",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "boundary:fhir_resource_fails_valueset_binding"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_NEG_002",
@@ -7080,7 +8024,16 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:negative",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "boundary:x12_segment_count_mismatch"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_NEG_003",
@@ -7158,7 +8111,16 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:negative",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "boundary:dicom_pixeldata_unsupported"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_NEG_004",
@@ -7236,7 +8198,16 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:negative",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "boundary:openapi_breaking_change_shipped"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_NEG_005",
@@ -7314,7 +8285,16 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:negative",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "boundary:api_version_sunset_reached"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_NEG_006",
@@ -7392,7 +8372,16 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:negative",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "boundary:vendor_extension_missing"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_NEG_007",
@@ -7470,7 +8459,16 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:negative",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "boundary:downstream_bahmni_schema_drift"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_NEG_008",
@@ -7548,7 +8546,16 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:negative",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "boundary:hl7_v2_trailing_pipe_abuse"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_NEG_009",
@@ -7626,7 +8633,16 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:negative",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "boundary:cda_template_oid_unknown"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_NEG_010",
@@ -7704,7 +8720,16 @@
       "priority": "P1",
       "automation_status": "automated",
       "estimated_duration_seconds": 5,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:negative",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "boundary:mcp_capability_negotiation_rejected"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_EDG_001",
@@ -7782,7 +8807,16 @@
       "priority": "P2",
       "automation_status": "automated",
       "estimated_duration_seconds": 10,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:edge",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "edge:fhir_r4_to_r5_boundary_resource"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_EDG_002",
@@ -7860,7 +8894,16 @@
       "priority": "P2",
       "automation_status": "automated",
       "estimated_duration_seconds": 10,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:edge",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "edge:openapi_3_0_3_1_wrap_around"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_EDG_003",
@@ -7938,7 +8981,16 @@
       "priority": "P2",
       "automation_status": "automated",
       "estimated_duration_seconds": 10,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:edge",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "edge:dicom_tag_0008_0008_borderline"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_EDG_004",
@@ -8016,7 +9068,16 @@
       "priority": "P2",
       "automation_status": "automated",
       "estimated_duration_seconds": 10,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:edge",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "edge:hl7_segment_32_of_32"
+      ]
     },
     {
       "use_case_id": "symphonix_bridge_sdk_NFR_nfr_co_002_EDG_005",
@@ -8094,7 +9155,16 @@
       "priority": "P2",
       "automation_status": "automated",
       "estimated_duration_seconds": 10,
-      "tags": []
+      "tags": [
+        "nfr-canonical",
+        "subsystem:symphonix_bridge_sdk",
+        "requirement:nfr-co-002",
+        "category:edge",
+        "priority:medium",
+        "iso25010:compatibility",
+        "iso25010-sub:coexistence",
+        "edge:x12_envelope_at_maximum_nesting"
+      ]
     }
   ]
 }
