@@ -158,6 +158,17 @@ from bridge_sdk.signal_governance import (
     PerceivedSignal,
     evaluate_signal_action,
 )
+from bridge_sdk.scope_override_guard import (
+    FileDualControlApprovalStore,
+    FileScopeOverrideAuditSink,
+    ScopeOverrideDecision,
+    ScopeOverrideError,
+    ScopeOverrideGuard,
+    ScopeOverrideMetrics,
+    ScopeOverrideRequest,
+    make_scope_override_metrics_router,
+    token_sha256,
+)
 from bridge_sdk.agent_skills import (
     AGENT_ONLY_SKILLS,
     AgentOnlySkill,
@@ -293,6 +304,15 @@ __all__ = [
     "GovernedDecision",
     "PerceivedSignal",
     "evaluate_signal_action",
+    "FileDualControlApprovalStore",
+    "FileScopeOverrideAuditSink",
+    "ScopeOverrideDecision",
+    "ScopeOverrideError",
+    "ScopeOverrideGuard",
+    "ScopeOverrideMetrics",
+    "ScopeOverrideRequest",
+    "make_scope_override_metrics_router",
+    "token_sha256",
     "AGENT_ONLY_SKILLS",
     "AgentOnlySkill",
     "AgentSenseFacet",

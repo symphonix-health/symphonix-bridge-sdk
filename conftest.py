@@ -1,6 +1,12 @@
 """Workspace-root conftest.py — hydrates User-scope env vars."""
 
 
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+
 def _hydrate_user_scope_secrets() -> None:
     """Pull persistent User-scope env vars into the current process env.
 
@@ -51,3 +57,21 @@ def _hydrate_user_scope_secrets() -> None:
 
 
 _hydrate_user_scope_secrets()
+
+
+def _add_workspace_sibling_packages() -> None:
+    """Make local sibling packages importable for real cross-repo contract tests."""
+
+    workspace = Path(__file__).resolve().parents[1]
+    candidates = (
+        workspace / "BulletTrain",
+        workspace / "global-agent-registry" / "src",
+    )
+    for candidate in candidates:
+        if candidate.exists():
+            path = str(candidate)
+            if path not in sys.path:
+                sys.path.insert(0, path)
+
+
+_add_workspace_sibling_packages()
