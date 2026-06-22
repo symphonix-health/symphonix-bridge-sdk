@@ -184,6 +184,8 @@ from bridge_sdk.evidence import (
     NullEvidenceResolver,
     ResolvedEvidence,
     StaticEvidenceResolver,
+    is_seeded_simulation_grounded,
+    seeded_simulation_grounding_failures,
     signal_from_evidence,
 )
 
@@ -325,6 +327,8 @@ __all__ = [
     "NullEvidenceResolver",
     "ResolvedEvidence",
     "StaticEvidenceResolver",
+    "is_seeded_simulation_grounded",
+    "seeded_simulation_grounding_failures",
     "signal_from_evidence",
     "BridgeEngine",
     "CanonicalEnvelope",

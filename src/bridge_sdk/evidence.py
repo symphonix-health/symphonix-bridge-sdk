@@ -28,6 +28,8 @@ __all__ = [
     "EvidenceResolver",
     "NullEvidenceResolver",
     "StaticEvidenceResolver",
+    "is_seeded_simulation_grounded",
+    "seeded_simulation_grounding_failures",
     "signal_from_evidence",
 ]
 
@@ -44,6 +46,16 @@ class ResolvedEvidence:
     coding: dict[str, str] = field(default_factory=dict)  # {"system":..,"code":..}
     provenance_ref: str = ""
     tamper: str = "unknown"  # ok | altered | unknown
+    source_span_ref: str = ""
+    target_evidence_ref: str = ""
+    seeded_dataset_id: str = ""
+    persona_id: str = ""
+    scenario_id: str = ""
+    service_route: str = ""
+    permission_scope: str = ""
+    telemetry_ref: str = ""
+    synthetic_telemetry: bool = False
+    live_production_evidence: bool = False
 
 
 @runtime_checkable
@@ -88,7 +100,11 @@ def signal_from_evidence(
     conservative defaults so the governance core escalates rather than
     auto-proceeds. Only verified, untampered evidence raises ``attested``.
     """
-    if resolved is None or resolved.tamper == "altered":
+    if (
+        resolved is None
+        or resolved.tamper == "altered"
+        or seeded_simulation_grounding_failures(resolved)
+    ):
         return base
     attested = (resolved.attested and resolved.tamper == "ok") or base.attested
     return replace(
@@ -102,3 +118,40 @@ def signal_from_evidence(
         if resolved.reversible is not None
         else base.reversible,
     )
+
+
+def is_seeded_simulation_grounded(resolved: ResolvedEvidence) -> bool:
+    """Return whether evidence can support accepted seeded-simulation claims."""
+
+    return not seeded_simulation_grounding_failures(resolved)
+
+
+def seeded_simulation_grounding_failures(resolved: ResolvedEvidence) -> list[str]:
+    """Explain why evidence cannot yet be treated as accepted implementation proof.
+
+    The bridge SDK may resolve signed evidence before live production. For mined
+    research findings, signature is not enough: the evidence must also bind the
+    source claim to target-repo evidence, a realistic seeded dataset, an agent
+    persona, a scenario, the exercised service route, permission scope, and
+    emitted telemetry. Any missing or synthetic/live-only component fails closed.
+    """
+
+    failures: list[str] = []
+    required = {
+        "source_span_ref": resolved.source_span_ref,
+        "target_evidence_ref": resolved.target_evidence_ref,
+        "seeded_dataset_id": resolved.seeded_dataset_id,
+        "persona_id": resolved.persona_id,
+        "scenario_id": resolved.scenario_id,
+        "service_route": resolved.service_route,
+        "permission_scope": resolved.permission_scope,
+        "telemetry_ref": resolved.telemetry_ref,
+    }
+    for field_name, value in required.items():
+        if not value.strip():
+            failures.append(f"missing_{field_name}")
+    if resolved.synthetic_telemetry:
+        failures.append("synthetic_telemetry")
+    if resolved.live_production_evidence:
+        failures.append("live_production_evidence")
+    return failures

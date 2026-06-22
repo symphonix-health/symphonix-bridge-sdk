@@ -20,6 +20,8 @@ from bridge_sdk import (
     SafetyClass,
     StaticEvidenceResolver,
     evaluate_signal_action,
+    is_seeded_simulation_grounded,
+    seeded_simulation_grounding_failures,
     signal_from_evidence,
 )
 
@@ -44,6 +46,27 @@ _ROUTINE = {
 }
 
 
+def _grounded_evidence(**overrides) -> ResolvedEvidence:
+    fields = dict(
+        evidence_ref="urn:x",
+        attested=True,
+        confidence=0.99,
+        origin="device",
+        reversible=True,
+        tamper="ok",
+        source_span_ref="paper:self-harness:page-5:offset-1520-1830",
+        target_evidence_ref="tests/test_evidence.py::test_rank_b_unblocks_auto_on_loop",
+        seeded_dataset_id="seeded-symphonix-bridge-evidence-v1",
+        persona_id="persona:clinician-routing-agent",
+        scenario_id="scenario:evidence-grounding-routine-dashboard-filter",
+        service_route="bridge_sdk.evidence.signal_from_evidence",
+        permission_scope="dashboard.filter:read",
+        telemetry_ref="telemetry:seeded:evidence-grounding:auto-on-loop",
+    )
+    fields.update(overrides)
+    return ResolvedEvidence(**fields)
+
+
 def test_null_resolver_is_fail_closed() -> None:
     base = PerceivedSignal(evidence_ref="urn:x")
     assert NullEvidenceResolver().resolve("urn:x") is None
@@ -51,14 +74,7 @@ def test_null_resolver_is_fail_closed() -> None:
 
 
 def test_static_resolver_enriches_signal() -> None:
-    ev = ResolvedEvidence(
-        evidence_ref="urn:x",
-        attested=True,
-        confidence=0.99,
-        origin="device",
-        reversible=True,
-        tamper="ok",
-    )
+    ev = _grounded_evidence()
     resolver = StaticEvidenceResolver({"urn:x": ev})
     enriched = signal_from_evidence(
         PerceivedSignal(evidence_ref="urn:x"), resolver.resolve("urn:x")
@@ -70,15 +86,35 @@ def test_static_resolver_enriches_signal() -> None:
 
 
 def test_tampered_evidence_not_trusted() -> None:
+    ev = _grounded_evidence(tamper="altered")
+    base = PerceivedSignal(evidence_ref="urn:x")
+    assert signal_from_evidence(base, ev) == base  # fail-closed: altered -> untrusted
+
+
+def test_missing_seeded_simulation_grounding_is_not_trusted() -> None:
     ev = ResolvedEvidence(
         evidence_ref="urn:x",
         attested=True,
         confidence=0.99,
         reversible=True,
-        tamper="altered",
+        tamper="ok",
     )
     base = PerceivedSignal(evidence_ref="urn:x")
-    assert signal_from_evidence(base, ev) == base  # fail-closed: altered -> untrusted
+
+    assert is_seeded_simulation_grounded(ev) is False
+    assert "missing_source_span_ref" in seeded_simulation_grounding_failures(ev)
+    assert signal_from_evidence(base, ev) == base
+
+
+def test_synthetic_or_live_only_telemetry_is_not_trusted() -> None:
+    synthetic = _grounded_evidence(synthetic_telemetry=True)
+    live_only = _grounded_evidence(live_production_evidence=True)
+    base = PerceivedSignal(evidence_ref="urn:x")
+
+    assert "synthetic_telemetry" in seeded_simulation_grounding_failures(synthetic)
+    assert "live_production_evidence" in seeded_simulation_grounding_failures(live_only)
+    assert signal_from_evidence(base, synthetic) == base
+    assert signal_from_evidence(base, live_only) == base
 
 
 def test_rank_b_unblocks_auto_on_loop() -> None:
@@ -89,13 +125,7 @@ def test_rank_b_unblocks_auto_on_loop() -> None:
     )
     assert before.tier is GovernanceTier.human_in_loop  # latent: unattested -> escalate
 
-    ev = ResolvedEvidence(
-        evidence_ref="urn:x",
-        attested=True,
-        confidence=0.99,
-        reversible=True,
-        tamper="ok",
-    )
+    ev = _grounded_evidence()
     resolved = signal_from_evidence(
         base, StaticEvidenceResolver({"urn:x": ev}).resolve("urn:x")
     )
@@ -108,13 +138,7 @@ def test_rank_b_unblocks_auto_on_loop() -> None:
 
 def test_tampered_evidence_keeps_escalation() -> None:
     base = PerceivedSignal(description="filter", evidence_ref="urn:x")
-    ev = ResolvedEvidence(
-        evidence_ref="urn:x",
-        attested=True,
-        confidence=0.99,
-        reversible=True,
-        tamper="altered",
-    )
+    ev = _grounded_evidence(tamper="altered")
     resolved = signal_from_evidence(base, ev)
     decision = evaluate_signal_action(
         intent="dashboard.filter", persona="p", signal=resolved, manifests=_ROUTINE
