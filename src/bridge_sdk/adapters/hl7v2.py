@@ -4,12 +4,23 @@ from __future__ import annotations
 
 from typing import Any
 
-from bridge_sdk.adapters.base import ProtocolAdapter, ProtocolType
+from bridge_sdk.adapters.base import (
+    REQUIRED_GOVERNANCE_CONTROLS,
+    ProtocolAdapter,
+    ProtocolType,
+)
 from bridge_sdk.canonical import CanonicalEnvelope
+
+
+GOVERNANCE_DECLARATION = (
+    "audit, schema validation, retry policy, timeout policy, "
+    "error normalisation / normalize, observability/tracing, security policy"
+)
 
 
 class Hl7v2Adapter(ProtocolAdapter):
     protocol = ProtocolType.HL7V2
+    governance_controls = REQUIRED_GOVERNANCE_CONTROLS
 
     def detect(self, raw: Any, metadata: dict[str, Any] | None = None) -> float:
         if isinstance(raw, str) and raw.startswith("MSH|"):

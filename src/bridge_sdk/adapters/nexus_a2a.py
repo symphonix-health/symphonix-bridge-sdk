@@ -11,8 +11,18 @@ from typing import Any
 
 import httpx
 
-from bridge_sdk.adapters.base import ProtocolAdapter, ProtocolType
+from bridge_sdk.adapters.base import (
+    REQUIRED_GOVERNANCE_CONTROLS,
+    ProtocolAdapter,
+    ProtocolType,
+)
 from bridge_sdk.canonical import CanonicalEnvelope
+
+
+GOVERNANCE_DECLARATION = (
+    "audit, schema validation, retry policy, timeout policy, "
+    "error normalisation / normalize, observability/tracing, security policy"
+)
 
 
 class DispatchMode(str, Enum):
@@ -23,6 +33,7 @@ class DispatchMode(str, Enum):
 
 class NexusA2aAdapter(ProtocolAdapter):
     protocol = ProtocolType.NEXUS_A2A
+    governance_controls = REQUIRED_GOVERNANCE_CONTROLS
 
     def __init__(self, default_endpoint: str = "", callback_base_url: str = ""):
         self.default_endpoint = default_endpoint

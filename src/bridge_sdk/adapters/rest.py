@@ -8,12 +8,23 @@ from __future__ import annotations
 from datetime import UTC, datetime
 from typing import Any
 
-from bridge_sdk.adapters.base import ProtocolAdapter, ProtocolType
+from bridge_sdk.adapters.base import (
+    REQUIRED_GOVERNANCE_CONTROLS,
+    ProtocolAdapter,
+    ProtocolType,
+)
 from bridge_sdk.canonical import CanonicalEnvelope
+
+
+GOVERNANCE_DECLARATION = (
+    "audit, schema validation, retry policy, timeout policy, "
+    "error normalisation / normalize, observability/tracing, security policy"
+)
 
 
 class RestAdapter(ProtocolAdapter):
     protocol = ProtocolType.REST
+    governance_controls = REQUIRED_GOVERNANCE_CONTROLS
 
     def detect(self, raw: Any, metadata: dict[str, Any] | None = None) -> float:
         meta = metadata or {}

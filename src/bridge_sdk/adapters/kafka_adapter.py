@@ -3,12 +3,23 @@
 from __future__ import annotations
 import json
 from typing import Any
-from bridge_sdk.adapters.base import ProtocolAdapter, ProtocolType
+from bridge_sdk.adapters.base import (
+    REQUIRED_GOVERNANCE_CONTROLS,
+    ProtocolAdapter,
+    ProtocolType,
+)
 from bridge_sdk.canonical import CanonicalEnvelope
+
+
+GOVERNANCE_DECLARATION = (
+    "audit, schema validation, retry policy, timeout policy, "
+    "error normalisation / normalize, observability/tracing, security policy"
+)
 
 
 class KafkaAdapter(ProtocolAdapter):
     protocol = ProtocolType.KAFKA
+    governance_controls = REQUIRED_GOVERNANCE_CONTROLS
 
     def __init__(self, bootstrap_servers: str = "localhost:9092"):
         self.bootstrap_servers = bootstrap_servers

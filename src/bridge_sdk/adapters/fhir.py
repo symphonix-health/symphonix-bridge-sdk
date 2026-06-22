@@ -6,12 +6,23 @@ from typing import Any
 
 import httpx
 
-from bridge_sdk.adapters.base import ProtocolAdapter, ProtocolType
+from bridge_sdk.adapters.base import (
+    REQUIRED_GOVERNANCE_CONTROLS,
+    ProtocolAdapter,
+    ProtocolType,
+)
 from bridge_sdk.canonical import CanonicalEnvelope
+
+
+GOVERNANCE_DECLARATION = (
+    "audit, schema validation, retry policy, timeout policy, "
+    "error normalisation / normalize, observability/tracing, security policy"
+)
 
 
 class FhirAdapter(ProtocolAdapter):
     protocol = ProtocolType.FHIR_R4
+    governance_controls = REQUIRED_GOVERNANCE_CONTROLS
 
     def __init__(self, fhir_base_url: str = "http://localhost:8152/fhir/r4"):
         self.fhir_base_url = fhir_base_url

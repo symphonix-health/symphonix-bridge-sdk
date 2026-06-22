@@ -24,6 +24,7 @@ from bridge_sdk.gharra_registration import (
 )
 
 _GHARRA_AVAILABLE = importlib.util.find_spec("gharra") is not None
+TRIAGE_API_BASE_URL = "http://127.0.0.1:8400/triage-api"
 
 
 def test_capabilities_payload_carries_intents_as_protocols() -> None:
@@ -36,14 +37,14 @@ def test_capabilities_payload_carries_intents_as_protocols() -> None:
 
 def test_registration_payload_minimal_shape() -> None:
     m = reference_manifest("triage-api")
-    payload = build_registration_payload(m, base_url="http://triage-api.local/")
+    payload = build_registration_payload(m, base_url=f"{TRIAGE_API_BASE_URL}/")
     assert payload["display_name"] == "triage-api"
     assert payload["jurisdiction"] == "GB"
     assert payload["capabilities"]["protocols"] == ["triage.start"]
     assert len(payload["endpoints"]) == 1
     ep = payload["endpoints"][0]
     assert ep["protocol"] == GHARRA_PROTOCOL_REST  # http-rest, not "rest"
-    assert ep["url"] == "http://triage-api.local"  # trailing slash stripped
+    assert ep["url"] == TRIAGE_API_BASE_URL  # trailing slash stripped
     assert ep["agent_card_url"].endswith("/.well-known/agent-card.json")
 
 
@@ -61,7 +62,7 @@ def test_payload_validates_against_real_gharra_agentrecord() -> None:
     from gharra.core.models import AgentRecord  # type: ignore
 
     m = reference_manifest("triage-api")
-    payload = build_registration_payload(m, base_url="http://triage-api.local")
+    payload = build_registration_payload(m, base_url=TRIAGE_API_BASE_URL)
     record = AgentRecord.model_validate(payload)
     assert record.display_name == "triage-api"
     assert "triage.start" in record.capabilities.protocols

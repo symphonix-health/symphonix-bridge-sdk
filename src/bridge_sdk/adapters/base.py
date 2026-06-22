@@ -25,6 +25,17 @@ class ProtocolType(str, Enum):
     SSE = "SSE"
 
 
+REQUIRED_GOVERNANCE_CONTROLS: tuple[str, ...] = (
+    "audit",
+    "schema validation",
+    "retry policy",
+    "timeout policy",
+    "error normalisation",
+    "observability/tracing",
+    "security policy",
+)
+
+
 class ProtocolAdapter(ABC):
     """Abstract base for all protocol adapters.
 
@@ -35,6 +46,7 @@ class ProtocolAdapter(ABC):
     """
 
     protocol: ProtocolType
+    governance_controls: tuple[str, ...] = REQUIRED_GOVERNANCE_CONTROLS
 
     @abstractmethod
     def detect(self, raw: Any, metadata: dict[str, Any] | None = None) -> float:
