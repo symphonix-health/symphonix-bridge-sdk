@@ -6,6 +6,7 @@ Fixes: G7 (trust), G8 (unified client), G10 (priority/weight ranking),
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import time
 from typing import Any
@@ -220,13 +221,29 @@ class GharraDiscoveryClient:
         trust = agent.get("trust", {})
         agent_id = agent.get("agent_id", "")
         if agent_id:
-            try:
-                route_info = await self.route(agent_id, purpose_of_use, correlation_id)
-                trust_bundle = route_info.get("trust_bundle", {})
-                if trust_bundle:
-                    trust = {**trust, **trust_bundle}
-            except Exception as e:
-                logger.debug("Route advisory failed for %s: %s", agent_id, e)
+            route_info: dict[str, Any] = {}
+            direct_trust: dict[str, Any] = {}
+            route_result, bundle_result = await asyncio.gather(
+                self.route(agent_id, purpose_of_use, correlation_id),
+                self.get_trust_bundle(agent_id),
+                return_exceptions=True,
+            )
+
+            if isinstance(route_result, Exception):
+                logger.debug("Route advisory failed for %s: %s", agent_id, route_result)
+            elif isinstance(route_result, dict):
+                route_info = route_result
+
+            if isinstance(bundle_result, Exception):
+                logger.debug(
+                    "Trust bundle fetch failed for %s: %s", agent_id, bundle_result
+                )
+            elif isinstance(bundle_result, dict):
+                direct_trust = bundle_result.get("trust_bundle", bundle_result)
+
+            route_trust = route_info.get("trust_bundle", {})
+            if direct_trust or route_trust:
+                trust = {**trust, **direct_trust, **route_trust}
 
         policy_tags = agent.get("policy_tags", {})
 
