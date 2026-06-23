@@ -15,9 +15,15 @@ dependencies = [
     "pydantic>=2.0",
     "fastapi>=0.115",
     "opentelemetry-exporter-otlp>=1.24",
-    "opentelemetry-instrumentation-fastapi>=0.45",
-    "opentelemetry-instrumentation-httpx>=0.45",
-    "opentelemetry-instrumentation-requests>=0.45",
+    # The opentelemetry-instrumentation-* distributions only ship pre-release
+    # builds (0.XXbN); a bare ">=0.45" excludes pre-releases, so pip cannot
+    # satisfy it without a global "--pre" (which then leaks unrelated
+    # pre-releases like grpcio/sentry into the resolve). Referencing the beta
+    # explicitly (">=0.45b0") tells pip pre-releases are allowed for THESE
+    # specifiers only, so consumers install without "--pre".
+    "opentelemetry-instrumentation-fastapi>=0.45b0",
+    "opentelemetry-instrumentation-httpx>=0.45b0",
+    "opentelemetry-instrumentation-requests>=0.45b0",
     "opentelemetry-sdk>=1.24",
     "prometheus-client>=0.20",
     "python-json-logger>=2.0",
