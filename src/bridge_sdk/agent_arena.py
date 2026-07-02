@@ -36,6 +36,7 @@ __all__ = [
     "ArenaResult",
     "GateDecision",
     "MetricKey",
+    "RECEIVER_OBSERVER_EVIDENCE_CRITERION",
     "ReleaseGate",
     "ReleaseThresholds",
     "RunMetrics",
@@ -59,6 +60,9 @@ class MetricKey(str, Enum):
     consent_breach_rate = "consent_breach_rate"
     human_handoff_rate = "human_handoff_rate"
     mean_steps_vs_golden = "mean_steps_vs_golden"  # mean steps / golden-path steps
+
+
+RECEIVER_OBSERVER_EVIDENCE_CRITERION = "receiver_observer_evidence"
 
 
 @dataclass(frozen=True)
@@ -211,7 +215,18 @@ class ReleaseGate:
     def __init__(self, thresholds: ReleaseThresholds | None = None) -> None:
         self._t = thresholds or ReleaseThresholds()
 
-    def evaluate(self, metrics: RunMetrics) -> GateDecision:
+    def evaluate(
+        self,
+        metrics: RunMetrics,
+        *,
+        receiver_observer_evidence: bool = False,
+    ) -> GateDecision:
+        """Evaluate release readiness.
+
+        A run with a human or agent handoff cannot be promoted from sender-side
+        metrics alone. The caller must also assert that receiver-bound observer
+        evidence was admitted for the receiving actor.
+        """
         failing: list[str] = []
         if metrics.task_success < self._t.min_task_success:
             failing.append(MetricKey.task_success.value)
@@ -223,4 +238,6 @@ class ReleaseGate:
             failing.append(MetricKey.consent_breach_rate.value)
         if metrics.mean_steps_vs_golden > self._t.max_mean_steps_vs_golden:
             failing.append(MetricKey.mean_steps_vs_golden.value)
+        if metrics.human_handoff_rate > 0 and not receiver_observer_evidence:
+            failing.append(RECEIVER_OBSERVER_EVIDENCE_CRITERION)
         return GateDecision(promoted=not failing, failing_criteria=tuple(failing))

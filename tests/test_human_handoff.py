@@ -17,6 +17,7 @@ from bridge_sdk.human_handoff import (
     HandoffTrigger,
     OutcomeTally,
     PackageValidationError,
+    ReceiverObserverEvidence,
     ReviewerOutcome,
     summarise_outcomes,
 )
@@ -38,6 +39,15 @@ def _package(**over) -> HandoffPackage:
     )
     base.update(over)
     return HandoffPackage(**base)
+
+
+def _receiver_evidence(**over) -> ReceiverObserverEvidence:
+    base = dict(
+        receiver_ref="PractitionerRole/receiver-1",
+        evidence_ref="AuditEvent/handoff-receiver-evidence-1",
+    )
+    base.update(over)
+    return ReceiverObserverEvidence(**base)
 
 
 # ---- FR-HH-001: needs_human_review is terminal-but-resumable -----------
@@ -98,10 +108,12 @@ def test_inbox_enqueue_and_one_click_resume() -> None:
     inbox = HandoffInbox()
     inbox.enqueue(_package())
     assert len(inbox.pending()) == 1
-    resumed_state = inbox.resume("wf-1")
+    evidence = _receiver_evidence()
+    resumed_state = inbox.resume("wf-1", receiver_observer_evidence=evidence)
     assert resumed_state == "running"  # resumes to exact pre-handoff state
     assert inbox.pending() == []
     assert inbox.resolution_of("wf-1") == "resume"
+    assert inbox.receiver_observer_evidence_of("wf-1") == evidence
 
 
 def test_inbox_amend_and_cancel_resolutions() -> None:
@@ -122,6 +134,44 @@ def test_amend_requires_note_and_cancel_requires_reason() -> None:
         inbox.amend("wf-1", note="")
     with pytest.raises(HandoffError):
         inbox.cancel("wf-1", reason="")
+
+
+def test_resume_requires_receiver_observer_evidence() -> None:
+    inbox = HandoffInbox()
+    inbox.enqueue(_package())
+    with pytest.raises(HandoffError, match="receiver observer evidence"):
+        inbox.resume("wf-1")
+
+
+@pytest.mark.parametrize(
+    "field",
+    [
+        "receiver_ref",
+        "evidence_ref",
+    ],
+)
+def test_receiver_observer_evidence_requires_receiver_and_evidence_ref(field) -> None:
+    evidence = _receiver_evidence(**{field: ""})
+    with pytest.raises(HandoffError, match="receiver observer evidence"):
+        evidence.validate()
+
+
+@pytest.mark.parametrize(
+    "field",
+    [
+        "accessible",
+        "permitted",
+        "attested",
+    ],
+)
+def test_resume_rejects_unadmitted_receiver_observer_evidence(field) -> None:
+    inbox = HandoffInbox()
+    inbox.enqueue(_package())
+    with pytest.raises(HandoffError, match="receiver observer evidence"):
+        inbox.resume(
+            "wf-1",
+            receiver_observer_evidence=_receiver_evidence(**{field: False}),
+        )
 
 
 # ---- FR-HH-003: package validation -------------------------------------
@@ -182,7 +232,10 @@ def test_each_trigger_creates_a_routable_package(trigger) -> None:
 def test_resume_fidelity_returns_exact_pre_handoff_state() -> None:
     inbox = HandoffInbox()
     inbox.enqueue(_package(workflow_id="wf-x", pre_handoff_state="waiting_for_input"))
-    assert inbox.resume("wf-x") == "waiting_for_input"
+    assert (
+        inbox.resume("wf-x", receiver_observer_evidence=_receiver_evidence())
+        == "waiting_for_input"
+    )
 
 
 def test_double_enqueue_rejected() -> None:
@@ -198,7 +251,11 @@ def test_double_enqueue_rejected() -> None:
 def test_grade_is_recorded_and_distinct_from_disposition() -> None:
     inbox = HandoffInbox()
     inbox.enqueue(_package())
-    inbox.resume("wf-1", outcome=ReviewerOutcome.correct)
+    inbox.resume(
+        "wf-1",
+        receiver_observer_evidence=_receiver_evidence(),
+        outcome=ReviewerOutcome.correct,
+    )
     assert inbox.resolution_of("wf-1") == "resume"  # what reviewer did
     assert inbox.outcome_of("wf-1") is ReviewerOutcome.correct  # the rubric grade
 

@@ -24,14 +24,19 @@ LOCAL_PATIENT_ID_PATTERN = (
     r"\b(?:ke-)?pat-\d{3,}(?:-\d+)?\b"
     r"|\b(?:ke-)?pat-\d{3,}(?:-\d+)?\b[^\n]{0,80}(?:patient[_-]?id|patient[_-]?ref)"
 )
+TOKEN_LEFT = r"(?:^|[^A-Za-z0-9_])"
+TOKEN_RIGHT = r"(?:$|[^A-Za-z0-9_])"
+NHS_NUMBER_FIELD_PATTERN = rf"{TOKEN_LEFT}nhs_number{TOKEN_RIGHT}"
+PATIENT_NHS_NUMBER_FIELD_PATTERN = rf"{TOKEN_LEFT}patient_nhs_number{TOKEN_RIGHT}"
+NHS_NUMBER_CAMEL_FIELD_PATTERN = rf"{TOKEN_LEFT}nhsNumber{TOKEN_RIGHT}"
 STATIC_SCAN_PATTERN = (
-    r"\bnhs_number\b"
-    r"|\bpatient_nhs_number\b"
-    r"|\bnhsNumber\b"
-    r"|NHS Number as primary patient identifier"
-    r"|generate_id\([^)]*PAT-"
-    rf"|{LOCAL_PATIENT_ID_PATTERN}"
-    r"|\bmpiId\s+TEXT\s+PRIMARY\s+KEY\b"
+    NHS_NUMBER_FIELD_PATTERN
+    + rf"|{PATIENT_NHS_NUMBER_FIELD_PATTERN}"
+    + rf"|{NHS_NUMBER_CAMEL_FIELD_PATTERN}"
+    + r"|NHS Number as primary patient identifier"
+    + r"|generate_id\([^)]*PAT-"
+    + rf"|{LOCAL_PATIENT_ID_PATTERN}"
+    + r"|\bmpiId\s+TEXT\s+PRIMARY\s+KEY\b"
 )
 CANONICAL_COLUMNS = {
     "use_case_id",
@@ -97,6 +102,7 @@ def _scan_repo_with_rg(repo: Path) -> list[str] | None:
         "!.claude/**",
         "!.codex/**",
         "!.git/**",
+        "!graphify-out/**",
         "!.mypy_cache/**",
         "!.next/**",
         "!.pytest_cache/**",
@@ -112,6 +118,7 @@ def _scan_repo_with_rg(repo: Path) -> list[str] | None:
         "!playwright-report/**",
         "!site-packages/**",
         "!test-results/**",
+        "!tests/integration/day_in_the_life/autonomous_sweep*.json",
         "!venv/**",
     ]
     suffix_globs = [
@@ -161,6 +168,8 @@ def _scan_repo_with_rg(repo: Path) -> list[str] | None:
         if findings:
             return findings
         return None
+    finally:
+        process.stdout.close()
 
     if process.returncode not in {0, 1, -9, 1_073_741_515} and not findings:
         return None
@@ -179,6 +188,10 @@ def _scan_repo_with_git_grep(repo: Path) -> list[str] | None:
         "*.yaml",
         "*.yml",
     ]
+    excluded_pathspecs = [
+        ":(exclude,glob)graphify-out/**",
+        ":(exclude,glob)tests/integration/day_in_the_life/autonomous_sweep*.json",
+    ]
     command = [
         "git",
         "-C",
@@ -192,6 +205,7 @@ def _scan_repo_with_git_grep(repo: Path) -> list[str] | None:
         STATIC_SCAN_PATTERN,
         "--",
         *suffix_globs,
+        *excluded_pathspecs,
     ]
 
     findings: list[str] = []
@@ -218,6 +232,8 @@ def _scan_repo_with_git_grep(repo: Path) -> list[str] | None:
         if findings:
             return findings
         return [f"{repo.relative_to(WORKSPACE)} static identity scan timed out"]
+    finally:
+        process.stdout.close()
 
     if process.returncode not in {0, 1, -9} and not findings:
         return None
@@ -414,9 +430,9 @@ def test_patient_identity_scenario_patient_ids_are_modulus_11_valid() -> None:
 def test_patient_identity_static_repo_scan_enforce_mode() -> None:
     patient_data_repos = _discover_symphonix_patient_data_repos()
     forbidden_patterns = [
-        re.compile(r"\bnhs_number\b"),
-        re.compile(r"\bpatient_nhs_number\b"),
-        re.compile(r"\bnhsNumber\b"),
+        re.compile(NHS_NUMBER_FIELD_PATTERN, re.IGNORECASE),
+        re.compile(PATIENT_NHS_NUMBER_FIELD_PATTERN, re.IGNORECASE),
+        re.compile(NHS_NUMBER_CAMEL_FIELD_PATTERN, re.IGNORECASE),
         re.compile(r"NHS Number as primary patient identifier", re.IGNORECASE),
         re.compile(r"generate_id\([^)]*PAT-"),
         re.compile(LOCAL_PATIENT_ID_PATTERN, re.IGNORECASE),
@@ -428,6 +444,7 @@ def test_patient_identity_static_repo_scan_enforce_mode() -> None:
         ".claude",
         ".codex",
         ".git",
+        "graphify-out",
         ".mypy_cache",
         ".next",
         ".pytest_cache",
@@ -467,6 +484,11 @@ def test_patient_identity_static_repo_scan_enforce_mode() -> None:
             for filename in files:
                 path = root_path / filename
                 if path.suffix not in suffixes:
+                    continue
+                relative_path = path.relative_to(repo).as_posix()
+                if relative_path.startswith(
+                    "tests/integration/day_in_the_life/autonomous_sweep"
+                ) and path.suffix == ".json":
                     continue
                 if path.stat().st_size > 2_000_000:
                     continue

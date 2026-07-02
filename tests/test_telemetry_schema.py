@@ -33,6 +33,7 @@ from bridge_sdk.human_handoff import (
     HandoffInbox,
     HandoffPackage,
     HandoffTrigger,
+    ReceiverObserverEvidence,
     ReviewerOutcome,
 )
 from bridge_sdk.telemetry_schema import (
@@ -212,7 +213,14 @@ def test_reviewer_outcome_grade_is_distinct_from_the_disposition() -> None:
     )
     inbox = HandoffInbox()
     inbox.enqueue(package)
-    inbox.resume("wf-eclaims-1", outcome=ReviewerOutcome.correct_suboptimal)
+    inbox.resume(
+        "wf-eclaims-1",
+        receiver_observer_evidence=ReceiverObserverEvidence(
+            receiver_ref="PractitionerRole/reviewer-1",
+            evidence_ref="AuditEvent/reviewer-evidence-1",
+        ),
+        outcome=ReviewerOutcome.correct_suboptimal,
+    )
     # The disposition records what the reviewer DID...
     assert inbox.resolution_of("wf-eclaims-1") == "resume"
     # ...the grade records whether the agent was RIGHT -- a distinct field.

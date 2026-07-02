@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 
 from fastapi import FastAPI
-from fastapi.testclient import TestClient
+from starlette.testclient import TestClient
 
 from bridge_sdk import (
     FileDualControlApprovalStore,

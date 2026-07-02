@@ -105,6 +105,7 @@ from bridge_sdk.human_handoff import (
     HandoffTrigger,
     OutcomeTally,
     PackageValidationError,
+    ReceiverObserverEvidence,
     ReviewerOutcome,
     summarise_outcomes,
 )
@@ -268,6 +269,7 @@ __all__ = [
     "HandoffTrigger",
     "OutcomeTally",
     "PackageValidationError",
+    "ReceiverObserverEvidence",
     "ReviewerOutcome",
     "summarise_outcomes",
     "ExecutionLedger",

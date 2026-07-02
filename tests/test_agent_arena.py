@@ -7,6 +7,7 @@ import pytest
 from bridge_sdk.agent_arena import (
     ArenaError,
     MetricKey,
+    RECEIVER_OBSERVER_EVIDENCE_CRITERION,
     ReleaseGate,
     ReleaseThresholds,
     SyntheticPatient,
@@ -100,6 +101,29 @@ def test_gate_promotes_clean_run() -> None:
     script = _script(("triage.start", "appointment.book", "result.retrieve"))
     res = run_arena(script, _golden_runner)
     decision = ReleaseGate().evaluate(res.metrics)
+    assert decision.promoted is True
+    assert decision.failing_criteria == ()
+
+
+def test_gate_blocks_handoff_without_receiver_observer_evidence() -> None:
+    def runner(step: str) -> dict[str, object]:
+        return {"handoff": step == "handoff.review", "completed": step == "done"}
+
+    res = run_arena(_script(("sender.prepare", "handoff.review", "done")), runner)
+    decision = ReleaseGate().evaluate(res.metrics)
+    assert decision.promoted is False
+    assert RECEIVER_OBSERVER_EVIDENCE_CRITERION in decision.failing_criteria
+
+
+def test_gate_promotes_handoff_when_receiver_observer_evidence_is_admitted() -> None:
+    def runner(step: str) -> dict[str, object]:
+        return {"handoff": step == "handoff.review", "completed": step == "done"}
+
+    res = run_arena(_script(("sender.prepare", "handoff.review", "done")), runner)
+    decision = ReleaseGate().evaluate(
+        res.metrics,
+        receiver_observer_evidence=True,
+    )
     assert decision.promoted is True
     assert decision.failing_criteria == ()
 

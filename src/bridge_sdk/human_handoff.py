@@ -34,6 +34,7 @@ __all__ = [
     "HandoffTrigger",
     "OutcomeTally",
     "PackageValidationError",
+    "ReceiverObserverEvidence",
     "ReviewerOutcome",
     "summarise_outcomes",
 ]
@@ -126,6 +127,41 @@ def summarise_outcomes(outcomes: Iterable[ReviewerOutcome]) -> OutcomeTally:
     )
 
 
+@dataclass(frozen=True)
+class ReceiverObserverEvidence:
+    """Evidence that the receiving observer can safely resume a handed-off task."""
+
+    receiver_ref: str
+    evidence_ref: str
+    accessible: bool = True
+    permitted: bool = True
+    attested: bool = True
+
+    def validate(self) -> None:
+        missing = [
+            field_name
+            for field_name in ("receiver_ref", "evidence_ref")
+            if not getattr(self, field_name)
+        ]
+        if missing:
+            raise HandoffError(f"receiver observer evidence missing: {missing}")
+        if not self.accessible:
+            raise HandoffError("receiver observer evidence is not accessible")
+        if not self.permitted:
+            raise HandoffError("receiver observer evidence is not permitted")
+        if not self.attested:
+            raise HandoffError("receiver observer evidence is not attested")
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "receiver_ref": self.receiver_ref,
+            "evidence_ref": self.evidence_ref,
+            "accessible": self.accessible,
+            "permitted": self.permitted,
+            "attested": self.attested,
+        }
+
+
 # Required elements of a handoff package (FR-HH-003). A package missing any of
 # these fails validation -- a clinician must never get a half-empty handoff.
 _REQUIRED_PACKAGE_FIELDS: tuple[str, ...] = (
@@ -185,6 +221,7 @@ class _InboxEntry:
     resolution: str | None = None  # resume | amend | cancel (the disposition)
     resumed_to_state: str | None = None
     reviewer_outcome: ReviewerOutcome | None = None  # the 4-class rubric grade
+    receiver_observer_evidence: ReceiverObserverEvidence | None = None
 
 
 class HandoffInbox:
@@ -214,19 +251,29 @@ class HandoffInbox:
         return self._entries[workflow_id].package
 
     def resume(
-        self, workflow_id: str, *, outcome: ReviewerOutcome | None = None
+        self,
+        workflow_id: str,
+        *,
+        receiver_observer_evidence: ReceiverObserverEvidence | None = None,
+        outcome: ReviewerOutcome | None = None,
     ) -> str:
         """One-click resume; returns the state the workflow resumes to (FR-HH-002).
 
         Resume fidelity (NFR-HH-001): the returned state equals the package's
         ``pre_handoff_state`` -- the workflow continues from exactly where it
-        paused, no data loss, no work repeated. ``outcome`` optionally records the
-        reviewer's four-class rubric grade alongside the disposition.
+        paused, no data loss, no work repeated. ``receiver_observer_evidence``
+        proves the receiving observer has admitted evidence for the resume
+        action. ``outcome`` optionally records the reviewer's four-class rubric
+        grade alongside the disposition.
         """
         entry = self._entry(workflow_id)
+        if receiver_observer_evidence is None:
+            raise HandoffError("resume requires receiver observer evidence")
+        receiver_observer_evidence.validate()
         entry.resolved = True
         entry.resolution = "resume"
         entry.resumed_to_state = entry.package.pre_handoff_state
+        entry.receiver_observer_evidence = receiver_observer_evidence
         if outcome is not None:
             entry.reviewer_outcome = outcome
         return entry.resumed_to_state
@@ -268,6 +315,11 @@ class HandoffInbox:
     def outcome_of(self, workflow_id: str) -> ReviewerOutcome | None:
         """The reviewer's rubric grade for a workflow, or None if ungraded."""
         return self._entry(workflow_id).reviewer_outcome
+
+    def receiver_observer_evidence_of(
+        self, workflow_id: str
+    ) -> ReceiverObserverEvidence | None:
+        return self._entry(workflow_id).receiver_observer_evidence
 
     def _entry(self, workflow_id: str) -> _InboxEntry:
         if workflow_id not in self._entries:
