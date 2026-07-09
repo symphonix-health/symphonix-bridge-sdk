@@ -38,6 +38,74 @@ STATIC_SCAN_PATTERN = (
     + rf"|{LOCAL_PATIENT_ID_PATTERN}"
     + r"|\bmpiId\s+TEXT\s+PRIMARY\s+KEY\b"
 )
+# Sanctioned detector/scanner allowlist (UAT-DEF-009). Every entry below is
+# scanner / detector / migration code (or the negative-control test fixtures
+# that prove that code fires) which MUST name the legacy identity token in
+# order to detect, forbid, or migrate it. Obfuscating the literal in these
+# files would break the very detection this gate exists to enforce, so they
+# are excluded from the static scan. Workspace-relative POSIX paths.
+ALLOWLISTED_DETECTOR_FILES: frozenset[str] = frozenset(
+    {
+        # caid-agent: SCH-01 forbidden-column detector maps legacy identifier
+        # columns (nhs_number, ...) to their owning entity.
+        "caid-agent/src/caid/team/code_reviewer.py",
+        # caid-agent: RI-01/RI-02 registry-key detector maps legacy key names
+        # to the canonical connector fixture tables.
+        "caid-agent/src/caid/team/referential_integrity.py",
+        # caid-agent: negative-control fixtures that must contain the legacy
+        # column so SCH-01 / QA gatekeeper / harness-triplet detectors fire.
+        "caid-agent/tests/test_code_reviewer.py",
+        "caid-agent/tests/test_qa_gatekeeper.py",
+        "caid-agent/tests/harness/test_harness_triplet.py",
+        # caid-agent: master-of-record forbid_columns specification docs that
+        # the referential-integrity detector mirrors; the spec must name the
+        # forbidden legacy columns to declare them forbidden.
+        "caid-agent/docs/sibling_harness_prompts/entities_README.md",
+        "caid-agent/docs/sibling_harness_prompts/entities_catalogue.md",
+        # community-nursing: SQLite migration detects the legacy
+        # patient_nhs_number column, backfills external_patient_nhs_number,
+        # and drops the legacy column -- it must name it to remove it.
+        "community-nursing/backend/community_nursing/db.py",
+        # community-nursing: contract-migration-tolerant legacy read aliases
+        # (external_nhs_number -> nhs_number -> patient_id) so queued hub
+        # deliveries in the old payload shape keep resolving.
+        "community-nursing/backend/community_nursing/main.py",
+        "community-nursing/backend/community_nursing/routes/webhooks_community_referral_delivery.py",
+        # community-nursing: migration test seeds the legacy schema and
+        # asserts the legacy column is dropped.
+        "community-nursing/backend/tests/test_schema_readiness.py",
+        # symphonix-assurance: column_markers legacy-column detector for the
+        # runtime-evidence registry scans.
+        "symphonix-assurance/src/symphonix_assurance/runtime_evidence.py",
+        # metadata-library: real-identifier / patient-level-column /
+        # forbidden-payload-key detectors.
+        "symphonix-national-health-metadata-library/src/symphonix_metadata/audit/seed_lineage_auditor.py",
+        "symphonix-national-health-metadata-library/src/symphonix_metadata/connectors/nhs_england.py",
+        "symphonix-national-health-metadata-library/src/symphonix_metadata/connectors/ons.py",
+        "symphonix-national-health-metadata-library/src/symphonix_metadata/security/restricted_content_scanner.py",
+        "symphonix-national-health-metadata-library/src/symphonix_metadata/validators/policy_validator.py",
+        # metadata-library: negative-control tests that inject the forbidden
+        # token to prove the detectors above reject it.
+        "symphonix-national-health-metadata-library/tests/test_gp_appointments_parser.py",
+        "symphonix-national-health-metadata-library/tests/test_ons_population_parser.py",
+        "symphonix-national-health-metadata-library/tests/test_policy_validator.py",
+        "symphonix-national-health-metadata-library/tests/test_restricted_content_scanner.py",
+        "symphonix-national-health-metadata-library/tests/test_seeded_synthetic_audit.py",
+        # vr-therapy: PATIENT_FORBIDDEN_COLUMNS projection guard (L-338/L-339)
+        # names the forbidden legacy columns to strip them from projections.
+        "vr-therapy/backend/src/connectors/models.py",
+    }
+)
+
+
+def _is_allowlisted_detector(path: Path) -> bool:
+    try:
+        relative = path.relative_to(WORKSPACE)
+    except ValueError:
+        return False
+    return relative.as_posix() in ALLOWLISTED_DETECTOR_FILES
+
+
 CANONICAL_COLUMNS = {
     "use_case_id",
     "subsystem",
@@ -157,6 +225,8 @@ def _scan_repo_with_rg(repo: Path) -> list[str] | None:
             path = Path(line.strip())
             if not path.exists():
                 continue
+            if _is_allowlisted_detector(path):
+                continue
             findings.append(str(path.relative_to(WORKSPACE)))
             if len(findings) >= MAX_STATIC_SCAN_FINDINGS_PER_REPO:
                 process.kill()
@@ -220,6 +290,8 @@ def _scan_repo_with_git_grep(repo: Path) -> list[str] | None:
         for line in process.stdout:
             path = repo / line.strip()
             if not path.exists():
+                continue
+            if _is_allowlisted_detector(path):
                 continue
             findings.append(str(path.relative_to(WORKSPACE)))
             if len(findings) >= MAX_STATIC_SCAN_FINDINGS_PER_REPO:
@@ -491,6 +563,8 @@ def test_patient_identity_static_repo_scan_enforce_mode() -> None:
                 ) and path.suffix == ".json":
                     continue
                 if path.stat().st_size > 2_000_000:
+                    continue
+                if _is_allowlisted_detector(path):
                     continue
                 text = path.read_text(encoding="utf-8", errors="ignore")
                 for pattern in forbidden_patterns:
