@@ -106,6 +106,55 @@ asyncio.run(main())
 | Idempotency | `idempotency_key` prevents duplicate delivery |
 | Correlation | `correlation_id` links request/response across hops |
 
+## Governance
+
+### Signal governance (`bridge_sdk.signal_governance`)
+
+`evaluate_signal_action(...)` is the shared "decide + govern" core consumed by
+both SignalBox faces -- the standalone `signalbox-mcp` server and the
+BulletTrain-embedded control plane -- so a perceived UI signal is turned into a
+governed decision identically regardless of which face saw it. It does not
+reinvent governance: it composes existing primitives (`resolve_intent`,
+`ClinicalSafetyCase`, `ConsentProjection`, `PersonaExecutionBudget` /
+`EmergencyOverride`, `HandoffPackage`, `DecisionCard`) into one risk-tiered
+human-in-the-loop model with a fail-closed safe-bypass predicate: perception
+never blocks; a reversible, high-confidence, attested, in-scope, routine
+action may run human-ON-the-loop, while everything else escalates to a
+blocking human-IN-the-loop review or halts. `evaluate_signal_action` is a pure
+decision function -- it only reads the gates and never charges a budget or
+enqueues a handoff -- so the caller applies side effects after acting on the
+decision, keeping both faces deterministic and identical. See
+`src/bridge_sdk/signal_governance.py`.
+
+### Council deliberation (`bridge_sdk.council_deliberation`, WS13 slice 1)
+
+Cynefin-routed multi-superpersona decision contract: `route()` classifies an
+incoming decision as clear / complicated / complex / chaotic (a red flag
+forbids `clear`, disorder fails toward `complex`, and emergencies route to
+`chaotic` / break-glass), and only `complicated` and `complex` convene a
+council. `CouncilComposition` is equipage-validated (a standing safety seat,
+substrate diversity, tools at approved-latest and healthy, a scoped persona
+token per seat) and fails closed if under-equipped. Each member casts a
+six-field `CouncilBallot` (recommendation, confidence, unique_perspective,
+blind_spots, evidence_refs, intuition); `blind_spot_cross_scan` runs a
+tool-executed hazard checklist plus salience-divergence check. `synthesize()`
+generalises `EnsembleVoter`-style weighted voting over typed decision options,
+down-weighting ungrounded ballots. `dispose()` escalates contested,
+coverage-gap, or ungrounded-winner outcomes to `needs_human_review` with
+dissent preserved verbatim; high-risk decisions never auto-commit.
+`deliberate()` refuses to convene for `clear` or `chaotic` classifications.
+See `src/bridge_sdk/council_deliberation.py`.
+
+### Receiver-evidence handoff gate
+
+`HandoffInbox.resume(...)` (in `bridge_sdk.human_handoff`) now requires a
+`ReceiverObserverEvidence` argument and fails closed with a `HandoffError` if
+it is omitted or fails validation (missing `receiver_ref` / `evidence_ref`, or
+not accessible / permitted / attested). This closes a safety gap where a
+multi-actor clinical handoff could be resumed without the receiving observer
+having admitted evidence that they can safely take over the task -- such a
+handoff is no longer promotable. See `src/bridge_sdk/human_handoff.py`.
+
 ## CanonicalEnvelope
 
 ```python
