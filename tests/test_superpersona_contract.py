@@ -86,9 +86,16 @@ def test_contract_policy_includes_signalbox_for_governed_execution() -> None:
 
     assert "signalbox.capture-session" in tool_ids
     assert "signalbox-mcp.invoke-tool" in tool_ids
+    assert "signalbox-mcp.computer-use-headed" in tool_ids
     assert "signalbox-mcp.capture-attestation" in tool_ids
     assert PersonaScope.ui_navigate in contract.required_token_scopes
     assert PersonaScope.task_escalate in contract.required_token_scopes
+    headed = next(
+        tool
+        for tool in policy["allowed_tools"]
+        if tool["tool_id"] == "signalbox-mcp.computer-use-headed"
+    )
+    assert headed["protocol"] == "browser"
 
 
 def test_high_risk_clinical_contract_can_use_signalbox_when_needed() -> None:
@@ -101,6 +108,11 @@ def test_high_risk_clinical_contract_can_use_signalbox_when_needed() -> None:
 
     assert signalbox_tools
     assert all("triage.start" in tool["intent_ids"] for tool in signalbox_tools)
+    assert any(
+        tool["tool_id"] == "signalbox-mcp.computer-use-headed"
+        and tool["protocol"] == "browser"
+        for tool in signalbox_tools
+    )
 
 
 def test_contract_validation_rejects_unknown_intent() -> None:

@@ -41,6 +41,7 @@ CONTRACT_SCHEMA_VERSION = "1.0.0"
 SIGNALBOX_TOOL_IDS = (
     "signalbox.capture-session",
     "signalbox-mcp.invoke-tool",
+    "signalbox-mcp.computer-use-headed",
     "signalbox-mcp.capture-attestation",
 )
 
@@ -192,6 +193,7 @@ class SuperpersonaContract(BaseModel):
                 {
                     "tool_id": binding.tool_id,
                     "component": binding.component,
+                    "protocol": binding.protocol.value,
                     "intent_ids": list(binding.intent_ids),
                     "required_scopes": [s.value for s in binding.required_scopes],
                     "safety_class": binding.safety_class.value,
@@ -477,6 +479,14 @@ def _signalbox_tool_bindings(
             tool_id="signalbox-mcp.invoke-tool",
             component="signalbox-mcp",
             protocol=ToolProtocol.mcp,
+            intent_ids=list(intents),
+            required_scopes=signalbox_scopes,
+            safety_class=safety,
+        ),
+        ToolBinding(
+            tool_id="signalbox-mcp.computer-use-headed",
+            component="signalbox-mcp",
+            protocol=ToolProtocol.browser,
             intent_ids=list(intents),
             required_scopes=signalbox_scopes,
             safety_class=safety,
