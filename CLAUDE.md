@@ -30,3 +30,28 @@ Enforcement in this repo:
 PRs that violate constitution rules are rejected per rule 7. If a temporary
 bypass is genuinely required, link an exception ADR (status: Proposed,
 expiry date set, owner named) -- without an ADR, the bypass is invalid.
+
+## Human handoff / release gate: receiver evidence is now required (2026-07-02)
+
+`src/bridge_sdk/human_handoff.py::HandoffInbox.resume()` and
+`src/bridge_sdk/agent_arena.py::ReleaseGate.evaluate()` both gained a
+`receiver_observer_evidence` parameter (commit `66d00a2`). This is a breaking
+change to callers written against the pre-2026-07-02 shape:
+
+- `HandoffInbox.resume(workflow_id, outcome=...)` **without**
+  `receiver_observer_evidence` now raises `HandoffError("resume requires
+  receiver observer evidence")`. Callers must construct and pass a
+  `ReceiverObserverEvidence` instance (which is itself `.validate()`-ed before
+  the resume is accepted).
+- `ReleaseGate.evaluate(...)` **without** `receiver_observer_evidence=True` now
+  silently adds `"receiver_observer_evidence"` to `failing_criteria` -- and
+  flips `promoted` to `False` -- for any run where `metrics.human_handoff_rate
+  > 0`. There is no exception; a caller not passing the flag will simply stop
+  being promoted for handoff-containing runs.
+
+Neither `signalbox-mcp`'s `action_resolver.govern_action()` /
+`signal_governance.evaluate_signal_action()` nor `clinical-pathways`'
+`integration/bridge_client.py` currently call `HandoffInbox.resume()` or
+`ReleaseGate.evaluate()`, so no in-workspace caller breaks today -- but any new
+integration against the human-handoff or release-gate surface must supply
+`receiver_observer_evidence` from the start.
