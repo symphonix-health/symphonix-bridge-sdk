@@ -13,6 +13,8 @@ Two layers, no mocks:
 from __future__ import annotations
 
 import importlib.util
+import json
+from pathlib import Path
 
 import pytest
 
@@ -24,7 +26,19 @@ from bridge_sdk.gharra_registration import (
 )
 
 _GHARRA_AVAILABLE = importlib.util.find_spec("gharra") is not None
-TRIAGE_API_BASE_URL = "http://127.0.0.1:8400/triage-api"
+
+# GHARRA primary endpoint resolved from the workspace port registry
+# (no hardcoded host:port literals -- no-bypass gate).
+_WORKSPACE_PORTS_PATH = (
+    Path(__file__).resolve().parents[2] / "workspace-tooling" / "ports.workspace.json"
+)
+_workspace_ports = json.loads(_WORKSPACE_PORTS_PATH.read_text(encoding="utf-8"))
+_gharra_primary_port = next(
+    int(port)
+    for port, meta in _workspace_ports["shared_infra_ports"].items()
+    if (meta.get("service") if isinstance(meta, dict) else meta) == "GHARRA primary"
+)
+TRIAGE_API_BASE_URL = f"http://127.0.0.1:{_gharra_primary_port}/triage-api"
 
 
 def test_capabilities_payload_carries_intents_as_protocols() -> None:
