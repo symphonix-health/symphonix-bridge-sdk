@@ -31,6 +31,43 @@ PRs that violate constitution rules are rejected per rule 7. If a temporary
 bypass is genuinely required, link an exception ADR (status: Proposed,
 expiry date set, owner named) -- without an ADR, the bypass is invalid.
 
+## Scope override guard: dual-control, audited safety-scope expansion (2026-06-21)
+
+`src/bridge_sdk/scope_override_guard.py` (commit `02f1185`) adds a fail-closed
+`ScopeOverrideGuard` for any caller that needs to grant a `PersonaScope`
+expansion beyond what a persona was originally issued. `ScopeOverrideGuard.evaluate()`
+takes a `ScopeOverrideRequest` (persona, primary/secondary actor, requested vs.
+granted scopes, rationale, `safety_case_ref`, correlation id) and returns a
+`ScopeOverrideDecision` -- permitted only when every excess scope is in the
+caller-configured `permitted_override_scopes` set, the rationale meets
+`min_rationale_chars`, a `safety_case_ref` is present, and (depending on
+configuration) a named secondary approver's token validates against a
+`FileDualControlApprovalStore`. Every decision is hashed and written to a
+`FileScopeOverrideAuditSink`, and `ScopeOverrideMetrics` tracks false-positive/
+false-negative rates; `make_scope_override_metrics_router()` exposes them as a
+FastAPI `APIRouter`. All of `FileDualControlApprovalStore`,
+`FileScopeOverrideAuditSink`, `ScopeOverrideDecision`, `ScopeOverrideError`,
+`ScopeOverrideGuard`, `ScopeOverrideMetrics`, `ScopeOverrideRequest`,
+`make_scope_override_metrics_router`, and `token_sha256` are re-exported from
+the package root (`bridge_sdk`).
+
+## Evidence resolution fails closed without seeded-simulation grounding (2026-06-22)
+
+`src/bridge_sdk/evidence.py` (commit `0b44492`) adds nine grounding fields to
+`ResolvedEvidence` -- `source_span_ref`, `target_evidence_ref`,
+`seeded_dataset_id`, `persona_id`, `scenario_id`, `service_route`,
+`permission_scope`, `telemetry_ref`, `synthetic_telemetry`, and
+`live_production_evidence` -- plus the new
+`seeded_simulation_grounding_failures(resolved)` / `is_seeded_simulation_grounded(resolved)`
+helpers (both re-exported from `bridge_sdk`). `signal_from_evidence(...)` now
+refuses to promote a signal to `attested` -- returning the conservative `base`
+signal instead -- whenever `seeded_simulation_grounding_failures()` reports any
+missing or synthetic/live-only component, in addition to the pre-existing
+`tamper == "altered"` check. A caller relying on `signal_from_evidence` to
+attest a claim now needs `ResolvedEvidence` populated with a full evidence
+chain (source span, target-repo evidence, seeded dataset, persona, scenario,
+service route, and permission scope), not just a valid signature.
+
 ## Human handoff / release gate: receiver evidence is now required (2026-07-02)
 
 `src/bridge_sdk/human_handoff.py::HandoffInbox.resume()` and
@@ -55,3 +92,18 @@ Neither `signalbox-mcp`'s `action_resolver.govern_action()` /
 `ReleaseGate.evaluate()`, so no in-workspace caller breaks today -- but any new
 integration against the human-handoff or release-gate surface must supply
 `receiver_observer_evidence` from the start.
+
+## SignalBox headed computer-use tool binding (2026-07-11)
+
+`src/bridge_sdk/superpersona_contract.py` (commit `e6876c9`) adds
+`"signalbox-mcp.computer-use-headed"` to `SIGNALBOX_TOOL_IDS` and to
+`_signalbox_tool_bindings()`, so a governed superpersona contract can now
+grant a persona the headed SignalBox computer-use surface (`ToolProtocol.browser`)
+as its own distinct tool binding, alongside the pre-existing
+`signalbox.capture-session`, `signalbox-mcp.invoke-tool`, and
+`signalbox-mcp.capture-attestation` bindings. The same commit also fixes the
+serialized `SuperpersonaContract.policy` output: `policy["allowed_tools"]`
+entries now include each binding's `protocol` value (previously omitted),
+so a consumer of the policy dict can distinguish, for example, an MCP tool
+call from a headed browser action without inspecting the contract object
+directly.
