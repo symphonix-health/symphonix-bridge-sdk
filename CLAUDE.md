@@ -55,3 +55,18 @@ Neither `signalbox-mcp`'s `action_resolver.govern_action()` /
 `ReleaseGate.evaluate()`, so no in-workspace caller breaks today -- but any new
 integration against the human-handoff or release-gate surface must supply
 `receiver_observer_evidence` from the start.
+
+## SignalBox headed computer-use tool binding added (2026-07-11)
+
+Commit `e6876c9` added `signalbox-mcp.computer-use-headed` to
+`SIGNALBOX_TOOL_IDS` and the governed tool-binding table in
+`src/bridge_sdk/superpersona_contract.py`. The binding carries
+`protocol: browser` and is included in `mcp_tool_policy()`'s
+`allowed_tools` alongside the existing `signalbox.capture-session`,
+`signalbox-mcp.invoke-tool`, and `signalbox-mcp.capture-attestation`
+bindings -- so a governed persona contract can now authorise headed
+computer-use browser sessions via SignalBox-MCP, not just the prior
+invoke-tool/capture-session/capture-attestation set. See
+`src/bridge_sdk/superpersona_contract.py` and
+`test_contract_policy_includes_signalbox_for_governed_execution` in
+`tests/test_superpersona_contract.py`.
