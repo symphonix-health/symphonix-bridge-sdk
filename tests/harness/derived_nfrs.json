@@ -4,7 +4,7 @@
   "metadata": {
     "subsystem": "symphonix-bridge-sdk",
     "fr_count": 212,
-    "derived_nfr_count": 21,
+    "derived_nfr_count": 16,
     "project_type": "sdk",
     "regulatory_regime": [
       "ISO_27001",
@@ -53,57 +53,7 @@
       ]
     },
     {
-      "requirement_id": "NFR-FL-001",
-      "title": "Horizontal scalability target",
-      "statement": "The system SHALL sustain 100 RPS sustained throughput with horizontal pod scaling without per-request degradation.",
-      "rationale": "ISO/IEC 25010:2023 Flexibility / scalability. Derived from scale_tier='production'; pilot tier omits this.",
-      "category": "non-functional",
-      "priority": "MEDIUM",
-      "iso_25010_characteristic": "Flexibility",
-      "iso_25010_subcharacteristic": "scalability",
-      "regulatory_ref": "",
-      "trace_links": [
-        "BSDK-002",
-        "BSDK-003",
-        "BSDK-101"
-      ],
-      "acceptance_criteria": [
-        {
-          "ac_id": "NFR-FL-001-AC01",
-          "given": "the system is deployed with replica count >= 2",
-          "when": "sustained load of 100 RPS is applied for 5 minutes",
-          "then": "p95 latency stays within performance target with no 5xx errors",
-          "test_type": "Positive"
-        }
-      ]
-    },
-    {
       "requirement_id": "NFR-RE-001",
-      "title": "Availability target (99.9%)",
-      "statement": "The system SHALL be available 99.9% measured monthly, excluding documented planned maintenance windows.",
-      "rationale": "ISO/IEC 25010:2023 Reliability / availability. Tier-specific target ('production'); without a quantified target the SLO is unaccountable.",
-      "category": "non-functional",
-      "priority": "HIGH",
-      "iso_25010_characteristic": "Reliability",
-      "iso_25010_subcharacteristic": "availability",
-      "regulatory_ref": "",
-      "trace_links": [
-        "BSDK-002",
-        "BSDK-003",
-        "BSDK-101"
-      ],
-      "acceptance_criteria": [
-        {
-          "ac_id": "NFR-RE-001-AC01",
-          "given": "the /health endpoint is documented",
-          "when": "external uptime probe queries /health every 60 s for a month",
-          "then": "recorded availability >= 99.9%",
-          "test_type": "Positive"
-        }
-      ]
-    },
-    {
-      "requirement_id": "NFR-RE-002",
       "title": "Downstream-call resilience (circuit breaker + retry)",
       "statement": "Calls to downstream systems SHALL be wrapped in a circuit breaker with exponential-backoff retry; the system SHALL degrade gracefully and surface a typed error to the caller rather than propagating the underlying failure.",
       "rationale": "ISO/IEC 25010:2023 Reliability / fault_tolerance. Derived from FRs that touch external systems; without breaker + retry semantics, transient downstream faults cascade.",
@@ -118,42 +68,17 @@
       ],
       "acceptance_criteria": [
         {
-          "ac_id": "NFR-RE-002-AC01",
+          "ac_id": "NFR-RE-001-AC01",
           "given": "the downstream is artificially returning 5xx",
           "when": "the system invokes the downstream",
           "then": "the breaker opens after threshold and a typed error is returned to the caller",
           "test_type": "Negative"
         },
         {
-          "ac_id": "NFR-RE-002-AC02",
+          "ac_id": "NFR-RE-001-AC02",
           "given": "the downstream recovers",
           "when": "the breaker reset window elapses",
           "then": "the breaker half-opens, probes succeed, and full traffic resumes",
-          "test_type": "Positive"
-        }
-      ]
-    },
-    {
-      "requirement_id": "NFR-RE-003",
-      "title": "Disaster recovery (RPO 15 min / RTO 1 h)",
-      "statement": "The system SHALL declare and exercise documented RPO 15 min and RTO 1 h via at least an annual DR drill.",
-      "rationale": "ISO/IEC 25010:2023 Reliability / recoverability. Derived from scale_tier='production'.",
-      "category": "non-functional",
-      "priority": "HIGH",
-      "iso_25010_characteristic": "Reliability",
-      "iso_25010_subcharacteristic": "recoverability",
-      "regulatory_ref": "",
-      "trace_links": [
-        "BSDK-002",
-        "BSDK-003",
-        "BSDK-101"
-      ],
-      "acceptance_criteria": [
-        {
-          "ac_id": "NFR-RE-003-AC01",
-          "given": "the operator triggers a DR drill",
-          "when": "primary region is taken offline",
-          "then": "failover completes within RTO (1 h) and data loss <= RPO (15 min)",
           "test_type": "Positive"
         }
       ]
@@ -239,65 +164,6 @@
           "when": "the operator queries the audit log",
           "then": "the request appears with caller, ts, correlation_id, operation, and outcome",
           "test_type": "Positive"
-        }
-      ]
-    },
-    {
-      "requirement_id": "NFR-SE-004",
-      "title": "Strong authentication on all endpoints",
-      "statement": "All endpoints SHALL require authentication (OIDC JWT or mTLS); credentials SHALL be hashed with a memory-hard KDF (argon2id or bcrypt cost >= 12); JWT TTL <= 24 h.",
-      "rationale": "ISO/IEC 25010:2023 Security / authenticity. Anonymous endpoints are an OWASP A01 (broken access control) risk.",
-      "category": "non-functional",
-      "priority": "CRITICAL",
-      "iso_25010_characteristic": "Security",
-      "iso_25010_subcharacteristic": "authenticity",
-      "regulatory_ref": "",
-      "trace_links": [
-        "BSDK-002",
-        "BSDK-003",
-        "BSDK-101"
-      ],
-      "acceptance_criteria": [
-        {
-          "ac_id": "NFR-SE-004-AC01",
-          "given": "no credentials are presented",
-          "when": "any documented endpoint is invoked",
-          "then": "the response is 401 Unauthorized",
-          "test_type": "Negative"
-        },
-        {
-          "ac_id": "NFR-SE-004-AC02",
-          "given": "valid credentials are presented",
-          "when": "the documented login endpoint is invoked",
-          "then": "a bearer token is returned with TTL <= 24 h",
-          "test_type": "Positive"
-        }
-      ]
-    },
-    {
-      "requirement_id": "NFR-SE-005",
-      "title": "Rate limiting + abuse defence",
-      "statement": "Public endpoints SHALL apply per-principal rate limiting with documented thresholds; mutating endpoints SHALL honour Idempotency-Key headers; replay attacks within the Idempotency-Key window SHALL be rejected.",
-      "rationale": "ISO/IEC 25010:2023 Security / resistance. OWASP A07.",
-      "category": "non-functional",
-      "priority": "HIGH",
-      "iso_25010_characteristic": "Security",
-      "iso_25010_subcharacteristic": "resistance",
-      "regulatory_ref": "",
-      "trace_links": [
-        "BSDK-002",
-        "BSDK-003",
-        "BSDK-101",
-        "BSDK-102",
-        "BSDK-103"
-      ],
-      "acceptance_criteria": [
-        {
-          "ac_id": "NFR-SE-005-AC01",
-          "given": "a principal exceeds the documented rate threshold",
-          "when": "they continue making requests",
-          "then": "subsequent requests return 429 with Retry-After",
-          "test_type": "Negative"
         }
       ]
     },
@@ -471,7 +337,7 @@
       ]
     },
     {
-      "requirement_id": "NFR-FL-002",
+      "requirement_id": "NFR-FL-001",
       "title": "Single-command install + Helm chart parity",
       "statement": "The system SHALL ship a Helm chart (production deployment) and a docker-compose for local development; both SHALL produce the same runtime contract.",
       "rationale": "ISO/IEC 25010:2023 Flexibility / installability — covers Portability in the user's NFR list.",
@@ -485,7 +351,7 @@
       ],
       "acceptance_criteria": [
         {
-          "ac_id": "NFR-FL-002-AC01",
+          "ac_id": "NFR-FL-001-AC01",
           "given": "a fresh operator clones the repo",
           "when": "they run docker-compose up",
           "then": "the documented endpoints respond without further configuration",
@@ -540,7 +406,7 @@
       ]
     },
     {
-      "requirement_id": "NFR-SE-006",
+      "requirement_id": "NFR-SE-004",
       "title": "Clinical telemetry zero-PHI evidence boundary",
       "statement": "Clinical telemetry ingestion SHALL preserve PHI inside helixcare-telemetry-intake and emit only zero-PHI evidence summaries with provenance, audit, replay, freshness, and trust controls.",
       "rationale": "ISO/IEC 25010:2023 Security / confidentiality. Derived because FHIR device and human-submitted observations can carry PHI while GHARRA remains a zero-PHI capability evidence graph.",
@@ -556,7 +422,7 @@
       ],
       "acceptance_criteria": [
         {
-          "ac_id": "NFR-SE-006-AC01",
+          "ac_id": "NFR-SE-004-AC01",
           "given": "a device or human telemetry payload reaches the intake boundary",
           "when": "consent, patient match, provenance, audit event, trusted device status, freshness, or replay protection is missing",
           "then": "the payload is rejected and GHARRA receives no raw patient identifier",
