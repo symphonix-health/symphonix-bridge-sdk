@@ -32,6 +32,15 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+observability = [
+    "opentelemetry-exporter-otlp>=1.24",
+    "opentelemetry-instrumentation-fastapi>=0.45b0",
+    "opentelemetry-instrumentation-httpx>=0.45b0",
+    "opentelemetry-instrumentation-requests>=0.45b0",
+    "opentelemetry-sdk>=1.24",
+    "prometheus-client>=0.20",
+    "sentry-sdk[fastapi]>=2.0",
+]
 all = [
     "hl7>=0.4",
     "pydicom>=2.4",
@@ -76,4 +85,5 @@ filterwarnings = [
     'ignore::DeprecationWarning:langchain_core',
     'ignore:asyncio.iscoroutinefunction:DeprecationWarning',
     'ignore::jwt.warnings.InsecureKeyLengthWarning',
+    'ignore:The OpenTelemetry.*stack will be removed:DeprecationWarning:symphonix_bridge_sdk',
 ]
