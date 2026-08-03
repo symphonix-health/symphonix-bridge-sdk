@@ -7,7 +7,13 @@ from typing import Any
 
 import sentry_sdk
 from sentry_sdk.integrations.fastapi import FastApiIntegration
-from sentry_sdk.integrations.sqlalchemy import SqlalchemyIntegration
+
+try:
+    from sentry_sdk.integrations.sqlalchemy import SqlalchemyIntegration as _SqlalchemyIntegration
+
+    _sqlalchemy_integration: list = [_SqlalchemyIntegration()]
+except Exception:
+    _sqlalchemy_integration = []
 
 _PHI_KEYS = {"patient_id", "nhs_number", "dob", "address", "name", "email"}
 
@@ -39,7 +45,7 @@ def init_sentry(service_name: str, environment: str = "production") -> None:
         environment=os.getenv("ENVIRONMENT", environment),
         release=os.getenv("APP_VERSION", "unknown"),
         server_name=service_name,
-        integrations=[FastApiIntegration(), SqlalchemyIntegration()],
+        integrations=[FastApiIntegration(), *_sqlalchemy_integration],
         traces_sample_rate=float(os.getenv("SENTRY_TRACES_SAMPLE_RATE", "0.1")),
         before_send=_before_send,
     )
