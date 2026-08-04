@@ -107,3 +107,53 @@ invoke-tool/capture-session/capture-attestation set. See
 `src/bridge_sdk/superpersona_contract.py` and
 `test_contract_policy_includes_signalbox_for_governed_execution` in
 `tests/test_superpersona_contract.py`.
+
+## Two source packages: `bridge_sdk` (canonical SDK) + `symphonix_bridge_sdk` (observability migration target)
+
+`pyproject.toml`'s `[tool.hatch.build.targets.wheel]` ships two top-level
+packages from `src/`: `bridge_sdk` (everything documented above -- adapters,
+signal governance, council deliberation, human handoff, superpersona
+contract, GRA) and `symphonix_bridge_sdk`, a newer package matching the repo
+name that currently holds only `observability/`. `src/bridge_sdk/observability/__init__.py`
+is now a thin backward-compatible shim (`from symphonix_bridge_sdk.observability
+import *`) -- the real implementation lives under `symphonix_bridge_sdk`, so
+both `from bridge_sdk.observability import ...` and
+`from symphonix_bridge_sdk.observability import ...` resolve to the same
+code and pick up the same deprecation/guard behaviour described below. This
+looks like the start of a package rename (`bridge_sdk` -> `symphonix_bridge_sdk`)
+scoped to `observability/` so far; no other submodule has moved yet.
+
+## `[observability]` optional extra + deprecation guard (2026-08-03, phase 1+2 of OTEL dep migration)
+
+Commit `6031d1f` (PR #9, closing issue #4 -- "move observability to an
+optional extra so lean consumers can drop OTEL entirely", the follow-up
+tracked from `signalbox-mcp`'s own `CLAUDE.md`) adds a new
+`[observability]` optional-dependencies group to `pyproject.toml`
+(`opentelemetry-exporter-otlp`, `opentelemetry-instrumentation-{fastapi,httpx,requests}`,
+`opentelemetry-sdk`, `prometheus-client`, `sentry-sdk[fastapi]`), plus two
+guards in `src/symphonix_bridge_sdk/observability/__init__.py` (and,
+via the shim above, `src/bridge_sdk/observability/__init__.py` too):
+
+- **Deprecation warning on import** -- any `import ...observability` emits a
+  `DeprecationWarning` stating that the OpenTelemetry/Sentry/Prometheus stack
+  will be removed from this package's CORE `dependencies` in the next major
+  release, and that consumers should add `symphonix-bridge-sdk[observability]`
+  to their own requirements to keep the import working after that happens.
+  `pyproject.toml`'s pytest `filterwarnings` silences this specific warning
+  for this repo's own test suite.
+- **Fail-loud `ImportError` guard** -- if any of
+  `opentelemetry.sdk.trace` / `opentelemetry.exporter.otlp` / `sentry_sdk` /
+  `prometheus_client` is genuinely missing, importing `observability` raises
+  an `ImportError` naming the missing module(s) and the install command,
+  instead of a cryptic failure deep inside a submodule.
+
+**This is phase 1+2 only.** As of this commit, `opentelemetry-*` /
+`sentry-sdk` / `prometheus-client` are STILL listed in `pyproject.toml`'s
+core `dependencies` (unchanged) -- a plain `pip install symphonix-bridge-sdk`
+still pulls the full OTEL/Sentry/Prometheus stack in. Phase 1+2 only adds the
+opt-in extra, the deprecation warning, and the fail-loud guard; removing the
+observability stack from core `dependencies` (the actual "lean consumer"
+win) is deferred to "the next major release" and has not landed yet -- do
+not assume `signalbox-mcp`'s bootstrap script (which still installs the
+observability deps directly, per its own `CLAUDE.md`) can be simplified
+until that later phase ships.
