@@ -1,10 +1,11 @@
 import importlib
 import json
 import logging
+import subprocess
 import sys
+import textwrap
 import warnings
 from pathlib import Path
-from unittest.mock import patch
 
 from fastapi import FastAPI
 from starlette.testclient import TestClient
@@ -103,24 +104,74 @@ def test_observability_import_emits_deprecation_warning():
     assert "observability" in str(deprecation_warnings[0].message).lower()
 
 
-def test_observability_import_error_when_stack_missing():
-    """When the OTEL/Sentry stack is absent, importing observability raises ImportError."""
-    mod = sys.modules.get("symphonix_bridge_sdk.observability")
-    if mod is not None:
-        del sys.modules["symphonix_bridge_sdk.observability"]
+def test_observability_import_error_when_stack_missing(tmp_path):
+    """When the OTEL/Sentry stack is absent, importing observability raises ImportError.
 
-    original_find_spec = importlib.util.find_spec
+    The absence is real, not mocked: the guard runs inside a child interpreter
+    started with ``-I -S``, so site-packages is genuinely off ``sys.path`` and
+    the stack is genuinely unimportable.  The module is executed straight from
+    its own file under a dotless name because the parent package pulls in
+    pydantic, which ``-S`` also removes; the guard is name-independent, so this
+    exercises the real code path with the real ``importlib.util.find_spec``.
 
-    def _stub_find_spec(name, *args, **kwargs):
-        if name.startswith("opentelemetry") or name.startswith("sentry") or name.startswith("prometheus"):
-            return None
-        return original_find_spec(name, *args, **kwargs)
+    Patching ``find_spec`` (the previous approach) made it *return None* where
+    reality *raises* ModuleNotFoundError, so it asserted a branch that could
+    never be reached in production.
+    """
+    module_path = (
+        Path(__file__).resolve().parents[1]
+        / "src"
+        / "symphonix_bridge_sdk"
+        / "observability"
+        / "__init__.py"
+    )
+    probe = tmp_path / "probe_missing_observability_stack.py"
+    probe.write_text(
+        textwrap.dedent(
+            f"""
+            import importlib.util
+            import sys
 
-    with patch("importlib.util.find_spec", side_effect=_stub_find_spec):
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore", DeprecationWarning)
+            # Known-true control: prove the interpreter really is stack-free,
+            # so a broken isolation surfaces as a failure, not a false pass.
+            for _name in ("opentelemetry", "sentry_sdk", "prometheus_client"):
+                if importlib.util.find_spec(_name) is not None:
+                    print("NOT_ISOLATED:" + _name)
+                    sys.exit(2)
+
+            spec = importlib.util.spec_from_file_location(
+                "observability_absent_stack_probe", r"{module_path}"
+            )
+            module = importlib.util.module_from_spec(spec)
             try:
-                importlib.import_module("symphonix_bridge_sdk.observability")
-                assert False, "Expected ImportError was not raised"
+                spec.loader.exec_module(module)
             except ImportError as exc:
-                assert "symphonix-bridge-sdk[observability]" in str(exc)
+                print("IMPORT_ERROR:" + " ".join(str(exc).split()))
+                sys.exit(0)
+            print("NO_ERROR")
+            sys.exit(1)
+            """
+        ),
+        encoding="utf-8",
+    )
+
+    result = subprocess.run(
+        [sys.executable, "-I", "-S", str(probe)],
+        capture_output=True,
+        text=True,
+        timeout=120,
+    )
+    stdout = result.stdout.strip()
+
+    assert not stdout.startswith("NOT_ISOLATED"), (
+        f"child interpreter was not stack-free, so the test proves nothing: {stdout}"
+    )
+    assert stdout.startswith("IMPORT_ERROR:"), (
+        "Expected ImportError was not raised with the stack genuinely missing "
+        f"(stdout={stdout!r}, stderr={result.stderr.strip()!r})"
+    )
+    message = stdout[len("IMPORT_ERROR:") :]
+    assert "symphonix-bridge-sdk[observability]" in message, (
+        "The guard must name the [observability] extra rather than surfacing a "
+        f"bare ModuleNotFoundError; got: {message!r}"
+    )

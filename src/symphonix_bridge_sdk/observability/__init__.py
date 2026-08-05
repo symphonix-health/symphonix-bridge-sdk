@@ -24,7 +24,25 @@ _REQUIRED = [
     "sentry_sdk",
     "prometheus_client",
 ]
-_missing = [m for m in _REQUIRED if importlib.util.find_spec(m) is None]
+
+
+def _is_missing(module: str) -> bool:
+    """Report whether *module* can be located, without leaking import errors.
+
+    ``find_spec`` only returns ``None`` for a top-level module that is absent.
+    For a dotted name it imports the parent package first, so an absent
+    ``opentelemetry`` raises ``ModuleNotFoundError`` instead of returning
+    ``None`` -- which is exactly the cryptic failure this guard exists to
+    replace.  A stale ``sys.modules`` entry with ``__spec__`` set to ``None``
+    raises ``ValueError`` for the same practical reason.  Both mean "missing".
+    """
+    try:
+        return importlib.util.find_spec(module) is None
+    except (ImportError, ValueError):
+        return True
+
+
+_missing = [m for m in _REQUIRED if _is_missing(m)]
 if _missing:
     raise ImportError(
         "symphonix_bridge_sdk.observability requires the OpenTelemetry/Sentry/"
