@@ -12,7 +12,13 @@ repos:
     hooks:
       - id: enforce-no-bypass
         name: enforce no-bypass (no mocks / hardcoded endpoints / stubs of real services)
-        entry: python ../BulletTrain/scripts/ci/enforce_no_bypass.py --root . --strict --baseline scripts/ci/no_bypass_baseline.json
+        # Workspace root derived from the MAIN repo's .git (git rev-parse
+        # --git-common-dir) so this entry also works from linked git worktrees,
+        # where a ../-relative path resolves against the worktrees directory
+        # and blocks every commit with "can't open file".
+        entry: >-
+          bash -c 'ws="$(dirname "$(dirname "$(git rev-parse --path-format=absolute --git-common-dir)")")";
+          exec python "$ws/BulletTrain/scripts/ci/enforce_no_bypass.py" --root . --strict --baseline scripts/ci/no_bypass_baseline.json'
         language: system
         pass_filenames: false
         always_run: true
