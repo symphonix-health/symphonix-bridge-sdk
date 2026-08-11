@@ -157,3 +157,27 @@ win) is deferred to "the next major release" and has not landed yet -- do
 not assume `signalbox-mcp`'s bootstrap script (which still installs the
 observability deps directly, per its own `CLAUDE.md`) can be simplified
 until that later phase ships.
+
+## Fix: the fail-loud missing-stack `ImportError` guard never actually fired (2026-08-05)
+
+Commit `4156085` fixes the "Fail-loud `ImportError` guard" described above.
+`importlib.util.find_spec()` only returns `None` for an ABSENT top-level
+module; for a dotted name it imports the parent package first, so with the
+observability stack genuinely absent, `find_spec("opentelemetry.sdk.trace")`
+raised `ModuleNotFoundError` instead of returning `None`. The friendly
+`ImportError` the guard is supposed to raise never fired -- a caller with the
+stack missing got exactly the cryptic `ModuleNotFoundError: No module named
+'opentelemetry'` the guard exists to prevent.
+
+`src/symphonix_bridge_sdk/observability/__init__.py` now probes via a new
+`_is_missing()` helper that also treats `ImportError`/`ValueError` raised by
+`find_spec` as "missing"; `src/bridge_sdk/observability` inherits the fix
+through the re-export shim described above, with no further change needed
+there. The commit also removed a `unittest.mock.patch` from
+`tests/test_observability.py` (posture rule 18 / L-259 -- no internal mocks)
+that had been faking `find_spec` to return `None` directly for the missing
+case -- a behaviour the real function never exhibits for a dotted name, so
+the mocked test was asserting a branch production could never reach. The
+replacement test runs the probe for real in a child interpreter started with
+`-I -S` so site-packages is genuinely off `sys.path`, with a known-true
+control that fails loudly if the child turns out not to be stack-free.
