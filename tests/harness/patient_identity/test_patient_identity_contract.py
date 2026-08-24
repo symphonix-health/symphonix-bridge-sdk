@@ -4,12 +4,12 @@ import json
 import re
 import shutil
 import subprocess
+from concurrent.futures import ThreadPoolExecutor
 from os import walk
 from pathlib import Path
 from typing import Any
 
 import pytest
-
 
 ROOT = Path(__file__).resolve().parents[3]
 WORKSPACE = ROOT.parent
@@ -19,6 +19,8 @@ SCENARIOS_PATH = Path(__file__).with_name("patient_identity_scenarios.json")
 CANONICAL_PATIENT_SYSTEM = "https://fhir.symphonix.health/Id/patient"
 NHS_NUMBER_SYSTEM = "https://fhir.nhs.uk/Id/nhs-number"
 MAX_STATIC_SCAN_FINDINGS_PER_REPO = 10
+TRANSIENT_WORKTREE_PREFIXES = ("_",)
+TRANSIENT_WORKTREE_NAMES = frozenset({".codex-worktrees", ".tmp-agent-worktrees"})
 LOCAL_PATIENT_ID_PATTERN = (
     r"(?:Patient/|patient[_-]?id[^\n]{0,80}|patient[_-]?ref[^\n]{0,80}|subject[^\n]{0,80})"
     r"\b(?:ke-)?pat-\d{3,}(?:-\d+)?\b"
@@ -264,6 +266,8 @@ def _scan_repo_with_git_grep(repo: Path) -> list[str] | None:
     ]
     command = [
         "git",
+        "-c",
+        f"safe.directory={repo}",
         "-C",
         str(repo),
         "grep",
@@ -315,7 +319,16 @@ def _scan_repo_with_git_grep(repo: Path) -> list[str] | None:
 def _origin_url(repo: Path) -> str:
     try:
         result = subprocess.run(
-            ["git", "-C", str(repo), "remote", "get-url", "origin"],
+            [
+                "git",
+                "-c",
+                f"safe.directory={repo}",
+                "-C",
+                str(repo),
+                "remote",
+                "get-url",
+                "origin",
+            ],
             check=False,
             stdout=subprocess.PIPE,
             stderr=subprocess.DEVNULL,
@@ -325,6 +338,20 @@ def _origin_url(repo: Path) -> str:
     except (OSError, subprocess.TimeoutExpired):
         return ""
     return result.stdout.strip()
+
+
+def _is_transient_workspace_checkout(repo: Path) -> bool:
+    """Exclude agent worktrees from estate discovery.
+
+    The workspace contains short-lived agent worktrees alongside canonical
+    repositories.  They may point at the same remote, but scanning them is
+    both redundant and unsafe: a dirty or partially checked-out worktree must
+    not become the estate's patient-identity evidence source.
+    """
+
+    return repo.name in TRANSIENT_WORKTREE_NAMES or repo.name.startswith(
+        TRANSIENT_WORKTREE_PREFIXES
+    )
 
 
 def _github_owner_and_repo(origin_url: str) -> tuple[str, str]:
@@ -343,7 +370,7 @@ def _discover_symphonix_patient_data_repos() -> list[Path]:
     for repo in sorted(WORKSPACE.iterdir(), key=lambda path: path.name.lower()):
         if not repo.is_dir() or not (repo / ".git").exists():
             continue
-        if repo == ROOT:
+        if repo == ROOT or _is_transient_workspace_checkout(repo):
             continue
         origin_url = _origin_url(repo)
         owner, remote_repo = _github_owner_and_repo(origin_url)
@@ -368,7 +395,12 @@ def test_patient_identity_static_repo_discovery_covers_local_symphonix_health_re
 ):
     candidates: dict[str, list[Path]] = {}
     for repo in sorted(WORKSPACE.iterdir(), key=lambda path: path.name.lower()):
-        if not repo.is_dir() or not (repo / ".git").exists() or repo == ROOT:
+        if (
+            not repo.is_dir()
+            or not (repo / ".git").exists()
+            or repo == ROOT
+            or _is_transient_workspace_checkout(repo)
+        ):
             continue
         owner, remote_repo = _github_owner_and_repo(_origin_url(repo))
         if owner.lower() != "symphonix-health":
@@ -393,6 +425,15 @@ def test_patient_identity_static_repo_discovery_covers_local_symphonix_health_re
     assert "africa-marketplace" not in discovered
     assert "symphonix-health-docs" not in discovered
     assert "BulletTrain-gap-2-signatures" not in discovered
+
+
+def test_patient_identity_static_repo_discovery_excludes_transient_worktrees() -> (
+    None
+):
+    discovered = _discover_symphonix_patient_data_repos()
+
+    assert any(repo.name == "BulletTrain" for repo in discovered)
+    assert all(not _is_transient_workspace_checkout(repo) for repo in discovered)
 
 
 def test_patient_identity_requirements_are_traced_to_scenarios() -> None:
@@ -536,10 +577,15 @@ def test_patient_identity_static_repo_scan_enforce_mode() -> None:
     }
 
     findings: list[str] = []
-    for repo in patient_data_repos:
-        if not repo.exists():
-            continue
-        git_grep_findings = _scan_repo_with_git_grep(repo)
+    existing_repos = [repo for repo in patient_data_repos if repo.exists()]
+
+    # Git subprocesses are independent per repository.  Run the bounded
+    # scans concurrently so a 60+ repository estate does not turn a simple
+    # contract check into a multi-minute serial timeout on Windows.
+    with ThreadPoolExecutor(max_workers=max(1, min(8, len(existing_repos)))) as pool:
+        git_results = list(pool.map(_scan_repo_with_git_grep, existing_repos))
+
+    for repo, git_grep_findings in zip(existing_repos, git_results, strict=True):
         if git_grep_findings is not None:
             findings.extend(git_grep_findings)
             continue
