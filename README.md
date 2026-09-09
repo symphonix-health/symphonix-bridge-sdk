@@ -13,7 +13,7 @@
 
 <p>
   <a href="https://github.com/symphonix-health"><img alt="Symphonix Health" src="https://img.shields.io/badge/Symphonix_Health-platform_spine-4DD0E1?style=flat-square" /></a>
-  <a href="https://github.com/symphonix-health/symphonix-health.github.io/blob/main/docs/system-catalogue.md"><img alt="System catalogue" src="https://img.shields.io/badge/catalogue-43_repos-14919B?style=flat-square" /></a>
+  <a href="https://github.com/symphonix-health/symphonix-health.github.io/blob/main/docs/system-catalogue.md"><img alt="System catalogue" src="https://img.shields.io/badge/catalogue-64_repos-14919B?style=flat-square" /></a>
 </p>
 
 | Field | Value |
@@ -22,9 +22,12 @@
 | Ecosystem layer | Platform spine |
 | Repository role | Protocol translation SDK using FHIR R4 as the canonical clinical pivot. |
 | Catalogue | [Symphonix system catalogue](https://github.com/symphonix-health/symphonix-health.github.io/blob/main/docs/system-catalogue.md) |
-| Scope basis | Current catalogue snapshot: 43 catalogued repositories; forked/imported repos are excluded. |
+| Scope basis | Current catalogue snapshot: 64 catalogued repositories; forked/imported repos are excluded. |
 | Evidence rule | Catalogue presence is orientation only. Use repo-local tests, CAID artefacts, seeded data, and runbooks for readiness claims. |
-<!-- symphonix-health-ecosystem:end -->
+<!-- symphonix-health-ecosystem:end -->
+<p align="center">
+  <img src="https://raw.githubusercontent.com/symphonix-health/.github/master/profile/assets/github-org-atlas.svg" alt="Symphonix Health GitHub system atlas - 64 catalogued repositories, 37 clinical sibling systems" width="100%" />
+</p>
 
 ## Recent Enhancements
 
