@@ -14,10 +14,35 @@ permissions:
   pull-requests: read
 
 jobs:
+  # ── Budget / credit-exhaustion gate ──────────────────────────────
+  # Skips all downstream jobs when GitHub Actions credits are exhausted.
+  # Control: set org/repo variable ACTIONS_BUDGET_AVAILABLE to "false"
+  # to kill-switch all workflows instantly without touching YAML.
+  budget-gate:
+    name: Budget gate
+    runs-on: ubuntu-latest
+    outputs:
+      proceed: ${{ steps.check.outputs.proceed }}
+    steps:
+      - name: Check budget availability
+        id: check
+        env:
+          BUDGET_VAR: ${{ vars.ACTIONS_BUDGET_AVAILABLE }}
+        run: |
+          # Manual kill-switch: org or repo variable set to "false"
+          if [ "$BUDGET_VAR" = "false" ]; then
+            echo "⏭️  ACTIONS_BUDGET_AVAILABLE is 'false' — skipping workflow"
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "proceed=true" >> "$GITHUB_OUTPUT"
+          echo "✅ Budget gate passed"
   # CC8.1 / Change Management — every change must pass build + tests
   build-and-test:
     name: Build and test
     runs-on: ubuntu-latest
+    needs: [budget-gate]
+    if: needs.budget-gate.outputs.proceed == 'true'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -81,6 +106,8 @@ jobs:
   sast:
     name: SAST
     runs-on: ubuntu-latest
+    needs: [budget-gate]
+    if: needs.budget-gate.outputs.proceed == 'true'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -100,7 +127,8 @@ jobs:
   dependency-review:
     name: Dependency review
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
+    needs: [budget-gate]
+    if: needs.budget-gate.outputs.proceed == 'true' && (github.event_name == 'pull_request')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -112,6 +140,8 @@ jobs:
   secret-scan:
     name: Secret scan
     runs-on: ubuntu-latest
+    needs: [budget-gate]
+    if: needs.budget-gate.outputs.proceed == 'true'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
