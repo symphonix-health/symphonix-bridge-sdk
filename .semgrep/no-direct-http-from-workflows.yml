@@ -43,7 +43,7 @@ rules:
         - "**/*_test.py"
         - "**/conftest.py"
     # Match HTTP method invocations whose URL argument literal targets a
-    # known vendor host.  Hub URLs (api_gateway:8000, localhost:8000,
+    # known vendor host.  Hub URLs (the api_gateway service host, a loopback host,
     # hub.bullettrain.*) do NOT match the vendor regex, so the canonical
     # `httpx.post(f"{hub}/v1/connectors/{name}/exchange", ...)` shape
     # used by every sibling adapter (pacs-ris HubBlobBackend,
