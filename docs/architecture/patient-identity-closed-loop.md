@@ -33,7 +33,7 @@ HMIS documentation says it should not hold patient identifiers, but shared schem
 
 ## Local Repository Coverage
 
-Local inventory was checked under `C:\Users\hgeec\github` on 2026-05-14. The patient identity static gate now includes only unique local Git repos whose origin is owned by `github.com/symphonix-health`. Other-owner local repos are excluded, even if their names mention Symphonix.
+Local inventory was checked under `<WORKSPACE_ROOT>` on 2026-05-14. The patient identity static gate now includes only unique local Git repos whose origin is owned by `github.com/symphonix-health`. Other-owner local repos are excluded, even if their names mention Symphonix.
 
 The static sibling scan covers these Symphonix Health repos:
 

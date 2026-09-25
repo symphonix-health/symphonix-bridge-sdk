@@ -12,7 +12,8 @@ from docx.oxml.ns import qn
 from docx.shared import Inches, Pt, RGBColor
 
 
-ROOT = Path("C:/Users/hgeec/github/symphonix-bridge-sdk")
+# Repo root, derived from this script (outputs/patient_identity/<this file>).
+ROOT = Path(__file__).resolve().parents[2]
 OUT = (
     ROOT
     / "outputs"

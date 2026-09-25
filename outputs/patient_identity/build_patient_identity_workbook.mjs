@@ -1,8 +1,10 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { SpreadsheetFile, Workbook } from "@oai/artifact-tool";
 
-const root = path.resolve("C:/Users/hgeec/github/symphonix-bridge-sdk");
+// Repo root, derived from this script (outputs/patient_identity/<this file>).
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 const outDir = path.join(root, "outputs", "patient_identity");
 const renderDir = path.join(outDir, "xlsx_rendered");
 const requirementsPath = path.join(root, "tests", "harness", "patient_identity", "requirements_matrix.json");

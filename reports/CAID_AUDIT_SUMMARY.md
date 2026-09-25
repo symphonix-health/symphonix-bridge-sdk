@@ -4,7 +4,7 @@ Date: 2026-05-26
 Repo: `symphonix-bridge-sdk` (Canonical FHIR R4 pivot SDK for any-to-any
 adapter translation across 26+ sibling repos)
 Auditor: CAID agent (implementation + validation mode)
-Path: `C:\Users\hgeec\github\symphonix-bridge-sdk`
+Path: `<WORKSPACE_ROOT>\symphonix-bridge-sdk`
 
 ---
 
@@ -123,7 +123,7 @@ Verification passes run after the edits, in-repo:
 | `tests/harness/patient_identity/test_patient_identity_contract.py` | 5/6 PASS | `test_patient_identity_static_repo_scan_enforce_mode` fails on **other workspace siblings** (analytics-bi, ambulance-ems, BulletTrain, mha-administration, pharmacy-system, triage-api, etc.) — pre-existing and unrelated to anything edited here (none of those repos appear in this diff) |
 
 Total in-repo: **46 passed, 0 newly failing**. The one workspace-scanning
-failure scans `C:\Users\hgeec\github\*` for legacy patient-id patterns
+failure scans `<WORKSPACE_ROOT>\*` for legacy patient-id patterns
 and is independent of the SDK gate work — it cannot have been caused by
 the changes in this diff.
 

@@ -32,9 +32,13 @@
 
 $ErrorActionPreference = "Stop"
 $bridge = Split-Path -Parent $MyInvocation.MyCommand.Path
-$btPy = "C:\Users\hgeec\github\BulletTrain\.venv\Scripts\python.exe"
-$gharraSrc = "C:\Users\hgeec\github\global-agent-registry\src"
-$btRoot = "C:\Users\hgeec\github\BulletTrain"
+# Sibling repos live beside this one. SYMPHONIX_WORKSPACE_ROOT wins (a linked
+# worktree does not sit beside its siblings); else the parent of this checkout.
+$wsRoot = $env:SYMPHONIX_WORKSPACE_ROOT
+if (-not $wsRoot) { $wsRoot = Split-Path -Parent $bridge }
+$btRoot = Join-Path $wsRoot "BulletTrain"
+$btPy = Join-Path $btRoot ".venv\Scripts\python.exe"
+$gharraSrc = Join-Path $wsRoot "global-agent-registry\src"
 
 if (-not (Test-Path $btPy)) {
     Write-Error "BulletTrain venv not found at $btPy -- run setup in BulletTrain first."

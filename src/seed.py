@@ -265,7 +265,7 @@ class BsdkConstitutionPolicySeed:
     """
 
     id: str = "BSDK-CONSTITUTION-002"
-    constitution_path: str = "c:/Users/hgeec/github/caid-agent/docs/architecture/bullettrain-integration-constitution.md"
+    constitution_path: str = "../caid-agent/docs/architecture/bullettrain-integration-constitution.md"
     write_time_guard: str = "~/.claude/hooks/bullettrain_integration_guard.py"
     semgrep_rules_dir: str = ".semgrep/"
     pr_checklist: str = ".github/PULL_REQUEST_TEMPLATE.md"
