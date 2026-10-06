@@ -64,3 +64,36 @@ def test_to_dict_is_serialisable() -> None:
     d = AGENT_ONLY_SKILLS["sense.hidden.read"].to_dict()
     assert d["facet"] == "hidden_structural"
     assert d["human_usable"] is False
+
+
+# --- action.input.intelligence (agent-only advisory input validation) ---------
+
+
+def test_input_intelligence_skill_is_agent_only_action() -> None:
+    skill = AGENT_ONLY_SKILLS["action.input.intelligence"]
+    # It is an ACTION, not a perception sense -- its own facet, not a sense.* one.
+    assert skill.facet is AgentSenseFacet.agent_action
+    assert skill.human_usable is False
+    assert skill.latent is True
+    # The advisory capability is scoped for least privilege.
+    assert skill.required_scope == "input-intelligence:request"
+
+
+def test_agent_action_facet_has_exactly_one_skill() -> None:
+    # The catalogue invariant: one skill per facet, so the new action facet
+    # cannot silently accumulate a second, unguarded member.
+    action_skills = [
+        s for s in agent_only_skills() if s.facet is AgentSenseFacet.agent_action
+    ]
+    assert len(action_skills) == 1
+    assert action_skills[0].skill_id == "action.input.intelligence"
+
+
+def test_input_intelligence_allows_agent_refuses_human() -> None:
+    # The whole point of option D: an agent may exercise the action, a human
+    # may not reach it through the agent-only channel (the human uses the
+    # product UI capability instead).
+    skill = assert_non_human("action.input.intelligence", actor_is_human=False)
+    assert skill.skill_id == "action.input.intelligence"
+    with pytest.raises(HumanUseRefused):
+        assert_non_human("action.input.intelligence", actor_is_human=True)

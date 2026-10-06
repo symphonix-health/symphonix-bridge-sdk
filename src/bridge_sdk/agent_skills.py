@@ -38,7 +38,14 @@ __all__ = [
 
 
 class AgentSenseFacet(str, Enum):
-    """The agent-only tooltip facets -- senses beyond human (design section 2)."""
+    """The agent-only tooltip facets -- senses beyond human (design section 2).
+
+    The first eight are *perception* channels: each reads something an agent can
+    perceive that a human cannot. ``agent_action`` is the one *action* facet: a
+    capability an agent may exercise that a human-usable surface must not, where
+    the guarded contract is "the agent may act, the human may not", not "the
+    agent may see, the human may not".
+    """
 
     provenance = "provenance"
     attestation = "attestation"
@@ -48,6 +55,7 @@ class AgentSenseFacet(str, Enum):
     telemetry = "telemetry"
     hidden_structural = "hidden_structural"  # off-screen / zero-opacity / behind-layer
     cross_modal = "cross_modal"
+    agent_action = "agent_action"  # act, not perceive -- see input intelligence below
 
 
 class HumanUseRefused(Exception):
@@ -162,6 +170,18 @@ AGENT_ONLY_SKILLS: dict[str, AgentOnlySkill] = {
             AgentSenseFacet.cross_modal,
             "Fuse pixels + DOM + network + attestation into one judgement; a "
             "human gets pixels only.",
+        ),
+        _skill(
+            "action.input.intelligence",
+            "Request advisory input intelligence before acting",
+            AgentSenseFacet.agent_action,
+            "Ask the advisory input-validation capability for bounded, "
+            "provenance-bearing suggestions on a field BEFORE submitting, then "
+            "act on an explicitly accepted suggestion. The capability never "
+            "blocks or mutates: deterministic validation stays the sole blocking "
+            "authority, and the agent's acceptance is the act. A human uses the "
+            "same capability through the product UI, not through this skill.",
+            required_scope="input-intelligence:request",
         ),
     )
 }
