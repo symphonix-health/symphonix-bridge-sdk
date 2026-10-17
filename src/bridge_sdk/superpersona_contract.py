@@ -235,6 +235,7 @@ def build_superpersona_contract(
     capabilities: list[dict[str, Any]] | None = None,
     action_intent_ids: list[str] | None = None,
     autonomy_default: AutonomyLevel = AutonomyLevel.advisory,
+    clinical_context: dict[str, Any] | None = None,
 ) -> SuperpersonaContract:
     """Build a deterministic contract from registry persona primitives."""
     intents = action_intent_ids or _infer_action_intents(role_category, allowed_purposes)
@@ -260,6 +261,36 @@ def build_superpersona_contract(
     framework = default_framework or "soap"
     salience = {intent: round(1.0 / len(intents), 4) for intent in intents} if intents else {}
 
+    if clinical_context:
+        from bridge_sdk.system1_reflex import compute_live_intuition
+
+        intuition, _ = compute_live_intuition(
+            persona_key=persona_key,
+            intents=intents,
+            safety_class=safety,
+            default_framework=framework,
+            clinical_text=str(clinical_context.get("clinical_text", "")),
+            timeline_events=clinical_context.get("timeline_events", ()),
+            vital_samples=clinical_context.get("vital_samples", ()),
+            hl7_or_fhir_payload=clinical_context.get("hl7_or_fhir_payload"),
+            active_medications=clinical_context.get("active_medications", ()),
+            allergies=clinical_context.get("allergies", ()),
+            conditions=clinical_context.get("conditions", ()),
+        )
+    else:
+        intuition = IntuitionDecision(
+            selected_framework=framework,
+            route_salience=salience,
+            candidate_hypotheses=[f"{persona_key}:{intent}" for intent in intents],
+            confidence=0.72 if safety is SafetyClass.high_risk else 0.8,
+            risk_score=_risk_score_for(safety),
+            reason_codes=[
+                "persona.default_framework",
+                "reference_action_manifest",
+                f"safety.{safety.value}",
+            ],
+        )
+
     return SuperpersonaContract(
         contract_id=_contract_id(persona_key, jurisdiction_pack, intents),
         persona_key=persona_key,
@@ -279,18 +310,7 @@ def build_superpersona_contract(
         eval_packs=_eval_packs_for(safety),
         runtime_budget=runtime_budget,
         required_token_scopes=scopes,
-        intuition=IntuitionDecision(
-            selected_framework=framework,
-            route_salience=salience,
-            candidate_hypotheses=[f"{persona_key}:{intent}" for intent in intents],
-            confidence=0.72 if safety is SafetyClass.high_risk else 0.8,
-            risk_score=_risk_score_for(safety),
-            reason_codes=[
-                "persona.default_framework",
-                "reference_action_manifest",
-                f"safety.{safety.value}",
-            ],
-        ),
+        intuition=intuition,
     )
 
 

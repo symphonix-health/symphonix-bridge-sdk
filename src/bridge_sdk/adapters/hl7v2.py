@@ -70,6 +70,30 @@ class Hl7v2Adapter(ProtocolAdapter):
             ]
 
         envelope.extract_loinc_codes()
+        from bridge_sdk.system1_reflex import Hl7v2SemanticReflex
+
+        triage = Hl7v2SemanticReflex.evaluate(
+            {"hl7v2_message": hl7, "fhir_resources": envelope.fhir_resources}
+        )
+        envelope.system1_triage = {
+            "quarantine_required": triage.quarantine_required,
+            "requires_human_review": triage.requires_human_review,
+            "risk_score": triage.risk_score,
+            "reason_codes": list(triage.reason_codes),
+            "anomalies": [
+                {
+                    "code": a.code,
+                    "loinc_code": a.loinc_code,
+                    "severity": a.severity,
+                    "category": a.category,
+                    "message": a.message,
+                    "suggested_unit": a.suggested_unit,
+                    "conversion_factor": a.conversion_factor,
+                }
+                for a in triage.anomalies
+            ],
+            "latency_ms": triage.latency_ms,
+        }
         return envelope
 
     async def from_canonical(

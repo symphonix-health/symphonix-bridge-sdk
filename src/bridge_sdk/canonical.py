@@ -69,6 +69,9 @@ class CanonicalEnvelope(BaseModel):
     # --- Phase 3 (G7): Trust material from GHARRA ---
     agent_trust: dict[str, Any] = Field(default_factory=dict)
 
+    # --- System 1 semantic & unit-mismatch triage metadata ---
+    system1_triage: dict[str, Any] = Field(default_factory=dict)
+
     def compute_hash(self) -> str:
         content = f"{self.envelope_id}:{self.correlation_id}:{self.timestamp}:{self.previous_hash}"
         self.envelope_hash = hashlib.sha256(content.encode()).hexdigest()
