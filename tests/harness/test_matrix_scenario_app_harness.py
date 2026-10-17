@@ -25,6 +25,7 @@ APP_PATHS_EXERCISED = (
     "src/bridge_sdk/consent_projection.py",
     "src/bridge_sdk/patient_identity.py",
     "src/bridge_sdk/signal_governance.py",
+    "src/bridge_sdk/system1_reflex.py",
     "seeded_alignment_trace.py",
 )
 

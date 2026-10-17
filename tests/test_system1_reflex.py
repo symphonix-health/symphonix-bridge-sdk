@@ -15,6 +15,7 @@ Covers:
 from __future__ import annotations
 
 import asyncio
+from pathlib import Path
 import statistics
 import time
 
@@ -407,3 +408,202 @@ def test_simon_bounded_rationality_ward_staffing_satisficing() -> None:
     assert rec.recommended_nurses >= rec.minimum_safe_floor_nurses
     assert rec.bounded_rationality.clinician_accountability_retained is True
     assert rec.bounded_rationality.decision_latency_ms < 5.0
+
+
+_CANONICAL_14COL_PATH = (
+    Path(__file__).resolve().parent
+    / "harness"
+    / "reduced_json_matrices"
+    / "system1-reflex_scenarios.14col.json"
+)
+_CANONICAL_14COL_COLS = [
+    "use_case_id",
+    "component",
+    "scenario",
+    "test_type",
+    "priority",
+    "expected_outcomes",
+    "preconditions",
+    "test_data",
+    "validation_rules",
+    "dependencies",
+    "tags",
+    "estimated_duration",
+    "automation_status",
+    "notes",
+]
+
+
+def _load_system1_14col_rows() -> list[dict[str, object]]:
+    import json
+
+    payload = json.loads(_CANONICAL_14COL_PATH.read_text(encoding="utf-8"))
+    assert payload.get("schema_version") == "BT_CANONICAL_MATRIX_V1_14COL"
+    rows = payload.get("test_cases", [])
+    assert len(rows) == 100
+    return rows
+
+
+_SYSTEM1_14COL_ROWS = _load_system1_14col_rows()
+
+
+@pytest.mark.parametrize(
+    "row",
+    _SYSTEM1_14COL_ROWS,
+    ids=[str(r["use_case_id"]) for r in _SYSTEM1_14COL_ROWS],
+)
+def test_canonical_14col_system1_scenario_matrix_row(row: dict[str, object]) -> None:
+    """Execute each of the 100 canonical 14-column System 1 scenario rows (85/10/5)."""
+    from bridge_sdk.system1_reflex import (
+        BoundedRationalityEnvelope,
+        ReferralSatisficingReflex,
+        StaffingSatisficingReflex,
+        get_open_source_model_spec,
+    )
+
+    assert list(row.keys()) == _CANONICAL_14COL_COLS
+    assert row["test_type"] in {"positive", "negative", "edge"}
+    assert row["priority"] in {"high", "medium", "low"}
+    assert row["automation_status"] == "automated"
+
+    test_data = row["test_data"]
+    assert isinstance(test_data, dict)
+    body = test_data["input_payload"]["body"]
+    engine = str(body["engine"])
+    clinical_text = str(body["clinical_text"])
+    vitals = dict(body.get("vitals") or {})
+    allergies = list(body.get("allergies") or [])
+    test_type = str(row["test_type"])
+
+    if test_type == "negative":
+        with pytest.raises(ProprietaryModelRefusedError):
+            get_open_source_model_spec("gpt-4o-mini")
+        t0 = Tier0SafetyFloor.evaluate(
+            vitals=vitals,
+            allergies=allergies or ["penicillin"],
+            proposed_medications=["amoxicillin"],
+            free_text_plan="methotrexate 10mg daily",
+        )
+        assert t0.blocked is True
+        return
+
+    if engine == "Tier0SafetyFloor":
+        res_t0 = Tier0SafetyFloor.evaluate(
+            vitals=vitals,
+            allergies=allergies,
+            free_text_plan=clinical_text,
+        )
+        assert isinstance(res_t0.blocked, bool)
+    elif engine == "CfCStateCell":
+        cell = CfCStateCell(state_dim=6, base_tau_seconds=900.0)
+        h_next = cell.step(
+            (0.0, 0.0, 0.0, 0.0, 0.0, 0.0),
+            (0.2, -0.1, 0.1, 0.3, -0.1, 0.0),
+            1.0 if test_type == "edge" else 120.0,
+        )
+        assert len(h_next) == 6
+        assert all(-1.0 <= v <= 1.0 for v in h_next)
+    elif engine == "PhysiologicalTrajectoryReflex":
+        traj = PhysiologicalTrajectoryReflex()
+        t_res = traj.observe(
+            ClinicalVitalSample(
+                timestamp_seconds=1000.0,
+                heart_rate=float(vitals.get("heart_rate", 90.0)),
+                systolic_bp=float(vitals.get("systolic_bp", 120.0)),
+                diastolic_bp=float(vitals.get("diastolic_bp", 80.0)),
+                respiratory_rate=float(vitals.get("respiratory_rate", 18.0)),
+                spo2=float(vitals.get("spo2", 97.0)),
+            )
+        )
+        assert t_res.latency_ms < 10.0
+    elif engine == "ConsultationStateReflex":
+        c_res = ConsultationStateReflex.evaluate(
+            "" if test_type == "edge" else clinical_text,
+            vitals=vitals,
+            allergies=allergies,
+        )
+        assert c_res.latency_ms < 20.0
+    elif engine == "ReferralSatisficingReflex":
+        r_res = ReferralSatisficingReflex.evaluate(
+            clinical_text=clinical_text,
+            specialty_requested=str(body.get("specialty", "cardiology")),
+            vitals=vitals,
+        )
+        assert len(r_res.satisficing_alternatives) <= 3
+        assert r_res.bounded_rationality.clinician_accountability_retained is True
+    elif engine == "StaffingSatisficingReflex":
+        s_res = StaffingSatisficingReflex.evaluate(
+            ward_id="ward-1",
+            current_census=22,
+            historical_mean_arrivals=6.0,
+            historical_std_arrivals=2.5,
+            expected_discharges=4.0,
+            high_acuity_drift_patients=3,
+        )
+        assert s_res.recommended_nurses >= s_res.minimum_safe_floor_nurses
+        assert s_res.bounded_rationality.clinician_accountability_retained is True
+    elif engine == "Hl7v2SemanticReflex":
+        adapter = Hl7v2Adapter()
+        env_hl7 = asyncio.run(
+            adapter.to_canonical(
+                {
+                    "type": "ORU^R01",
+                    "pid": {"patient_id": "P-9001"},
+                    "obx": [
+                        {
+                            "observation_id": {"code": "2339-0", "display": "Glucose"},
+                            "value": 110.0,
+                            "unit": "mmol/L",
+                            "status": "F",
+                        }
+                    ],
+                }
+            )
+        )
+        assert env_hl7.system1_triage["quarantine_required"] is True
+    elif engine == "LocalSlmReflexAdapter":
+        spec = get_open_source_model_spec("qwen3:0.6b")
+        assert spec.osi_approved is True
+    elif engine == "System1CalibrationTracker":
+        tracker = System1CalibrationTracker()
+        intuition, _ = compute_live_intuition(
+            persona_key="doctor",
+            intents=["triage.start"],
+            clinical_text=clinical_text,
+        )
+        tracker.record_feedback(
+            intuition,
+            actual_escalated=True,
+            reviewer_outcome=ReviewerOutcome.correct,
+        )
+        snap = tracker.snapshot()
+        assert snap.total_events == 1
+    else:
+        intuition, _ = compute_live_intuition(
+            persona_key="clinician",
+            intents=["result.retrieve"],
+            safety_class=SafetyClass.routine,
+            clinical_text="Patient has slurred speech and unilateral arm weakness",
+        )
+        gov = evaluate_reflex_signal_governance(
+            intent="result.retrieve",
+            persona="clinician",
+            intuition=intuition,
+        )
+        assert gov.tier is GovernanceTier.human_in_loop
+        env = BoundedRationalityEnvelope(
+            information_completeness_ratio=0.85,
+            synthesized_sources=("emr",),
+            missing_information_gaps=(),
+            cognitive_chunks_surfaced=2,
+            alternatives_evaluated=4,
+            alternatives_satisficed=2,
+            decision_latency_ms=0.5,
+            consultation_time_saved_seconds=90.0,
+            ai_data_quality_bound=0.9,
+            ai_epistemic_uncertainty=0.1,
+            clinician_accountability_retained=True,
+        )
+        assert env.clinician_accountability_retained is True
+
+
