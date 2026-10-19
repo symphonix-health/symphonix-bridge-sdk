@@ -221,6 +221,15 @@ from bridge_sdk.system1_reflex import (
     get_open_source_model_spec,
     is_local_trust_endpoint,
 )
+from bridge_sdk.national_sandbox_probe import (
+    NATIONAL_SANDBOX_SPECS,
+    NationalSandboxContractSpec,
+    NationalSandboxProbeResult,
+    get_national_sandbox_spec,
+    probe_national_sandbox,
+    validate_national_sandbox_headers,
+    validate_national_sandbox_response,
+)
 
 __version__ = "0.1.0"
 __all__ = [
@@ -400,4 +409,11 @@ __all__ = [
     "format_patient_id",
     "is_valid_patient_id",
     "normalize_patient_id",
+    "NATIONAL_SANDBOX_SPECS",
+    "NationalSandboxContractSpec",
+    "NationalSandboxProbeResult",
+    "get_national_sandbox_spec",
+    "probe_national_sandbox",
+    "validate_national_sandbox_headers",
+    "validate_national_sandbox_response",
 ]

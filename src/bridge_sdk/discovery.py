@@ -112,13 +112,15 @@ class GharraDiscoveryClient:
         api_key: str | None = None,
         timeout: float = 10.0,
         cache_ttl: float = 300.0,
+        allow_stale_fallback: bool = False,
     ):
         self.base_url = base_url.rstrip("/")
         self.api_key = api_key
         self.timeout = timeout
         self._cache: dict[str, tuple[float, Any]] = {}  # (expiry, data)
         self._cache_ttl = cache_ttl
-        # G14: Fallback cache — persists beyond TTL when GHARRA is unreachable
+        self.allow_stale_fallback = allow_stale_fallback
+        # G14: Fallback cache — only consulted when allow_stale_fallback=True
         self._fallback_cache: dict[str, Any] = {}
 
     def _headers(self, correlation_id: str = "") -> dict[str, str]:
@@ -176,18 +178,20 @@ class GharraDiscoveryClient:
                 )
 
             self._cache[cache_key] = (time.monotonic() + self._cache_ttl, results)
-            self._fallback_cache[cache_key] = results  # G14: persist for fallback
+            if self.allow_stale_fallback:
+                self._fallback_cache[cache_key] = results
             return results
 
         except Exception as e:
-            logger.warning("GHARRA discovery failed: %s — checking fallback cache", e)
-            # G14: Return stale fallback if available
-            fallback = self._fallback_cache.get(cache_key)
-            if fallback:
-                logger.info(
-                    "Returning %d stale agents from fallback cache", len(fallback)
-                )
-                return fallback
+            if self.allow_stale_fallback:
+                logger.warning("GHARRA discovery failed: %s -- checking fallback cache", e)
+                fallback = self._fallback_cache.get(cache_key)
+                if fallback:
+                    logger.info(
+                        "Returning %d stale agents from fallback cache", len(fallback)
+                    )
+                    return fallback
+            logger.error("GHARRA discovery failed closed: %s", e)
             raise
 
     async def discover_and_resolve(
