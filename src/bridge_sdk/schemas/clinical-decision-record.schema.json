@@ -1,0 +1,786 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gharra.symphonix.health/schemas/clinical-decision-record.schema.json",
+  "title": "Symphonix clinical decision explanation and evidence record",
+  "description": "Canonical verifiable clinical rationale record emitted by any GHARRA-registered agent that produces or materially shapes a clinical conclusion. Research basis: FUTURE-AI, WHO Ethics and Governance of AI for Health, TRIPOD+AI, DECIDE-AI.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_id",
+    "agent",
+    "decision",
+    "supporting_facts",
+    "evidence",
+    "uncertainty",
+    "safety",
+    "provenance",
+    "audit"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "record_id": {
+      "type": "string",
+      "pattern": "^cdr_[a-z0-9-]{8,64}$"
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "agent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gharra_agent_id",
+        "display_name",
+        "version",
+        "clinical_domain"
+      ],
+      "properties": {
+        "gharra_agent_id": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "clinical_domain": {
+          "type": "string",
+          "enum": [
+            "diagnostics",
+            "treatment",
+            "prescribing",
+            "triage",
+            "referral",
+            "care_planning",
+            "risk_assessment",
+            "interpretation",
+            "monitoring",
+            "mental_health",
+            "maternal_health",
+            "nutrition",
+            "oncology",
+            "other"
+          ]
+        },
+        "repository": {
+          "type": "string"
+        },
+        "responsible_owner_org_id": {
+          "type": "string"
+        }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "summary",
+        "outputs"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "outputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "label",
+              "code_system",
+              "role",
+              "facts_relied_upon",
+              "confidence"
+            ],
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "code_system": {
+                "type": "string"
+              },
+              "code": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string",
+                "enum": [
+                  "primary",
+                  "differential",
+                  "recommended",
+                  "alternative",
+                  "excluded",
+                  "escalation",
+                  "information"
+                ],
+                "description": "role=excluded carries the falsification trail: a considered-and-ruled-out option."
+              },
+              "facts_relied_upon": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/fact_reference"
+                }
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "calibration": {
+                "$ref": "#/$defs/calibration"
+              }
+            }
+          }
+        }
+      }
+    },
+    "supporting_facts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "fact_id",
+          "kind",
+          "value"
+        ],
+        "properties": {
+          "fact_id": {
+            "type": "string",
+            "pattern": "^F[0-9]{1,6}$"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "symptom",
+              "sign",
+              "vital",
+              "laboratory",
+              "imaging",
+              "medication",
+              "allergy",
+              "history",
+              "demographic",
+              "social",
+              "screening",
+              "genomics",
+              "other"
+            ]
+          },
+          "value": {
+            "type": [
+              "string",
+              "number",
+              "boolean"
+            ]
+          },
+          "source": {
+            "$ref": "#/$defs/fact_source"
+          },
+          "negated": {
+            "type": "boolean"
+          },
+          "temporal_note": {
+            "type": "string"
+          },
+          "identifier_scope": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidence_id",
+          "kind",
+          "identifier",
+          "version_or_release"
+        ],
+        "properties": {
+          "evidence_id": {
+            "type": "string",
+            "pattern": "^E[0-9]{1,6}$"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "clinical_guideline",
+              "systematic_review",
+              "primary_study",
+              "terminology_release",
+              "drug_information",
+              "regulatory_standard",
+              "internal_safety_rule",
+              "service_response",
+              "research_framework"
+            ]
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Resolvable identifier: DOI, guideline ID with publisher and jurisdiction, terminology release ID."
+          },
+          "version_or_release": {
+            "type": "string"
+          },
+          "jurisdiction": {
+            "type": "string"
+          },
+          "retrieved_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "supports": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "research_framework_basis": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "framework",
+                "principle"
+              ],
+              "properties": {
+                "framework": {
+                  "type": "string",
+                  "enum": [
+                    "FUTURE-AI",
+                    "WHO-AI-ETHICS",
+                    "TRIPOD+AI",
+                    "DECIDE-AI",
+                    "EQUATOR",
+                    "INTERNAL-SAFETY"
+                  ]
+                },
+                "principle": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "uncertainty": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "missing_information",
+        "calibrated_confidence",
+        "calibration_method"
+      ],
+      "properties": {
+        "statement": {
+          "type": "string",
+          "maxLength": 2000,
+          "description": "Plain-language statement for the clinician about what the agent does not know."
+        },
+        "missing_information": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "what",
+              "why_it_matters"
+            ],
+            "properties": {
+              "what": {
+                "type": "string"
+              },
+              "why_it_matters": {
+                "type": "string"
+              },
+              "requested_from": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "conflicting_findings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "description",
+              "direction"
+            ],
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "direction": {
+                "type": "string",
+                "enum": [
+                  "supports",
+                  "contradicts",
+                  "neutral"
+                ]
+              },
+              "fact_or_evidence_ref": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "calibrated_confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "calibration_method": {
+          "type": "string",
+          "enum": [
+            "identity",
+            "temperature_scaling",
+            "isotonic_lookup_table",
+            "empirical_calibration_logged"
+          ]
+        },
+        "calculation": {
+          "$ref": "#/$defs/calculation"
+        }
+      }
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contraindications_checked",
+        "alerts",
+        "requires_human_review",
+        "review_role",
+        "abstention"
+      ],
+      "properties": {
+        "contraindications_checked": {
+          "type": "boolean"
+        },
+        "alerts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "severity",
+              "message"
+            ],
+            "properties": {
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "critical",
+                  "high",
+                  "moderate",
+                  "low",
+                  "info"
+                ]
+              },
+              "message": {
+                "type": "string"
+              },
+              "rule_id": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "requires_human_review": {
+          "type": "boolean"
+        },
+        "review_role": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "decision_status": {
+          "type": "string",
+          "enum": [
+            "approved",
+            "requires_human_review",
+            "abstained",
+            "blocked"
+          ]
+        },
+        "abstention": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "abstained",
+            "reason_code"
+          ],
+          "properties": {
+            "abstained": {
+              "type": "boolean"
+            },
+            "reason_code": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "minimum_confidence_threshold": {
+              "type": "number"
+            }
+          }
+        },
+        "safety_rule_hits": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_or_component",
+        "inputs"
+      ],
+      "properties": {
+        "model_or_component": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "identifier",
+            "version"
+          ],
+          "properties": {
+            "identifier": {
+              "type": "string",
+              "description": "Deterministic rule engine, retrieved model, or LLM with pinned model id."
+            },
+            "version": {
+              "type": "string"
+            },
+            "provider": {
+              "type": "string"
+            },
+            "deployment_fingerprint": {
+              "type": "string"
+            }
+          }
+        },
+        "inputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "type",
+              "identifier"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "clinical_record",
+                  "terminology_service",
+                  "guideline_store",
+                  "prescribing_check",
+                  "imaging_service",
+                  "laboratory_service",
+                  "llm_prompt",
+                  "retrieval",
+                  "policy_engine",
+                  "other_service"
+                ]
+              },
+              "identifier": {
+                "type": "string"
+              },
+              "version_or_release": {
+                "type": "string"
+              },
+              "tool": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "prompt_identifier": {
+          "type": "string"
+        },
+        "prompt_version": {
+          "type": "string"
+        },
+        "code_change": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "repository",
+            "revision"
+          ],
+          "properties": {
+            "repository": {
+              "type": "string"
+            },
+            "revision": {
+              "type": "string"
+            },
+            "revision_kind": {
+              "type": "string",
+              "enum": [
+                "commit_sha",
+                "release_tag",
+                "content_hash"
+              ]
+            },
+            "revision_verified": {
+              "type": "boolean",
+              "default": false,
+              "description": "True only when this revision was actually resolved in the current session (verified ancestry), not asserted."
+            }
+          }
+        }
+      }
+    },
+    "audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "audit_reference",
+        "persisted",
+        "tenant_scope"
+      ],
+      "properties": {
+        "audit_reference": {
+          "type": "string",
+          "description": "Tamper-evident reference resolvable in the audit store; not merely a generated id."
+        },
+        "persisted": {
+          "type": "boolean"
+        },
+        "resolved_in_audit_store": {
+          "type": "boolean",
+          "default": false
+        },
+        "tenant_scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "patient_scope",
+            "facility_scope"
+          ],
+          "properties": {
+            "patient_scope": {
+              "type": "string"
+            },
+            "facility_scope": {
+              "type": "string"
+            },
+            "purpose_of_use": {
+              "type": "string"
+            }
+          }
+        },
+        "clinician_action": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "accepted",
+                "rejected",
+                "modified",
+                "deferred",
+                "not_yet_reviewed"
+              ]
+            },
+            "acted_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "accountable_clinician": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "fact_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fact_id",
+        "how_it_contributed"
+      ],
+      "properties": {
+        "fact_id": {
+          "type": "string",
+          "pattern": "^F[0-9]{1,6}$"
+        },
+        "how_it_contributed": {
+          "type": "string",
+          "minLength": 10,
+          "description": "The specific causal link from this fact to this output. Core anti-wrong-reason control."
+        },
+        "strength": {
+          "type": "string",
+          "enum": [
+            "primary",
+            "supporting",
+            "weak",
+            "contradictory"
+          ]
+        }
+      }
+    },
+    "calculation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "inputs_used"
+      ],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": [
+            "deterministic_rule_set",
+            "scored_rule_set",
+            "bayesian_posterior",
+            "retrieved_llm",
+            "ensemble_vote",
+            "calibrated_heuristic",
+            "hybrid"
+          ]
+        },
+        "inputs_used": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "value"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "type": [
+                  "string",
+                  "number",
+                  "boolean"
+                ]
+              },
+              "derived_from": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "thresholds_applied": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "value"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "type": "number"
+              },
+              "resulting_status": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "reproducible": {
+          "type": "boolean",
+          "default": false
+        },
+        "verification_command": {
+          "type": "string"
+        }
+      }
+    },
+    "calibration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "raw_confidence": {
+          "type": "number"
+        },
+        "calibrated_confidence": {
+          "type": "number"
+        },
+        "method": {
+          "type": "string"
+        },
+        "calibration_table_version": {
+          "type": "string"
+        },
+        "drift_check": {
+          "type": "string"
+        }
+      }
+    },
+    "fact_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_system": {
+          "type": "string"
+        },
+        "source_record_id": {
+          "type": "string"
+        },
+        "resolved": {
+          "type": "boolean",
+          "default": false
+        },
+        "observed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "jurisdiction": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
