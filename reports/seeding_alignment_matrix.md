@@ -8,13 +8,13 @@
 - **Gate commit**: c431d032072ebd1333c0c5f3ea9fd59bf7c1beec
 
 ## Inspected paths
-- project_dir: `C:\Users\hgeec\github\symphonix-bridge-sdk`
-- requirements: `C:\Users\hgeec\github\symphonix-bridge-sdk\docs\REQUIREMENTS.md`
-- requirements_all: `C:\Users\hgeec\github\symphonix-bridge-sdk\docs\REQUIREMENTS.md;C:\Users\hgeec\github\symphonix-bridge-sdk\tests\harness\requirements_superset.json`
+- project_dir: `<WORKSPACE_ROOT>\symphonix-bridge-sdk`
+- requirements: `<WORKSPACE_ROOT>\symphonix-bridge-sdk\docs\REQUIREMENTS.md`
+- requirements_all: `<WORKSPACE_ROOT>\symphonix-bridge-sdk\docs\REQUIREMENTS.md;<WORKSPACE_ROOT>\symphonix-bridge-sdk\tests\harness\requirements_superset.json`
 - spec: `(none)`
-- matrices: `C:\Users\hgeec\github\symphonix-bridge-sdk\tests\harness\json_matrices`
-- matrices_all: `C:\Users\hgeec\github\symphonix-bridge-sdk\tests\harness\json_matrices;C:\Users\hgeec\github\symphonix-bridge-sdk\tests\harness\canonical_matrices;C:\Users\hgeec\github\symphonix-bridge-sdk\tests\harness`
-- seed: `C:\Users\hgeec\github\symphonix-bridge-sdk\src\seed.py`
+- matrices: `<WORKSPACE_ROOT>\symphonix-bridge-sdk\tests\harness\json_matrices`
+- matrices_all: `<WORKSPACE_ROOT>\symphonix-bridge-sdk\tests\harness\json_matrices;<WORKSPACE_ROOT>\symphonix-bridge-sdk\tests\harness\canonical_matrices;<WORKSPACE_ROOT>\symphonix-bridge-sdk\tests\harness`
+- seed: `<WORKSPACE_ROOT>\symphonix-bridge-sdk\src\seed.py`
 
 ## Alignment matrix (summary)
 

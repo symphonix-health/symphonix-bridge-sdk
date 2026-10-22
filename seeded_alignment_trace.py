@@ -312,7 +312,6 @@ EVIDENCE_PATHS = {
         "seeded_alignment_trace.py",
         "brand/index.html",
         "conftest.py",
-        "outputs/patient_identity/build_patient_identity_docx.py",
         "src/bridge_sdk/__init__.py",
         "src/bridge_sdk/adapters/__init__.py",
         "src/bridge_sdk/adapters/base.py",

@@ -9,3 +9,11 @@ build/
 *.log
 .pytest_cache/
 .ruff_cache/
+
+# Internal working files kept out of the public repository (2026-10-22).
+# Agents may keep local, untracked copies.
+CLAUDE.md
+AGENTS.md
+graphify-out/
+outputs/
+.claude/

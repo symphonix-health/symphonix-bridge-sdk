@@ -193,3 +193,7 @@ python -m pytest -q
 
 Functional use-case projections are stored in `tests/harness/reduced_json_matrices/*.14col.json`. They preserve the source V2 scenario IDs and requirement IDs, and `tests/test_bullettrain_v1_matrix.py` checks the 14-column schema, source-row parity, and `tests/harness/requirements_matrix.json` coverage. Existing service and integration suites remain the runtime evidence for real service behavior.
 <!-- bullettrain-v1-matrix:end -->
+
+## Licence
+
+Apache License 2.0. See [LICENSE](LICENSE).

@@ -395,26 +395,26 @@
   ],
   "generated_at": "2026-06-07T10:42:05Z",
   "repo": "symphonix-bridge-sdk",
-  "repo_path": "C:\\Users\\hgeec\\github\\symphonix-bridge-sdk",
+  "repo_path": "<WORKSPACE_ROOT>\\symphonix-bridge-sdk",
   "runtime_gates": {
     "commands": [
       {
         "command": "python -m pytest tests/test_requirement_acceptance_alignment.py tests/test_specification_alignment.py -q",
-        "cwd": "C:\\Users\\hgeec\\github\\symphonix-bridge-sdk",
+        "cwd": "<WORKSPACE_ROOT>\\symphonix-bridge-sdk",
         "exit_code": 0,
         "stderr_tail": "",
         "stdout_tail": "..........                                                               [100%]\n10 passed in 0.37s\n"
       },
       {
-        "command": "python -m caid.cli fpfn-audit --repo C:\\Users\\hgeec\\github\\symphonix-bridge-sdk --format text --fail-on none",
-        "cwd": "C:\\Users\\hgeec\\github\\caid-agent",
+        "command": "python -m caid.cli fpfn-audit --repo <WORKSPACE_ROOT>\\symphonix-bridge-sdk --format text --fail-on none",
+        "cwd": "<WORKSPACE_ROOT>\\caid-agent",
         "exit_code": 0,
         "stderr_tail": "",
-        "stdout_tail": "FP/FN audit: C:\\Users\\hgeec\\github\\symphonix-bridge-sdk\nVerdict: PASS\nCounts: {'PASS': 2, 'FAIL': 0, 'PARTIAL': 0, 'BLOCKED': 0}\n\n- PASS package bridge_sdk (active)\n  direct_tests: tests/test_agent_arena.py, tests/test_agent_audit.py, tests/test_agent_contract.py, tests/test_clinical_safety_case.py, tests/test_concurrency.py, tests/test_consent_projection.py, tests/test_error_envelope.py, tests/test_execution_ledger.py, tests/test_gharra_registration.py, tests/test_human_handoff.py, tests/test_observability.py, tests/test_patient_identity.py, tests/test_persona_delegation.py, tests/test_rollout.py, tests/test_smoke_import.py, tests/test_telemetry_schema.py\n  notes: direct component-matched test evidence found\n- PASS package symphonix_bridge_sdk (active)\n  direct_tests: tests/test_observability.py, tests/test_smoke_import.py\n  notes: direct component-matched test evidence found\n"
+        "stdout_tail": "FP/FN audit: <WORKSPACE_ROOT>\\symphonix-bridge-sdk\nVerdict: PASS\nCounts: {'PASS': 2, 'FAIL': 0, 'PARTIAL': 0, 'BLOCKED': 0}\n\n- PASS package bridge_sdk (active)\n  direct_tests: tests/test_agent_arena.py, tests/test_agent_audit.py, tests/test_agent_contract.py, tests/test_clinical_safety_case.py, tests/test_concurrency.py, tests/test_consent_projection.py, tests/test_error_envelope.py, tests/test_execution_ledger.py, tests/test_gharra_registration.py, tests/test_human_handoff.py, tests/test_observability.py, tests/test_patient_identity.py, tests/test_persona_delegation.py, tests/test_rollout.py, tests/test_smoke_import.py, tests/test_telemetry_schema.py\n  notes: direct component-matched test evidence found\n- PASS package symphonix_bridge_sdk (active)\n  direct_tests: tests/test_observability.py, tests/test_smoke_import.py\n  notes: direct component-matched test evidence found\n"
       },
       {
-        "command": "python C:\\Users\\hgeec\\github\\caid-agent\\scripts\\check_seeding_alignment.py --project-dir C:\\Users\\hgeec\\github\\symphonix-bridge-sdk --report-dir C:\\Users\\hgeec\\github\\symphonix-bridge-sdk\\reports",
-        "cwd": "C:\\Users\\hgeec\\github\\symphonix-bridge-sdk",
+        "command": "python <WORKSPACE_ROOT>\\caid-agent\\scripts\\check_seeding_alignment.py --project-dir <WORKSPACE_ROOT>\\symphonix-bridge-sdk --report-dir <WORKSPACE_ROOT>\\symphonix-bridge-sdk\\reports",
+        "cwd": "<WORKSPACE_ROOT>\\symphonix-bridge-sdk",
         "exit_code": 1,
         "stderr_tail": "",
         "stdout_tail": "[SEEDING-ALIGNMENT-GATE] decision=FAIL\n[SEEDING-ALIGNMENT-GATE] functional_testing_permitted=NO\n[SEEDING-ALIGNMENT-GATE] rationale=One or more rows flagged ORPHAN / MISSING -- requirement, spec, use-case, and seed must be aligned before functional testing fires.\n[SEEDING-ALIGNMENT-GATE] rows=466 blocking=254 orphan_seed=0 missing_seed=0 partial_seeding=0\n[SEEDING-ALIGNMENT-GATE] Functional testing is blocked because the Seeding Alignment Gate has not passed.\n"
