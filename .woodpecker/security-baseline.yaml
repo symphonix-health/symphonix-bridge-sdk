@@ -1,0 +1,61 @@
+# Symphonix security baseline for Woodpecker CI.
+#
+# Supersedes the symphonix-security-baseline.yaml and woodpecker-merge-guard.yaml
+# drafts generated on 2026-10-16, which were never committed. Differences:
+# - runs on the clinical agent pool (unlabelled work can land on the trading agent);
+# - every image is pinned (the draft used trufflehog:latest);
+# - dependency risk is a hermetic lockfile scan (osv-scanner) instead of an
+#   install-everything-and-run-pytest step that cannot work without sibling
+#   repositories and services, and so would be red for reasons unrelated to code;
+# - one pipeline instead of two: the merge guard's only check, refusing
+#   green-bypass patterns, is a step here.
+# The three checks are independent (depends_on: []), so one failing check
+# never hides another check's findings.
+# Exit codes are never masked. osv-scanner exits 128 only when the repository has
+# no lockfile at all; that one case is reported and passes, anything else fails.
+
+when:
+  - event: [push, pull_request, manual, cron]
+
+labels:
+  platform: linux/amd64
+  pool: clinical
+
+steps:
+  - name: no-green-bypass
+    depends_on: []
+    image: python:3.12.10-slim
+    commands:
+      - |
+        python - <<'PY'
+        import pathlib, sys
+        # Built from parts so this file does not match its own check.
+        patterns = ("||" + " true", "continue-on-error" + ": true", "failure" + ": ignore")
+        bad = []
+        for f in sorted(pathlib.Path(".woodpecker").glob("*.y*ml")):
+            for i, line in enumerate(f.read_text(encoding="utf-8").splitlines(), 1):
+                if any(p in line for p in patterns) and not line.lstrip().startswith("#"):
+                    bad.append(f"{f}:{i}")
+        if bad:
+            sys.exit("[FAIL] green-bypass pattern in " + ", ".join(bad))
+        print("[OK] no green-bypass pattern in .woodpecker/")
+        PY
+
+  - name: dependency-vulnerabilities
+    depends_on: []
+    image: ghcr.io/google/osv-scanner:v2.2.3@sha256:fca9be4446310094be881b63f6862879282647f121ad3326e91dd90afbf8ef50
+    commands:
+      - |
+        status=0
+        /osv-scanner scan source -r . || status=$?
+        if [ "$status" -eq 128 ]; then
+          echo "[INFO] no lockfile in this repository; nothing to scan"
+          exit 0
+        fi
+        exit "$status"
+
+  - name: verified-secrets
+    depends_on: []
+    image: trufflesecurity/trufflehog:3.90.8@sha256:5dc064868ba7933601b5cbaea6954954d524ddd5dc6222a9667acea70068bf7d
+    commands:
+      - trufflehog filesystem . --only-verified --fail --no-update
