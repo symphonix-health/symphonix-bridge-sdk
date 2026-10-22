@@ -1642,7 +1642,7 @@ def mask_clinical_decision_record(
             ts["patient_scope"] = masker(ts["patient_scope"])
 
     prov = cloned.get("provenance")
-    if isinstance(prov, dict) and role_profile == "clinician":
+    if isinstance(prov, dict) and role_profile in {"clinician", "patient"}:
         mc = prov.get("model_or_component")
         if isinstance(mc, dict):
             mc.pop("deployment_fingerprint", None)
