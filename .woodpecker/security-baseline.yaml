@@ -9,13 +9,28 @@
 #   repositories and services, and so would be red for reasons unrelated to code;
 # - one pipeline instead of two: the merge guard's only check, refusing
 #   green-bypass patterns, is a step here.
-# The three checks are independent (depends_on: []), so one failing check
-# never hides another check's findings.
+# The checks are independent (depends_on: []), so one failing check never hides
+# another check's findings.
 # Exit codes are never masked. osv-scanner exits 128 only when the repository has
 # no lockfile at all; that one case is reported and passes, anything else fails.
+#
+# 2026-10-24: replaces .github/workflows/symphonix-security-baseline.yml, removed
+# from every repository with this change (GitHub Actions is retired).
+# - static-analysis (Semgrep) stands in for the Actions CodeQL job. CodeQL only
+#   reported findings; here every finding is printed and the step fails on
+#   ERROR-severity findings or a scan error. The ruleset (p/default) is fetched
+#   from the Semgrep registry at run time, so new rules can surface new findings
+#   without a change here; the scanner itself is pinned.
+# - cron runs are limited to a cron job named "security-baseline", so a
+#   repository's other schedules (site health, audits) do not also re-run this.
+# - not ported: the Actions "Build and test" job (a generic install-and-pytest
+#   that cannot run without siblings and services; repositories run their own
+#   test pipelines), and its budget gate (an Actions-credit kill-switch).
 
 when:
-  - event: [push, pull_request, manual, cron]
+  - event: [push, pull_request, manual]
+  - event: cron
+    cron: security-baseline
 
 labels:
   platform: linux/amd64
@@ -59,3 +74,28 @@ steps:
     image: trufflesecurity/trufflehog:3.90.8@sha256:5dc064868ba7933601b5cbaea6954954d524ddd5dc6222a9667acea70068bf7d
     commands:
       - trufflehog filesystem . --only-verified --fail --no-update
+
+  - name: static-analysis
+    depends_on: []
+    image: semgrep/semgrep:1.180.0@sha256:529ee8a277ec8adc5b534d7c74eea0a47e9de21d62852b6ba7ac6ba9566845c3
+    commands:
+      - |
+        status=0
+        semgrep scan --config p/default --metrics=off --quiet --json --output semgrep.json . || status=$?
+        if [ "$status" -ne 0 ]; then
+          echo "[FAIL] semgrep exited $status (scan error)"
+          exit "$status"
+        fi
+        python3 - <<'PY'
+        import json, sys
+        results = json.load(open("semgrep.json", encoding="utf-8")).get("results", [])
+        counts = {}
+        for r in results:
+            sev = r["extra"].get("severity", "UNKNOWN")
+            counts[sev] = counts.get(sev, 0) + 1
+            print(f'[{sev}] {r["path"]}:{r["start"]["line"]} {r["check_id"]}')
+        print("[INFO] semgrep findings by severity:", counts or "none")
+        if counts.get("ERROR"):
+            sys.exit(f'[FAIL] {counts["ERROR"]} ERROR-severity finding(s)')
+        print("[OK] no ERROR-severity findings")
+        PY
