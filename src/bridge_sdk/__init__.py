@@ -117,6 +117,14 @@ from bridge_sdk.execution_ledger import (
     TaskState,
     WorkflowState,
 )
+from bridge_sdk.durable_agent import (
+    DAEC_CONTRACT_VERSION,
+    CheckpointEnvelope,
+    DurableIdempotencyConflict,
+    DurableLedgerAdapter,
+    SideEffectReceipt,
+    canonical_payload_hash,
+)
 from bridge_sdk.gharra_registration import (
     build_capabilities_payload,
     build_registration_payload,
@@ -397,6 +405,12 @@ __all__ = [
     "LedgerHealth",
     "TaskState",
     "WorkflowState",
+    "DAEC_CONTRACT_VERSION",
+    "CheckpointEnvelope",
+    "DurableIdempotencyConflict",
+    "DurableLedgerAdapter",
+    "SideEffectReceipt",
+    "canonical_payload_hash",
     "DelegationError",
     "PersonaScope",
     "PersonaToken",
