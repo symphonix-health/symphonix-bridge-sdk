@@ -1,0 +1,1992 @@
+{
+  "SYS1_NEG_0091": {
+    "blocked": true,
+    "contraindications": [
+      "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
+      "tier0.never_event.methotrexate_daily_dosing_hazard"
+    ],
+    "emergency": false,
+    "min_risk_score": 0.98,
+    "news2_single_param_red": false,
+    "reason_codes": [
+      "tier0.allergy_contraindication",
+      "tier0.never_event_guard",
+      "tier0.dose_proposal_requires_clinician_signoff"
+    ],
+    "red_flags": [
+      "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
+      "tier0.never_event.methotrexate_daily_dosing_hazard"
+    ]
+  },
+  "SYS1_NEG_0094": {
+    "active_red_flags": [
+      "sys1.red_flag.chest_pain",
+      "sys1.red_flag.jaw_or_arm_radiation"
+    ],
+    "anxiety_level": "critical",
+    "candidate_snomed_codes": [
+      {
+        "code": "29857009",
+        "display": "Chest pain",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "225566008",
+        "display": "Pain radiating to left arm or jaw",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "267036007",
+        "display": "Dyspnoea",
+        "system": "http://snomed.info/sct"
+      }
+    ],
+    "confidence": 0.72,
+    "confirmed_symptoms": [
+      "Chest pain",
+      "Pain radiating to left arm or jaw",
+      "Dyspnoea"
+    ],
+    "negated_findings": [
+      "No fever (fever negated)",
+      "No cough (cough negated)"
+    ],
+    "reason_codes": [
+      "sys1.consultation_state_reflex",
+      "sys1.negation_guard_applied",
+      "sys1.red_flag_detected",
+      "sys1.safety_net_prompts_staged"
+    ],
+    "requires_clinician_review": true,
+    "risk_score": 0.78,
+    "soap_prefill": {
+      "assessment": "Presenting features: Chest pain, Pain radiating to left arm or jaw, Dyspnoea | Red-flag sentinels: sys1.red_flag.chest_pain, sys1.red_flag.jaw_or_arm_radiation",
+      "chief_complaint": "Chest pain",
+      "examination": "Pertinent negatives: No fever (fever negated); No cough (cough negated) | Safety-net checks to complete: Screen diaphoresis, nausea, or exertional dyspnoea; Verify 12-lead ECG and serial troponin requirement; Screen Resting SpO2, respiratory rate, and pleuritic chest pain",
+      "history_of_present_illness": "Patient reports central chest pain radiating to left arm and shortness of breath. Denies fever or cough.",
+      "plan": "Allergy guard active: aspirin | Complete red-flag safety netting: Screen diaphoresis, nausea, or exertional dyspnoea; Verify 12-lead ECG and serial troponin requirement"
+    },
+    "trust_level": "building",
+    "unscreened_safety_net_prompts": [
+      "Screen diaphoresis, nausea, or exertional dyspnoea",
+      "Verify 12-lead ECG and serial troponin requirement",
+      "Screen Resting SpO2, respiratory rate, and pleuritic chest pain",
+      "Screen haemoptysis and unilateral calf swelling"
+    ]
+  },
+  "SYS1_NEG_0095": {
+    "bounded_rationality": {
+      "ai_data_quality_bound": 0.3333,
+      "ai_epistemic_uncertainty": 0.4347,
+      "ai_operational_mode": "in_process_cfc_deterministic",
+      "alternatives_evaluated": 4,
+      "alternatives_satisficed": 3,
+      "clinician_accountability_retained": true,
+      "cognitive_chunks_surfaced": 3,
+      "consultation_time_saved_seconds": 150.0,
+      "information_completeness_ratio": 0.3333,
+      "missing_information_gaps": [
+        "No prior longitudinal problem list on file",
+        "Medication history unconfirmed",
+        "No baseline diagnostic investigations attached",
+        "Live external hospital slot feed unavailable; using franchise directory estimates"
+      ],
+      "synthesized_sources": [
+        "consultation_presentation",
+        "nice_who_referral_guidelines",
+        "current_encounter_vitals",
+        "default_franchise_network_topology"
+      ]
+    },
+    "clinical_red_flags": [
+      "sys1.red_flag.chest_pain",
+      "sys1.red_flag.jaw_or_arm_radiation"
+    ],
+    "guideline_triggers": [
+      "Red-flag clinical presentation (sys1.red_flag.chest_pain, sys1.red_flag.jaw_or_arm_radiation) requires urgent cardiology escalation",
+      "Complete safety-net screening: Screen diaphoresis, nausea, or exertional dyspnoea"
+    ],
+    "predictive_risk_score": 0.78,
+    "recommended_option": {
+      "cost_tier": "sha_nhif_covered",
+      "distance_km": 6.5,
+      "estimated_wait_days": 0.0,
+      "facility_id": "EQA-HUB-ACUTE-01",
+      "facility_name": "Equity Afya Regional Acute Referral Hub",
+      "meets_aspiration_threshold": true,
+      "option_id": "ref-opt-1",
+      "pathway_type": "emergency_transfer",
+      "satisficing_score": 0.978,
+      "specialty": "cardiology",
+      "supporting_evidence": [
+        "Pathway: emergency_transfer (cardiology)",
+        "Estimated wait: 0d | Distance: 6.5km | Cost tier: sha_nhif_covered",
+        "Matches red-flag escalation requirement (monotonic safety floor)"
+      ],
+      "uncertainty_notes": [
+        "No prior longitudinal problem list on file",
+        "Medication history unconfirmed"
+      ],
+      "urgency": "stat"
+    },
+    "satisficing_alternatives": [
+      {
+        "cost_tier": "sha_nhif_covered",
+        "distance_km": 6.5,
+        "estimated_wait_days": 0.0,
+        "facility_id": "EQA-HUB-ACUTE-01",
+        "facility_name": "Equity Afya Regional Acute Referral Hub",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-1",
+        "pathway_type": "emergency_transfer",
+        "satisficing_score": 0.978,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: emergency_transfer (cardiology)",
+          "Estimated wait: 0d | Distance: 6.5km | Cost tier: sha_nhif_covered",
+          "Matches red-flag escalation requirement (monotonic safety floor)"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed"
+        ],
+        "urgency": "stat"
+      },
+      {
+        "cost_tier": "low_copay_franchise",
+        "distance_km": 0.0,
+        "estimated_wait_days": 0.5,
+        "facility_id": "EQA-TELE-SPEC-01",
+        "facility_name": "Equity Afya Franchise Tele-Specialist Consult",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-2",
+        "pathway_type": "tele_specialist_coconsult",
+        "satisficing_score": 0.818,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: tele_specialist_coconsult (cardiology)",
+          "Estimated wait: 0.5d | Distance: 0km | Cost tier: low_copay_franchise"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed"
+        ],
+        "urgency": "urgent"
+      },
+      {
+        "cost_tier": "standard_specialist_tariff",
+        "distance_km": 18.0,
+        "estimated_wait_days": 7.0,
+        "facility_id": "EXT-TERTIARY-01",
+        "facility_name": "External Tertiary Specialist Centre",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-4",
+        "pathway_type": "fast_track_specialist",
+        "satisficing_score": 0.7987,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: fast_track_specialist (cardiology)",
+          "Estimated wait: 7d | Distance: 18km | Cost tier: standard_specialist_tariff",
+          "Matches red-flag escalation requirement (monotonic safety floor)"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed",
+          "Out-of-pocket specialist tariff may exceed patient affordability threshold"
+        ],
+        "urgency": "urgent"
+      }
+    ]
+  },
+  "SYS1_POS_0001": {
+    "blocked": true,
+    "contraindications": [
+      "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
+      "tier0.never_event.methotrexate_daily_dosing_hazard"
+    ],
+    "emergency": false,
+    "min_risk_score": 0.98,
+    "news2_single_param_red": false,
+    "reason_codes": [
+      "tier0.allergy_contraindication",
+      "tier0.never_event_guard",
+      "tier0.dose_proposal_requires_clinician_signoff"
+    ],
+    "red_flags": [
+      "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
+      "tier0.never_event.methotrexate_daily_dosing_hazard"
+    ]
+  },
+  "SYS1_POS_0004": {
+    "active_red_flags": [
+      "sys1.red_flag.chest_pain",
+      "sys1.red_flag.jaw_or_arm_radiation"
+    ],
+    "anxiety_level": "critical",
+    "candidate_snomed_codes": [
+      {
+        "code": "29857009",
+        "display": "Chest pain",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "225566008",
+        "display": "Pain radiating to left arm or jaw",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "267036007",
+        "display": "Dyspnoea",
+        "system": "http://snomed.info/sct"
+      }
+    ],
+    "confidence": 0.72,
+    "confirmed_symptoms": [
+      "Chest pain",
+      "Pain radiating to left arm or jaw",
+      "Dyspnoea"
+    ],
+    "negated_findings": [
+      "No fever (fever negated)",
+      "No cough (cough negated)"
+    ],
+    "reason_codes": [
+      "sys1.consultation_state_reflex",
+      "sys1.negation_guard_applied",
+      "sys1.red_flag_detected",
+      "sys1.safety_net_prompts_staged"
+    ],
+    "requires_clinician_review": true,
+    "risk_score": 0.78,
+    "soap_prefill": {
+      "assessment": "Presenting features: Chest pain, Pain radiating to left arm or jaw, Dyspnoea | Red-flag sentinels: sys1.red_flag.chest_pain, sys1.red_flag.jaw_or_arm_radiation",
+      "chief_complaint": "Chest pain",
+      "examination": "Pertinent negatives: No fever (fever negated); No cough (cough negated) | Safety-net checks to complete: Screen diaphoresis, nausea, or exertional dyspnoea; Verify 12-lead ECG and serial troponin requirement; Screen Resting SpO2, respiratory rate, and pleuritic chest pain",
+      "history_of_present_illness": "Patient reports central chest pain radiating to left arm and shortness of breath. Denies fever or cough.",
+      "plan": "Allergy guard active: aspirin | Complete red-flag safety netting: Screen diaphoresis, nausea, or exertional dyspnoea; Verify 12-lead ECG and serial troponin requirement"
+    },
+    "trust_level": "building",
+    "unscreened_safety_net_prompts": [
+      "Screen diaphoresis, nausea, or exertional dyspnoea",
+      "Verify 12-lead ECG and serial troponin requirement",
+      "Screen Resting SpO2, respiratory rate, and pleuritic chest pain",
+      "Screen haemoptysis and unilateral calf swelling"
+    ]
+  },
+  "SYS1_POS_0005": {
+    "bounded_rationality": {
+      "ai_data_quality_bound": 0.3333,
+      "ai_epistemic_uncertainty": 0.4347,
+      "ai_operational_mode": "in_process_cfc_deterministic",
+      "alternatives_evaluated": 4,
+      "alternatives_satisficed": 3,
+      "clinician_accountability_retained": true,
+      "cognitive_chunks_surfaced": 3,
+      "consultation_time_saved_seconds": 150.0,
+      "information_completeness_ratio": 0.3333,
+      "missing_information_gaps": [
+        "No prior longitudinal problem list on file",
+        "Medication history unconfirmed",
+        "No baseline diagnostic investigations attached",
+        "Live external hospital slot feed unavailable; using franchise directory estimates"
+      ],
+      "synthesized_sources": [
+        "consultation_presentation",
+        "nice_who_referral_guidelines",
+        "current_encounter_vitals",
+        "default_franchise_network_topology"
+      ]
+    },
+    "clinical_red_flags": [
+      "sys1.red_flag.chest_pain",
+      "sys1.red_flag.jaw_or_arm_radiation"
+    ],
+    "guideline_triggers": [
+      "Red-flag clinical presentation (sys1.red_flag.chest_pain, sys1.red_flag.jaw_or_arm_radiation) requires urgent cardiology escalation",
+      "Complete safety-net screening: Screen diaphoresis, nausea, or exertional dyspnoea"
+    ],
+    "predictive_risk_score": 0.78,
+    "recommended_option": {
+      "cost_tier": "sha_nhif_covered",
+      "distance_km": 6.5,
+      "estimated_wait_days": 0.0,
+      "facility_id": "EQA-HUB-ACUTE-01",
+      "facility_name": "Equity Afya Regional Acute Referral Hub",
+      "meets_aspiration_threshold": true,
+      "option_id": "ref-opt-1",
+      "pathway_type": "emergency_transfer",
+      "satisficing_score": 0.978,
+      "specialty": "cardiology",
+      "supporting_evidence": [
+        "Pathway: emergency_transfer (cardiology)",
+        "Estimated wait: 0d | Distance: 6.5km | Cost tier: sha_nhif_covered",
+        "Matches red-flag escalation requirement (monotonic safety floor)"
+      ],
+      "uncertainty_notes": [
+        "No prior longitudinal problem list on file",
+        "Medication history unconfirmed"
+      ],
+      "urgency": "stat"
+    },
+    "satisficing_alternatives": [
+      {
+        "cost_tier": "sha_nhif_covered",
+        "distance_km": 6.5,
+        "estimated_wait_days": 0.0,
+        "facility_id": "EQA-HUB-ACUTE-01",
+        "facility_name": "Equity Afya Regional Acute Referral Hub",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-1",
+        "pathway_type": "emergency_transfer",
+        "satisficing_score": 0.978,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: emergency_transfer (cardiology)",
+          "Estimated wait: 0d | Distance: 6.5km | Cost tier: sha_nhif_covered",
+          "Matches red-flag escalation requirement (monotonic safety floor)"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed"
+        ],
+        "urgency": "stat"
+      },
+      {
+        "cost_tier": "low_copay_franchise",
+        "distance_km": 0.0,
+        "estimated_wait_days": 0.5,
+        "facility_id": "EQA-TELE-SPEC-01",
+        "facility_name": "Equity Afya Franchise Tele-Specialist Consult",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-2",
+        "pathway_type": "tele_specialist_coconsult",
+        "satisficing_score": 0.818,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: tele_specialist_coconsult (cardiology)",
+          "Estimated wait: 0.5d | Distance: 0km | Cost tier: low_copay_franchise"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed"
+        ],
+        "urgency": "urgent"
+      },
+      {
+        "cost_tier": "standard_specialist_tariff",
+        "distance_km": 18.0,
+        "estimated_wait_days": 7.0,
+        "facility_id": "EXT-TERTIARY-01",
+        "facility_name": "External Tertiary Specialist Centre",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-4",
+        "pathway_type": "fast_track_specialist",
+        "satisficing_score": 0.7987,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: fast_track_specialist (cardiology)",
+          "Estimated wait: 7d | Distance: 18km | Cost tier: standard_specialist_tariff",
+          "Matches red-flag escalation requirement (monotonic safety floor)"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed",
+          "Out-of-pocket specialist tariff may exceed patient affordability threshold"
+        ],
+        "urgency": "urgent"
+      }
+    ]
+  },
+  "SYS1_POS_0011": {
+    "blocked": true,
+    "contraindications": [
+      "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
+      "tier0.never_event.methotrexate_daily_dosing_hazard"
+    ],
+    "emergency": false,
+    "min_risk_score": 0.98,
+    "news2_single_param_red": false,
+    "reason_codes": [
+      "tier0.allergy_contraindication",
+      "tier0.never_event_guard",
+      "tier0.dose_proposal_requires_clinician_signoff"
+    ],
+    "red_flags": [
+      "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
+      "tier0.never_event.methotrexate_daily_dosing_hazard"
+    ]
+  },
+  "SYS1_POS_0014": {
+    "active_red_flags": [
+      "sys1.red_flag.chest_pain",
+      "sys1.red_flag.jaw_or_arm_radiation"
+    ],
+    "anxiety_level": "critical",
+    "candidate_snomed_codes": [
+      {
+        "code": "29857009",
+        "display": "Chest pain",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "225566008",
+        "display": "Pain radiating to left arm or jaw",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "267036007",
+        "display": "Dyspnoea",
+        "system": "http://snomed.info/sct"
+      }
+    ],
+    "confidence": 0.72,
+    "confirmed_symptoms": [
+      "Chest pain",
+      "Pain radiating to left arm or jaw",
+      "Dyspnoea"
+    ],
+    "negated_findings": [
+      "No fever (fever negated)",
+      "No cough (cough negated)"
+    ],
+    "reason_codes": [
+      "sys1.consultation_state_reflex",
+      "sys1.negation_guard_applied",
+      "sys1.red_flag_detected",
+      "sys1.safety_net_prompts_staged"
+    ],
+    "requires_clinician_review": true,
+    "risk_score": 0.78,
+    "soap_prefill": {
+      "assessment": "Presenting features: Chest pain, Pain radiating to left arm or jaw, Dyspnoea | Red-flag sentinels: sys1.red_flag.chest_pain, sys1.red_flag.jaw_or_arm_radiation",
+      "chief_complaint": "Chest pain",
+      "examination": "Pertinent negatives: No fever (fever negated); No cough (cough negated) | Safety-net checks to complete: Screen diaphoresis, nausea, or exertional dyspnoea; Verify 12-lead ECG and serial troponin requirement; Screen Resting SpO2, respiratory rate, and pleuritic chest pain",
+      "history_of_present_illness": "Patient reports central chest pain radiating to left arm and shortness of breath. Denies fever or cough.",
+      "plan": "Allergy guard active: aspirin | Complete red-flag safety netting: Screen diaphoresis, nausea, or exertional dyspnoea; Verify 12-lead ECG and serial troponin requirement"
+    },
+    "trust_level": "building",
+    "unscreened_safety_net_prompts": [
+      "Screen diaphoresis, nausea, or exertional dyspnoea",
+      "Verify 12-lead ECG and serial troponin requirement",
+      "Screen Resting SpO2, respiratory rate, and pleuritic chest pain",
+      "Screen haemoptysis and unilateral calf swelling"
+    ]
+  },
+  "SYS1_POS_0015": {
+    "bounded_rationality": {
+      "ai_data_quality_bound": 0.3333,
+      "ai_epistemic_uncertainty": 0.4347,
+      "ai_operational_mode": "in_process_cfc_deterministic",
+      "alternatives_evaluated": 4,
+      "alternatives_satisficed": 3,
+      "clinician_accountability_retained": true,
+      "cognitive_chunks_surfaced": 3,
+      "consultation_time_saved_seconds": 150.0,
+      "information_completeness_ratio": 0.3333,
+      "missing_information_gaps": [
+        "No prior longitudinal problem list on file",
+        "Medication history unconfirmed",
+        "No baseline diagnostic investigations attached",
+        "Live external hospital slot feed unavailable; using franchise directory estimates"
+      ],
+      "synthesized_sources": [
+        "consultation_presentation",
+        "nice_who_referral_guidelines",
+        "current_encounter_vitals",
+        "default_franchise_network_topology"
+      ]
+    },
+    "clinical_red_flags": [
+      "sys1.red_flag.chest_pain",
+      "sys1.red_flag.jaw_or_arm_radiation"
+    ],
+    "guideline_triggers": [
+      "Red-flag clinical presentation (sys1.red_flag.chest_pain, sys1.red_flag.jaw_or_arm_radiation) requires urgent cardiology escalation",
+      "Complete safety-net screening: Screen diaphoresis, nausea, or exertional dyspnoea"
+    ],
+    "predictive_risk_score": 0.78,
+    "recommended_option": {
+      "cost_tier": "sha_nhif_covered",
+      "distance_km": 6.5,
+      "estimated_wait_days": 0.0,
+      "facility_id": "EQA-HUB-ACUTE-01",
+      "facility_name": "Equity Afya Regional Acute Referral Hub",
+      "meets_aspiration_threshold": true,
+      "option_id": "ref-opt-1",
+      "pathway_type": "emergency_transfer",
+      "satisficing_score": 0.978,
+      "specialty": "cardiology",
+      "supporting_evidence": [
+        "Pathway: emergency_transfer (cardiology)",
+        "Estimated wait: 0d | Distance: 6.5km | Cost tier: sha_nhif_covered",
+        "Matches red-flag escalation requirement (monotonic safety floor)"
+      ],
+      "uncertainty_notes": [
+        "No prior longitudinal problem list on file",
+        "Medication history unconfirmed"
+      ],
+      "urgency": "stat"
+    },
+    "satisficing_alternatives": [
+      {
+        "cost_tier": "sha_nhif_covered",
+        "distance_km": 6.5,
+        "estimated_wait_days": 0.0,
+        "facility_id": "EQA-HUB-ACUTE-01",
+        "facility_name": "Equity Afya Regional Acute Referral Hub",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-1",
+        "pathway_type": "emergency_transfer",
+        "satisficing_score": 0.978,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: emergency_transfer (cardiology)",
+          "Estimated wait: 0d | Distance: 6.5km | Cost tier: sha_nhif_covered",
+          "Matches red-flag escalation requirement (monotonic safety floor)"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed"
+        ],
+        "urgency": "stat"
+      },
+      {
+        "cost_tier": "low_copay_franchise",
+        "distance_km": 0.0,
+        "estimated_wait_days": 0.5,
+        "facility_id": "EQA-TELE-SPEC-01",
+        "facility_name": "Equity Afya Franchise Tele-Specialist Consult",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-2",
+        "pathway_type": "tele_specialist_coconsult",
+        "satisficing_score": 0.818,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: tele_specialist_coconsult (cardiology)",
+          "Estimated wait: 0.5d | Distance: 0km | Cost tier: low_copay_franchise"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed"
+        ],
+        "urgency": "urgent"
+      },
+      {
+        "cost_tier": "standard_specialist_tariff",
+        "distance_km": 18.0,
+        "estimated_wait_days": 7.0,
+        "facility_id": "EXT-TERTIARY-01",
+        "facility_name": "External Tertiary Specialist Centre",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-4",
+        "pathway_type": "fast_track_specialist",
+        "satisficing_score": 0.7987,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: fast_track_specialist (cardiology)",
+          "Estimated wait: 7d | Distance: 18km | Cost tier: standard_specialist_tariff",
+          "Matches red-flag escalation requirement (monotonic safety floor)"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed",
+          "Out-of-pocket specialist tariff may exceed patient affordability threshold"
+        ],
+        "urgency": "urgent"
+      }
+    ]
+  },
+  "SYS1_POS_0021": {
+    "blocked": true,
+    "contraindications": [
+      "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
+      "tier0.never_event.methotrexate_daily_dosing_hazard"
+    ],
+    "emergency": false,
+    "min_risk_score": 0.98,
+    "news2_single_param_red": false,
+    "reason_codes": [
+      "tier0.allergy_contraindication",
+      "tier0.never_event_guard",
+      "tier0.dose_proposal_requires_clinician_signoff"
+    ],
+    "red_flags": [
+      "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
+      "tier0.never_event.methotrexate_daily_dosing_hazard"
+    ]
+  },
+  "SYS1_POS_0024": {
+    "active_red_flags": [
+      "sys1.red_flag.chest_pain",
+      "sys1.red_flag.jaw_or_arm_radiation"
+    ],
+    "anxiety_level": "critical",
+    "candidate_snomed_codes": [
+      {
+        "code": "29857009",
+        "display": "Chest pain",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "225566008",
+        "display": "Pain radiating to left arm or jaw",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "267036007",
+        "display": "Dyspnoea",
+        "system": "http://snomed.info/sct"
+      }
+    ],
+    "confidence": 0.72,
+    "confirmed_symptoms": [
+      "Chest pain",
+      "Pain radiating to left arm or jaw",
+      "Dyspnoea"
+    ],
+    "negated_findings": [
+      "No fever (fever negated)",
+      "No cough (cough negated)"
+    ],
+    "reason_codes": [
+      "sys1.consultation_state_reflex",
+      "sys1.negation_guard_applied",
+      "sys1.red_flag_detected",
+      "sys1.safety_net_prompts_staged"
+    ],
+    "requires_clinician_review": true,
+    "risk_score": 0.78,
+    "soap_prefill": {
+      "assessment": "Presenting features: Chest pain, Pain radiating to left arm or jaw, Dyspnoea | Red-flag sentinels: sys1.red_flag.chest_pain, sys1.red_flag.jaw_or_arm_radiation",
+      "chief_complaint": "Chest pain",
+      "examination": "Pertinent negatives: No fever (fever negated); No cough (cough negated) | Safety-net checks to complete: Screen diaphoresis, nausea, or exertional dyspnoea; Verify 12-lead ECG and serial troponin requirement; Screen Resting SpO2, respiratory rate, and pleuritic chest pain",
+      "history_of_present_illness": "Patient reports central chest pain radiating to left arm and shortness of breath. Denies fever or cough.",
+      "plan": "Allergy guard active: aspirin | Complete red-flag safety netting: Screen diaphoresis, nausea, or exertional dyspnoea; Verify 12-lead ECG and serial troponin requirement"
+    },
+    "trust_level": "building",
+    "unscreened_safety_net_prompts": [
+      "Screen diaphoresis, nausea, or exertional dyspnoea",
+      "Verify 12-lead ECG and serial troponin requirement",
+      "Screen Resting SpO2, respiratory rate, and pleuritic chest pain",
+      "Screen haemoptysis and unilateral calf swelling"
+    ]
+  },
+  "SYS1_POS_0025": {
+    "bounded_rationality": {
+      "ai_data_quality_bound": 0.3333,
+      "ai_epistemic_uncertainty": 0.4347,
+      "ai_operational_mode": "in_process_cfc_deterministic",
+      "alternatives_evaluated": 4,
+      "alternatives_satisficed": 3,
+      "clinician_accountability_retained": true,
+      "cognitive_chunks_surfaced": 3,
+      "consultation_time_saved_seconds": 150.0,
+      "information_completeness_ratio": 0.3333,
+      "missing_information_gaps": [
+        "No prior longitudinal problem list on file",
+        "Medication history unconfirmed",
+        "No baseline diagnostic investigations attached",
+        "Live external hospital slot feed unavailable; using franchise directory estimates"
+      ],
+      "synthesized_sources": [
+        "consultation_presentation",
+        "nice_who_referral_guidelines",
+        "current_encounter_vitals",
+        "default_franchise_network_topology"
+      ]
+    },
+    "clinical_red_flags": [
+      "sys1.red_flag.chest_pain",
+      "sys1.red_flag.jaw_or_arm_radiation"
+    ],
+    "guideline_triggers": [
+      "Red-flag clinical presentation (sys1.red_flag.chest_pain, sys1.red_flag.jaw_or_arm_radiation) requires urgent cardiology escalation",
+      "Complete safety-net screening: Screen diaphoresis, nausea, or exertional dyspnoea"
+    ],
+    "predictive_risk_score": 0.78,
+    "recommended_option": {
+      "cost_tier": "sha_nhif_covered",
+      "distance_km": 6.5,
+      "estimated_wait_days": 0.0,
+      "facility_id": "EQA-HUB-ACUTE-01",
+      "facility_name": "Equity Afya Regional Acute Referral Hub",
+      "meets_aspiration_threshold": true,
+      "option_id": "ref-opt-1",
+      "pathway_type": "emergency_transfer",
+      "satisficing_score": 0.978,
+      "specialty": "cardiology",
+      "supporting_evidence": [
+        "Pathway: emergency_transfer (cardiology)",
+        "Estimated wait: 0d | Distance: 6.5km | Cost tier: sha_nhif_covered",
+        "Matches red-flag escalation requirement (monotonic safety floor)"
+      ],
+      "uncertainty_notes": [
+        "No prior longitudinal problem list on file",
+        "Medication history unconfirmed"
+      ],
+      "urgency": "stat"
+    },
+    "satisficing_alternatives": [
+      {
+        "cost_tier": "sha_nhif_covered",
+        "distance_km": 6.5,
+        "estimated_wait_days": 0.0,
+        "facility_id": "EQA-HUB-ACUTE-01",
+        "facility_name": "Equity Afya Regional Acute Referral Hub",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-1",
+        "pathway_type": "emergency_transfer",
+        "satisficing_score": 0.978,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: emergency_transfer (cardiology)",
+          "Estimated wait: 0d | Distance: 6.5km | Cost tier: sha_nhif_covered",
+          "Matches red-flag escalation requirement (monotonic safety floor)"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed"
+        ],
+        "urgency": "stat"
+      },
+      {
+        "cost_tier": "low_copay_franchise",
+        "distance_km": 0.0,
+        "estimated_wait_days": 0.5,
+        "facility_id": "EQA-TELE-SPEC-01",
+        "facility_name": "Equity Afya Franchise Tele-Specialist Consult",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-2",
+        "pathway_type": "tele_specialist_coconsult",
+        "satisficing_score": 0.818,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: tele_specialist_coconsult (cardiology)",
+          "Estimated wait: 0.5d | Distance: 0km | Cost tier: low_copay_franchise"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed"
+        ],
+        "urgency": "urgent"
+      },
+      {
+        "cost_tier": "standard_specialist_tariff",
+        "distance_km": 18.0,
+        "estimated_wait_days": 7.0,
+        "facility_id": "EXT-TERTIARY-01",
+        "facility_name": "External Tertiary Specialist Centre",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-4",
+        "pathway_type": "fast_track_specialist",
+        "satisficing_score": 0.7987,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: fast_track_specialist (cardiology)",
+          "Estimated wait: 7d | Distance: 18km | Cost tier: standard_specialist_tariff",
+          "Matches red-flag escalation requirement (monotonic safety floor)"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed",
+          "Out-of-pocket specialist tariff may exceed patient affordability threshold"
+        ],
+        "urgency": "urgent"
+      }
+    ]
+  },
+  "SYS1_POS_0031": {
+    "blocked": true,
+    "contraindications": [
+      "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
+      "tier0.never_event.methotrexate_daily_dosing_hazard"
+    ],
+    "emergency": false,
+    "min_risk_score": 0.98,
+    "news2_single_param_red": false,
+    "reason_codes": [
+      "tier0.allergy_contraindication",
+      "tier0.never_event_guard",
+      "tier0.dose_proposal_requires_clinician_signoff"
+    ],
+    "red_flags": [
+      "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
+      "tier0.never_event.methotrexate_daily_dosing_hazard"
+    ]
+  },
+  "SYS1_POS_0034": {
+    "active_red_flags": [
+      "sys1.red_flag.chest_pain",
+      "sys1.red_flag.jaw_or_arm_radiation"
+    ],
+    "anxiety_level": "critical",
+    "candidate_snomed_codes": [
+      {
+        "code": "29857009",
+        "display": "Chest pain",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "225566008",
+        "display": "Pain radiating to left arm or jaw",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "267036007",
+        "display": "Dyspnoea",
+        "system": "http://snomed.info/sct"
+      }
+    ],
+    "confidence": 0.72,
+    "confirmed_symptoms": [
+      "Chest pain",
+      "Pain radiating to left arm or jaw",
+      "Dyspnoea"
+    ],
+    "negated_findings": [
+      "No fever (fever negated)",
+      "No cough (cough negated)"
+    ],
+    "reason_codes": [
+      "sys1.consultation_state_reflex",
+      "sys1.negation_guard_applied",
+      "sys1.red_flag_detected",
+      "sys1.safety_net_prompts_staged"
+    ],
+    "requires_clinician_review": true,
+    "risk_score": 0.78,
+    "soap_prefill": {
+      "assessment": "Presenting features: Chest pain, Pain radiating to left arm or jaw, Dyspnoea | Red-flag sentinels: sys1.red_flag.chest_pain, sys1.red_flag.jaw_or_arm_radiation",
+      "chief_complaint": "Chest pain",
+      "examination": "Pertinent negatives: No fever (fever negated); No cough (cough negated) | Safety-net checks to complete: Screen diaphoresis, nausea, or exertional dyspnoea; Verify 12-lead ECG and serial troponin requirement; Screen Resting SpO2, respiratory rate, and pleuritic chest pain",
+      "history_of_present_illness": "Patient reports central chest pain radiating to left arm and shortness of breath. Denies fever or cough.",
+      "plan": "Allergy guard active: aspirin | Complete red-flag safety netting: Screen diaphoresis, nausea, or exertional dyspnoea; Verify 12-lead ECG and serial troponin requirement"
+    },
+    "trust_level": "building",
+    "unscreened_safety_net_prompts": [
+      "Screen diaphoresis, nausea, or exertional dyspnoea",
+      "Verify 12-lead ECG and serial troponin requirement",
+      "Screen Resting SpO2, respiratory rate, and pleuritic chest pain",
+      "Screen haemoptysis and unilateral calf swelling"
+    ]
+  },
+  "SYS1_POS_0035": {
+    "bounded_rationality": {
+      "ai_data_quality_bound": 0.3333,
+      "ai_epistemic_uncertainty": 0.4347,
+      "ai_operational_mode": "in_process_cfc_deterministic",
+      "alternatives_evaluated": 4,
+      "alternatives_satisficed": 3,
+      "clinician_accountability_retained": true,
+      "cognitive_chunks_surfaced": 3,
+      "consultation_time_saved_seconds": 150.0,
+      "information_completeness_ratio": 0.3333,
+      "missing_information_gaps": [
+        "No prior longitudinal problem list on file",
+        "Medication history unconfirmed",
+        "No baseline diagnostic investigations attached",
+        "Live external hospital slot feed unavailable; using franchise directory estimates"
+      ],
+      "synthesized_sources": [
+        "consultation_presentation",
+        "nice_who_referral_guidelines",
+        "current_encounter_vitals",
+        "default_franchise_network_topology"
+      ]
+    },
+    "clinical_red_flags": [
+      "sys1.red_flag.chest_pain",
+      "sys1.red_flag.jaw_or_arm_radiation"
+    ],
+    "guideline_triggers": [
+      "Red-flag clinical presentation (sys1.red_flag.chest_pain, sys1.red_flag.jaw_or_arm_radiation) requires urgent cardiology escalation",
+      "Complete safety-net screening: Screen diaphoresis, nausea, or exertional dyspnoea"
+    ],
+    "predictive_risk_score": 0.78,
+    "recommended_option": {
+      "cost_tier": "sha_nhif_covered",
+      "distance_km": 6.5,
+      "estimated_wait_days": 0.0,
+      "facility_id": "EQA-HUB-ACUTE-01",
+      "facility_name": "Equity Afya Regional Acute Referral Hub",
+      "meets_aspiration_threshold": true,
+      "option_id": "ref-opt-1",
+      "pathway_type": "emergency_transfer",
+      "satisficing_score": 0.978,
+      "specialty": "cardiology",
+      "supporting_evidence": [
+        "Pathway: emergency_transfer (cardiology)",
+        "Estimated wait: 0d | Distance: 6.5km | Cost tier: sha_nhif_covered",
+        "Matches red-flag escalation requirement (monotonic safety floor)"
+      ],
+      "uncertainty_notes": [
+        "No prior longitudinal problem list on file",
+        "Medication history unconfirmed"
+      ],
+      "urgency": "stat"
+    },
+    "satisficing_alternatives": [
+      {
+        "cost_tier": "sha_nhif_covered",
+        "distance_km": 6.5,
+        "estimated_wait_days": 0.0,
+        "facility_id": "EQA-HUB-ACUTE-01",
+        "facility_name": "Equity Afya Regional Acute Referral Hub",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-1",
+        "pathway_type": "emergency_transfer",
+        "satisficing_score": 0.978,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: emergency_transfer (cardiology)",
+          "Estimated wait: 0d | Distance: 6.5km | Cost tier: sha_nhif_covered",
+          "Matches red-flag escalation requirement (monotonic safety floor)"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed"
+        ],
+        "urgency": "stat"
+      },
+      {
+        "cost_tier": "low_copay_franchise",
+        "distance_km": 0.0,
+        "estimated_wait_days": 0.5,
+        "facility_id": "EQA-TELE-SPEC-01",
+        "facility_name": "Equity Afya Franchise Tele-Specialist Consult",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-2",
+        "pathway_type": "tele_specialist_coconsult",
+        "satisficing_score": 0.818,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: tele_specialist_coconsult (cardiology)",
+          "Estimated wait: 0.5d | Distance: 0km | Cost tier: low_copay_franchise"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed"
+        ],
+        "urgency": "urgent"
+      },
+      {
+        "cost_tier": "standard_specialist_tariff",
+        "distance_km": 18.0,
+        "estimated_wait_days": 7.0,
+        "facility_id": "EXT-TERTIARY-01",
+        "facility_name": "External Tertiary Specialist Centre",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-4",
+        "pathway_type": "fast_track_specialist",
+        "satisficing_score": 0.7987,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: fast_track_specialist (cardiology)",
+          "Estimated wait: 7d | Distance: 18km | Cost tier: standard_specialist_tariff",
+          "Matches red-flag escalation requirement (monotonic safety floor)"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed",
+          "Out-of-pocket specialist tariff may exceed patient affordability threshold"
+        ],
+        "urgency": "urgent"
+      }
+    ]
+  },
+  "SYS1_POS_0041": {
+    "blocked": true,
+    "contraindications": [
+      "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
+      "tier0.never_event.methotrexate_daily_dosing_hazard"
+    ],
+    "emergency": false,
+    "min_risk_score": 0.98,
+    "news2_single_param_red": false,
+    "reason_codes": [
+      "tier0.allergy_contraindication",
+      "tier0.never_event_guard",
+      "tier0.dose_proposal_requires_clinician_signoff"
+    ],
+    "red_flags": [
+      "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
+      "tier0.never_event.methotrexate_daily_dosing_hazard"
+    ]
+  },
+  "SYS1_POS_0044": {
+    "active_red_flags": [
+      "sys1.red_flag.chest_pain",
+      "sys1.red_flag.jaw_or_arm_radiation"
+    ],
+    "anxiety_level": "critical",
+    "candidate_snomed_codes": [
+      {
+        "code": "29857009",
+        "display": "Chest pain",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "225566008",
+        "display": "Pain radiating to left arm or jaw",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "267036007",
+        "display": "Dyspnoea",
+        "system": "http://snomed.info/sct"
+      }
+    ],
+    "confidence": 0.72,
+    "confirmed_symptoms": [
+      "Chest pain",
+      "Pain radiating to left arm or jaw",
+      "Dyspnoea"
+    ],
+    "negated_findings": [
+      "No fever (fever negated)",
+      "No cough (cough negated)"
+    ],
+    "reason_codes": [
+      "sys1.consultation_state_reflex",
+      "sys1.negation_guard_applied",
+      "sys1.red_flag_detected",
+      "sys1.safety_net_prompts_staged"
+    ],
+    "requires_clinician_review": true,
+    "risk_score": 0.78,
+    "soap_prefill": {
+      "assessment": "Presenting features: Chest pain, Pain radiating to left arm or jaw, Dyspnoea | Red-flag sentinels: sys1.red_flag.chest_pain, sys1.red_flag.jaw_or_arm_radiation",
+      "chief_complaint": "Chest pain",
+      "examination": "Pertinent negatives: No fever (fever negated); No cough (cough negated) | Safety-net checks to complete: Screen diaphoresis, nausea, or exertional dyspnoea; Verify 12-lead ECG and serial troponin requirement; Screen Resting SpO2, respiratory rate, and pleuritic chest pain",
+      "history_of_present_illness": "Patient reports central chest pain radiating to left arm and shortness of breath. Denies fever or cough.",
+      "plan": "Allergy guard active: aspirin | Complete red-flag safety netting: Screen diaphoresis, nausea, or exertional dyspnoea; Verify 12-lead ECG and serial troponin requirement"
+    },
+    "trust_level": "building",
+    "unscreened_safety_net_prompts": [
+      "Screen diaphoresis, nausea, or exertional dyspnoea",
+      "Verify 12-lead ECG and serial troponin requirement",
+      "Screen Resting SpO2, respiratory rate, and pleuritic chest pain",
+      "Screen haemoptysis and unilateral calf swelling"
+    ]
+  },
+  "SYS1_POS_0045": {
+    "bounded_rationality": {
+      "ai_data_quality_bound": 0.3333,
+      "ai_epistemic_uncertainty": 0.4347,
+      "ai_operational_mode": "in_process_cfc_deterministic",
+      "alternatives_evaluated": 4,
+      "alternatives_satisficed": 3,
+      "clinician_accountability_retained": true,
+      "cognitive_chunks_surfaced": 3,
+      "consultation_time_saved_seconds": 150.0,
+      "information_completeness_ratio": 0.3333,
+      "missing_information_gaps": [
+        "No prior longitudinal problem list on file",
+        "Medication history unconfirmed",
+        "No baseline diagnostic investigations attached",
+        "Live external hospital slot feed unavailable; using franchise directory estimates"
+      ],
+      "synthesized_sources": [
+        "consultation_presentation",
+        "nice_who_referral_guidelines",
+        "current_encounter_vitals",
+        "default_franchise_network_topology"
+      ]
+    },
+    "clinical_red_flags": [
+      "sys1.red_flag.chest_pain",
+      "sys1.red_flag.jaw_or_arm_radiation"
+    ],
+    "guideline_triggers": [
+      "Red-flag clinical presentation (sys1.red_flag.chest_pain, sys1.red_flag.jaw_or_arm_radiation) requires urgent cardiology escalation",
+      "Complete safety-net screening: Screen diaphoresis, nausea, or exertional dyspnoea"
+    ],
+    "predictive_risk_score": 0.78,
+    "recommended_option": {
+      "cost_tier": "sha_nhif_covered",
+      "distance_km": 6.5,
+      "estimated_wait_days": 0.0,
+      "facility_id": "EQA-HUB-ACUTE-01",
+      "facility_name": "Equity Afya Regional Acute Referral Hub",
+      "meets_aspiration_threshold": true,
+      "option_id": "ref-opt-1",
+      "pathway_type": "emergency_transfer",
+      "satisficing_score": 0.978,
+      "specialty": "cardiology",
+      "supporting_evidence": [
+        "Pathway: emergency_transfer (cardiology)",
+        "Estimated wait: 0d | Distance: 6.5km | Cost tier: sha_nhif_covered",
+        "Matches red-flag escalation requirement (monotonic safety floor)"
+      ],
+      "uncertainty_notes": [
+        "No prior longitudinal problem list on file",
+        "Medication history unconfirmed"
+      ],
+      "urgency": "stat"
+    },
+    "satisficing_alternatives": [
+      {
+        "cost_tier": "sha_nhif_covered",
+        "distance_km": 6.5,
+        "estimated_wait_days": 0.0,
+        "facility_id": "EQA-HUB-ACUTE-01",
+        "facility_name": "Equity Afya Regional Acute Referral Hub",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-1",
+        "pathway_type": "emergency_transfer",
+        "satisficing_score": 0.978,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: emergency_transfer (cardiology)",
+          "Estimated wait: 0d | Distance: 6.5km | Cost tier: sha_nhif_covered",
+          "Matches red-flag escalation requirement (monotonic safety floor)"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed"
+        ],
+        "urgency": "stat"
+      },
+      {
+        "cost_tier": "low_copay_franchise",
+        "distance_km": 0.0,
+        "estimated_wait_days": 0.5,
+        "facility_id": "EQA-TELE-SPEC-01",
+        "facility_name": "Equity Afya Franchise Tele-Specialist Consult",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-2",
+        "pathway_type": "tele_specialist_coconsult",
+        "satisficing_score": 0.818,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: tele_specialist_coconsult (cardiology)",
+          "Estimated wait: 0.5d | Distance: 0km | Cost tier: low_copay_franchise"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed"
+        ],
+        "urgency": "urgent"
+      },
+      {
+        "cost_tier": "standard_specialist_tariff",
+        "distance_km": 18.0,
+        "estimated_wait_days": 7.0,
+        "facility_id": "EXT-TERTIARY-01",
+        "facility_name": "External Tertiary Specialist Centre",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-4",
+        "pathway_type": "fast_track_specialist",
+        "satisficing_score": 0.7987,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: fast_track_specialist (cardiology)",
+          "Estimated wait: 7d | Distance: 18km | Cost tier: standard_specialist_tariff",
+          "Matches red-flag escalation requirement (monotonic safety floor)"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed",
+          "Out-of-pocket specialist tariff may exceed patient affordability threshold"
+        ],
+        "urgency": "urgent"
+      }
+    ]
+  },
+  "SYS1_POS_0051": {
+    "blocked": true,
+    "contraindications": [
+      "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
+      "tier0.never_event.methotrexate_daily_dosing_hazard"
+    ],
+    "emergency": false,
+    "min_risk_score": 0.98,
+    "news2_single_param_red": false,
+    "reason_codes": [
+      "tier0.allergy_contraindication",
+      "tier0.never_event_guard",
+      "tier0.dose_proposal_requires_clinician_signoff"
+    ],
+    "red_flags": [
+      "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
+      "tier0.never_event.methotrexate_daily_dosing_hazard"
+    ]
+  },
+  "SYS1_POS_0054": {
+    "active_red_flags": [
+      "sys1.red_flag.chest_pain",
+      "sys1.red_flag.jaw_or_arm_radiation"
+    ],
+    "anxiety_level": "critical",
+    "candidate_snomed_codes": [
+      {
+        "code": "29857009",
+        "display": "Chest pain",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "225566008",
+        "display": "Pain radiating to left arm or jaw",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "267036007",
+        "display": "Dyspnoea",
+        "system": "http://snomed.info/sct"
+      }
+    ],
+    "confidence": 0.72,
+    "confirmed_symptoms": [
+      "Chest pain",
+      "Pain radiating to left arm or jaw",
+      "Dyspnoea"
+    ],
+    "negated_findings": [
+      "No fever (fever negated)",
+      "No cough (cough negated)"
+    ],
+    "reason_codes": [
+      "sys1.consultation_state_reflex",
+      "sys1.negation_guard_applied",
+      "sys1.red_flag_detected",
+      "sys1.safety_net_prompts_staged"
+    ],
+    "requires_clinician_review": true,
+    "risk_score": 0.78,
+    "soap_prefill": {
+      "assessment": "Presenting features: Chest pain, Pain radiating to left arm or jaw, Dyspnoea | Red-flag sentinels: sys1.red_flag.chest_pain, sys1.red_flag.jaw_or_arm_radiation",
+      "chief_complaint": "Chest pain",
+      "examination": "Pertinent negatives: No fever (fever negated); No cough (cough negated) | Safety-net checks to complete: Screen diaphoresis, nausea, or exertional dyspnoea; Verify 12-lead ECG and serial troponin requirement; Screen Resting SpO2, respiratory rate, and pleuritic chest pain",
+      "history_of_present_illness": "Patient reports central chest pain radiating to left arm and shortness of breath. Denies fever or cough.",
+      "plan": "Allergy guard active: aspirin | Complete red-flag safety netting: Screen diaphoresis, nausea, or exertional dyspnoea; Verify 12-lead ECG and serial troponin requirement"
+    },
+    "trust_level": "building",
+    "unscreened_safety_net_prompts": [
+      "Screen diaphoresis, nausea, or exertional dyspnoea",
+      "Verify 12-lead ECG and serial troponin requirement",
+      "Screen Resting SpO2, respiratory rate, and pleuritic chest pain",
+      "Screen haemoptysis and unilateral calf swelling"
+    ]
+  },
+  "SYS1_POS_0055": {
+    "bounded_rationality": {
+      "ai_data_quality_bound": 0.3333,
+      "ai_epistemic_uncertainty": 0.4347,
+      "ai_operational_mode": "in_process_cfc_deterministic",
+      "alternatives_evaluated": 4,
+      "alternatives_satisficed": 3,
+      "clinician_accountability_retained": true,
+      "cognitive_chunks_surfaced": 3,
+      "consultation_time_saved_seconds": 150.0,
+      "information_completeness_ratio": 0.3333,
+      "missing_information_gaps": [
+        "No prior longitudinal problem list on file",
+        "Medication history unconfirmed",
+        "No baseline diagnostic investigations attached",
+        "Live external hospital slot feed unavailable; using franchise directory estimates"
+      ],
+      "synthesized_sources": [
+        "consultation_presentation",
+        "nice_who_referral_guidelines",
+        "current_encounter_vitals",
+        "default_franchise_network_topology"
+      ]
+    },
+    "clinical_red_flags": [
+      "sys1.red_flag.chest_pain",
+      "sys1.red_flag.jaw_or_arm_radiation"
+    ],
+    "guideline_triggers": [
+      "Red-flag clinical presentation (sys1.red_flag.chest_pain, sys1.red_flag.jaw_or_arm_radiation) requires urgent cardiology escalation",
+      "Complete safety-net screening: Screen diaphoresis, nausea, or exertional dyspnoea"
+    ],
+    "predictive_risk_score": 0.78,
+    "recommended_option": {
+      "cost_tier": "sha_nhif_covered",
+      "distance_km": 6.5,
+      "estimated_wait_days": 0.0,
+      "facility_id": "EQA-HUB-ACUTE-01",
+      "facility_name": "Equity Afya Regional Acute Referral Hub",
+      "meets_aspiration_threshold": true,
+      "option_id": "ref-opt-1",
+      "pathway_type": "emergency_transfer",
+      "satisficing_score": 0.978,
+      "specialty": "cardiology",
+      "supporting_evidence": [
+        "Pathway: emergency_transfer (cardiology)",
+        "Estimated wait: 0d | Distance: 6.5km | Cost tier: sha_nhif_covered",
+        "Matches red-flag escalation requirement (monotonic safety floor)"
+      ],
+      "uncertainty_notes": [
+        "No prior longitudinal problem list on file",
+        "Medication history unconfirmed"
+      ],
+      "urgency": "stat"
+    },
+    "satisficing_alternatives": [
+      {
+        "cost_tier": "sha_nhif_covered",
+        "distance_km": 6.5,
+        "estimated_wait_days": 0.0,
+        "facility_id": "EQA-HUB-ACUTE-01",
+        "facility_name": "Equity Afya Regional Acute Referral Hub",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-1",
+        "pathway_type": "emergency_transfer",
+        "satisficing_score": 0.978,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: emergency_transfer (cardiology)",
+          "Estimated wait: 0d | Distance: 6.5km | Cost tier: sha_nhif_covered",
+          "Matches red-flag escalation requirement (monotonic safety floor)"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed"
+        ],
+        "urgency": "stat"
+      },
+      {
+        "cost_tier": "low_copay_franchise",
+        "distance_km": 0.0,
+        "estimated_wait_days": 0.5,
+        "facility_id": "EQA-TELE-SPEC-01",
+        "facility_name": "Equity Afya Franchise Tele-Specialist Consult",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-2",
+        "pathway_type": "tele_specialist_coconsult",
+        "satisficing_score": 0.818,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: tele_specialist_coconsult (cardiology)",
+          "Estimated wait: 0.5d | Distance: 0km | Cost tier: low_copay_franchise"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed"
+        ],
+        "urgency": "urgent"
+      },
+      {
+        "cost_tier": "standard_specialist_tariff",
+        "distance_km": 18.0,
+        "estimated_wait_days": 7.0,
+        "facility_id": "EXT-TERTIARY-01",
+        "facility_name": "External Tertiary Specialist Centre",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-4",
+        "pathway_type": "fast_track_specialist",
+        "satisficing_score": 0.7987,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: fast_track_specialist (cardiology)",
+          "Estimated wait: 7d | Distance: 18km | Cost tier: standard_specialist_tariff",
+          "Matches red-flag escalation requirement (monotonic safety floor)"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed",
+          "Out-of-pocket specialist tariff may exceed patient affordability threshold"
+        ],
+        "urgency": "urgent"
+      }
+    ]
+  },
+  "SYS1_POS_0061": {
+    "blocked": true,
+    "contraindications": [
+      "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
+      "tier0.never_event.methotrexate_daily_dosing_hazard"
+    ],
+    "emergency": false,
+    "min_risk_score": 0.98,
+    "news2_single_param_red": false,
+    "reason_codes": [
+      "tier0.allergy_contraindication",
+      "tier0.never_event_guard",
+      "tier0.dose_proposal_requires_clinician_signoff"
+    ],
+    "red_flags": [
+      "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
+      "tier0.never_event.methotrexate_daily_dosing_hazard"
+    ]
+  },
+  "SYS1_POS_0064": {
+    "active_red_flags": [
+      "sys1.red_flag.chest_pain",
+      "sys1.red_flag.jaw_or_arm_radiation"
+    ],
+    "anxiety_level": "critical",
+    "candidate_snomed_codes": [
+      {
+        "code": "29857009",
+        "display": "Chest pain",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "225566008",
+        "display": "Pain radiating to left arm or jaw",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "267036007",
+        "display": "Dyspnoea",
+        "system": "http://snomed.info/sct"
+      }
+    ],
+    "confidence": 0.72,
+    "confirmed_symptoms": [
+      "Chest pain",
+      "Pain radiating to left arm or jaw",
+      "Dyspnoea"
+    ],
+    "negated_findings": [
+      "No fever (fever negated)",
+      "No cough (cough negated)"
+    ],
+    "reason_codes": [
+      "sys1.consultation_state_reflex",
+      "sys1.negation_guard_applied",
+      "sys1.red_flag_detected",
+      "sys1.safety_net_prompts_staged"
+    ],
+    "requires_clinician_review": true,
+    "risk_score": 0.78,
+    "soap_prefill": {
+      "assessment": "Presenting features: Chest pain, Pain radiating to left arm or jaw, Dyspnoea | Red-flag sentinels: sys1.red_flag.chest_pain, sys1.red_flag.jaw_or_arm_radiation",
+      "chief_complaint": "Chest pain",
+      "examination": "Pertinent negatives: No fever (fever negated); No cough (cough negated) | Safety-net checks to complete: Screen diaphoresis, nausea, or exertional dyspnoea; Verify 12-lead ECG and serial troponin requirement; Screen Resting SpO2, respiratory rate, and pleuritic chest pain",
+      "history_of_present_illness": "Patient reports central chest pain radiating to left arm and shortness of breath. Denies fever or cough.",
+      "plan": "Allergy guard active: aspirin | Complete red-flag safety netting: Screen diaphoresis, nausea, or exertional dyspnoea; Verify 12-lead ECG and serial troponin requirement"
+    },
+    "trust_level": "building",
+    "unscreened_safety_net_prompts": [
+      "Screen diaphoresis, nausea, or exertional dyspnoea",
+      "Verify 12-lead ECG and serial troponin requirement",
+      "Screen Resting SpO2, respiratory rate, and pleuritic chest pain",
+      "Screen haemoptysis and unilateral calf swelling"
+    ]
+  },
+  "SYS1_POS_0065": {
+    "bounded_rationality": {
+      "ai_data_quality_bound": 0.3333,
+      "ai_epistemic_uncertainty": 0.4347,
+      "ai_operational_mode": "in_process_cfc_deterministic",
+      "alternatives_evaluated": 4,
+      "alternatives_satisficed": 3,
+      "clinician_accountability_retained": true,
+      "cognitive_chunks_surfaced": 3,
+      "consultation_time_saved_seconds": 150.0,
+      "information_completeness_ratio": 0.3333,
+      "missing_information_gaps": [
+        "No prior longitudinal problem list on file",
+        "Medication history unconfirmed",
+        "No baseline diagnostic investigations attached",
+        "Live external hospital slot feed unavailable; using franchise directory estimates"
+      ],
+      "synthesized_sources": [
+        "consultation_presentation",
+        "nice_who_referral_guidelines",
+        "current_encounter_vitals",
+        "default_franchise_network_topology"
+      ]
+    },
+    "clinical_red_flags": [
+      "sys1.red_flag.chest_pain",
+      "sys1.red_flag.jaw_or_arm_radiation"
+    ],
+    "guideline_triggers": [
+      "Red-flag clinical presentation (sys1.red_flag.chest_pain, sys1.red_flag.jaw_or_arm_radiation) requires urgent cardiology escalation",
+      "Complete safety-net screening: Screen diaphoresis, nausea, or exertional dyspnoea"
+    ],
+    "predictive_risk_score": 0.78,
+    "recommended_option": {
+      "cost_tier": "sha_nhif_covered",
+      "distance_km": 6.5,
+      "estimated_wait_days": 0.0,
+      "facility_id": "EQA-HUB-ACUTE-01",
+      "facility_name": "Equity Afya Regional Acute Referral Hub",
+      "meets_aspiration_threshold": true,
+      "option_id": "ref-opt-1",
+      "pathway_type": "emergency_transfer",
+      "satisficing_score": 0.978,
+      "specialty": "cardiology",
+      "supporting_evidence": [
+        "Pathway: emergency_transfer (cardiology)",
+        "Estimated wait: 0d | Distance: 6.5km | Cost tier: sha_nhif_covered",
+        "Matches red-flag escalation requirement (monotonic safety floor)"
+      ],
+      "uncertainty_notes": [
+        "No prior longitudinal problem list on file",
+        "Medication history unconfirmed"
+      ],
+      "urgency": "stat"
+    },
+    "satisficing_alternatives": [
+      {
+        "cost_tier": "sha_nhif_covered",
+        "distance_km": 6.5,
+        "estimated_wait_days": 0.0,
+        "facility_id": "EQA-HUB-ACUTE-01",
+        "facility_name": "Equity Afya Regional Acute Referral Hub",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-1",
+        "pathway_type": "emergency_transfer",
+        "satisficing_score": 0.978,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: emergency_transfer (cardiology)",
+          "Estimated wait: 0d | Distance: 6.5km | Cost tier: sha_nhif_covered",
+          "Matches red-flag escalation requirement (monotonic safety floor)"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed"
+        ],
+        "urgency": "stat"
+      },
+      {
+        "cost_tier": "low_copay_franchise",
+        "distance_km": 0.0,
+        "estimated_wait_days": 0.5,
+        "facility_id": "EQA-TELE-SPEC-01",
+        "facility_name": "Equity Afya Franchise Tele-Specialist Consult",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-2",
+        "pathway_type": "tele_specialist_coconsult",
+        "satisficing_score": 0.818,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: tele_specialist_coconsult (cardiology)",
+          "Estimated wait: 0.5d | Distance: 0km | Cost tier: low_copay_franchise"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed"
+        ],
+        "urgency": "urgent"
+      },
+      {
+        "cost_tier": "standard_specialist_tariff",
+        "distance_km": 18.0,
+        "estimated_wait_days": 7.0,
+        "facility_id": "EXT-TERTIARY-01",
+        "facility_name": "External Tertiary Specialist Centre",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-4",
+        "pathway_type": "fast_track_specialist",
+        "satisficing_score": 0.7987,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: fast_track_specialist (cardiology)",
+          "Estimated wait: 7d | Distance: 18km | Cost tier: standard_specialist_tariff",
+          "Matches red-flag escalation requirement (monotonic safety floor)"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed",
+          "Out-of-pocket specialist tariff may exceed patient affordability threshold"
+        ],
+        "urgency": "urgent"
+      }
+    ]
+  },
+  "SYS1_POS_0071": {
+    "blocked": true,
+    "contraindications": [
+      "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
+      "tier0.never_event.methotrexate_daily_dosing_hazard"
+    ],
+    "emergency": false,
+    "min_risk_score": 0.98,
+    "news2_single_param_red": false,
+    "reason_codes": [
+      "tier0.allergy_contraindication",
+      "tier0.never_event_guard",
+      "tier0.dose_proposal_requires_clinician_signoff"
+    ],
+    "red_flags": [
+      "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
+      "tier0.never_event.methotrexate_daily_dosing_hazard"
+    ]
+  },
+  "SYS1_POS_0074": {
+    "active_red_flags": [
+      "sys1.red_flag.chest_pain",
+      "sys1.red_flag.jaw_or_arm_radiation"
+    ],
+    "anxiety_level": "critical",
+    "candidate_snomed_codes": [
+      {
+        "code": "29857009",
+        "display": "Chest pain",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "225566008",
+        "display": "Pain radiating to left arm or jaw",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "267036007",
+        "display": "Dyspnoea",
+        "system": "http://snomed.info/sct"
+      }
+    ],
+    "confidence": 0.72,
+    "confirmed_symptoms": [
+      "Chest pain",
+      "Pain radiating to left arm or jaw",
+      "Dyspnoea"
+    ],
+    "negated_findings": [
+      "No fever (fever negated)",
+      "No cough (cough negated)"
+    ],
+    "reason_codes": [
+      "sys1.consultation_state_reflex",
+      "sys1.negation_guard_applied",
+      "sys1.red_flag_detected",
+      "sys1.safety_net_prompts_staged"
+    ],
+    "requires_clinician_review": true,
+    "risk_score": 0.78,
+    "soap_prefill": {
+      "assessment": "Presenting features: Chest pain, Pain radiating to left arm or jaw, Dyspnoea | Red-flag sentinels: sys1.red_flag.chest_pain, sys1.red_flag.jaw_or_arm_radiation",
+      "chief_complaint": "Chest pain",
+      "examination": "Pertinent negatives: No fever (fever negated); No cough (cough negated) | Safety-net checks to complete: Screen diaphoresis, nausea, or exertional dyspnoea; Verify 12-lead ECG and serial troponin requirement; Screen Resting SpO2, respiratory rate, and pleuritic chest pain",
+      "history_of_present_illness": "Patient reports central chest pain radiating to left arm and shortness of breath. Denies fever or cough.",
+      "plan": "Allergy guard active: aspirin | Complete red-flag safety netting: Screen diaphoresis, nausea, or exertional dyspnoea; Verify 12-lead ECG and serial troponin requirement"
+    },
+    "trust_level": "building",
+    "unscreened_safety_net_prompts": [
+      "Screen diaphoresis, nausea, or exertional dyspnoea",
+      "Verify 12-lead ECG and serial troponin requirement",
+      "Screen Resting SpO2, respiratory rate, and pleuritic chest pain",
+      "Screen haemoptysis and unilateral calf swelling"
+    ]
+  },
+  "SYS1_POS_0075": {
+    "bounded_rationality": {
+      "ai_data_quality_bound": 0.3333,
+      "ai_epistemic_uncertainty": 0.4347,
+      "ai_operational_mode": "in_process_cfc_deterministic",
+      "alternatives_evaluated": 4,
+      "alternatives_satisficed": 3,
+      "clinician_accountability_retained": true,
+      "cognitive_chunks_surfaced": 3,
+      "consultation_time_saved_seconds": 150.0,
+      "information_completeness_ratio": 0.3333,
+      "missing_information_gaps": [
+        "No prior longitudinal problem list on file",
+        "Medication history unconfirmed",
+        "No baseline diagnostic investigations attached",
+        "Live external hospital slot feed unavailable; using franchise directory estimates"
+      ],
+      "synthesized_sources": [
+        "consultation_presentation",
+        "nice_who_referral_guidelines",
+        "current_encounter_vitals",
+        "default_franchise_network_topology"
+      ]
+    },
+    "clinical_red_flags": [
+      "sys1.red_flag.chest_pain",
+      "sys1.red_flag.jaw_or_arm_radiation"
+    ],
+    "guideline_triggers": [
+      "Red-flag clinical presentation (sys1.red_flag.chest_pain, sys1.red_flag.jaw_or_arm_radiation) requires urgent cardiology escalation",
+      "Complete safety-net screening: Screen diaphoresis, nausea, or exertional dyspnoea"
+    ],
+    "predictive_risk_score": 0.78,
+    "recommended_option": {
+      "cost_tier": "sha_nhif_covered",
+      "distance_km": 6.5,
+      "estimated_wait_days": 0.0,
+      "facility_id": "EQA-HUB-ACUTE-01",
+      "facility_name": "Equity Afya Regional Acute Referral Hub",
+      "meets_aspiration_threshold": true,
+      "option_id": "ref-opt-1",
+      "pathway_type": "emergency_transfer",
+      "satisficing_score": 0.978,
+      "specialty": "cardiology",
+      "supporting_evidence": [
+        "Pathway: emergency_transfer (cardiology)",
+        "Estimated wait: 0d | Distance: 6.5km | Cost tier: sha_nhif_covered",
+        "Matches red-flag escalation requirement (monotonic safety floor)"
+      ],
+      "uncertainty_notes": [
+        "No prior longitudinal problem list on file",
+        "Medication history unconfirmed"
+      ],
+      "urgency": "stat"
+    },
+    "satisficing_alternatives": [
+      {
+        "cost_tier": "sha_nhif_covered",
+        "distance_km": 6.5,
+        "estimated_wait_days": 0.0,
+        "facility_id": "EQA-HUB-ACUTE-01",
+        "facility_name": "Equity Afya Regional Acute Referral Hub",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-1",
+        "pathway_type": "emergency_transfer",
+        "satisficing_score": 0.978,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: emergency_transfer (cardiology)",
+          "Estimated wait: 0d | Distance: 6.5km | Cost tier: sha_nhif_covered",
+          "Matches red-flag escalation requirement (monotonic safety floor)"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed"
+        ],
+        "urgency": "stat"
+      },
+      {
+        "cost_tier": "low_copay_franchise",
+        "distance_km": 0.0,
+        "estimated_wait_days": 0.5,
+        "facility_id": "EQA-TELE-SPEC-01",
+        "facility_name": "Equity Afya Franchise Tele-Specialist Consult",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-2",
+        "pathway_type": "tele_specialist_coconsult",
+        "satisficing_score": 0.818,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: tele_specialist_coconsult (cardiology)",
+          "Estimated wait: 0.5d | Distance: 0km | Cost tier: low_copay_franchise"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed"
+        ],
+        "urgency": "urgent"
+      },
+      {
+        "cost_tier": "standard_specialist_tariff",
+        "distance_km": 18.0,
+        "estimated_wait_days": 7.0,
+        "facility_id": "EXT-TERTIARY-01",
+        "facility_name": "External Tertiary Specialist Centre",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-4",
+        "pathway_type": "fast_track_specialist",
+        "satisficing_score": 0.7987,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: fast_track_specialist (cardiology)",
+          "Estimated wait: 7d | Distance: 18km | Cost tier: standard_specialist_tariff",
+          "Matches red-flag escalation requirement (monotonic safety floor)"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed",
+          "Out-of-pocket specialist tariff may exceed patient affordability threshold"
+        ],
+        "urgency": "urgent"
+      }
+    ]
+  },
+  "SYS1_POS_0081": {
+    "blocked": true,
+    "contraindications": [
+      "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
+      "tier0.never_event.methotrexate_daily_dosing_hazard"
+    ],
+    "emergency": false,
+    "min_risk_score": 0.98,
+    "news2_single_param_red": false,
+    "reason_codes": [
+      "tier0.allergy_contraindication",
+      "tier0.never_event_guard",
+      "tier0.dose_proposal_requires_clinician_signoff"
+    ],
+    "red_flags": [
+      "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
+      "tier0.never_event.methotrexate_daily_dosing_hazard"
+    ]
+  },
+  "SYS1_POS_0084": {
+    "active_red_flags": [
+      "sys1.red_flag.chest_pain",
+      "sys1.red_flag.jaw_or_arm_radiation"
+    ],
+    "anxiety_level": "critical",
+    "candidate_snomed_codes": [
+      {
+        "code": "29857009",
+        "display": "Chest pain",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "225566008",
+        "display": "Pain radiating to left arm or jaw",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "267036007",
+        "display": "Dyspnoea",
+        "system": "http://snomed.info/sct"
+      }
+    ],
+    "confidence": 0.72,
+    "confirmed_symptoms": [
+      "Chest pain",
+      "Pain radiating to left arm or jaw",
+      "Dyspnoea"
+    ],
+    "negated_findings": [
+      "No fever (fever negated)",
+      "No cough (cough negated)"
+    ],
+    "reason_codes": [
+      "sys1.consultation_state_reflex",
+      "sys1.negation_guard_applied",
+      "sys1.red_flag_detected",
+      "sys1.safety_net_prompts_staged"
+    ],
+    "requires_clinician_review": true,
+    "risk_score": 0.78,
+    "soap_prefill": {
+      "assessment": "Presenting features: Chest pain, Pain radiating to left arm or jaw, Dyspnoea | Red-flag sentinels: sys1.red_flag.chest_pain, sys1.red_flag.jaw_or_arm_radiation",
+      "chief_complaint": "Chest pain",
+      "examination": "Pertinent negatives: No fever (fever negated); No cough (cough negated) | Safety-net checks to complete: Screen diaphoresis, nausea, or exertional dyspnoea; Verify 12-lead ECG and serial troponin requirement; Screen Resting SpO2, respiratory rate, and pleuritic chest pain",
+      "history_of_present_illness": "Patient reports central chest pain radiating to left arm and shortness of breath. Denies fever or cough.",
+      "plan": "Allergy guard active: aspirin | Complete red-flag safety netting: Screen diaphoresis, nausea, or exertional dyspnoea; Verify 12-lead ECG and serial troponin requirement"
+    },
+    "trust_level": "building",
+    "unscreened_safety_net_prompts": [
+      "Screen diaphoresis, nausea, or exertional dyspnoea",
+      "Verify 12-lead ECG and serial troponin requirement",
+      "Screen Resting SpO2, respiratory rate, and pleuritic chest pain",
+      "Screen haemoptysis and unilateral calf swelling"
+    ]
+  },
+  "SYS1_POS_0085": {
+    "bounded_rationality": {
+      "ai_data_quality_bound": 0.3333,
+      "ai_epistemic_uncertainty": 0.4347,
+      "ai_operational_mode": "in_process_cfc_deterministic",
+      "alternatives_evaluated": 4,
+      "alternatives_satisficed": 3,
+      "clinician_accountability_retained": true,
+      "cognitive_chunks_surfaced": 3,
+      "consultation_time_saved_seconds": 150.0,
+      "information_completeness_ratio": 0.3333,
+      "missing_information_gaps": [
+        "No prior longitudinal problem list on file",
+        "Medication history unconfirmed",
+        "No baseline diagnostic investigations attached",
+        "Live external hospital slot feed unavailable; using franchise directory estimates"
+      ],
+      "synthesized_sources": [
+        "consultation_presentation",
+        "nice_who_referral_guidelines",
+        "current_encounter_vitals",
+        "default_franchise_network_topology"
+      ]
+    },
+    "clinical_red_flags": [
+      "sys1.red_flag.chest_pain",
+      "sys1.red_flag.jaw_or_arm_radiation"
+    ],
+    "guideline_triggers": [
+      "Red-flag clinical presentation (sys1.red_flag.chest_pain, sys1.red_flag.jaw_or_arm_radiation) requires urgent cardiology escalation",
+      "Complete safety-net screening: Screen diaphoresis, nausea, or exertional dyspnoea"
+    ],
+    "predictive_risk_score": 0.78,
+    "recommended_option": {
+      "cost_tier": "sha_nhif_covered",
+      "distance_km": 6.5,
+      "estimated_wait_days": 0.0,
+      "facility_id": "EQA-HUB-ACUTE-01",
+      "facility_name": "Equity Afya Regional Acute Referral Hub",
+      "meets_aspiration_threshold": true,
+      "option_id": "ref-opt-1",
+      "pathway_type": "emergency_transfer",
+      "satisficing_score": 0.978,
+      "specialty": "cardiology",
+      "supporting_evidence": [
+        "Pathway: emergency_transfer (cardiology)",
+        "Estimated wait: 0d | Distance: 6.5km | Cost tier: sha_nhif_covered",
+        "Matches red-flag escalation requirement (monotonic safety floor)"
+      ],
+      "uncertainty_notes": [
+        "No prior longitudinal problem list on file",
+        "Medication history unconfirmed"
+      ],
+      "urgency": "stat"
+    },
+    "satisficing_alternatives": [
+      {
+        "cost_tier": "sha_nhif_covered",
+        "distance_km": 6.5,
+        "estimated_wait_days": 0.0,
+        "facility_id": "EQA-HUB-ACUTE-01",
+        "facility_name": "Equity Afya Regional Acute Referral Hub",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-1",
+        "pathway_type": "emergency_transfer",
+        "satisficing_score": 0.978,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: emergency_transfer (cardiology)",
+          "Estimated wait: 0d | Distance: 6.5km | Cost tier: sha_nhif_covered",
+          "Matches red-flag escalation requirement (monotonic safety floor)"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed"
+        ],
+        "urgency": "stat"
+      },
+      {
+        "cost_tier": "low_copay_franchise",
+        "distance_km": 0.0,
+        "estimated_wait_days": 0.5,
+        "facility_id": "EQA-TELE-SPEC-01",
+        "facility_name": "Equity Afya Franchise Tele-Specialist Consult",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-2",
+        "pathway_type": "tele_specialist_coconsult",
+        "satisficing_score": 0.818,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: tele_specialist_coconsult (cardiology)",
+          "Estimated wait: 0.5d | Distance: 0km | Cost tier: low_copay_franchise"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed"
+        ],
+        "urgency": "urgent"
+      },
+      {
+        "cost_tier": "standard_specialist_tariff",
+        "distance_km": 18.0,
+        "estimated_wait_days": 7.0,
+        "facility_id": "EXT-TERTIARY-01",
+        "facility_name": "External Tertiary Specialist Centre",
+        "meets_aspiration_threshold": true,
+        "option_id": "ref-opt-4",
+        "pathway_type": "fast_track_specialist",
+        "satisficing_score": 0.7987,
+        "specialty": "cardiology",
+        "supporting_evidence": [
+          "Pathway: fast_track_specialist (cardiology)",
+          "Estimated wait: 7d | Distance: 18km | Cost tier: standard_specialist_tariff",
+          "Matches red-flag escalation requirement (monotonic safety floor)"
+        ],
+        "uncertainty_notes": [
+          "No prior longitudinal problem list on file",
+          "Medication history unconfirmed",
+          "Out-of-pocket specialist tariff may exceed patient affordability threshold"
+        ],
+        "urgency": "urgent"
+      }
+    ]
+  }
+}
