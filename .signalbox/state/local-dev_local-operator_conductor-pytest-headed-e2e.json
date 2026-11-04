@@ -1,0 +1,29 @@
+{
+  "current_lease": {
+    "capabilities": [
+      "browser.control"
+    ],
+    "expires_at": 1793823803.4513743,
+    "fencing_token": 1,
+    "issued_at": 1793823503.4513743,
+    "lease_id": "lease-local-dev:local-operator:conductor-pytest-headed-e2e-1",
+    "operator_id": "local-operator",
+    "revoked": false,
+    "session_id": "conductor-pytest-headed-e2e",
+    "tenant_id": "local-dev"
+  },
+  "fence_counter": 1,
+  "fsm_state": "closed",
+  "persona": "clinician",
+  "persona_binding_expires_at": null,
+  "persona_binding_source": "local_dev_unscoped",
+  "quota_events": [],
+  "quota_limit": null,
+  "scope": {
+    "operator_id": "local-operator",
+    "session_id": "conductor-pytest-headed-e2e",
+    "tenant_id": "local-dev"
+  },
+  "task_count": 0,
+  "websocket_subscriptions": []
+}
