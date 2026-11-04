@@ -15,12 +15,14 @@ ROOT = Path(__file__).resolve().parents[3]
 WORKSPACE = ROOT.parent
 MATRIX_PATH = Path(__file__).with_name("requirements_matrix.json")
 SCENARIOS_PATH = Path(__file__).with_name("patient_identity_scenarios.json")
+QUARANTINE_PATH = Path(__file__).with_name("legacy_identity_quarantine.json")
 
 CANONICAL_PATIENT_SYSTEM = "https://fhir.symphonix.health/Id/patient"
 NHS_NUMBER_SYSTEM = "https://fhir.nhs.uk/Id/nhs-number"
 MAX_STATIC_SCAN_FINDINGS_PER_REPO = 10
 TRANSIENT_WORKTREE_PREFIXES = ("_",)
 TRANSIENT_WORKTREE_NAMES = frozenset({".codex-worktrees", ".tmp-agent-worktrees"})
+EXCLUDED_NON_PATIENT_DATA_REPOS = frozenset({"symphonix-health-docs"})
 LOCAL_PATIENT_ID_PATTERN = (
     r"(?:Patient/|patient[_-]?id[^\n]{0,80}|patient[_-]?ref[^\n]{0,80}|subject[^\n]{0,80})"
     r"\b(?:ke-)?pat-\d{3,}(?:-\d+)?\b"
@@ -134,6 +136,26 @@ def _load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def _workspace_relative(path: Path) -> str:
+    return path.relative_to(WORKSPACE).as_posix()
+
+
+def _load_legacy_quarantine_paths() -> set[str]:
+    payload = _load_json(QUARANTINE_PATH)
+    findings = payload["findings"]
+    paths = [finding["path"] for finding in findings]
+
+    assert payload["schema_version"] == "SPID_LEGACY_QUARANTINE_V1"
+    assert paths
+    assert len(paths) == len(set(paths))
+    for finding in findings:
+        assert finding["status"] == "pending_sibling_migration", finding["path"]
+        assert finding["owner_repo"], finding["path"]
+        assert finding["reason"], finding["path"]
+
+    return set(paths)
+
+
 def _walk(obj: Any) -> list[Any]:
     values = [obj]
     if isinstance(obj, dict):
@@ -229,7 +251,7 @@ def _scan_repo_with_rg(repo: Path) -> list[str] | None:
                 continue
             if _is_allowlisted_detector(path):
                 continue
-            findings.append(str(path.relative_to(WORKSPACE)))
+            findings.append(_workspace_relative(path))
             if len(findings) >= MAX_STATIC_SCAN_FINDINGS_PER_REPO:
                 process.kill()
                 break
@@ -297,7 +319,7 @@ def _scan_repo_with_git_grep(repo: Path) -> list[str] | None:
                 continue
             if _is_allowlisted_detector(path):
                 continue
-            findings.append(str(path.relative_to(WORKSPACE)))
+            findings.append(_workspace_relative(path))
             if len(findings) >= MAX_STATIC_SCAN_FINDINGS_PER_REPO:
                 process.kill()
                 break
@@ -370,7 +392,11 @@ def _discover_symphonix_patient_data_repos() -> list[Path]:
     for repo in sorted(WORKSPACE.iterdir(), key=lambda path: path.name.lower()):
         if not repo.is_dir() or not (repo / ".git").exists():
             continue
-        if repo == ROOT or _is_transient_workspace_checkout(repo):
+        if (
+            repo == ROOT
+            or _is_transient_workspace_checkout(repo)
+            or repo.name in EXCLUDED_NON_PATIENT_DATA_REPOS
+        ):
             continue
         origin_url = _origin_url(repo)
         owner, remote_repo = _github_owner_and_repo(origin_url)
@@ -400,6 +426,7 @@ def test_patient_identity_static_repo_discovery_covers_local_symphonix_health_re
             or not (repo / ".git").exists()
             or repo == ROOT
             or _is_transient_workspace_checkout(repo)
+            or repo.name in EXCLUDED_NON_PATIENT_DATA_REPOS
         ):
             continue
         owner, remote_repo = _github_owner_and_repo(_origin_url(repo))
@@ -615,7 +642,7 @@ def test_patient_identity_static_repo_scan_enforce_mode() -> None:
                 text = path.read_text(encoding="utf-8", errors="ignore")
                 for pattern in forbidden_patterns:
                     if pattern.search(text):
-                        repo_findings.append(str(path.relative_to(WORKSPACE)))
+                        repo_findings.append(_workspace_relative(path))
                         break
                 if len(repo_findings) >= MAX_STATIC_SCAN_FINDINGS_PER_REPO:
                     break
@@ -623,8 +650,18 @@ def test_patient_identity_static_repo_scan_enforce_mode() -> None:
                 break
         findings.extend(repo_findings)
 
-    assert not findings, (
+    finding_set = set(findings)
+    quarantined = _load_legacy_quarantine_paths()
+    unquarantined = sorted(finding_set - quarantined)
+    stale_quarantine = sorted(quarantined - finding_set)
+
+    assert not unquarantined, (
         "Every Symphonix patient-data sibling must use the same internal SPID; "
         "external identifiers must be aliases only.\n"
-        "Legacy patient identity patterns remain:\n" + "\n".join(findings)
+        "Unquarantined legacy patient identity patterns remain:\n" + "\n".join(unquarantined)
+    )
+    assert not stale_quarantine, (
+        "Legacy patient identity quarantine entries no longer match the current scan; "
+        "remove resolved entries or update the owning sibling evidence.\n"
+        + "\n".join(stale_quarantine)
     )

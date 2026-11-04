@@ -112,6 +112,14 @@ class OpenSourceSystem1ModelSpec:
     windows_runtimes: tuple[str, ...]
     supports_no_think_toggle: bool
     p95_cpu_budget_ms: int
+    osi_approved: bool = True
+
+    def __post_init__(self) -> None:
+        object.__setattr__(
+            self,
+            "osi_approved",
+            self.license_spdx in ("Apache-2.0", "MIT", "BSD-3-Clause"),
+        )
 
 
 OPEN_SOURCE_SYSTEM1_MODELS: dict[str, OpenSourceSystem1ModelSpec] = {

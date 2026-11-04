@@ -47,7 +47,9 @@ __all__ = [
     "FieldType",
     "IOContract",
     "ManifestError",
+    "CONDUCTOR_SIBLING_MANIFESTS",
     "REFERENCE_MANIFESTS",
+    "all_conductor_manifests",
     "ResolverDecision",
     "ResolverPath",
     "SafetyClass",
@@ -535,3 +537,280 @@ def reference_manifest(component: str) -> AgentActionManifest:
         raise ManifestError(
             f"no reference manifest for component '{component}'"
         ) from None
+
+
+CONDUCTOR_SIBLING_MANIFESTS: dict[str, AgentActionManifest] = {
+    "enterprise-epr": AgentActionManifest(
+        component="enterprise-epr",
+        intents=[
+            ActionIntent(
+                intent="epr.encounter.read",
+                title="Read patient encounter and active problem list",
+                component="enterprise-epr",
+                safety_class=SafetyClass.sensitive,
+                input=IOContract(fields=[_patient_ref()]),
+                output=IOContract(fields=[FieldSpec(name="encounter", type=FieldType.reference)]),
+                fhir_task_code="agent-epr-encounter-read",
+            ),
+            ActionIntent(
+                intent="epr.discharge.propose",
+                title="Draft discharge summary and readiness proposal for clinician sign-off",
+                component="enterprise-epr",
+                safety_class=SafetyClass.high_risk,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="encounter", type=FieldType.reference),
+                        FieldSpec(name="summary_text", type=FieldType.string),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="discharge_draft", type=FieldType.reference)]),
+                fhir_task_code="agent-epr-discharge-propose",
+            ),
+        ],
+    ),
+    "pharmacy-system": AgentActionManifest(
+        component="pharmacy-system",
+        intents=[
+            ActionIntent(
+                intent="pharmacy.prescription.verify",
+                title="Verify medication safety, allergies, and renal dosing",
+                component="pharmacy-system",
+                safety_class=SafetyClass.high_risk,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="medication_request", type=FieldType.reference),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="verification_status", type=FieldType.code)]),
+                fhir_task_code="agent-pharmacy-verify",
+            ),
+            ActionIntent(
+                intent="pharmacy.dispense.release",
+                title="Release verified medication dispense (requires pharmacist sign-off)",
+                component="pharmacy-system",
+                safety_class=SafetyClass.high_risk,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="medication_request", type=FieldType.reference),
+                        FieldSpec(name="pharmacist_signoff_id", type=FieldType.string),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="medication_dispense", type=FieldType.reference)]),
+                fhir_task_code="agent-pharmacy-dispense",
+            ),
+        ],
+    ),
+    "nursing-station": AgentActionManifest(
+        component="nursing-station",
+        intents=[
+            ActionIntent(
+                intent="nursing.vitals.record",
+                title="Record nursing vital signs and NEWS2 observation",
+                component="nursing-station",
+                safety_class=SafetyClass.sensitive,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="news2_score", type=FieldType.integer),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="observation", type=FieldType.reference)]),
+                fhir_task_code="agent-nursing-vitals-record",
+            ),
+            ActionIntent(
+                intent="nursing.deterioration.escalate",
+                title="Escalate acute NEWS2 clinical deterioration to rapid response team",
+                component="nursing-station",
+                safety_class=SafetyClass.high_risk,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="news2_score", type=FieldType.integer),
+                        FieldSpec(name="escalation_reason", type=FieldType.string),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="escalation_task", type=FieldType.reference)]),
+                fhir_task_code="agent-nursing-deterioration-escalate",
+            ),
+        ],
+    ),
+    "scheduling-gateway": AgentActionManifest(
+        component="scheduling-gateway",
+        intents=[
+            ActionIntent(
+                intent="scheduling.slot.reserve",
+                title="Reserve a federated outpatient or follow-up slot",
+                component="scheduling-gateway",
+                safety_class=SafetyClass.sensitive,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="slot_id", type=FieldType.string),
+                        FieldSpec(name="clinic_code", type=FieldType.code),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="appointment", type=FieldType.reference)]),
+                fhir_task_code="agent-scheduling-slot-reserve",
+            ),
+        ],
+    ),
+    "patient360-assistant": AgentActionManifest(
+        component="patient360-assistant",
+        intents=[
+            ActionIntent(
+                intent="patient360.summary.synthesize",
+                title="Synthesize longitudinal Patient360 clinical summary across federated siblings",
+                component="patient360-assistant",
+                safety_class=SafetyClass.sensitive,
+                input=IOContract(fields=[_patient_ref()]),
+                output=IOContract(fields=[FieldSpec(name="bundle", type=FieldType.reference)]),
+                fhir_task_code="agent-patient360-synthesize",
+            ),
+        ],
+    ),
+    "clinical-pathways": AgentActionManifest(
+        component="clinical-pathways",
+        intents=[
+            ActionIntent(
+                intent="pathways.sepsis.evaluate",
+                title="Evaluate NICE NG51 sepsis and acute deterioration pathway",
+                component="clinical-pathways",
+                safety_class=SafetyClass.high_risk,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="news2_score", type=FieldType.integer),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="care_plan", type=FieldType.reference)]),
+                fhir_task_code="agent-pathways-sepsis-evaluate",
+            ),
+        ],
+    ),
+    "pacs-ris": AgentActionManifest(
+        component="pacs-ris",
+        intents=[
+            ActionIntent(
+                intent="imaging.order.create",
+                title="Create a diagnostic imaging order in PACS/RIS",
+                component="pacs-ris",
+                safety_class=SafetyClass.sensitive,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="modality", type=FieldType.code),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="service_request", type=FieldType.reference)]),
+                fhir_task_code="agent-imaging-order-create",
+            ),
+        ],
+    ),
+    "community-nursing": AgentActionManifest(
+        component="community-nursing",
+        intents=[
+            ActionIntent(
+                intent="community.visit.schedule",
+                title="Schedule post-discharge community nursing follow-up visit",
+                component="community-nursing",
+                safety_class=SafetyClass.sensitive,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="visit_window", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="care_visit", type=FieldType.reference)]),
+                fhir_task_code="agent-community-visit-schedule",
+            ),
+        ],
+    ),
+    "ambulance-ems": AgentActionManifest(
+        component="ambulance-ems",
+        intents=[
+            ActionIntent(
+                intent="ambulance.handover.record",
+                title="Record pre-hospital ATMIST ambulance handover to ED",
+                component="ambulance-ems",
+                safety_class=SafetyClass.high_risk,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="atmist_summary", type=FieldType.string),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="handover_composition", type=FieldType.reference)]),
+                fhir_task_code="agent-ambulance-handover-record",
+            ),
+        ],
+    ),
+    "symphonix-health-research-to-caid-agent": AgentActionManifest(
+        component="symphonix-health-research-to-caid-agent",
+        intents=[
+            ActionIntent(
+                intent="research.evidence.appraise",
+                title="Execute governed R0-R5 literature retrieval, redaction, and GRADE appraisal",
+                component="symphonix-health-research-to-caid-agent",
+                safety_class=SafetyClass.routine,
+                input=IOContract(
+                    fields=[
+                        FieldSpec(name="query", type=FieldType.string),
+                        FieldSpec(name="tier", type=FieldType.code),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="evidence_pack_id", type=FieldType.string)]),
+                fhir_task_code="agent-research-evidence-appraise",
+            ),
+        ],
+    ),
+    "second-brain-kb": AgentActionManifest(
+        component="second-brain-kb",
+        intents=[
+            ActionIntent(
+                intent="kb.guideline.query",
+                title="Query curated internal clinical guidelines and proven knowledge base",
+                component="second-brain-kb",
+                safety_class=SafetyClass.routine,
+                input=IOContract(
+                    fields=[FieldSpec(name="topic", type=FieldType.string)]
+                ),
+                output=IOContract(fields=[FieldSpec(name="knowledge_entry_id", type=FieldType.string)]),
+                fhir_task_code="agent-kb-guideline-query",
+            ),
+        ],
+    ),
+    "global-agent-registry": AgentActionManifest(
+        component="global-agent-registry",
+        intents=[
+            ActionIntent(
+                intent="gharra.capability.select",
+                title="Broker governed Persona/SuperPersona capability selection with trust and jurisdiction gates",
+                component="global-agent-registry",
+                safety_class=SafetyClass.routine,
+                input=IOContract(
+                    fields=[
+                        FieldSpec(name="domain", type=FieldType.string),
+                        FieldSpec(name="jurisdiction", type=FieldType.code),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="selected_agent_id", type=FieldType.string)]),
+                fhir_task_code="agent-gharra-capability-select",
+            ),
+        ],
+    ),
+}
+
+
+def all_conductor_manifests() -> dict[str, AgentActionManifest]:
+    """Return the combined dictionary of reference and Conductor sibling manifests."""
+    combined = dict(REFERENCE_MANIFESTS)
+    combined.update(CONDUCTOR_SIBLING_MANIFESTS)
+    return combined

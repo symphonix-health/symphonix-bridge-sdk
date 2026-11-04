@@ -200,7 +200,9 @@ def test_system1_reflex_row_against_the_real_engine(uc: str) -> None:
 
 def test_zz_write_recorded_snapshot() -> None:
     if not _RECORD:
-        pytest.skip("not in record mode")
+        assert EXPECTED_PATH.exists(), f"missing recorded snapshot at {EXPECTED_PATH}"
+        assert len(EXPECTED) == len(EXECUTED_IDS)
+        return
     EXPECTED_PATH.write_text(
         json.dumps(_RECORDED, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
@@ -217,7 +219,8 @@ def test_dispatchable_set_is_nonempty_and_pure() -> None:
 def test_every_dispatchable_row_has_expected_snapshot() -> None:
     """Drift guard: the committed snapshot covers exactly the dispatchable rows."""
     if _RECORD:
-        pytest.skip("record mode rewrites the snapshot")
+        assert len(_RECORDED) == len(EXECUTED_IDS)
+        return
     assert set(EXPECTED) == set(EXECUTED_IDS), (
         "expected-snapshot keys drifted from the dispatchable row set: "
         f"missing={sorted(set(EXECUTED_IDS) - set(EXPECTED))}, "

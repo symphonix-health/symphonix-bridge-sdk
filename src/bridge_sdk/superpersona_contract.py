@@ -17,7 +17,9 @@ from typing import Any
 from pydantic import BaseModel, ConfigDict, Field, computed_field, model_validator
 
 from bridge_sdk.agent_contract import (
+    CONDUCTOR_SIBLING_MANIFESTS,
     REFERENCE_MANIFESTS,
+    all_conductor_manifests,
     AgentActionManifest,
     AutonomyLevel,
     ExecutionMode,
@@ -88,6 +90,9 @@ class RuntimeBudgetPolicy(BaseModel):
     token_budget: int = Field(ge=1)
     cost_class: str
     max_concurrency: int = Field(ge=1)
+    monthly_ceiling_gbp: float = Field(default=10.0, ge=0.0)
+    gateway_cap_gbp: float = Field(default=5.0, ge=0.0)
+    routing_mode: str = Field(default="local_first")
 
 
 class IntuitionDecision(BaseModel):
@@ -363,7 +368,7 @@ def reference_superpersona_contract(persona_key: str) -> SuperpersonaContract:
 def _intent_component_map() -> dict[str, AgentActionManifest]:
     return {
         intent.intent: manifest
-        for manifest in REFERENCE_MANIFESTS.values()
+        for manifest in all_conductor_manifests().values()
         for intent in manifest.intents
     }
 
