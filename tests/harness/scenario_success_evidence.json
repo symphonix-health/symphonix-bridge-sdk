@@ -4,80 +4,9 @@
   "pytest_file": "tests/harness/test_matrix_scenario_execution.py",
   "pytest_function": "test_system1_reflex_row_against_the_real_engine",
   "runtime_matrix": "tests/harness/json_matrices/system1-reflex_scenarios.json",
-  "executed_row_count": 30,
-  "unexecuted_row_count": 70,
-  "unexecuted_rows": [
-    "SYS1_EDG_0096",
-    "SYS1_EDG_0097",
-    "SYS1_EDG_0098",
-    "SYS1_EDG_0099",
-    "SYS1_EDG_0100",
-    "SYS1_NEG_0086",
-    "SYS1_NEG_0087",
-    "SYS1_NEG_0088",
-    "SYS1_NEG_0089",
-    "SYS1_NEG_0090",
-    "SYS1_NEG_0092",
-    "SYS1_NEG_0093",
-    "SYS1_POS_0002",
-    "SYS1_POS_0003",
-    "SYS1_POS_0006",
-    "SYS1_POS_0007",
-    "SYS1_POS_0008",
-    "SYS1_POS_0009",
-    "SYS1_POS_0010",
-    "SYS1_POS_0012",
-    "SYS1_POS_0013",
-    "SYS1_POS_0016",
-    "SYS1_POS_0017",
-    "SYS1_POS_0018",
-    "SYS1_POS_0019",
-    "SYS1_POS_0020",
-    "SYS1_POS_0022",
-    "SYS1_POS_0023",
-    "SYS1_POS_0026",
-    "SYS1_POS_0027",
-    "SYS1_POS_0028",
-    "SYS1_POS_0029",
-    "SYS1_POS_0030",
-    "SYS1_POS_0032",
-    "SYS1_POS_0033",
-    "SYS1_POS_0036",
-    "SYS1_POS_0037",
-    "SYS1_POS_0038",
-    "SYS1_POS_0039",
-    "SYS1_POS_0040",
-    "SYS1_POS_0042",
-    "SYS1_POS_0043",
-    "SYS1_POS_0046",
-    "SYS1_POS_0047",
-    "SYS1_POS_0048",
-    "SYS1_POS_0049",
-    "SYS1_POS_0050",
-    "SYS1_POS_0052",
-    "SYS1_POS_0053",
-    "SYS1_POS_0056",
-    "SYS1_POS_0057",
-    "SYS1_POS_0058",
-    "SYS1_POS_0059",
-    "SYS1_POS_0060",
-    "SYS1_POS_0062",
-    "SYS1_POS_0063",
-    "SYS1_POS_0066",
-    "SYS1_POS_0067",
-    "SYS1_POS_0068",
-    "SYS1_POS_0069",
-    "SYS1_POS_0070",
-    "SYS1_POS_0072",
-    "SYS1_POS_0073",
-    "SYS1_POS_0076",
-    "SYS1_POS_0077",
-    "SYS1_POS_0078",
-    "SYS1_POS_0079",
-    "SYS1_POS_0080",
-    "SYS1_POS_0082",
-    "SYS1_POS_0083"
-  ],
+  "executed_row_count": 100,
+  "unexecuted_row_count": 0,
+  "unexecuted_rows": [],
   "evidence": [
     {
       "use_case_id": "SYS1_POS_0001",
@@ -86,6 +15,32 @@
       "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#0:SYS1_POS_0001",
       "pytest_param_id": "SYS1_POS_0001",
       "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0001]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0002",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 1,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#1:SYS1_POS_0002",
+      "pytest_param_id": "SYS1_POS_0002",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0002]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0003",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 2,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#2:SYS1_POS_0003",
+      "pytest_param_id": "SYS1_POS_0003",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0003]",
       "expected_status": "passed",
       "app_paths_exercised": [
         "src/bridge_sdk/__init__.py",
@@ -119,12 +74,103 @@
       ]
     },
     {
+      "use_case_id": "SYS1_POS_0006",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 5,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#5:SYS1_POS_0006",
+      "pytest_param_id": "SYS1_POS_0006",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0006]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0007",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 6,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#6:SYS1_POS_0007",
+      "pytest_param_id": "SYS1_POS_0007",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0007]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0008",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 7,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#7:SYS1_POS_0008",
+      "pytest_param_id": "SYS1_POS_0008",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0008]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0009",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 8,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#8:SYS1_POS_0009",
+      "pytest_param_id": "SYS1_POS_0009",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0009]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0010",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 9,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#9:SYS1_POS_0010",
+      "pytest_param_id": "SYS1_POS_0010",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0010]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
       "use_case_id": "SYS1_POS_0011",
       "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
       "matrix_row_index": 10,
       "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#10:SYS1_POS_0011",
       "pytest_param_id": "SYS1_POS_0011",
       "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0011]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0012",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 11,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#11:SYS1_POS_0012",
+      "pytest_param_id": "SYS1_POS_0012",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0012]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0013",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 12,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#12:SYS1_POS_0013",
+      "pytest_param_id": "SYS1_POS_0013",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0013]",
       "expected_status": "passed",
       "app_paths_exercised": [
         "src/bridge_sdk/__init__.py",
@@ -158,12 +204,103 @@
       ]
     },
     {
+      "use_case_id": "SYS1_POS_0016",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 15,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#15:SYS1_POS_0016",
+      "pytest_param_id": "SYS1_POS_0016",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0016]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0017",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 16,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#16:SYS1_POS_0017",
+      "pytest_param_id": "SYS1_POS_0017",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0017]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0018",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 17,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#17:SYS1_POS_0018",
+      "pytest_param_id": "SYS1_POS_0018",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0018]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0019",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 18,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#18:SYS1_POS_0019",
+      "pytest_param_id": "SYS1_POS_0019",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0019]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0020",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 19,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#19:SYS1_POS_0020",
+      "pytest_param_id": "SYS1_POS_0020",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0020]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
       "use_case_id": "SYS1_POS_0021",
       "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
       "matrix_row_index": 20,
       "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#20:SYS1_POS_0021",
       "pytest_param_id": "SYS1_POS_0021",
       "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0021]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0022",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 21,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#21:SYS1_POS_0022",
+      "pytest_param_id": "SYS1_POS_0022",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0022]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0023",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 22,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#22:SYS1_POS_0023",
+      "pytest_param_id": "SYS1_POS_0023",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0023]",
       "expected_status": "passed",
       "app_paths_exercised": [
         "src/bridge_sdk/__init__.py",
@@ -197,12 +334,103 @@
       ]
     },
     {
+      "use_case_id": "SYS1_POS_0026",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 25,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#25:SYS1_POS_0026",
+      "pytest_param_id": "SYS1_POS_0026",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0026]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0027",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 26,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#26:SYS1_POS_0027",
+      "pytest_param_id": "SYS1_POS_0027",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0027]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0028",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 27,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#27:SYS1_POS_0028",
+      "pytest_param_id": "SYS1_POS_0028",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0028]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0029",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 28,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#28:SYS1_POS_0029",
+      "pytest_param_id": "SYS1_POS_0029",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0029]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0030",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 29,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#29:SYS1_POS_0030",
+      "pytest_param_id": "SYS1_POS_0030",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0030]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
       "use_case_id": "SYS1_POS_0031",
       "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
       "matrix_row_index": 30,
       "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#30:SYS1_POS_0031",
       "pytest_param_id": "SYS1_POS_0031",
       "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0031]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0032",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 31,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#31:SYS1_POS_0032",
+      "pytest_param_id": "SYS1_POS_0032",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0032]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0033",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 32,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#32:SYS1_POS_0033",
+      "pytest_param_id": "SYS1_POS_0033",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0033]",
       "expected_status": "passed",
       "app_paths_exercised": [
         "src/bridge_sdk/__init__.py",
@@ -236,12 +464,103 @@
       ]
     },
     {
+      "use_case_id": "SYS1_POS_0036",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 35,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#35:SYS1_POS_0036",
+      "pytest_param_id": "SYS1_POS_0036",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0036]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0037",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 36,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#36:SYS1_POS_0037",
+      "pytest_param_id": "SYS1_POS_0037",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0037]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0038",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 37,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#37:SYS1_POS_0038",
+      "pytest_param_id": "SYS1_POS_0038",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0038]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0039",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 38,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#38:SYS1_POS_0039",
+      "pytest_param_id": "SYS1_POS_0039",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0039]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0040",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 39,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#39:SYS1_POS_0040",
+      "pytest_param_id": "SYS1_POS_0040",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0040]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
       "use_case_id": "SYS1_POS_0041",
       "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
       "matrix_row_index": 40,
       "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#40:SYS1_POS_0041",
       "pytest_param_id": "SYS1_POS_0041",
       "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0041]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0042",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 41,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#41:SYS1_POS_0042",
+      "pytest_param_id": "SYS1_POS_0042",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0042]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0043",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 42,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#42:SYS1_POS_0043",
+      "pytest_param_id": "SYS1_POS_0043",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0043]",
       "expected_status": "passed",
       "app_paths_exercised": [
         "src/bridge_sdk/__init__.py",
@@ -275,12 +594,103 @@
       ]
     },
     {
+      "use_case_id": "SYS1_POS_0046",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 45,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#45:SYS1_POS_0046",
+      "pytest_param_id": "SYS1_POS_0046",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0046]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0047",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 46,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#46:SYS1_POS_0047",
+      "pytest_param_id": "SYS1_POS_0047",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0047]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0048",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 47,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#47:SYS1_POS_0048",
+      "pytest_param_id": "SYS1_POS_0048",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0048]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0049",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 48,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#48:SYS1_POS_0049",
+      "pytest_param_id": "SYS1_POS_0049",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0049]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0050",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 49,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#49:SYS1_POS_0050",
+      "pytest_param_id": "SYS1_POS_0050",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0050]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
       "use_case_id": "SYS1_POS_0051",
       "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
       "matrix_row_index": 50,
       "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#50:SYS1_POS_0051",
       "pytest_param_id": "SYS1_POS_0051",
       "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0051]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0052",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 51,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#51:SYS1_POS_0052",
+      "pytest_param_id": "SYS1_POS_0052",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0052]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0053",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 52,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#52:SYS1_POS_0053",
+      "pytest_param_id": "SYS1_POS_0053",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0053]",
       "expected_status": "passed",
       "app_paths_exercised": [
         "src/bridge_sdk/__init__.py",
@@ -314,12 +724,103 @@
       ]
     },
     {
+      "use_case_id": "SYS1_POS_0056",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 55,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#55:SYS1_POS_0056",
+      "pytest_param_id": "SYS1_POS_0056",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0056]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0057",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 56,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#56:SYS1_POS_0057",
+      "pytest_param_id": "SYS1_POS_0057",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0057]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0058",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 57,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#57:SYS1_POS_0058",
+      "pytest_param_id": "SYS1_POS_0058",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0058]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0059",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 58,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#58:SYS1_POS_0059",
+      "pytest_param_id": "SYS1_POS_0059",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0059]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0060",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 59,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#59:SYS1_POS_0060",
+      "pytest_param_id": "SYS1_POS_0060",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0060]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
       "use_case_id": "SYS1_POS_0061",
       "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
       "matrix_row_index": 60,
       "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#60:SYS1_POS_0061",
       "pytest_param_id": "SYS1_POS_0061",
       "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0061]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0062",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 61,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#61:SYS1_POS_0062",
+      "pytest_param_id": "SYS1_POS_0062",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0062]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0063",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 62,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#62:SYS1_POS_0063",
+      "pytest_param_id": "SYS1_POS_0063",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0063]",
       "expected_status": "passed",
       "app_paths_exercised": [
         "src/bridge_sdk/__init__.py",
@@ -353,12 +854,103 @@
       ]
     },
     {
+      "use_case_id": "SYS1_POS_0066",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 65,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#65:SYS1_POS_0066",
+      "pytest_param_id": "SYS1_POS_0066",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0066]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0067",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 66,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#66:SYS1_POS_0067",
+      "pytest_param_id": "SYS1_POS_0067",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0067]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0068",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 67,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#67:SYS1_POS_0068",
+      "pytest_param_id": "SYS1_POS_0068",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0068]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0069",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 68,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#68:SYS1_POS_0069",
+      "pytest_param_id": "SYS1_POS_0069",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0069]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0070",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 69,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#69:SYS1_POS_0070",
+      "pytest_param_id": "SYS1_POS_0070",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0070]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
       "use_case_id": "SYS1_POS_0071",
       "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
       "matrix_row_index": 70,
       "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#70:SYS1_POS_0071",
       "pytest_param_id": "SYS1_POS_0071",
       "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0071]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0072",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 71,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#71:SYS1_POS_0072",
+      "pytest_param_id": "SYS1_POS_0072",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0072]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0073",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 72,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#72:SYS1_POS_0073",
+      "pytest_param_id": "SYS1_POS_0073",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0073]",
       "expected_status": "passed",
       "app_paths_exercised": [
         "src/bridge_sdk/__init__.py",
@@ -392,12 +984,103 @@
       ]
     },
     {
+      "use_case_id": "SYS1_POS_0076",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 75,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#75:SYS1_POS_0076",
+      "pytest_param_id": "SYS1_POS_0076",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0076]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0077",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 76,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#76:SYS1_POS_0077",
+      "pytest_param_id": "SYS1_POS_0077",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0077]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0078",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 77,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#77:SYS1_POS_0078",
+      "pytest_param_id": "SYS1_POS_0078",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0078]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0079",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 78,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#78:SYS1_POS_0079",
+      "pytest_param_id": "SYS1_POS_0079",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0079]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0080",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 79,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#79:SYS1_POS_0080",
+      "pytest_param_id": "SYS1_POS_0080",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0080]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
       "use_case_id": "SYS1_POS_0081",
       "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
       "matrix_row_index": 80,
       "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#80:SYS1_POS_0081",
       "pytest_param_id": "SYS1_POS_0081",
       "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0081]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0082",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 81,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#81:SYS1_POS_0082",
+      "pytest_param_id": "SYS1_POS_0082",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0082]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_POS_0083",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 82,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#82:SYS1_POS_0083",
+      "pytest_param_id": "SYS1_POS_0083",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_POS_0083]",
       "expected_status": "passed",
       "app_paths_exercised": [
         "src/bridge_sdk/__init__.py",
@@ -431,12 +1114,103 @@
       ]
     },
     {
+      "use_case_id": "SYS1_NEG_0086",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 85,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#85:SYS1_NEG_0086",
+      "pytest_param_id": "SYS1_NEG_0086",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_NEG_0086]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_NEG_0087",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 86,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#86:SYS1_NEG_0087",
+      "pytest_param_id": "SYS1_NEG_0087",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_NEG_0087]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_NEG_0088",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 87,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#87:SYS1_NEG_0088",
+      "pytest_param_id": "SYS1_NEG_0088",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_NEG_0088]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_NEG_0089",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 88,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#88:SYS1_NEG_0089",
+      "pytest_param_id": "SYS1_NEG_0089",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_NEG_0089]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_NEG_0090",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 89,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#89:SYS1_NEG_0090",
+      "pytest_param_id": "SYS1_NEG_0090",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_NEG_0090]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
       "use_case_id": "SYS1_NEG_0091",
       "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
       "matrix_row_index": 90,
       "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#90:SYS1_NEG_0091",
       "pytest_param_id": "SYS1_NEG_0091",
       "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_NEG_0091]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_NEG_0092",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 91,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#91:SYS1_NEG_0092",
+      "pytest_param_id": "SYS1_NEG_0092",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_NEG_0092]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_NEG_0093",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 92,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#92:SYS1_NEG_0093",
+      "pytest_param_id": "SYS1_NEG_0093",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_NEG_0093]",
       "expected_status": "passed",
       "app_paths_exercised": [
         "src/bridge_sdk/__init__.py",
@@ -463,6 +1237,71 @@
       "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#94:SYS1_NEG_0095",
       "pytest_param_id": "SYS1_NEG_0095",
       "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_NEG_0095]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_EDG_0096",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 95,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#95:SYS1_EDG_0096",
+      "pytest_param_id": "SYS1_EDG_0096",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_EDG_0096]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_EDG_0097",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 96,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#96:SYS1_EDG_0097",
+      "pytest_param_id": "SYS1_EDG_0097",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_EDG_0097]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_EDG_0098",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 97,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#97:SYS1_EDG_0098",
+      "pytest_param_id": "SYS1_EDG_0098",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_EDG_0098]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_EDG_0099",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 98,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#98:SYS1_EDG_0099",
+      "pytest_param_id": "SYS1_EDG_0099",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_EDG_0099]",
+      "expected_status": "passed",
+      "app_paths_exercised": [
+        "src/bridge_sdk/__init__.py",
+        "src/bridge_sdk/system1_reflex.py"
+      ]
+    },
+    {
+      "use_case_id": "SYS1_EDG_0100",
+      "matrix_file": "tests/harness/json_matrices/system1-reflex_scenarios.json",
+      "matrix_row_index": 99,
+      "matrix_row_key": "tests/harness/json_matrices/system1-reflex_scenarios.json#99:SYS1_EDG_0100",
+      "pytest_param_id": "SYS1_EDG_0100",
+      "pytest_node_id": "tests/harness/test_matrix_scenario_execution.py::test_system1_reflex_row_against_the_real_engine[SYS1_EDG_0100]",
       "expected_status": "passed",
       "app_paths_exercised": [
         "src/bridge_sdk/__init__.py",

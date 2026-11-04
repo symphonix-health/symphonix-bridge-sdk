@@ -40,7 +40,18 @@ PYTEST_FUNCTION = "test_system1_reflex_row_against_the_real_engine"
 # bridge_sdk.system1_reflex fully fed by the generic row body. Kept in lockstep
 # with DISPATCH in test_matrix_scenario_execution.py.
 DISPATCHABLE_ENGINES = frozenset(
-    {"Tier0SafetyFloor", "ConsultationStateReflex", "ReferralSatisficingReflex"}
+    {
+        "Tier0SafetyFloor",
+        "CfCStateCell",
+        "PhysiologicalTrajectoryReflex",
+        "ConsultationStateReflex",
+        "ReferralSatisficingReflex",
+        "StaffingSatisficingReflex",
+        "Hl7v2SemanticReflex",
+        "LocalSlmReflexAdapter",
+        "System1CalibrationTracker",
+        "SignalBoxGovernanceBridge",
+    }
 )
 # Real source files the dispatched callables exercise.
 APP_PATHS_EXERCISED = (

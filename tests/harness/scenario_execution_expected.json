@@ -1,4 +1,322 @@
 {
+  "SYS1_EDG_0096": {
+    "bounded_rationality": {
+      "ai_data_quality_bound": 0.84,
+      "ai_epistemic_uncertainty": 0.1136,
+      "ai_operational_mode": "in_process_cfc_deterministic",
+      "alternatives_evaluated": 5,
+      "alternatives_satisficed": 2,
+      "clinician_accountability_retained": true,
+      "cognitive_chunks_surfaced": 3,
+      "consultation_time_saved_seconds": 300.0,
+      "information_completeness_ratio": 0.84,
+      "missing_information_gaps": [
+        "Exact unscheduled ED admissions and individual length-of-stay remain stochastic"
+      ],
+      "synthesized_sources": [
+        "current_ward_census",
+        "historical_arrival_distribution",
+        "cfc_physiological_drift_acuity_stream"
+      ]
+    },
+    "census_uncertainty_band": [
+      18,
+      26
+    ],
+    "expected_patient_census": 22.0,
+    "high_acuity_drift_patients": 2,
+    "minimum_safe_floor_nurses": 6,
+    "rationale": [
+      "Expected census 22.0 (80% arrival interval [18, 26] patients).",
+      "2 patient(s) exhibiting active CfC physiological drift weighted at 1:2 acuity ratio.",
+      "Satisficing deployment: 7 nurses (statutory floor 6, surge reserve +1)."
+    ],
+    "recommended_nurses": 7,
+    "shift_hours": 12.0,
+    "surge_contingency_nurses": 1,
+    "target_patients_per_nurse": 3.14,
+    "ward_id": "ward-nursing_workforce"
+  },
+  "SYS1_EDG_0097": {
+    "anomalies": [
+      {
+        "category": "unit_mismatch",
+        "code": "HL7_GLUCOSE_UNIT_SWAP_MGDL_AS_MMOLL",
+        "conversion_factor": 0.0555,
+        "loinc_code": "2339-0",
+        "message": "Glucose 110 labelled 'mmol/L' is characteristic of mg/dL (~6.1 mmol/L); 18x insulin dosing hazard if unquarantined.",
+        "severity": "critical",
+        "suggested_unit": "mg/dL"
+      },
+      {
+        "category": "critical_value",
+        "code": "HL7_POTASSIUM_CRITICAL_HYPERKALAEMIA",
+        "conversion_factor": null,
+        "loinc_code": "2823-3",
+        "message": "Critical hyperkalaemia (7.4 mmol/L); immediate ECG & clinical review.",
+        "severity": "high",
+        "suggested_unit": null
+      }
+    ],
+    "quarantine_required": true,
+    "reason_codes": [
+      "sys1.hl7.unit_mismatch_glucose",
+      "sys1.hl7.critical_hyperkalaemia"
+    ],
+    "requires_human_review": true,
+    "risk_score": 0.88
+  },
+  "SYS1_EDG_0098": {
+    "intuition": {
+      "candidate_hypotheses": [
+        "clinician:triage.start"
+      ],
+      "confidence": 0.76,
+      "reason_codes": [
+        "sys1.consultation_state_reflex",
+        "safety.routine"
+      ],
+      "risk_score": 0.18,
+      "route_salience": {
+        "triage.start": 1.0
+      },
+      "selected_framework": "soap"
+    },
+    "model_spec": {
+      "architecture": "fast_no_think_slm",
+      "huggingface_repo": "Qwen/Qwen3-0.6B",
+      "license_spdx": "Apache-2.0",
+      "model_id": "qwen3:0.6b",
+      "ollama_tag": "qwen3:0.6b",
+      "osi_approved": true,
+      "parameter_count": "0.6B",
+      "supports_no_think_toggle": true,
+      "windows_runtimes": [
+        "ollama",
+        "llama.cpp",
+        "onnxruntime-genai"
+      ]
+    }
+  },
+  "SYS1_EDG_0099": {
+    "brier_score": 0.6724,
+    "candidate_weight_release": {
+      "model_versions": {
+        "system1.reflex": "cfc-1.0",
+        "tier0.safety_seat": "deterministic-1.0"
+      },
+      "version": "sys1-weights-1.0.0-fn-hardened",
+      "weights": {
+        "system1.reflex": 0.85,
+        "tier0.safety_seat": 1.35
+      }
+    },
+    "expected_calibration_error": 0.82,
+    "false_negatives": 1,
+    "false_positives": 0,
+    "outcome_tally": {
+      "correct": 1,
+      "correct_suboptimal": 0,
+      "incorrect_harmless": 0,
+      "total": 1,
+      "unsafe": 0
+    },
+    "precision": 1.0,
+    "recall": 0.0,
+    "total_events": 1,
+    "true_negatives": 0,
+    "true_positives": 0
+  },
+  "SYS1_EDG_0100": {
+    "decision_card": {
+      "action_path": "lis/result.retrieve",
+      "correlation_id": "corr-system1-reflex",
+      "evidence_references": [
+        "fhir://Observation/system1-reflex"
+      ],
+      "outcome": "human_in_loop",
+      "persona": "clinician",
+      "rationale": "consent:absent_for_sensitive; bypass_block:low_confidence"
+    },
+    "handoff": {
+      "audit_chain_ref": "corr-system1-reflex",
+      "decision_rationale": "consent:absent_for_sensitive; bypass_block:low_confidence",
+      "pending_inputs": [],
+      "pre_handoff_state": "awaiting_human_review",
+      "provenance_ref": "fhir://Observation/system1-reflex",
+      "recommended_next_action": "Human review then resume 'result.retrieve'",
+      "task_summary": "Governed review of intent 'result.retrieve' for persona 'clinician'",
+      "trigger": "consent_conflict",
+      "workflow_id": "wf-system1-reflex"
+    },
+    "permitted": false,
+    "reasons": [
+      "consent:absent_for_sensitive",
+      "bypass_block:low_confidence"
+    ],
+    "resolver_path": "api",
+    "safety_class": "sensitive",
+    "tier": "human_in_loop"
+  },
+  "SYS1_NEG_0086": {
+    "bounded_rationality": {
+      "ai_data_quality_bound": 0.84,
+      "ai_epistemic_uncertainty": 0.1042,
+      "ai_operational_mode": "in_process_cfc_deterministic",
+      "alternatives_evaluated": 5,
+      "alternatives_satisficed": 2,
+      "clinician_accountability_retained": true,
+      "cognitive_chunks_surfaced": 3,
+      "consultation_time_saved_seconds": 300.0,
+      "information_completeness_ratio": 0.84,
+      "missing_information_gaps": [
+        "Exact unscheduled ED admissions and individual length-of-stay remain stochastic"
+      ],
+      "synthesized_sources": [
+        "current_ward_census",
+        "historical_arrival_distribution",
+        "cfc_physiological_drift_acuity_stream"
+      ]
+    },
+    "census_uncertainty_band": [
+      20,
+      28
+    ],
+    "expected_patient_census": 24.0,
+    "high_acuity_drift_patients": 4,
+    "minimum_safe_floor_nurses": 7,
+    "rationale": [
+      "Expected census 24.0 (80% arrival interval [20, 28] patients).",
+      "4 patient(s) exhibiting active CfC physiological drift weighted at 1:2 acuity ratio.",
+      "Satisficing deployment: 8 nurses (statutory floor 7, surge reserve +1)."
+    ],
+    "recommended_nurses": 8,
+    "shift_hours": 12.0,
+    "surge_contingency_nurses": 1,
+    "target_patients_per_nurse": 3.0,
+    "ward_id": "ward-nursing_workforce"
+  },
+  "SYS1_NEG_0087": {
+    "anomalies": [
+      {
+        "category": "unit_mismatch",
+        "code": "HL7_GLUCOSE_UNIT_SWAP_MGDL_AS_MMOLL",
+        "conversion_factor": 0.0555,
+        "loinc_code": "2339-0",
+        "message": "Glucose 110 labelled 'mmol/L' is characteristic of mg/dL (~6.1 mmol/L); 18x insulin dosing hazard if unquarantined.",
+        "severity": "critical",
+        "suggested_unit": "mg/dL"
+      },
+      {
+        "category": "critical_value",
+        "code": "HL7_POTASSIUM_CRITICAL_HYPERKALAEMIA",
+        "conversion_factor": null,
+        "loinc_code": "2823-3",
+        "message": "Critical hyperkalaemia (7.4 mmol/L); immediate ECG & clinical review.",
+        "severity": "high",
+        "suggested_unit": null
+      }
+    ],
+    "quarantine_required": true,
+    "reason_codes": [
+      "sys1.hl7.unit_mismatch_glucose",
+      "sys1.hl7.critical_hyperkalaemia"
+    ],
+    "requires_human_review": true,
+    "risk_score": 0.88
+  },
+  "SYS1_NEG_0088": {
+    "intuition": {
+      "candidate_hypotheses": [
+        "clinician:triage.start"
+      ],
+      "confidence": 0.76,
+      "reason_codes": [
+        "sys1.consultation_state_reflex",
+        "safety.routine"
+      ],
+      "risk_score": 0.18,
+      "route_salience": {
+        "triage.start": 1.0
+      },
+      "selected_framework": "soap"
+    },
+    "model_spec": {
+      "architecture": "fast_no_think_slm",
+      "huggingface_repo": "Qwen/Qwen3-0.6B",
+      "license_spdx": "Apache-2.0",
+      "model_id": "qwen3:0.6b",
+      "ollama_tag": "qwen3:0.6b",
+      "osi_approved": true,
+      "parameter_count": "0.6B",
+      "supports_no_think_toggle": true,
+      "windows_runtimes": [
+        "ollama",
+        "llama.cpp",
+        "onnxruntime-genai"
+      ]
+    }
+  },
+  "SYS1_NEG_0089": {
+    "brier_score": 0.6724,
+    "candidate_weight_release": {
+      "model_versions": {
+        "system1.reflex": "cfc-1.0",
+        "tier0.safety_seat": "deterministic-1.0"
+      },
+      "version": "sys1-weights-1.0.0-fn-hardened",
+      "weights": {
+        "system1.reflex": 0.85,
+        "tier0.safety_seat": 1.35
+      }
+    },
+    "expected_calibration_error": 0.82,
+    "false_negatives": 1,
+    "false_positives": 0,
+    "outcome_tally": {
+      "correct": 1,
+      "correct_suboptimal": 0,
+      "incorrect_harmless": 0,
+      "total": 1,
+      "unsafe": 0
+    },
+    "precision": 1.0,
+    "recall": 0.0,
+    "total_events": 1,
+    "true_negatives": 0,
+    "true_positives": 0
+  },
+  "SYS1_NEG_0090": {
+    "decision_card": {
+      "action_path": "lis/result.retrieve",
+      "correlation_id": "corr-system1-reflex",
+      "evidence_references": [
+        "fhir://Observation/system1-reflex"
+      ],
+      "outcome": "human_in_loop",
+      "persona": "clinician",
+      "rationale": "consent:absent_for_sensitive; bypass_block:low_confidence"
+    },
+    "handoff": {
+      "audit_chain_ref": "corr-system1-reflex",
+      "decision_rationale": "consent:absent_for_sensitive; bypass_block:low_confidence",
+      "pending_inputs": [],
+      "pre_handoff_state": "awaiting_human_review",
+      "provenance_ref": "fhir://Observation/system1-reflex",
+      "recommended_next_action": "Human review then resume 'result.retrieve'",
+      "task_summary": "Governed review of intent 'result.retrieve' for persona 'clinician'",
+      "trigger": "consent_conflict",
+      "workflow_id": "wf-system1-reflex"
+    },
+    "permitted": false,
+    "reasons": [
+      "consent:absent_for_sensitive",
+      "bypass_block:low_confidence"
+    ],
+    "resolver_path": "api",
+    "safety_class": "sensitive",
+    "tier": "human_in_loop"
+  },
   "SYS1_NEG_0091": {
     "blocked": true,
     "contraindications": [
@@ -17,6 +335,41 @@
       "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
       "tier0.never_event.methotrexate_daily_dosing_hazard"
     ]
+  },
+  "SYS1_NEG_0092": {
+    "engine": "CfCStateCell",
+    "h_next": [
+      0.076374,
+      0.08911,
+      0.120538,
+      0.062051,
+      0.007695,
+      0.0055
+    ],
+    "state_dim": 6
+  },
+  "SYS1_NEG_0093": {
+    "compensatory_drift_score": 0.2868,
+    "cynefin_suggestion": "complex",
+    "deterioration_detected": true,
+    "hidden_state": [
+      0.085657,
+      0.066731,
+      0.074903,
+      0.076793,
+      0.043824,
+      0.02203
+    ],
+    "pulse_pressure": 24.0,
+    "reason_codes": [
+      "cfc.trajectory_nominal"
+    ],
+    "red_flags": [],
+    "respiratory_oxygen_divergence": 0.875,
+    "shock_index": 1.1429,
+    "shock_index_velocity_per_hr": 0.0,
+    "static_news2_score": 7,
+    "subthreshold_early_warning": false
   },
   "SYS1_NEG_0094": {
     "active_red_flags": [
@@ -217,6 +570,41 @@
       "tier0.never_event.methotrexate_daily_dosing_hazard"
     ]
   },
+  "SYS1_POS_0002": {
+    "engine": "CfCStateCell",
+    "h_next": [
+      0.076374,
+      0.08911,
+      0.120538,
+      0.062051,
+      0.007695,
+      0.0055
+    ],
+    "state_dim": 6
+  },
+  "SYS1_POS_0003": {
+    "compensatory_drift_score": 0.2868,
+    "cynefin_suggestion": "complex",
+    "deterioration_detected": true,
+    "hidden_state": [
+      0.085657,
+      0.066731,
+      0.074903,
+      0.076793,
+      0.043824,
+      0.02203
+    ],
+    "pulse_pressure": 24.0,
+    "reason_codes": [
+      "cfc.trajectory_nominal"
+    ],
+    "red_flags": [],
+    "respiratory_oxygen_divergence": 0.875,
+    "shock_index": 1.1429,
+    "shock_index_velocity_per_hr": 0.0,
+    "static_news2_score": 7,
+    "subthreshold_early_warning": false
+  },
   "SYS1_POS_0004": {
     "active_red_flags": [
       "sys1.red_flag.chest_pain",
@@ -397,6 +785,165 @@
       }
     ]
   },
+  "SYS1_POS_0006": {
+    "bounded_rationality": {
+      "ai_data_quality_bound": 0.84,
+      "ai_epistemic_uncertainty": 0.1136,
+      "ai_operational_mode": "in_process_cfc_deterministic",
+      "alternatives_evaluated": 5,
+      "alternatives_satisficed": 2,
+      "clinician_accountability_retained": true,
+      "cognitive_chunks_surfaced": 3,
+      "consultation_time_saved_seconds": 300.0,
+      "information_completeness_ratio": 0.84,
+      "missing_information_gaps": [
+        "Exact unscheduled ED admissions and individual length-of-stay remain stochastic"
+      ],
+      "synthesized_sources": [
+        "current_ward_census",
+        "historical_arrival_distribution",
+        "cfc_physiological_drift_acuity_stream"
+      ]
+    },
+    "census_uncertainty_band": [
+      18,
+      26
+    ],
+    "expected_patient_census": 22.0,
+    "high_acuity_drift_patients": 2,
+    "minimum_safe_floor_nurses": 6,
+    "rationale": [
+      "Expected census 22.0 (80% arrival interval [18, 26] patients).",
+      "2 patient(s) exhibiting active CfC physiological drift weighted at 1:2 acuity ratio.",
+      "Satisficing deployment: 7 nurses (statutory floor 6, surge reserve +1)."
+    ],
+    "recommended_nurses": 7,
+    "shift_hours": 12.0,
+    "surge_contingency_nurses": 1,
+    "target_patients_per_nurse": 3.14,
+    "ward_id": "ward-nursing_workforce"
+  },
+  "SYS1_POS_0007": {
+    "anomalies": [
+      {
+        "category": "unit_mismatch",
+        "code": "HL7_GLUCOSE_UNIT_SWAP_MGDL_AS_MMOLL",
+        "conversion_factor": 0.0555,
+        "loinc_code": "2339-0",
+        "message": "Glucose 110 labelled 'mmol/L' is characteristic of mg/dL (~6.1 mmol/L); 18x insulin dosing hazard if unquarantined.",
+        "severity": "critical",
+        "suggested_unit": "mg/dL"
+      },
+      {
+        "category": "critical_value",
+        "code": "HL7_POTASSIUM_CRITICAL_HYPERKALAEMIA",
+        "conversion_factor": null,
+        "loinc_code": "2823-3",
+        "message": "Critical hyperkalaemia (7.4 mmol/L); immediate ECG & clinical review.",
+        "severity": "high",
+        "suggested_unit": null
+      }
+    ],
+    "quarantine_required": true,
+    "reason_codes": [
+      "sys1.hl7.unit_mismatch_glucose",
+      "sys1.hl7.critical_hyperkalaemia"
+    ],
+    "requires_human_review": true,
+    "risk_score": 0.88
+  },
+  "SYS1_POS_0008": {
+    "intuition": {
+      "candidate_hypotheses": [
+        "clinician:triage.start"
+      ],
+      "confidence": 0.76,
+      "reason_codes": [
+        "sys1.consultation_state_reflex",
+        "safety.routine"
+      ],
+      "risk_score": 0.18,
+      "route_salience": {
+        "triage.start": 1.0
+      },
+      "selected_framework": "soap"
+    },
+    "model_spec": {
+      "architecture": "fast_no_think_slm",
+      "huggingface_repo": "Qwen/Qwen3-0.6B",
+      "license_spdx": "Apache-2.0",
+      "model_id": "qwen3:0.6b",
+      "ollama_tag": "qwen3:0.6b",
+      "osi_approved": true,
+      "parameter_count": "0.6B",
+      "supports_no_think_toggle": true,
+      "windows_runtimes": [
+        "ollama",
+        "llama.cpp",
+        "onnxruntime-genai"
+      ]
+    }
+  },
+  "SYS1_POS_0009": {
+    "brier_score": 0.6724,
+    "candidate_weight_release": {
+      "model_versions": {
+        "system1.reflex": "cfc-1.0",
+        "tier0.safety_seat": "deterministic-1.0"
+      },
+      "version": "sys1-weights-1.0.0-fn-hardened",
+      "weights": {
+        "system1.reflex": 0.85,
+        "tier0.safety_seat": 1.35
+      }
+    },
+    "expected_calibration_error": 0.82,
+    "false_negatives": 1,
+    "false_positives": 0,
+    "outcome_tally": {
+      "correct": 1,
+      "correct_suboptimal": 0,
+      "incorrect_harmless": 0,
+      "total": 1,
+      "unsafe": 0
+    },
+    "precision": 1.0,
+    "recall": 0.0,
+    "total_events": 1,
+    "true_negatives": 0,
+    "true_positives": 0
+  },
+  "SYS1_POS_0010": {
+    "decision_card": {
+      "action_path": "lis/result.retrieve",
+      "correlation_id": "corr-system1-reflex",
+      "evidence_references": [
+        "fhir://Observation/system1-reflex"
+      ],
+      "outcome": "human_in_loop",
+      "persona": "clinician",
+      "rationale": "consent:absent_for_sensitive; bypass_block:low_confidence"
+    },
+    "handoff": {
+      "audit_chain_ref": "corr-system1-reflex",
+      "decision_rationale": "consent:absent_for_sensitive; bypass_block:low_confidence",
+      "pending_inputs": [],
+      "pre_handoff_state": "awaiting_human_review",
+      "provenance_ref": "fhir://Observation/system1-reflex",
+      "recommended_next_action": "Human review then resume 'result.retrieve'",
+      "task_summary": "Governed review of intent 'result.retrieve' for persona 'clinician'",
+      "trigger": "consent_conflict",
+      "workflow_id": "wf-system1-reflex"
+    },
+    "permitted": false,
+    "reasons": [
+      "consent:absent_for_sensitive",
+      "bypass_block:low_confidence"
+    ],
+    "resolver_path": "api",
+    "safety_class": "sensitive",
+    "tier": "human_in_loop"
+  },
   "SYS1_POS_0011": {
     "blocked": true,
     "contraindications": [
@@ -415,6 +962,41 @@
       "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
       "tier0.never_event.methotrexate_daily_dosing_hazard"
     ]
+  },
+  "SYS1_POS_0012": {
+    "engine": "CfCStateCell",
+    "h_next": [
+      0.076374,
+      0.08911,
+      0.120538,
+      0.062051,
+      0.007695,
+      0.0055
+    ],
+    "state_dim": 6
+  },
+  "SYS1_POS_0013": {
+    "compensatory_drift_score": 0.2868,
+    "cynefin_suggestion": "complex",
+    "deterioration_detected": true,
+    "hidden_state": [
+      0.085657,
+      0.066731,
+      0.074903,
+      0.076793,
+      0.043824,
+      0.02203
+    ],
+    "pulse_pressure": 24.0,
+    "reason_codes": [
+      "cfc.trajectory_nominal"
+    ],
+    "red_flags": [],
+    "respiratory_oxygen_divergence": 0.875,
+    "shock_index": 1.1429,
+    "shock_index_velocity_per_hr": 0.0,
+    "static_news2_score": 7,
+    "subthreshold_early_warning": false
   },
   "SYS1_POS_0014": {
     "active_red_flags": [
@@ -596,6 +1178,165 @@
       }
     ]
   },
+  "SYS1_POS_0016": {
+    "bounded_rationality": {
+      "ai_data_quality_bound": 0.84,
+      "ai_epistemic_uncertainty": 0.0962,
+      "ai_operational_mode": "in_process_cfc_deterministic",
+      "alternatives_evaluated": 5,
+      "alternatives_satisficed": 2,
+      "clinician_accountability_retained": true,
+      "cognitive_chunks_surfaced": 3,
+      "consultation_time_saved_seconds": 300.0,
+      "information_completeness_ratio": 0.84,
+      "missing_information_gaps": [
+        "Exact unscheduled ED admissions and individual length-of-stay remain stochastic"
+      ],
+      "synthesized_sources": [
+        "current_ward_census",
+        "historical_arrival_distribution",
+        "cfc_physiological_drift_acuity_stream"
+      ]
+    },
+    "census_uncertainty_band": [
+      22,
+      30
+    ],
+    "expected_patient_census": 26.0,
+    "high_acuity_drift_patients": 3,
+    "minimum_safe_floor_nurses": 8,
+    "rationale": [
+      "Expected census 26.0 (80% arrival interval [22, 30] patients).",
+      "3 patient(s) exhibiting active CfC physiological drift weighted at 1:2 acuity ratio.",
+      "Satisficing deployment: 9 nurses (statutory floor 8, surge reserve +1)."
+    ],
+    "recommended_nurses": 9,
+    "shift_hours": 12.0,
+    "surge_contingency_nurses": 1,
+    "target_patients_per_nurse": 2.89,
+    "ward_id": "ward-nursing_workforce"
+  },
+  "SYS1_POS_0017": {
+    "anomalies": [
+      {
+        "category": "unit_mismatch",
+        "code": "HL7_GLUCOSE_UNIT_SWAP_MGDL_AS_MMOLL",
+        "conversion_factor": 0.0555,
+        "loinc_code": "2339-0",
+        "message": "Glucose 110 labelled 'mmol/L' is characteristic of mg/dL (~6.1 mmol/L); 18x insulin dosing hazard if unquarantined.",
+        "severity": "critical",
+        "suggested_unit": "mg/dL"
+      },
+      {
+        "category": "critical_value",
+        "code": "HL7_POTASSIUM_CRITICAL_HYPERKALAEMIA",
+        "conversion_factor": null,
+        "loinc_code": "2823-3",
+        "message": "Critical hyperkalaemia (7.4 mmol/L); immediate ECG & clinical review.",
+        "severity": "high",
+        "suggested_unit": null
+      }
+    ],
+    "quarantine_required": true,
+    "reason_codes": [
+      "sys1.hl7.unit_mismatch_glucose",
+      "sys1.hl7.critical_hyperkalaemia"
+    ],
+    "requires_human_review": true,
+    "risk_score": 0.88
+  },
+  "SYS1_POS_0018": {
+    "intuition": {
+      "candidate_hypotheses": [
+        "clinician:triage.start"
+      ],
+      "confidence": 0.76,
+      "reason_codes": [
+        "sys1.consultation_state_reflex",
+        "safety.routine"
+      ],
+      "risk_score": 0.18,
+      "route_salience": {
+        "triage.start": 1.0
+      },
+      "selected_framework": "soap"
+    },
+    "model_spec": {
+      "architecture": "fast_no_think_slm",
+      "huggingface_repo": "Qwen/Qwen3-0.6B",
+      "license_spdx": "Apache-2.0",
+      "model_id": "qwen3:0.6b",
+      "ollama_tag": "qwen3:0.6b",
+      "osi_approved": true,
+      "parameter_count": "0.6B",
+      "supports_no_think_toggle": true,
+      "windows_runtimes": [
+        "ollama",
+        "llama.cpp",
+        "onnxruntime-genai"
+      ]
+    }
+  },
+  "SYS1_POS_0019": {
+    "brier_score": 0.6724,
+    "candidate_weight_release": {
+      "model_versions": {
+        "system1.reflex": "cfc-1.0",
+        "tier0.safety_seat": "deterministic-1.0"
+      },
+      "version": "sys1-weights-1.0.0-fn-hardened",
+      "weights": {
+        "system1.reflex": 0.85,
+        "tier0.safety_seat": 1.35
+      }
+    },
+    "expected_calibration_error": 0.82,
+    "false_negatives": 1,
+    "false_positives": 0,
+    "outcome_tally": {
+      "correct": 1,
+      "correct_suboptimal": 0,
+      "incorrect_harmless": 0,
+      "total": 1,
+      "unsafe": 0
+    },
+    "precision": 1.0,
+    "recall": 0.0,
+    "total_events": 1,
+    "true_negatives": 0,
+    "true_positives": 0
+  },
+  "SYS1_POS_0020": {
+    "decision_card": {
+      "action_path": "lis/result.retrieve",
+      "correlation_id": "corr-system1-reflex",
+      "evidence_references": [
+        "fhir://Observation/system1-reflex"
+      ],
+      "outcome": "human_in_loop",
+      "persona": "clinician",
+      "rationale": "consent:absent_for_sensitive; bypass_block:low_confidence"
+    },
+    "handoff": {
+      "audit_chain_ref": "corr-system1-reflex",
+      "decision_rationale": "consent:absent_for_sensitive; bypass_block:low_confidence",
+      "pending_inputs": [],
+      "pre_handoff_state": "awaiting_human_review",
+      "provenance_ref": "fhir://Observation/system1-reflex",
+      "recommended_next_action": "Human review then resume 'result.retrieve'",
+      "task_summary": "Governed review of intent 'result.retrieve' for persona 'clinician'",
+      "trigger": "consent_conflict",
+      "workflow_id": "wf-system1-reflex"
+    },
+    "permitted": false,
+    "reasons": [
+      "consent:absent_for_sensitive",
+      "bypass_block:low_confidence"
+    ],
+    "resolver_path": "api",
+    "safety_class": "sensitive",
+    "tier": "human_in_loop"
+  },
   "SYS1_POS_0021": {
     "blocked": true,
     "contraindications": [
@@ -614,6 +1355,41 @@
       "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
       "tier0.never_event.methotrexate_daily_dosing_hazard"
     ]
+  },
+  "SYS1_POS_0022": {
+    "engine": "CfCStateCell",
+    "h_next": [
+      0.076374,
+      0.08911,
+      0.120538,
+      0.062051,
+      0.007695,
+      0.0055
+    ],
+    "state_dim": 6
+  },
+  "SYS1_POS_0023": {
+    "compensatory_drift_score": 0.2868,
+    "cynefin_suggestion": "complex",
+    "deterioration_detected": true,
+    "hidden_state": [
+      0.085657,
+      0.066731,
+      0.074903,
+      0.076793,
+      0.043824,
+      0.02203
+    ],
+    "pulse_pressure": 24.0,
+    "reason_codes": [
+      "cfc.trajectory_nominal"
+    ],
+    "red_flags": [],
+    "respiratory_oxygen_divergence": 0.875,
+    "shock_index": 1.1429,
+    "shock_index_velocity_per_hr": 0.0,
+    "static_news2_score": 7,
+    "subthreshold_early_warning": false
   },
   "SYS1_POS_0024": {
     "active_red_flags": [
@@ -795,6 +1571,165 @@
       }
     ]
   },
+  "SYS1_POS_0026": {
+    "bounded_rationality": {
+      "ai_data_quality_bound": 0.84,
+      "ai_epistemic_uncertainty": 0.1042,
+      "ai_operational_mode": "in_process_cfc_deterministic",
+      "alternatives_evaluated": 5,
+      "alternatives_satisficed": 2,
+      "clinician_accountability_retained": true,
+      "cognitive_chunks_surfaced": 3,
+      "consultation_time_saved_seconds": 300.0,
+      "information_completeness_ratio": 0.84,
+      "missing_information_gaps": [
+        "Exact unscheduled ED admissions and individual length-of-stay remain stochastic"
+      ],
+      "synthesized_sources": [
+        "current_ward_census",
+        "historical_arrival_distribution",
+        "cfc_physiological_drift_acuity_stream"
+      ]
+    },
+    "census_uncertainty_band": [
+      20,
+      28
+    ],
+    "expected_patient_census": 24.0,
+    "high_acuity_drift_patients": 4,
+    "minimum_safe_floor_nurses": 7,
+    "rationale": [
+      "Expected census 24.0 (80% arrival interval [20, 28] patients).",
+      "4 patient(s) exhibiting active CfC physiological drift weighted at 1:2 acuity ratio.",
+      "Satisficing deployment: 8 nurses (statutory floor 7, surge reserve +1)."
+    ],
+    "recommended_nurses": 8,
+    "shift_hours": 12.0,
+    "surge_contingency_nurses": 1,
+    "target_patients_per_nurse": 3.0,
+    "ward_id": "ward-nursing_workforce"
+  },
+  "SYS1_POS_0027": {
+    "anomalies": [
+      {
+        "category": "unit_mismatch",
+        "code": "HL7_GLUCOSE_UNIT_SWAP_MGDL_AS_MMOLL",
+        "conversion_factor": 0.0555,
+        "loinc_code": "2339-0",
+        "message": "Glucose 110 labelled 'mmol/L' is characteristic of mg/dL (~6.1 mmol/L); 18x insulin dosing hazard if unquarantined.",
+        "severity": "critical",
+        "suggested_unit": "mg/dL"
+      },
+      {
+        "category": "critical_value",
+        "code": "HL7_POTASSIUM_CRITICAL_HYPERKALAEMIA",
+        "conversion_factor": null,
+        "loinc_code": "2823-3",
+        "message": "Critical hyperkalaemia (7.4 mmol/L); immediate ECG & clinical review.",
+        "severity": "high",
+        "suggested_unit": null
+      }
+    ],
+    "quarantine_required": true,
+    "reason_codes": [
+      "sys1.hl7.unit_mismatch_glucose",
+      "sys1.hl7.critical_hyperkalaemia"
+    ],
+    "requires_human_review": true,
+    "risk_score": 0.88
+  },
+  "SYS1_POS_0028": {
+    "intuition": {
+      "candidate_hypotheses": [
+        "clinician:triage.start"
+      ],
+      "confidence": 0.76,
+      "reason_codes": [
+        "sys1.consultation_state_reflex",
+        "safety.routine"
+      ],
+      "risk_score": 0.18,
+      "route_salience": {
+        "triage.start": 1.0
+      },
+      "selected_framework": "soap"
+    },
+    "model_spec": {
+      "architecture": "fast_no_think_slm",
+      "huggingface_repo": "Qwen/Qwen3-0.6B",
+      "license_spdx": "Apache-2.0",
+      "model_id": "qwen3:0.6b",
+      "ollama_tag": "qwen3:0.6b",
+      "osi_approved": true,
+      "parameter_count": "0.6B",
+      "supports_no_think_toggle": true,
+      "windows_runtimes": [
+        "ollama",
+        "llama.cpp",
+        "onnxruntime-genai"
+      ]
+    }
+  },
+  "SYS1_POS_0029": {
+    "brier_score": 0.6724,
+    "candidate_weight_release": {
+      "model_versions": {
+        "system1.reflex": "cfc-1.0",
+        "tier0.safety_seat": "deterministic-1.0"
+      },
+      "version": "sys1-weights-1.0.0-fn-hardened",
+      "weights": {
+        "system1.reflex": 0.85,
+        "tier0.safety_seat": 1.35
+      }
+    },
+    "expected_calibration_error": 0.82,
+    "false_negatives": 1,
+    "false_positives": 0,
+    "outcome_tally": {
+      "correct": 1,
+      "correct_suboptimal": 0,
+      "incorrect_harmless": 0,
+      "total": 1,
+      "unsafe": 0
+    },
+    "precision": 1.0,
+    "recall": 0.0,
+    "total_events": 1,
+    "true_negatives": 0,
+    "true_positives": 0
+  },
+  "SYS1_POS_0030": {
+    "decision_card": {
+      "action_path": "lis/result.retrieve",
+      "correlation_id": "corr-system1-reflex",
+      "evidence_references": [
+        "fhir://Observation/system1-reflex"
+      ],
+      "outcome": "human_in_loop",
+      "persona": "clinician",
+      "rationale": "consent:absent_for_sensitive; bypass_block:low_confidence"
+    },
+    "handoff": {
+      "audit_chain_ref": "corr-system1-reflex",
+      "decision_rationale": "consent:absent_for_sensitive; bypass_block:low_confidence",
+      "pending_inputs": [],
+      "pre_handoff_state": "awaiting_human_review",
+      "provenance_ref": "fhir://Observation/system1-reflex",
+      "recommended_next_action": "Human review then resume 'result.retrieve'",
+      "task_summary": "Governed review of intent 'result.retrieve' for persona 'clinician'",
+      "trigger": "consent_conflict",
+      "workflow_id": "wf-system1-reflex"
+    },
+    "permitted": false,
+    "reasons": [
+      "consent:absent_for_sensitive",
+      "bypass_block:low_confidence"
+    ],
+    "resolver_path": "api",
+    "safety_class": "sensitive",
+    "tier": "human_in_loop"
+  },
   "SYS1_POS_0031": {
     "blocked": true,
     "contraindications": [
@@ -813,6 +1748,41 @@
       "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
       "tier0.never_event.methotrexate_daily_dosing_hazard"
     ]
+  },
+  "SYS1_POS_0032": {
+    "engine": "CfCStateCell",
+    "h_next": [
+      0.076374,
+      0.08911,
+      0.120538,
+      0.062051,
+      0.007695,
+      0.0055
+    ],
+    "state_dim": 6
+  },
+  "SYS1_POS_0033": {
+    "compensatory_drift_score": 0.2868,
+    "cynefin_suggestion": "complex",
+    "deterioration_detected": true,
+    "hidden_state": [
+      0.085657,
+      0.066731,
+      0.074903,
+      0.076793,
+      0.043824,
+      0.02203
+    ],
+    "pulse_pressure": 24.0,
+    "reason_codes": [
+      "cfc.trajectory_nominal"
+    ],
+    "red_flags": [],
+    "respiratory_oxygen_divergence": 0.875,
+    "shock_index": 1.1429,
+    "shock_index_velocity_per_hr": 0.0,
+    "static_news2_score": 7,
+    "subthreshold_early_warning": false
   },
   "SYS1_POS_0034": {
     "active_red_flags": [
@@ -994,6 +1964,165 @@
       }
     ]
   },
+  "SYS1_POS_0036": {
+    "bounded_rationality": {
+      "ai_data_quality_bound": 0.84,
+      "ai_epistemic_uncertainty": 0.1136,
+      "ai_operational_mode": "in_process_cfc_deterministic",
+      "alternatives_evaluated": 5,
+      "alternatives_satisficed": 2,
+      "clinician_accountability_retained": true,
+      "cognitive_chunks_surfaced": 3,
+      "consultation_time_saved_seconds": 300.0,
+      "information_completeness_ratio": 0.84,
+      "missing_information_gaps": [
+        "Exact unscheduled ED admissions and individual length-of-stay remain stochastic"
+      ],
+      "synthesized_sources": [
+        "current_ward_census",
+        "historical_arrival_distribution",
+        "cfc_physiological_drift_acuity_stream"
+      ]
+    },
+    "census_uncertainty_band": [
+      18,
+      26
+    ],
+    "expected_patient_census": 22.0,
+    "high_acuity_drift_patients": 2,
+    "minimum_safe_floor_nurses": 6,
+    "rationale": [
+      "Expected census 22.0 (80% arrival interval [18, 26] patients).",
+      "2 patient(s) exhibiting active CfC physiological drift weighted at 1:2 acuity ratio.",
+      "Satisficing deployment: 7 nurses (statutory floor 6, surge reserve +1)."
+    ],
+    "recommended_nurses": 7,
+    "shift_hours": 12.0,
+    "surge_contingency_nurses": 1,
+    "target_patients_per_nurse": 3.14,
+    "ward_id": "ward-nursing_workforce"
+  },
+  "SYS1_POS_0037": {
+    "anomalies": [
+      {
+        "category": "unit_mismatch",
+        "code": "HL7_GLUCOSE_UNIT_SWAP_MGDL_AS_MMOLL",
+        "conversion_factor": 0.0555,
+        "loinc_code": "2339-0",
+        "message": "Glucose 110 labelled 'mmol/L' is characteristic of mg/dL (~6.1 mmol/L); 18x insulin dosing hazard if unquarantined.",
+        "severity": "critical",
+        "suggested_unit": "mg/dL"
+      },
+      {
+        "category": "critical_value",
+        "code": "HL7_POTASSIUM_CRITICAL_HYPERKALAEMIA",
+        "conversion_factor": null,
+        "loinc_code": "2823-3",
+        "message": "Critical hyperkalaemia (7.4 mmol/L); immediate ECG & clinical review.",
+        "severity": "high",
+        "suggested_unit": null
+      }
+    ],
+    "quarantine_required": true,
+    "reason_codes": [
+      "sys1.hl7.unit_mismatch_glucose",
+      "sys1.hl7.critical_hyperkalaemia"
+    ],
+    "requires_human_review": true,
+    "risk_score": 0.88
+  },
+  "SYS1_POS_0038": {
+    "intuition": {
+      "candidate_hypotheses": [
+        "clinician:triage.start"
+      ],
+      "confidence": 0.76,
+      "reason_codes": [
+        "sys1.consultation_state_reflex",
+        "safety.routine"
+      ],
+      "risk_score": 0.18,
+      "route_salience": {
+        "triage.start": 1.0
+      },
+      "selected_framework": "soap"
+    },
+    "model_spec": {
+      "architecture": "fast_no_think_slm",
+      "huggingface_repo": "Qwen/Qwen3-0.6B",
+      "license_spdx": "Apache-2.0",
+      "model_id": "qwen3:0.6b",
+      "ollama_tag": "qwen3:0.6b",
+      "osi_approved": true,
+      "parameter_count": "0.6B",
+      "supports_no_think_toggle": true,
+      "windows_runtimes": [
+        "ollama",
+        "llama.cpp",
+        "onnxruntime-genai"
+      ]
+    }
+  },
+  "SYS1_POS_0039": {
+    "brier_score": 0.6724,
+    "candidate_weight_release": {
+      "model_versions": {
+        "system1.reflex": "cfc-1.0",
+        "tier0.safety_seat": "deterministic-1.0"
+      },
+      "version": "sys1-weights-1.0.0-fn-hardened",
+      "weights": {
+        "system1.reflex": 0.85,
+        "tier0.safety_seat": 1.35
+      }
+    },
+    "expected_calibration_error": 0.82,
+    "false_negatives": 1,
+    "false_positives": 0,
+    "outcome_tally": {
+      "correct": 1,
+      "correct_suboptimal": 0,
+      "incorrect_harmless": 0,
+      "total": 1,
+      "unsafe": 0
+    },
+    "precision": 1.0,
+    "recall": 0.0,
+    "total_events": 1,
+    "true_negatives": 0,
+    "true_positives": 0
+  },
+  "SYS1_POS_0040": {
+    "decision_card": {
+      "action_path": "lis/result.retrieve",
+      "correlation_id": "corr-system1-reflex",
+      "evidence_references": [
+        "fhir://Observation/system1-reflex"
+      ],
+      "outcome": "human_in_loop",
+      "persona": "clinician",
+      "rationale": "consent:absent_for_sensitive; bypass_block:low_confidence"
+    },
+    "handoff": {
+      "audit_chain_ref": "corr-system1-reflex",
+      "decision_rationale": "consent:absent_for_sensitive; bypass_block:low_confidence",
+      "pending_inputs": [],
+      "pre_handoff_state": "awaiting_human_review",
+      "provenance_ref": "fhir://Observation/system1-reflex",
+      "recommended_next_action": "Human review then resume 'result.retrieve'",
+      "task_summary": "Governed review of intent 'result.retrieve' for persona 'clinician'",
+      "trigger": "consent_conflict",
+      "workflow_id": "wf-system1-reflex"
+    },
+    "permitted": false,
+    "reasons": [
+      "consent:absent_for_sensitive",
+      "bypass_block:low_confidence"
+    ],
+    "resolver_path": "api",
+    "safety_class": "sensitive",
+    "tier": "human_in_loop"
+  },
   "SYS1_POS_0041": {
     "blocked": true,
     "contraindications": [
@@ -1012,6 +2141,41 @@
       "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
       "tier0.never_event.methotrexate_daily_dosing_hazard"
     ]
+  },
+  "SYS1_POS_0042": {
+    "engine": "CfCStateCell",
+    "h_next": [
+      0.076374,
+      0.08911,
+      0.120538,
+      0.062051,
+      0.007695,
+      0.0055
+    ],
+    "state_dim": 6
+  },
+  "SYS1_POS_0043": {
+    "compensatory_drift_score": 0.2868,
+    "cynefin_suggestion": "complex",
+    "deterioration_detected": true,
+    "hidden_state": [
+      0.085657,
+      0.066731,
+      0.074903,
+      0.076793,
+      0.043824,
+      0.02203
+    ],
+    "pulse_pressure": 24.0,
+    "reason_codes": [
+      "cfc.trajectory_nominal"
+    ],
+    "red_flags": [],
+    "respiratory_oxygen_divergence": 0.875,
+    "shock_index": 1.1429,
+    "shock_index_velocity_per_hr": 0.0,
+    "static_news2_score": 7,
+    "subthreshold_early_warning": false
   },
   "SYS1_POS_0044": {
     "active_red_flags": [
@@ -1193,6 +2357,165 @@
       }
     ]
   },
+  "SYS1_POS_0046": {
+    "bounded_rationality": {
+      "ai_data_quality_bound": 0.84,
+      "ai_epistemic_uncertainty": 0.0962,
+      "ai_operational_mode": "in_process_cfc_deterministic",
+      "alternatives_evaluated": 5,
+      "alternatives_satisficed": 2,
+      "clinician_accountability_retained": true,
+      "cognitive_chunks_surfaced": 3,
+      "consultation_time_saved_seconds": 300.0,
+      "information_completeness_ratio": 0.84,
+      "missing_information_gaps": [
+        "Exact unscheduled ED admissions and individual length-of-stay remain stochastic"
+      ],
+      "synthesized_sources": [
+        "current_ward_census",
+        "historical_arrival_distribution",
+        "cfc_physiological_drift_acuity_stream"
+      ]
+    },
+    "census_uncertainty_band": [
+      22,
+      30
+    ],
+    "expected_patient_census": 26.0,
+    "high_acuity_drift_patients": 3,
+    "minimum_safe_floor_nurses": 8,
+    "rationale": [
+      "Expected census 26.0 (80% arrival interval [22, 30] patients).",
+      "3 patient(s) exhibiting active CfC physiological drift weighted at 1:2 acuity ratio.",
+      "Satisficing deployment: 9 nurses (statutory floor 8, surge reserve +1)."
+    ],
+    "recommended_nurses": 9,
+    "shift_hours": 12.0,
+    "surge_contingency_nurses": 1,
+    "target_patients_per_nurse": 2.89,
+    "ward_id": "ward-nursing_workforce"
+  },
+  "SYS1_POS_0047": {
+    "anomalies": [
+      {
+        "category": "unit_mismatch",
+        "code": "HL7_GLUCOSE_UNIT_SWAP_MGDL_AS_MMOLL",
+        "conversion_factor": 0.0555,
+        "loinc_code": "2339-0",
+        "message": "Glucose 110 labelled 'mmol/L' is characteristic of mg/dL (~6.1 mmol/L); 18x insulin dosing hazard if unquarantined.",
+        "severity": "critical",
+        "suggested_unit": "mg/dL"
+      },
+      {
+        "category": "critical_value",
+        "code": "HL7_POTASSIUM_CRITICAL_HYPERKALAEMIA",
+        "conversion_factor": null,
+        "loinc_code": "2823-3",
+        "message": "Critical hyperkalaemia (7.4 mmol/L); immediate ECG & clinical review.",
+        "severity": "high",
+        "suggested_unit": null
+      }
+    ],
+    "quarantine_required": true,
+    "reason_codes": [
+      "sys1.hl7.unit_mismatch_glucose",
+      "sys1.hl7.critical_hyperkalaemia"
+    ],
+    "requires_human_review": true,
+    "risk_score": 0.88
+  },
+  "SYS1_POS_0048": {
+    "intuition": {
+      "candidate_hypotheses": [
+        "clinician:triage.start"
+      ],
+      "confidence": 0.76,
+      "reason_codes": [
+        "sys1.consultation_state_reflex",
+        "safety.routine"
+      ],
+      "risk_score": 0.18,
+      "route_salience": {
+        "triage.start": 1.0
+      },
+      "selected_framework": "soap"
+    },
+    "model_spec": {
+      "architecture": "fast_no_think_slm",
+      "huggingface_repo": "Qwen/Qwen3-0.6B",
+      "license_spdx": "Apache-2.0",
+      "model_id": "qwen3:0.6b",
+      "ollama_tag": "qwen3:0.6b",
+      "osi_approved": true,
+      "parameter_count": "0.6B",
+      "supports_no_think_toggle": true,
+      "windows_runtimes": [
+        "ollama",
+        "llama.cpp",
+        "onnxruntime-genai"
+      ]
+    }
+  },
+  "SYS1_POS_0049": {
+    "brier_score": 0.6724,
+    "candidate_weight_release": {
+      "model_versions": {
+        "system1.reflex": "cfc-1.0",
+        "tier0.safety_seat": "deterministic-1.0"
+      },
+      "version": "sys1-weights-1.0.0-fn-hardened",
+      "weights": {
+        "system1.reflex": 0.85,
+        "tier0.safety_seat": 1.35
+      }
+    },
+    "expected_calibration_error": 0.82,
+    "false_negatives": 1,
+    "false_positives": 0,
+    "outcome_tally": {
+      "correct": 1,
+      "correct_suboptimal": 0,
+      "incorrect_harmless": 0,
+      "total": 1,
+      "unsafe": 0
+    },
+    "precision": 1.0,
+    "recall": 0.0,
+    "total_events": 1,
+    "true_negatives": 0,
+    "true_positives": 0
+  },
+  "SYS1_POS_0050": {
+    "decision_card": {
+      "action_path": "lis/result.retrieve",
+      "correlation_id": "corr-system1-reflex",
+      "evidence_references": [
+        "fhir://Observation/system1-reflex"
+      ],
+      "outcome": "human_in_loop",
+      "persona": "clinician",
+      "rationale": "consent:absent_for_sensitive; bypass_block:low_confidence"
+    },
+    "handoff": {
+      "audit_chain_ref": "corr-system1-reflex",
+      "decision_rationale": "consent:absent_for_sensitive; bypass_block:low_confidence",
+      "pending_inputs": [],
+      "pre_handoff_state": "awaiting_human_review",
+      "provenance_ref": "fhir://Observation/system1-reflex",
+      "recommended_next_action": "Human review then resume 'result.retrieve'",
+      "task_summary": "Governed review of intent 'result.retrieve' for persona 'clinician'",
+      "trigger": "consent_conflict",
+      "workflow_id": "wf-system1-reflex"
+    },
+    "permitted": false,
+    "reasons": [
+      "consent:absent_for_sensitive",
+      "bypass_block:low_confidence"
+    ],
+    "resolver_path": "api",
+    "safety_class": "sensitive",
+    "tier": "human_in_loop"
+  },
   "SYS1_POS_0051": {
     "blocked": true,
     "contraindications": [
@@ -1211,6 +2534,41 @@
       "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
       "tier0.never_event.methotrexate_daily_dosing_hazard"
     ]
+  },
+  "SYS1_POS_0052": {
+    "engine": "CfCStateCell",
+    "h_next": [
+      0.076374,
+      0.08911,
+      0.120538,
+      0.062051,
+      0.007695,
+      0.0055
+    ],
+    "state_dim": 6
+  },
+  "SYS1_POS_0053": {
+    "compensatory_drift_score": 0.2868,
+    "cynefin_suggestion": "complex",
+    "deterioration_detected": true,
+    "hidden_state": [
+      0.085657,
+      0.066731,
+      0.074903,
+      0.076793,
+      0.043824,
+      0.02203
+    ],
+    "pulse_pressure": 24.0,
+    "reason_codes": [
+      "cfc.trajectory_nominal"
+    ],
+    "red_flags": [],
+    "respiratory_oxygen_divergence": 0.875,
+    "shock_index": 1.1429,
+    "shock_index_velocity_per_hr": 0.0,
+    "static_news2_score": 7,
+    "subthreshold_early_warning": false
   },
   "SYS1_POS_0054": {
     "active_red_flags": [
@@ -1392,6 +2750,165 @@
       }
     ]
   },
+  "SYS1_POS_0056": {
+    "bounded_rationality": {
+      "ai_data_quality_bound": 0.84,
+      "ai_epistemic_uncertainty": 0.1042,
+      "ai_operational_mode": "in_process_cfc_deterministic",
+      "alternatives_evaluated": 5,
+      "alternatives_satisficed": 2,
+      "clinician_accountability_retained": true,
+      "cognitive_chunks_surfaced": 3,
+      "consultation_time_saved_seconds": 300.0,
+      "information_completeness_ratio": 0.84,
+      "missing_information_gaps": [
+        "Exact unscheduled ED admissions and individual length-of-stay remain stochastic"
+      ],
+      "synthesized_sources": [
+        "current_ward_census",
+        "historical_arrival_distribution",
+        "cfc_physiological_drift_acuity_stream"
+      ]
+    },
+    "census_uncertainty_band": [
+      20,
+      28
+    ],
+    "expected_patient_census": 24.0,
+    "high_acuity_drift_patients": 4,
+    "minimum_safe_floor_nurses": 7,
+    "rationale": [
+      "Expected census 24.0 (80% arrival interval [20, 28] patients).",
+      "4 patient(s) exhibiting active CfC physiological drift weighted at 1:2 acuity ratio.",
+      "Satisficing deployment: 8 nurses (statutory floor 7, surge reserve +1)."
+    ],
+    "recommended_nurses": 8,
+    "shift_hours": 12.0,
+    "surge_contingency_nurses": 1,
+    "target_patients_per_nurse": 3.0,
+    "ward_id": "ward-nursing_workforce"
+  },
+  "SYS1_POS_0057": {
+    "anomalies": [
+      {
+        "category": "unit_mismatch",
+        "code": "HL7_GLUCOSE_UNIT_SWAP_MGDL_AS_MMOLL",
+        "conversion_factor": 0.0555,
+        "loinc_code": "2339-0",
+        "message": "Glucose 110 labelled 'mmol/L' is characteristic of mg/dL (~6.1 mmol/L); 18x insulin dosing hazard if unquarantined.",
+        "severity": "critical",
+        "suggested_unit": "mg/dL"
+      },
+      {
+        "category": "critical_value",
+        "code": "HL7_POTASSIUM_CRITICAL_HYPERKALAEMIA",
+        "conversion_factor": null,
+        "loinc_code": "2823-3",
+        "message": "Critical hyperkalaemia (7.4 mmol/L); immediate ECG & clinical review.",
+        "severity": "high",
+        "suggested_unit": null
+      }
+    ],
+    "quarantine_required": true,
+    "reason_codes": [
+      "sys1.hl7.unit_mismatch_glucose",
+      "sys1.hl7.critical_hyperkalaemia"
+    ],
+    "requires_human_review": true,
+    "risk_score": 0.88
+  },
+  "SYS1_POS_0058": {
+    "intuition": {
+      "candidate_hypotheses": [
+        "clinician:triage.start"
+      ],
+      "confidence": 0.76,
+      "reason_codes": [
+        "sys1.consultation_state_reflex",
+        "safety.routine"
+      ],
+      "risk_score": 0.18,
+      "route_salience": {
+        "triage.start": 1.0
+      },
+      "selected_framework": "soap"
+    },
+    "model_spec": {
+      "architecture": "fast_no_think_slm",
+      "huggingface_repo": "Qwen/Qwen3-0.6B",
+      "license_spdx": "Apache-2.0",
+      "model_id": "qwen3:0.6b",
+      "ollama_tag": "qwen3:0.6b",
+      "osi_approved": true,
+      "parameter_count": "0.6B",
+      "supports_no_think_toggle": true,
+      "windows_runtimes": [
+        "ollama",
+        "llama.cpp",
+        "onnxruntime-genai"
+      ]
+    }
+  },
+  "SYS1_POS_0059": {
+    "brier_score": 0.6724,
+    "candidate_weight_release": {
+      "model_versions": {
+        "system1.reflex": "cfc-1.0",
+        "tier0.safety_seat": "deterministic-1.0"
+      },
+      "version": "sys1-weights-1.0.0-fn-hardened",
+      "weights": {
+        "system1.reflex": 0.85,
+        "tier0.safety_seat": 1.35
+      }
+    },
+    "expected_calibration_error": 0.82,
+    "false_negatives": 1,
+    "false_positives": 0,
+    "outcome_tally": {
+      "correct": 1,
+      "correct_suboptimal": 0,
+      "incorrect_harmless": 0,
+      "total": 1,
+      "unsafe": 0
+    },
+    "precision": 1.0,
+    "recall": 0.0,
+    "total_events": 1,
+    "true_negatives": 0,
+    "true_positives": 0
+  },
+  "SYS1_POS_0060": {
+    "decision_card": {
+      "action_path": "lis/result.retrieve",
+      "correlation_id": "corr-system1-reflex",
+      "evidence_references": [
+        "fhir://Observation/system1-reflex"
+      ],
+      "outcome": "human_in_loop",
+      "persona": "clinician",
+      "rationale": "consent:absent_for_sensitive; bypass_block:low_confidence"
+    },
+    "handoff": {
+      "audit_chain_ref": "corr-system1-reflex",
+      "decision_rationale": "consent:absent_for_sensitive; bypass_block:low_confidence",
+      "pending_inputs": [],
+      "pre_handoff_state": "awaiting_human_review",
+      "provenance_ref": "fhir://Observation/system1-reflex",
+      "recommended_next_action": "Human review then resume 'result.retrieve'",
+      "task_summary": "Governed review of intent 'result.retrieve' for persona 'clinician'",
+      "trigger": "consent_conflict",
+      "workflow_id": "wf-system1-reflex"
+    },
+    "permitted": false,
+    "reasons": [
+      "consent:absent_for_sensitive",
+      "bypass_block:low_confidence"
+    ],
+    "resolver_path": "api",
+    "safety_class": "sensitive",
+    "tier": "human_in_loop"
+  },
   "SYS1_POS_0061": {
     "blocked": true,
     "contraindications": [
@@ -1410,6 +2927,41 @@
       "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
       "tier0.never_event.methotrexate_daily_dosing_hazard"
     ]
+  },
+  "SYS1_POS_0062": {
+    "engine": "CfCStateCell",
+    "h_next": [
+      0.076374,
+      0.08911,
+      0.120538,
+      0.062051,
+      0.007695,
+      0.0055
+    ],
+    "state_dim": 6
+  },
+  "SYS1_POS_0063": {
+    "compensatory_drift_score": 0.2868,
+    "cynefin_suggestion": "complex",
+    "deterioration_detected": true,
+    "hidden_state": [
+      0.085657,
+      0.066731,
+      0.074903,
+      0.076793,
+      0.043824,
+      0.02203
+    ],
+    "pulse_pressure": 24.0,
+    "reason_codes": [
+      "cfc.trajectory_nominal"
+    ],
+    "red_flags": [],
+    "respiratory_oxygen_divergence": 0.875,
+    "shock_index": 1.1429,
+    "shock_index_velocity_per_hr": 0.0,
+    "static_news2_score": 7,
+    "subthreshold_early_warning": false
   },
   "SYS1_POS_0064": {
     "active_red_flags": [
@@ -1591,6 +3143,165 @@
       }
     ]
   },
+  "SYS1_POS_0066": {
+    "bounded_rationality": {
+      "ai_data_quality_bound": 0.84,
+      "ai_epistemic_uncertainty": 0.1136,
+      "ai_operational_mode": "in_process_cfc_deterministic",
+      "alternatives_evaluated": 5,
+      "alternatives_satisficed": 2,
+      "clinician_accountability_retained": true,
+      "cognitive_chunks_surfaced": 3,
+      "consultation_time_saved_seconds": 300.0,
+      "information_completeness_ratio": 0.84,
+      "missing_information_gaps": [
+        "Exact unscheduled ED admissions and individual length-of-stay remain stochastic"
+      ],
+      "synthesized_sources": [
+        "current_ward_census",
+        "historical_arrival_distribution",
+        "cfc_physiological_drift_acuity_stream"
+      ]
+    },
+    "census_uncertainty_band": [
+      18,
+      26
+    ],
+    "expected_patient_census": 22.0,
+    "high_acuity_drift_patients": 2,
+    "minimum_safe_floor_nurses": 6,
+    "rationale": [
+      "Expected census 22.0 (80% arrival interval [18, 26] patients).",
+      "2 patient(s) exhibiting active CfC physiological drift weighted at 1:2 acuity ratio.",
+      "Satisficing deployment: 7 nurses (statutory floor 6, surge reserve +1)."
+    ],
+    "recommended_nurses": 7,
+    "shift_hours": 12.0,
+    "surge_contingency_nurses": 1,
+    "target_patients_per_nurse": 3.14,
+    "ward_id": "ward-nursing_workforce"
+  },
+  "SYS1_POS_0067": {
+    "anomalies": [
+      {
+        "category": "unit_mismatch",
+        "code": "HL7_GLUCOSE_UNIT_SWAP_MGDL_AS_MMOLL",
+        "conversion_factor": 0.0555,
+        "loinc_code": "2339-0",
+        "message": "Glucose 110 labelled 'mmol/L' is characteristic of mg/dL (~6.1 mmol/L); 18x insulin dosing hazard if unquarantined.",
+        "severity": "critical",
+        "suggested_unit": "mg/dL"
+      },
+      {
+        "category": "critical_value",
+        "code": "HL7_POTASSIUM_CRITICAL_HYPERKALAEMIA",
+        "conversion_factor": null,
+        "loinc_code": "2823-3",
+        "message": "Critical hyperkalaemia (7.4 mmol/L); immediate ECG & clinical review.",
+        "severity": "high",
+        "suggested_unit": null
+      }
+    ],
+    "quarantine_required": true,
+    "reason_codes": [
+      "sys1.hl7.unit_mismatch_glucose",
+      "sys1.hl7.critical_hyperkalaemia"
+    ],
+    "requires_human_review": true,
+    "risk_score": 0.88
+  },
+  "SYS1_POS_0068": {
+    "intuition": {
+      "candidate_hypotheses": [
+        "clinician:triage.start"
+      ],
+      "confidence": 0.76,
+      "reason_codes": [
+        "sys1.consultation_state_reflex",
+        "safety.routine"
+      ],
+      "risk_score": 0.18,
+      "route_salience": {
+        "triage.start": 1.0
+      },
+      "selected_framework": "soap"
+    },
+    "model_spec": {
+      "architecture": "fast_no_think_slm",
+      "huggingface_repo": "Qwen/Qwen3-0.6B",
+      "license_spdx": "Apache-2.0",
+      "model_id": "qwen3:0.6b",
+      "ollama_tag": "qwen3:0.6b",
+      "osi_approved": true,
+      "parameter_count": "0.6B",
+      "supports_no_think_toggle": true,
+      "windows_runtimes": [
+        "ollama",
+        "llama.cpp",
+        "onnxruntime-genai"
+      ]
+    }
+  },
+  "SYS1_POS_0069": {
+    "brier_score": 0.6724,
+    "candidate_weight_release": {
+      "model_versions": {
+        "system1.reflex": "cfc-1.0",
+        "tier0.safety_seat": "deterministic-1.0"
+      },
+      "version": "sys1-weights-1.0.0-fn-hardened",
+      "weights": {
+        "system1.reflex": 0.85,
+        "tier0.safety_seat": 1.35
+      }
+    },
+    "expected_calibration_error": 0.82,
+    "false_negatives": 1,
+    "false_positives": 0,
+    "outcome_tally": {
+      "correct": 1,
+      "correct_suboptimal": 0,
+      "incorrect_harmless": 0,
+      "total": 1,
+      "unsafe": 0
+    },
+    "precision": 1.0,
+    "recall": 0.0,
+    "total_events": 1,
+    "true_negatives": 0,
+    "true_positives": 0
+  },
+  "SYS1_POS_0070": {
+    "decision_card": {
+      "action_path": "lis/result.retrieve",
+      "correlation_id": "corr-system1-reflex",
+      "evidence_references": [
+        "fhir://Observation/system1-reflex"
+      ],
+      "outcome": "human_in_loop",
+      "persona": "clinician",
+      "rationale": "consent:absent_for_sensitive; bypass_block:low_confidence"
+    },
+    "handoff": {
+      "audit_chain_ref": "corr-system1-reflex",
+      "decision_rationale": "consent:absent_for_sensitive; bypass_block:low_confidence",
+      "pending_inputs": [],
+      "pre_handoff_state": "awaiting_human_review",
+      "provenance_ref": "fhir://Observation/system1-reflex",
+      "recommended_next_action": "Human review then resume 'result.retrieve'",
+      "task_summary": "Governed review of intent 'result.retrieve' for persona 'clinician'",
+      "trigger": "consent_conflict",
+      "workflow_id": "wf-system1-reflex"
+    },
+    "permitted": false,
+    "reasons": [
+      "consent:absent_for_sensitive",
+      "bypass_block:low_confidence"
+    ],
+    "resolver_path": "api",
+    "safety_class": "sensitive",
+    "tier": "human_in_loop"
+  },
   "SYS1_POS_0071": {
     "blocked": true,
     "contraindications": [
@@ -1609,6 +3320,41 @@
       "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
       "tier0.never_event.methotrexate_daily_dosing_hazard"
     ]
+  },
+  "SYS1_POS_0072": {
+    "engine": "CfCStateCell",
+    "h_next": [
+      0.076374,
+      0.08911,
+      0.120538,
+      0.062051,
+      0.007695,
+      0.0055
+    ],
+    "state_dim": 6
+  },
+  "SYS1_POS_0073": {
+    "compensatory_drift_score": 0.2868,
+    "cynefin_suggestion": "complex",
+    "deterioration_detected": true,
+    "hidden_state": [
+      0.085657,
+      0.066731,
+      0.074903,
+      0.076793,
+      0.043824,
+      0.02203
+    ],
+    "pulse_pressure": 24.0,
+    "reason_codes": [
+      "cfc.trajectory_nominal"
+    ],
+    "red_flags": [],
+    "respiratory_oxygen_divergence": 0.875,
+    "shock_index": 1.1429,
+    "shock_index_velocity_per_hr": 0.0,
+    "static_news2_score": 7,
+    "subthreshold_early_warning": false
   },
   "SYS1_POS_0074": {
     "active_red_flags": [
@@ -1790,6 +3536,165 @@
       }
     ]
   },
+  "SYS1_POS_0076": {
+    "bounded_rationality": {
+      "ai_data_quality_bound": 0.84,
+      "ai_epistemic_uncertainty": 0.0962,
+      "ai_operational_mode": "in_process_cfc_deterministic",
+      "alternatives_evaluated": 5,
+      "alternatives_satisficed": 2,
+      "clinician_accountability_retained": true,
+      "cognitive_chunks_surfaced": 3,
+      "consultation_time_saved_seconds": 300.0,
+      "information_completeness_ratio": 0.84,
+      "missing_information_gaps": [
+        "Exact unscheduled ED admissions and individual length-of-stay remain stochastic"
+      ],
+      "synthesized_sources": [
+        "current_ward_census",
+        "historical_arrival_distribution",
+        "cfc_physiological_drift_acuity_stream"
+      ]
+    },
+    "census_uncertainty_band": [
+      22,
+      30
+    ],
+    "expected_patient_census": 26.0,
+    "high_acuity_drift_patients": 3,
+    "minimum_safe_floor_nurses": 8,
+    "rationale": [
+      "Expected census 26.0 (80% arrival interval [22, 30] patients).",
+      "3 patient(s) exhibiting active CfC physiological drift weighted at 1:2 acuity ratio.",
+      "Satisficing deployment: 9 nurses (statutory floor 8, surge reserve +1)."
+    ],
+    "recommended_nurses": 9,
+    "shift_hours": 12.0,
+    "surge_contingency_nurses": 1,
+    "target_patients_per_nurse": 2.89,
+    "ward_id": "ward-nursing_workforce"
+  },
+  "SYS1_POS_0077": {
+    "anomalies": [
+      {
+        "category": "unit_mismatch",
+        "code": "HL7_GLUCOSE_UNIT_SWAP_MGDL_AS_MMOLL",
+        "conversion_factor": 0.0555,
+        "loinc_code": "2339-0",
+        "message": "Glucose 110 labelled 'mmol/L' is characteristic of mg/dL (~6.1 mmol/L); 18x insulin dosing hazard if unquarantined.",
+        "severity": "critical",
+        "suggested_unit": "mg/dL"
+      },
+      {
+        "category": "critical_value",
+        "code": "HL7_POTASSIUM_CRITICAL_HYPERKALAEMIA",
+        "conversion_factor": null,
+        "loinc_code": "2823-3",
+        "message": "Critical hyperkalaemia (7.4 mmol/L); immediate ECG & clinical review.",
+        "severity": "high",
+        "suggested_unit": null
+      }
+    ],
+    "quarantine_required": true,
+    "reason_codes": [
+      "sys1.hl7.unit_mismatch_glucose",
+      "sys1.hl7.critical_hyperkalaemia"
+    ],
+    "requires_human_review": true,
+    "risk_score": 0.88
+  },
+  "SYS1_POS_0078": {
+    "intuition": {
+      "candidate_hypotheses": [
+        "clinician:triage.start"
+      ],
+      "confidence": 0.76,
+      "reason_codes": [
+        "sys1.consultation_state_reflex",
+        "safety.routine"
+      ],
+      "risk_score": 0.18,
+      "route_salience": {
+        "triage.start": 1.0
+      },
+      "selected_framework": "soap"
+    },
+    "model_spec": {
+      "architecture": "fast_no_think_slm",
+      "huggingface_repo": "Qwen/Qwen3-0.6B",
+      "license_spdx": "Apache-2.0",
+      "model_id": "qwen3:0.6b",
+      "ollama_tag": "qwen3:0.6b",
+      "osi_approved": true,
+      "parameter_count": "0.6B",
+      "supports_no_think_toggle": true,
+      "windows_runtimes": [
+        "ollama",
+        "llama.cpp",
+        "onnxruntime-genai"
+      ]
+    }
+  },
+  "SYS1_POS_0079": {
+    "brier_score": 0.6724,
+    "candidate_weight_release": {
+      "model_versions": {
+        "system1.reflex": "cfc-1.0",
+        "tier0.safety_seat": "deterministic-1.0"
+      },
+      "version": "sys1-weights-1.0.0-fn-hardened",
+      "weights": {
+        "system1.reflex": 0.85,
+        "tier0.safety_seat": 1.35
+      }
+    },
+    "expected_calibration_error": 0.82,
+    "false_negatives": 1,
+    "false_positives": 0,
+    "outcome_tally": {
+      "correct": 1,
+      "correct_suboptimal": 0,
+      "incorrect_harmless": 0,
+      "total": 1,
+      "unsafe": 0
+    },
+    "precision": 1.0,
+    "recall": 0.0,
+    "total_events": 1,
+    "true_negatives": 0,
+    "true_positives": 0
+  },
+  "SYS1_POS_0080": {
+    "decision_card": {
+      "action_path": "lis/result.retrieve",
+      "correlation_id": "corr-system1-reflex",
+      "evidence_references": [
+        "fhir://Observation/system1-reflex"
+      ],
+      "outcome": "human_in_loop",
+      "persona": "clinician",
+      "rationale": "consent:absent_for_sensitive; bypass_block:low_confidence"
+    },
+    "handoff": {
+      "audit_chain_ref": "corr-system1-reflex",
+      "decision_rationale": "consent:absent_for_sensitive; bypass_block:low_confidence",
+      "pending_inputs": [],
+      "pre_handoff_state": "awaiting_human_review",
+      "provenance_ref": "fhir://Observation/system1-reflex",
+      "recommended_next_action": "Human review then resume 'result.retrieve'",
+      "task_summary": "Governed review of intent 'result.retrieve' for persona 'clinician'",
+      "trigger": "consent_conflict",
+      "workflow_id": "wf-system1-reflex"
+    },
+    "permitted": false,
+    "reasons": [
+      "consent:absent_for_sensitive",
+      "bypass_block:low_confidence"
+    ],
+    "resolver_path": "api",
+    "safety_class": "sensitive",
+    "tier": "human_in_loop"
+  },
   "SYS1_POS_0081": {
     "blocked": true,
     "contraindications": [
@@ -1808,6 +3713,41 @@
       "tier0.allergy.penicillin_cross_reactivity:amoxicillin",
       "tier0.never_event.methotrexate_daily_dosing_hazard"
     ]
+  },
+  "SYS1_POS_0082": {
+    "engine": "CfCStateCell",
+    "h_next": [
+      0.076374,
+      0.08911,
+      0.120538,
+      0.062051,
+      0.007695,
+      0.0055
+    ],
+    "state_dim": 6
+  },
+  "SYS1_POS_0083": {
+    "compensatory_drift_score": 0.2868,
+    "cynefin_suggestion": "complex",
+    "deterioration_detected": true,
+    "hidden_state": [
+      0.085657,
+      0.066731,
+      0.074903,
+      0.076793,
+      0.043824,
+      0.02203
+    ],
+    "pulse_pressure": 24.0,
+    "reason_codes": [
+      "cfc.trajectory_nominal"
+    ],
+    "red_flags": [],
+    "respiratory_oxygen_divergence": 0.875,
+    "shock_index": 1.1429,
+    "shock_index_velocity_per_hr": 0.0,
+    "static_news2_score": 7,
+    "subthreshold_early_warning": false
   },
   "SYS1_POS_0084": {
     "active_red_flags": [

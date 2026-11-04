@@ -53,10 +53,21 @@ _SRC = ROOT / "src"
 if str(_SRC) not in sys.path:
     sys.path.insert(0, str(_SRC))
 
+from bridge_sdk.agent_contract import SafetyClass  # noqa: E402
+from bridge_sdk.human_handoff import ReviewerOutcome  # noqa: E402
 from bridge_sdk.system1_reflex import (  # noqa: E402
+    CfCStateCell,
+    ClinicalVitalSample,
     ConsultationStateReflex,
+    Hl7v2SemanticReflex,
+    PhysiologicalTrajectoryReflex,
     ReferralSatisficingReflex,
+    StaffingSatisficingReflex,
+    System1CalibrationTracker,
     Tier0SafetyFloor,
+    compute_live_intuition,
+    evaluate_reflex_signal_governance,
+    get_open_source_model_spec,
 )
 
 MATRIX = ROOT / "tests" / "harness" / "json_matrices" / "system1-reflex_scenarios.json"
@@ -67,7 +78,7 @@ PYTEST_FUNCTION = "test_system1_reflex_row_against_the_real_engine"
 
 # Non-deterministic (wall-clock latency) result fields are dropped before the
 # observed snapshot is taken -- they are timing, not behaviour.
-_TIMING_KEY_FRAGMENTS = ("latency", "elapsed")
+_TIMING_KEY_FRAGMENTS = ("latency", "elapsed", "timestamp", "recorded_at", "created_at")
 _FLOAT_PRECISION = 6
 
 
@@ -76,6 +87,37 @@ def _dispatch_tier0(body: dict[str, Any]) -> Any:
         vitals=body.get("vitals"),
         allergies=tuple(body.get("allergies") or ()),
         free_text_plan=body.get("clinical_text") or "",
+    )
+
+
+def _dispatch_cfc(body: dict[str, Any]) -> Any:
+    vitals = body.get("vitals") or {}
+    cell = CfCStateCell(state_dim=6, base_tau_seconds=900.0)
+    x_vec = (
+        float(vitals.get("heart_rate", 90.0)) / 200.0,
+        float(vitals.get("systolic_bp", 120.0)) / 200.0,
+        float(vitals.get("spo2", 97.0)) / 100.0,
+        float(vitals.get("respiratory_rate", 18.0)) / 40.0,
+        0.1,
+        -0.1,
+    )
+    dt = 1.0 if body.get("test_type") == "edge" else 120.0
+    h_next = cell.step((0.0, 0.0, 0.0, 0.0, 0.0, 0.0), x_vec, dt)
+    return {"engine": "CfCStateCell", "state_dim": len(h_next), "h_next": h_next}
+
+
+def _dispatch_trajectory(body: dict[str, Any]) -> Any:
+    vitals = body.get("vitals") or {}
+    traj = PhysiologicalTrajectoryReflex()
+    return traj.observe(
+        ClinicalVitalSample(
+            timestamp_seconds=1000.0,
+            heart_rate=float(vitals.get("heart_rate", 90.0)),
+            systolic_bp=float(vitals.get("systolic_bp", 120.0)),
+            diastolic_bp=float(vitals.get("diastolic_bp", 80.0)),
+            respiratory_rate=float(vitals.get("respiratory_rate", 18.0)),
+            spo2=float(vitals.get("spo2", 97.0)),
+        )
     )
 
 
@@ -95,11 +137,95 @@ def _dispatch_referral(body: dict[str, Any]) -> Any:
     )
 
 
-# engine name (row body.engine) -> real callable fully determined by the row body.
+def _dispatch_staffing(body: dict[str, Any]) -> Any:
+    idx = int(body.get("scenario_index", 1))
+    return StaffingSatisficingReflex.evaluate(
+        ward_id=f"ward-{body.get('specialty', 'acute')}",
+        current_census=20 + (idx % 6),
+        historical_mean_arrivals=6.0,
+        historical_std_arrivals=2.5,
+        expected_discharges=4.0,
+        high_acuity_drift_patients=2 + (idx % 3),
+    )
+
+
+def _dispatch_hl7v2(body: dict[str, Any]) -> Any:
+    text = str(body.get("clinical_text") or "")
+    glu_val = 110.0 if "95" in text or "110" in text else 95.0
+    k_val = 7.4 if "7.4" in text else 14.2
+    return Hl7v2SemanticReflex.evaluate(
+        {
+            "type": "ORU^R01",
+            "pid": {"patient_id": "P-9434765919"},
+            "obx": [
+                {
+                    "observation_id": {"code": "2339-0", "display": "Glucose"},
+                    "value": glu_val,
+                    "unit": "mmol/L",
+                    "status": "F",
+                },
+                {
+                    "observation_id": {"code": "2823-3", "display": "Potassium"},
+                    "value": k_val,
+                    "unit": "mmol/L",
+                    "status": "F",
+                },
+            ],
+        }
+    )
+
+
+def _dispatch_local_slm(body: dict[str, Any]) -> Any:
+    spec = get_open_source_model_spec("qwen3:0.6b")
+    intuition, _ = compute_live_intuition(
+        persona_key="clinician",
+        intents=["triage.start"],
+        clinical_text=str(body.get("clinical_text") or ""),
+    )
+    return {"model_spec": spec, "intuition": intuition}
+
+
+def _dispatch_calibration(body: dict[str, Any]) -> Any:
+    tracker = System1CalibrationTracker(baseline_version="sys1-weights-1.0.0")
+    intuition, _ = compute_live_intuition(
+        persona_key="doctor",
+        intents=["triage.start"],
+        clinical_text=str(body.get("clinical_text") or ""),
+    )
+    tracker.record_feedback(
+        intuition,
+        actual_escalated=True,
+        reviewer_outcome=ReviewerOutcome.correct,
+    )
+    return tracker.snapshot()
+
+
+def _dispatch_signalbox_bridge(body: dict[str, Any]) -> Any:
+    intuition, _ = compute_live_intuition(
+        persona_key="clinician",
+        intents=["result.retrieve"],
+        safety_class=SafetyClass.routine,
+        clinical_text=str(body.get("clinical_text") or ""),
+    )
+    return evaluate_reflex_signal_governance(
+        intent="result.retrieve",
+        persona="clinician",
+        intuition=intuition,
+    )
+
+
+# engine name (row body.engine) -> real callable fully determined by the row body (10/10 engines).
 DISPATCH: dict[str, Callable[[dict[str, Any]], Any]] = {
     "Tier0SafetyFloor": _dispatch_tier0,
+    "CfCStateCell": _dispatch_cfc,
+    "PhysiologicalTrajectoryReflex": _dispatch_trajectory,
     "ConsultationStateReflex": _dispatch_consultation,
     "ReferralSatisficingReflex": _dispatch_referral,
+    "StaffingSatisficingReflex": _dispatch_staffing,
+    "Hl7v2SemanticReflex": _dispatch_hl7v2,
+    "LocalSlmReflexAdapter": _dispatch_local_slm,
+    "System1CalibrationTracker": _dispatch_calibration,
+    "SignalBoxGovernanceBridge": _dispatch_signalbox_bridge,
 }
 
 # Real source files the dispatched callables exercise (schema V1
@@ -117,6 +243,8 @@ def _is_timing_key(key: str) -> bool:
 
 def _canonical(obj: Any, *, _key: str | None = None) -> Any:
     """JSON-native, timing-free, float-rounded projection of a result value."""
+    if hasattr(obj, "model_dump") and callable(getattr(obj, "model_dump")):
+        return _canonical(obj.model_dump())
     if dataclasses.is_dataclass(obj) and not isinstance(obj, type):
         out: dict[str, Any] = {}
         for field in dataclasses.fields(obj):

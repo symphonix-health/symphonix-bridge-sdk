@@ -1256,7 +1256,7 @@
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
     },
     {
-      "path": "nursing-station/tests/harness/test_matrix_scenario_app_harness.py",
+      "path": "nursing-station/tests/test_api.py",
       "owner_repo": "nursing-station",
       "status": "pending_sibling_migration",
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
