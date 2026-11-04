@@ -344,12 +344,6 @@
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
     },
     {
-      "path": "cancer-pathway-tracker/frontend/src/pages/AISupportPage.tsx",
-      "owner_repo": "cancer-pathway-tracker",
-      "status": "pending_sibling_migration",
-      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
-    },
-    {
       "path": "cancer-pathway-tracker/tests/harness/reduced_json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.14col.json",
       "owner_repo": "cancer-pathway-tracker",
       "status": "pending_sibling_migration",
@@ -1226,7 +1220,7 @@
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
     },
     {
-      "path": "nursing-station/src/clinical_cohort_3tier_router.py",
+      "path": "nursing-station/tests/test_clinical_decision_record_w10.py",
       "owner_repo": "nursing-station",
       "status": "pending_sibling_migration",
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."

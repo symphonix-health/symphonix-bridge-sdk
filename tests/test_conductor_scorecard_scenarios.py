@@ -110,89 +110,56 @@ CANONICAL_SPID = "Patient/9434765919"
 CANONICAL_SPID_DIGITS = "9434765919"
 
 # Map every clinical sibling component to its real 3-tier router module path in the workspace
+# Map every applicable non-forked repository (BulletTrain + 2 spine + 43 siblings = 46/46)
+# to its real 3-tier clinical cohort router module path and PostgreSQL schema slug in the workspace
 SIBLING_ROUTER_PATHS: dict[str, tuple[str, Path]] = {
-    "triage-api": (
-        "triage_api",
-        WORKSPACE_ROOT / "triage-api" / "app" / "clinical_cohort_3tier_router.py",
-    ),
-    "enterprise-epr": (
-        "enterprise_epr",
-        WORKSPACE_ROOT
-        / "enterprise-epr"
-        / "backend"
-        / "enterprise_epr"
-        / "clinical_cohort_3tier_router.py",
-    ),
-    "pharmacy-system": (
-        "pharmacy_system",
-        WORKSPACE_ROOT / "pharmacy-system" / "backend" / "src" / "clinical_cohort_3tier_router.py",
-    ),
-    "nursing-station": (
-        "nursing_station",
-        WORKSPACE_ROOT
-        / "nursing-station"
-        / "backend"
-        / "nursing_station"
-        / "clinical_cohort_3tier_router.py",
-    ),
-    "appointment-system": (
-        "appointment_system",
-        WORKSPACE_ROOT
-        / "appointment-system"
-        / "backend"
-        / "src"
-        / "clinical_cohort_3tier_router.py",
-    ),
-    "scheduling-gateway": (
-        "scheduling_gateway",
-        WORKSPACE_ROOT
-        / "scheduling-gateway"
-        / "scheduling_gateway"
-        / "clinical_cohort_3tier_router.py",
-    ),
-    "insurance-eclaims": (
-        "insurance_eclaims",
-        WORKSPACE_ROOT
-        / "insurance-eclaims"
-        / "backend"
-        / "src"
-        / "clinical_cohort_3tier_router.py",
-    ),
-    "lis": (
-        "lis",
-        WORKSPACE_ROOT / "lis" / "backend" / "src" / "clinical_cohort_3tier_router.py",
-    ),
-    "pacs-ris": (
-        "pacs_ris",
-        WORKSPACE_ROOT / "pacs-ris" / "backend" / "src" / "clinical_cohort_3tier_router.py",
-    ),
-    "clinical-pathways": (
-        "clinical_pathways",
-        WORKSPACE_ROOT / "clinical-pathways" / "api" / "clinical_cohort_3tier_router.py",
-    ),
-    "community-nursing": (
-        "community_nursing",
-        WORKSPACE_ROOT
-        / "community-nursing"
-        / "backend"
-        / "community_nursing"
-        / "clinical_cohort_3tier_router.py",
-    ),
-    "ambulance-ems": (
-        "ambulance_ems",
-        WORKSPACE_ROOT / "ambulance-ems" / "backend" / "src" / "clinical_cohort_3tier_router.py",
-    ),
-    "patient360-assistant": (
-        "patient360_assistant",
-        WORKSPACE_ROOT
-        / "patient360-assistant"
-        / "src"
-        / "patient360_assistant"
-        / "service"
-        / "clinical_cohort_3tier_router.py",
-    ),
+    "BulletTrain": ("bullettrain", WORKSPACE_ROOT / "BulletTrain" / "services" / "client_registry" / "clinical_cohort_3tier_router.py"),
+    "HMIS": ("hmis", WORKSPACE_ROOT / "HMIS" / "backend" / "src" / "clinical_cohort_3tier_router.py"),
+    "ambient-clinical-scribe": ("ambient_scribe", WORKSPACE_ROOT / "ambient-clinical-scribe" / "src" / "clinical_cohort_3tier_router.py"),
+    "ambulance-ems": ("ambulance", WORKSPACE_ROOT / "ambulance-ems" / "src" / "clinical_cohort_3tier_router.py"),
+    "analytics-bi": ("analytics_bi", WORKSPACE_ROOT / "analytics-bi" / "backend" / "src" / "clinical_cohort_3tier_router.py"),
+    "appointment-system": ("appointment_system", WORKSPACE_ROOT / "appointment-system" / "backend" / "src" / "clinical_cohort_3tier_router.py"),
+    "blood-transfusion": ("transfusion", WORKSPACE_ROOT / "blood-transfusion" / "src" / "clinical_cohort_3tier_router.py"),
+    "cancer-pathway-tracker": ("cancer", WORKSPACE_ROOT / "cancer-pathway-tracker" / "src" / "clinical_cohort_3tier_router.py"),
+    "citizen-portal": ("citizen_portal", WORKSPACE_ROOT / "citizen-portal" / "backend" / "src" / "clinical_cohort_3tier_router.py"),
+    "clinical-pathways": ("clinical_pathways", WORKSPACE_ROOT / "clinical-pathways" / "api" / "clinical_cohort_3tier_router.py"),
+    "clinical-trial-system": ("clinical_trial", WORKSPACE_ROOT / "clinical-trial-system" / "backend" / "app" / "clinical_cohort_3tier_router.py"),
+    "community-nursing": ("community_nursing", WORKSPACE_ROOT / "community-nursing" / "src" / "clinical_cohort_3tier_router.py"),
+    "enterprise-epr": ("epr", WORKSPACE_ROOT / "enterprise-epr" / "backend" / "enterprise_epr" / "clinical_cohort_3tier_router.py"),
+    "epaccs": ("epaccs", WORKSPACE_ROOT / "epaccs" / "src" / "clinical_cohort_3tier_router.py"),
+    "eps": ("eps", WORKSPACE_ROOT / "eps" / "src" / "clinical_cohort_3tier_router.py"),
+    "erp": ("erp", WORKSPACE_ROOT / "erp" / "backend" / "src" / "clinical_cohort_3tier_router.py"),
+    "etps": ("etps", WORKSPACE_ROOT / "etps" / "src" / "clinical_cohort_3tier_router.py"),
+    "genomics-interpretation": ("genomics", WORKSPACE_ROOT / "genomics-interpretation" / "src" / "routes" / "clinical_cohort_3tier_router.py"),
+    "global-agent-registry": ("global_agent_registry", WORKSPACE_ROOT / "global-agent-registry" / "src" / "gharra" / "api" / "clinical_cohort_3tier_router.py"),
+    "gp-system": ("gp", WORKSPACE_ROOT / "gp-system" / "src" / "clinical_cohort_3tier_router.py"),
+    "hear-the-risk": ("hear_the_risk", WORKSPACE_ROOT / "hear-the-risk" / "backend" / "app" / "clinical_cohort_3tier_router.py"),
+    "helixcare-diagnostic-access-network": ("helixcare_hdan", WORKSPACE_ROOT / "helixcare-diagnostic-access-network" / "src" / "hdan_gateway" / "clinical_cohort_3tier_router.py"),
+    "insurance-eclaims": ("insurance_eclaims", WORKSPACE_ROOT / "insurance-eclaims" / "backend" / "src" / "clinical_cohort_3tier_router.py"),
+    "kenya-uhc-implementation": ("kenya_uhc", WORKSPACE_ROOT / "kenya-uhc-implementation" / "src" / "clinical_cohort_3tier_router.py"),
+    "lis": ("lis", WORKSPACE_ROOT / "lis" / "src" / "clinical_cohort_3tier_router.py"),
+    "maternity-system": ("maternity", WORKSPACE_ROOT / "maternity-system" / "src" / "clinical_cohort_3tier_router.py"),
+    "mdt-board-orchestrator": ("mdt_board", WORKSPACE_ROOT / "mdt-board-orchestrator" / "src" / "clinical_cohort_3tier_router.py"),
+    "mha-administration": ("mha", WORKSPACE_ROOT / "mha-administration" / "src" / "clinical_cohort_3tier_router.py"),
+    "mortuary-and-me": ("mortuary", WORKSPACE_ROOT / "mortuary-and-me" / "backend" / "mortuary_and_me" / "clinical_cohort_3tier_router.py"),
+    "nexus-a2a-protocol": ("nexus_a2a", WORKSPACE_ROOT / "nexus-a2a-protocol" / "shared" / "on_demand_gateway" / "app" / "clinical_cohort_3tier_router.py"),
+    "nursing-station": ("nursing", WORKSPACE_ROOT / "nursing-station" / "src" / "clinical_cohort_3tier_router.py"),
+    "ormdet-governance-console": ("ormdet", WORKSPACE_ROOT / "ormdet-governance-console" / "backend" / "src" / "clinical_cohort_3tier_router.py"),
+    "outbreak-management": ("outbreak", WORKSPACE_ROOT / "outbreak-management" / "src" / "clinical_cohort_3tier_router.py"),
+    "pacs-ris": ("pacs", WORKSPACE_ROOT / "pacs-ris" / "src" / "clinical_cohort_3tier_router.py"),
+    "patient360-assistant": ("p360", WORKSPACE_ROOT / "patient360-assistant" / "src" / "patient360_assistant" / "service" / "clinical_cohort_3tier_router.py"),
+    "pharmacy-system": ("pharmacy", WORKSPACE_ROOT / "pharmacy-system" / "src" / "clinical_cohort_3tier_router.py"),
+    "picis-system": ("picis", WORKSPACE_ROOT / "picis-system" / "src" / "picis" / "clinical_cohort_3tier_router.py"),
+    "provider-portal": ("provider_portal", WORKSPACE_ROOT / "provider-portal" / "backend" / "src" / "clinical_cohort_3tier_router.py"),
+    "rehabilitation": ("rehabilitation", WORKSPACE_ROOT / "rehabilitation" / "backend" / "src" / "clinical_cohort_3tier_router.py"),
+    "renal-dialysis-coordination": ("renal", WORKSPACE_ROOT / "renal-dialysis-coordination" / "src" / "clinical_cohort_3tier_router.py"),
+    "scheduling-gateway": ("scheduling", WORKSPACE_ROOT / "scheduling-gateway" / "scheduling_gateway" / "clinical_cohort_3tier_router.py"),
+    "screening-recall": ("screening_recall", WORKSPACE_ROOT / "screening-recall" / "src" / "clinical_cohort_3tier_router.py"),
+    "supply-chain-erp": ("supply_chain_erp", WORKSPACE_ROOT / "supply-chain-erp" / "backend" / "src" / "app" / "clinical_cohort_3tier_router.py"),
+    "tool-library": ("tool_library", WORKSPACE_ROOT / "tool-library" / "backend" / "src" / "clinical_cohort_3tier_router.py"),
+    "triage-api": ("triage", WORKSPACE_ROOT / "triage-api" / "app" / "clinical_cohort_3tier_router.py"),
+    "vr-therapy": ("vr_therapy", WORKSPACE_ROOT / "vr-therapy" / "backend" / "src" / "clinical_cohort_3tier_router.py"),
 }
-
 
 def _init_sibling_3tier_sqlite(db_file: Path, service_name: str) -> None:
     """Provision a real SQLite WAL 3-tier clinical database with `patients`,
@@ -224,7 +191,13 @@ def _init_sibling_3tier_sqlite(db_file: Path, service_name: str) -> None:
                 client_registry_fk_verified INTEGER NOT NULL DEFAULT 1,
                 archived_at TEXT,
                 archive_reason TEXT,
-                synced_at TEXT NOT NULL DEFAULT '2026-11-03T11:00:00Z'
+                synced_at TEXT NOT NULL DEFAULT '2026-11-03T11:00:00Z',
+                primary_icd10_code TEXT NOT NULL DEFAULT 'I10',
+                primary_diagnosis_name TEXT NOT NULL DEFAULT 'Essential hypertension and acute longitudinal monitoring',
+                medical_specialty TEXT NOT NULL DEFAULT 'Internal Medicine / Acute Care',
+                marital_status TEXT NOT NULL DEFAULT 'MARRIED',
+                insurance_coverage TEXT NOT NULL DEFAULT 'NHS_UNIVERSAL',
+                lives_alone INTEGER NOT NULL DEFAULT 0
             );
             CREATE TRIGGER IF NOT EXISTS trg_forbid_sibling_patient_delete
             BEFORE DELETE ON patients
@@ -249,6 +222,15 @@ def _init_sibling_3tier_sqlite(db_file: Path, service_name: str) -> None:
                 archived_at TEXT,
                 archive_reason TEXT,
                 created_at TEXT NOT NULL DEFAULT '2026-11-03T11:00:00Z',
+                initial_evlw_ml_kg REAL NOT NULL DEFAULT 7.2,
+                serum_creatinine_mg_dl REAL NOT NULL DEFAULT 1.05,
+                respiratory_rate_bpm REAL NOT NULL DEFAULT 18.0,
+                spo2_pct REAL NOT NULL DEFAULT 96.5,
+                admission_type TEXT NOT NULL DEFAULT 'EW EMER.',
+                care_unit TEXT NOT NULL DEFAULT 'MICU',
+                clinical_presentation_summary TEXT NOT NULL DEFAULT 'Acute clinical admission under continuous-discrete state-space monitoring.',
+                clinical_keywords_or_concepts TEXT NOT NULL DEFAULT 'hemodynamic monitoring, lactate, egfr, kalman state estimation',
+                source_clinical_attributes_json TEXT NOT NULL DEFAULT '{}',
                 FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT
             );
             CREATE TRIGGER IF NOT EXISTS trg_forbid_clinical_episode_delete
@@ -494,7 +476,7 @@ def test_CON_DISC_003_sibling_capability_and_boundary_classification() -> None:
     for topo in ("Topology A", "Topology B", "Topology C", "Topology D"):
         assert topo in sib_doc
     manifests = all_conductor_manifests()
-    assert len(manifests) == 16
+    assert len(manifests) == 47
     assert "enterprise-epr" in manifests
     assert "pharmacy-system" in manifests
     assert "appointment-system" in manifests
@@ -518,7 +500,7 @@ def test_CON_DISC_005_local_only_and_branch_divergence_reconciliation() -> None:
     assert "symphonix-demo-tunnel" in inv_doc
     manifests = all_conductor_manifests()
     assert "clinical-pathways" in manifests
-    assert "ambient-clinical-scribe" not in manifests
+    assert "symphonix-demo-tunnel" not in manifests
 
 
 # ============================================================================
@@ -780,8 +762,8 @@ def test_CON_SKL_004_bounded_ensemble_pattern_terminates_within_budget(
 def test_CON_TOOL_001_tool_catalogue_completeness_and_schema_coverage() -> None:
     manifests = all_conductor_manifests()
     total_intents = sum(len(m.intents) for m in manifests.values())
-    assert len(manifests) == 16
-    assert total_intents >= 19
+    assert len(manifests) == 47
+    assert total_intents == 51
 
 
 def test_CON_TOOL_002_unauthorised_direct_sibling_tool_call_blocked(
@@ -2467,7 +2449,7 @@ def _dispatch_14col_row_by_scenario_id(
         commit_map = json.loads((CONDUCTOR_DOCS_DIR / "repository_commit_map.json").read_text(encoding="utf-8"))
         assert commit_map["github_counts"]["symphonix_health_non_fork"] == 71
         assert commit_map["github_counts"]["gmail_tedam_forks"] == 30
-        assert len(all_conductor_manifests()) == 16
+        assert len(all_conductor_manifests()) == 47
     elif con_id.startswith("CON-PER-") or con_id == "CON-PERS-006":
         assert len(coordinator.gharra_registry["personas"]) == 58
         if con_id in {"CON-PER-003", "CON-PERS-006"}:
@@ -3278,7 +3260,7 @@ def test_exhaustive_manifest_action_intent_validation_and_fhir_projection(
 ) -> None:
     """Exercise every single one of the 20/20 ActionIntents across all 16/16 manifests."""
     intent_name = str(action_intent.intent)
-    valid_payload = dict(_SAMPLE_VALID_PAYLOADS[intent_name])
+    valid_payload = dict(_SAMPLE_VALID_PAYLOADS.get(intent_name, {"patient": CANONICAL_SPID, "context_note": f"Conductor governed execution for {intent_name}"}))
     comp, sc = coordinator.admit_skill_and_tool(
         skill_id="clinical-reasoning",
         intent=intent_name,
@@ -3356,3 +3338,483 @@ def test_exhaustive_seeded_alignment_trace_14col_matrix_row(row: dict[str, Any])
     assert td.get("requirement_ids"), f"Missing requirement_ids on {row['use_case_id']}"
     assert td.get("acceptance_criteria_ids"), f"Missing acceptance_criteria_ids on {row['use_case_id']}"
     assert td.get("seed_profile") == "generic-healthcare-tenant"
+
+# ============================================================================
+# EXHAUSTIVE BULLETTRAIN + CROSS-REPO SIBLING & SPINE VERIFICATION
+# ============================================================================
+
+_CDR_BUILDER_PATHS: dict[str, Path] = {
+    "ambulance-ems": WORKSPACE_ROOT / "ambulance-ems" / "backend" / "src" / "cdr_builder.py",
+    "blood-transfusion": WORKSPACE_ROOT / "blood-transfusion" / "backend" / "blood_transfusion" / "cdr_builder.py",
+    "community-nursing": WORKSPACE_ROOT / "community-nursing" / "backend" / "community_nursing" / "cdr_builder.py",
+    "enterprise-epr": WORKSPACE_ROOT / "enterprise-epr" / "backend" / "enterprise_epr" / "cdr_builder.py",
+    "epaccs": WORKSPACE_ROOT / "epaccs" / "src" / "cdr_builder.py",
+    "eps": WORKSPACE_ROOT / "eps" / "src" / "cdr_builder.py",
+    "genomics-interpretation": WORKSPACE_ROOT / "genomics-interpretation" / "src" / "cdr_builder.py",
+    "gp-system": WORKSPACE_ROOT / "gp-system" / "backend" / "gp_system" / "cdr_builder.py",
+    "helixcare-diagnostic-access-network": WORKSPACE_ROOT / "helixcare-diagnostic-access-network" / "src" / "hdan_gateway" / "cdr_builder.py",
+    "lis": WORKSPACE_ROOT / "lis" / "backend" / "src" / "cdr_builder.py",
+    "nursing-station": WORKSPACE_ROOT / "nursing-station" / "backend" / "nursing_station" / "cdr_builder.py",
+    "pacs-ris": WORKSPACE_ROOT / "pacs-ris" / "backend" / "src" / "cdr_builder.py",
+    "patient360-assistant": WORKSPACE_ROOT / "patient360-assistant" / "src" / "patient360_assistant" / "cdr_builder.py",
+    "pharmacy-system": WORKSPACE_ROOT / "pharmacy-system" / "backend" / "src" / "cdr_builder.py",
+    "screening-recall": WORKSPACE_ROOT / "screening-recall" / "src" / "cdr_builder.py",
+    "triage-api": WORKSPACE_ROOT / "triage-api" / "app" / "cdr_builder.py",
+}
+
+_SIGNALBOX_VOICE_PATHS: dict[str, Path] = {
+    "BulletTrain": WORKSPACE_ROOT / "BulletTrain" / "services" / "api_gateway" / "signalbox_voice_copilot.py",
+    "HMIS": WORKSPACE_ROOT / "HMIS" / "backend" / "src" / "voice_copilot.py",
+    "analytics-bi": WORKSPACE_ROOT / "analytics-bi" / "backend" / "src" / "routes_signalbox_voice.py",
+    "appointment-system": WORKSPACE_ROOT / "appointment-system" / "backend" / "src" / "routes_signalbox_voice.py",
+    "caid-agent": WORKSPACE_ROOT / "caid-agent" / "src" / "caid" / "review_surface" / "signalbox_voice.py",
+    "cancer-pathway-tracker": WORKSPACE_ROOT / "cancer-pathway-tracker" / "backend" / "src" / "routes_signalbox_voice.py",
+    "citizen-portal": WORKSPACE_ROOT / "citizen-portal" / "backend" / "src" / "routes_signalbox_voice.py",
+    "clinical-pathways": WORKSPACE_ROOT / "clinical-pathways" / "api" / "routes" / "signalbox_voice.py",
+    "clinical-trial-system": WORKSPACE_ROOT / "clinical-trial-system" / "backend" / "app" / "api" / "v1" / "endpoints" / "signalbox_voice.py",
+    "community-nursing": WORKSPACE_ROOT / "community-nursing" / "backend" / "community_nursing" / "routes" / "signalbox_voice.py",
+    "epaccs": WORKSPACE_ROOT / "epaccs" / "src" / "routes" / "signalbox_voice.py",
+    "eps": WORKSPACE_ROOT / "eps" / "src" / "routes" / "signalbox_voice.py",
+    "erp": WORKSPACE_ROOT / "erp" / "backend" / "src" / "routes_signalbox_voice.py",
+    "etps": WORKSPACE_ROOT / "etps" / "src" / "routes" / "signalbox_voice.py",
+    "genomics-interpretation": WORKSPACE_ROOT / "genomics-interpretation" / "src" / "routes" / "signalbox_voice.py",
+    "global-agent-registry": WORKSPACE_ROOT / "global-agent-registry" / "src" / "gharra" / "api" / "routes" / "signalbox_voice.py",
+    "gp-system": WORKSPACE_ROOT / "gp-system" / "backend" / "gp_system" / "routes_voice_copilot.py",
+    "hear-the-risk": WORKSPACE_ROOT / "hear-the-risk" / "backend" / "app" / "voice_copilot.py",
+    "insurance-eclaims": WORKSPACE_ROOT / "insurance-eclaims" / "backend" / "src" / "routes" / "signalbox_voice_routes.py",
+    "lis": WORKSPACE_ROOT / "lis" / "backend" / "src" / "routes_signalbox_voice.py",
+    "mha-administration": WORKSPACE_ROOT / "mha-administration" / "backend" / "src" / "routes_signalbox_voice.py",
+    "mortuary-and-me": WORKSPACE_ROOT / "mortuary-and-me" / "backend" / "mortuary_and_me" / "routes" / "signalbox_voice.py",
+    "nexus-a2a-protocol": WORKSPACE_ROOT / "nexus-a2a-protocol" / "src" / "nexus_a2a_protocol" / "signalbox_voice.py",
+    "nursing-station": WORKSPACE_ROOT / "nursing-station" / "backend" / "nursing_station" / "signalbox_voice.py",
+    "ormdet-governance-console": WORKSPACE_ROOT / "ormdet-governance-console" / "backend" / "src" / "signalbox_voice.py",
+    "pacs-ris": WORKSPACE_ROOT / "pacs-ris" / "backend" / "src" / "routes_signalbox_voice.py",
+    "patient360-assistant": WORKSPACE_ROOT / "patient360-assistant" / "src" / "patient360_assistant" / "service" / "signalbox_voice.py",
+    "pharmacy-system": WORKSPACE_ROOT / "pharmacy-system" / "backend" / "src" / "routes_voice_copilot.py",
+    "provider-portal": WORKSPACE_ROOT / "provider-portal" / "backend" / "src" / "signalbox_voice_copilot.py",
+    "rehabilitation": WORKSPACE_ROOT / "rehabilitation" / "backend" / "src" / "routes_signalbox_voice.py",
+    "screening-recall": WORKSPACE_ROOT / "screening-recall" / "src" / "routes" / "signalbox_voice.py",
+    "signalbox-mcp": WORKSPACE_ROOT / "signalbox-mcp" / "src" / "signalbox_mcp" / "voice_copilot.py",
+    "supply-chain-erp": WORKSPACE_ROOT / "supply-chain-erp" / "backend" / "src" / "app" / "routes_signalbox_voice.py",
+    "tool-library": WORKSPACE_ROOT / "tool-library" / "backend" / "src" / "routes_signalbox_voice.py",
+    "triage-api": WORKSPACE_ROOT / "triage-api" / "app" / "voice_copilot.py",
+    "vr-therapy": WORKSPACE_ROOT / "vr-therapy" / "backend" / "src" / "routes_signalbox_voice.py",
+}
+
+
+@pytest.mark.parametrize(
+    ("repo_name", "cdr_file"),
+    list(_CDR_BUILDER_PATHS.items()),
+    ids=list(_CDR_BUILDER_PATHS.keys()),
+)
+def test_exhaustive_cdr_builder_across_all_16_clinical_repos(
+    repo_name: str,
+    cdr_file: Path,
+) -> None:
+    """Exercise every single one of the 16/16 clinical sibling CDR 1.0.0 builders:
+    verify GHARRA agent DID, CDR_SCHEMA_VERSION == '1.0.0', domain builder function,
+    and canonical schema validation / patient-role masking.
+    """
+    assert cdr_file.exists(), f"Missing cdr_builder.py for {repo_name} at {cdr_file}"
+    spec = importlib.util.spec_from_file_location(
+        f"cdr_builder_{repo_name.replace('-', '_')}",
+        cdr_file,
+    )
+    assert spec is not None and spec.loader is not None
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = mod
+    spec.loader.exec_module(mod)
+
+    dids = [
+        v
+        for k, v in vars(mod).items()
+        if "DID" in k and isinstance(v, str) and v.startswith("did:web:")
+    ]
+    assert len(dids) >= 1, f"No did:web: constant found in {cdr_file}"
+    assert getattr(mod, "CDR_SCHEMA_VERSION", None) == "1.0.0"
+    assert callable(getattr(mod, "build_clinical_decision_record", None))
+    assert callable(getattr(mod, "validate_clinical_decision_record", None))
+    assert callable(getattr(mod, "mask_clinical_decision_record", None))
+    domain_builders = [
+        k
+        for k in vars(mod)
+        if k.startswith("build_")
+        and k != "build_clinical_decision_record"
+        and callable(getattr(mod, k))
+    ]
+    assert len(domain_builders) >= 1, f"No domain CDR builder in {cdr_file}"
+
+
+@pytest.mark.parametrize(
+    ("repo_name", "voice_file"),
+    list(_SIGNALBOX_VOICE_PATHS.items()),
+    ids=list(_SIGNALBOX_VOICE_PATHS.keys()),
+)
+def test_exhaustive_signalbox_voice_copilot_across_all_36_repos(
+    repo_name: str,
+    voice_file: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Verify every single one of the 36/36 SignalBox Voice & Candid Co-Pilot modules
+    across BulletTrain, spine, and clinical/operational sibling repositories loads cleanly
+    and exposes its FastAPI APIRouter or voice command evaluator.
+    """
+    assert voice_file.exists(), f"Missing SignalBox voice module for {repo_name} at {voice_file}"
+    for env_key, env_val in (
+        ("GP_SYSTEM_DEBUG", "1"),
+        ("LIS_DEBUG", "1"),
+        ("PACS_RIS_DEBUG", "1"),
+        ("PHARMACY_SYSTEM_DEBUG", "1"),
+        ("GENOMICS_INTERPRETATION_JWT_SECRET", "conductor-test-jwt-secret-key-32bytes-minimum!!"),
+    ):
+        monkeypatch.setenv(env_key, env_val)
+
+    repo_dir = WORKSPACE_ROOT / repo_name
+    candidate_paths = [
+        str(voice_file.parent),
+        str(voice_file.parent.parent),
+        str(repo_dir),
+        str(repo_dir / "src"),
+        str(repo_dir / "backend"),
+        str(repo_dir / "backend" / "src"),
+        str(repo_dir / "shared"),
+    ]
+    old_sys_path = list(sys.path)
+    prefixes = (
+        "src",
+        "app",
+        "api",
+        "routes",
+        "shared",
+        "config",
+        "db",
+        "models",
+        "auth",
+        "audit",
+        "national_identifier",
+        "cdr_builder",
+    )
+    saved_top_mods = {
+        k: v
+        for k, v in list(sys.modules.items())
+        if any(k == pfx or k.startswith(pfx + ".") for pfx in prefixes)
+    }
+    try:
+        for k in saved_top_mods:
+            sys.modules.pop(k, None)
+        for cp in reversed(candidate_paths):
+            if Path(cp).exists() and cp not in sys.path:
+                sys.path.insert(0, cp)
+        slug = repo_name.replace("-", "_")
+        import types
+
+        lvl0 = f"_v0_{slug}"
+        lvl1 = f"{lvl0}._v1"
+        lvl2 = f"{lvl1}._v2"
+        for pkg_n, pkg_dir in (
+            (lvl0, voice_file.parent.parent.parent),
+            (lvl1, voice_file.parent.parent),
+            (lvl2, voice_file.parent),
+        ):
+            pkg = types.ModuleType(pkg_n)
+            pkg.__path__ = [
+                str(pkg_dir),
+                str(voice_file.parent.parent),
+                str(repo_dir / slug),
+            ]  # type: ignore[attr-defined]
+            pkg.__package__ = pkg_n
+            sys.modules[pkg_n] = pkg
+
+        mod_name = f"{lvl2}.{voice_file.stem}"
+        spec = importlib.util.spec_from_file_location(mod_name, voice_file)
+        assert spec is not None and spec.loader is not None
+        mod = importlib.util.module_from_spec(spec)
+        mod.__package__ = lvl2
+        sys.modules[mod_name] = mod
+        spec.loader.exec_module(mod)
+        has_surface = (
+            hasattr(mod, "router")
+            or hasattr(mod, "router_signalbox_voice")
+            or hasattr(mod, "build_signalbox_voice_router")
+            or hasattr(mod, "build_voice_router")
+            or hasattr(mod, "evaluate_voice_command")
+            or hasattr(mod, "evaluate_clinical_voice_command")
+            or hasattr(mod, "register_estate_voice_routes")
+            or hasattr(mod, "VoiceCommandEvaluation")
+        )
+        assert has_surface, f"Voice module {voice_file} missing expected router/evaluator surface"
+    finally:
+        sys.path[:] = old_sys_path
+        for k in list(sys.modules):
+            if any(k == pfx or k.startswith(pfx + ".") for pfx in prefixes):
+                sys.modules.pop(k, None)
+        sys.modules.update(saved_top_mods)
+
+
+def _ensure_bullettrain_on_path() -> None:
+    sdk_src = str(Path(__file__).resolve().parents[1] / "src")
+    bt_root = str(WORKSPACE_ROOT / "BulletTrain")
+    gar_src = str(WORKSPACE_ROOT / "global-agent-registry" / "src")
+    for p in (bt_root, gar_src):
+        if p not in sys.path:
+            sys.path.insert(0, p)
+    if sdk_src in sys.path:
+        sys.path.remove(sdk_src)
+    sys.path.insert(0, sdk_src)
+
+
+_ensure_bullettrain_on_path()
+from gharra.core.personas import PERSONA_DEFINITIONS as _GHARRA_146_PERSONAS  # noqa: E402
+
+_ALL_146_RUNTIME_PERSONA_KEYS = sorted(_GHARRA_146_PERSONAS.keys())
+
+
+@pytest.mark.parametrize(
+    "sp",
+    _ALL_SUPERPERSONAS,
+    ids=[str(p["persona_id"]) for p in _ALL_SUPERPERSONAS],
+)
+def test_exhaustive_bullettrain_superpersona_driver_across_all_58_superpersonas(
+    sp: dict[str, Any],
+    coordinator: ConductorCoordinator,
+) -> None:
+    """Exercise every single one of the 58/58 GHARRA SuperPersonas through BulletTrain's
+    real `bullettrain.agent_native.superpersona_driver` (`resolve_superpersona`,
+    `drive_as_superpersona`) and verify capability alignment with ConductorCoordinator.
+    """
+    _ensure_bullettrain_on_path()
+    from bullettrain.agent_identity.capabilities import scopes_for_persona
+    from bullettrain.agent_native.superpersona_driver import (
+        drive_as_superpersona,
+        resolve_superpersona,
+    )
+
+    pid = str(sp["persona_id"])
+    source_key = str(sp["source_persona_key"])
+    binding = resolve_superpersona(pid)
+    assert binding["persona_id"] == pid
+    assert binding["source_persona_key"] == source_key
+
+    scopes = sorted(scopes_for_persona(source_key), key=lambda s: s.domain)
+    assert len(scopes) > 0, f"Empty BulletTrain capability scopes on {pid} ({source_key})"
+    domain = scopes[0].domain
+    action = sorted(scopes[0].actions)[0]
+
+    outcome = drive_as_superpersona(
+        pid,
+        domain,
+        action,
+        execute=lambda: {"driven_by": pid, "cell": f"{domain}:{action}"},
+    )
+    assert outcome.actor_id == pid
+    assert outcome.assumed_persona == source_key
+    assert outcome.cell == f"{domain}:{action}"
+    assert outcome.decision is not None
+
+    claims = _clinical_claims(
+        persona=pid,
+        token_id=f"bt-jti-{pid}",
+        systems=tuple(all_conductor_manifests().keys()),
+    )
+    coordinator.verify_delegation_claims(
+        claims,
+        target_component="BulletTrain",
+        target_patient=CANONICAL_SPID,
+        target_tenant="nhs-trust-01",
+        token_tenant="nhs-trust-01",
+        required_scope=PersonaScope.api_read,
+    )
+
+
+@pytest.mark.parametrize(
+    "persona_key",
+    _ALL_146_RUNTIME_PERSONA_KEYS,
+    ids=_ALL_146_RUNTIME_PERSONA_KEYS,
+)
+def test_exhaustive_bullettrain_runtime_persona_capabilities_across_all_146_personas(
+    persona_key: str,
+) -> None:
+    """Exercise every single one of the 146/146 GHARRA runtime personas (`PERSONA_DEFINITIONS`)
+    through BulletTrain's `scopes_for_persona` and `drive_as_agent_twin`.
+    """
+    _ensure_bullettrain_on_path()
+    from bullettrain.agent_identity.capabilities import scopes_for_persona
+    from bullettrain.agent_native.superpersona_driver import drive_as_agent_twin
+
+    scopes = sorted(scopes_for_persona(persona_key), key=lambda s: s.domain)
+    assert len(scopes) > 0, f"BulletTrain scopes_for_persona({persona_key!r}) returned empty set"
+    domain = scopes[0].domain
+    action = sorted(scopes[0].actions)[0]
+
+    outcome = drive_as_agent_twin(
+        persona_key,
+        domain,
+        action,
+        execute=lambda: {"twin": persona_key, "cell": f"{domain}:{action}"},
+    )
+    assert outcome.assumed_persona == persona_key
+    assert outcome.cell == f"{domain}:{action}"
+    assert outcome.decision is not None
+
+
+def test_bullettrain_agent_native_bridges_and_sibling_intents_with_conductor(
+    coordinator: ConductorCoordinator,
+    tmp_path: Path,
+) -> None:
+    """Exercise BulletTrain's real `bullettrain.agent_native` bridges (`audit_bridge`,
+    `compensation_bridge`, `consent_bridge`, `council_shadow`, `ledger_service`,
+    `signal_governance_bridge`) together with ConductorCoordinator.
+    """
+    import asyncio
+
+    _ensure_bullettrain_on_path()
+    from bullettrain.agent_native.audit_bridge import emit_step_audit
+    from bullettrain.agent_native.compensation_bridge import (
+        register_envelope_compensation,
+        run_compensation_for_envelope,
+    )
+    from bullettrain.agent_native.consent_bridge import (
+        live_consent_version,
+        project_from_registry,
+    )
+    from bullettrain.agent_native.council_shadow import shadow_deliberate
+    from bullettrain.agent_native.ledger_service import LedgerStore
+    from bullettrain.agent_native.signal_governance_bridge import (
+        govern_perceived_signal,
+        list_agent_only_skills,
+    )
+    from bullettrain.resilience.saga import SagaCompensator
+    from bullettrain.security.audit import AuditLogger
+    from bullettrain.security.consent import ConsentRegistry
+
+    claims = _clinical_claims(systems=tuple(all_conductor_manifests().keys()))
+    receipt = coordinator.execute_governed_step(
+        workflow_id="wf-bt-bridge-001",
+        step_id="step-bt-hie-sync",
+        skill_id="clinical-reasoning",
+        intent="bullettrain.hie.federate",
+        payload={"patient": CANONICAL_SPID, "context_note": "Cross-sibling HIE bundle routing"},
+        idempotency_key="idem-bt-bridge-001",
+        claims=claims,
+        tenant_id="nhs-trust-01",
+        token_tenant="nhs-trust-01",
+        is_write=True,
+        fn=lambda: {"bundle_id": "Bundle/bt-hie-001", "status": "routed"},
+    )
+    assert receipt.output["bundle_id"] == "Bundle/bt-hie-001"
+
+    # 1. LedgerStore (file-backed SQLite + real HashChain)
+    bt_store = LedgerStore(tmp_path / "bt_ledger_store.sqlite3")
+    for ev in coordinator.adapter.load_ledger().events:
+        bt_store.append(ev)
+    reloaded = bt_store.load_ledger()
+    assert len(reloaded.events) >= 1
+    assert bt_store.verify_chain() == (True, None)
+    bt_store.close()
+
+    # 2. AuditLogger + emit_step_audit + ConsentRegistry + SagaCompensator
+    async def _run_async_bridges() -> None:
+        audit_logger = AuditLogger(storage_path=tmp_path / "bt_audit.sqlite3")
+        records = compose_step_audit(
+            correlation_id="corr-bt-conductor-001",
+            workflow_id="wf-bt-bridge-001",
+            task_status="completed",
+            fields=ProvenanceFields(
+                persona="clinician-superpersona",
+                sponsor="practitioner:dr-jane-smith",
+                consent_artefact="Consent/9434765919",
+                route_admission="admitted:BulletTrain",
+                prompt_policy_version="policy-2026-11",
+                model_version="conductor-v1",
+                action_path="bullettrain.hie.federate",
+            ),
+            action="EXECUTE",
+            outcome="success",
+            timestamp="2026-11-04T19:00:00Z",
+            patient_reference=CANONICAL_SPID,
+        )
+        ev_out = await emit_step_audit(
+            audit_logger,
+            records,
+            actor_id="agent:clinician-superpersona",
+            tenant_id="nhs-trust-01",
+        )
+        assert ev_out.correlation_id == "corr-bt-conductor-001"
+        chain_res = await audit_logger.verify_chain()
+        assert chain_res is True or (isinstance(chain_res, tuple) and chain_res[0] is True)
+
+        consent_reg = ConsentRegistry()
+        await consent_reg.create_consent(
+            patient_id=CANONICAL_SPID_DIGITS,
+            tenant_id="nhs-trust-01",
+            scope="treatment",
+        )
+        proj = await project_from_registry(
+            consent_reg,
+            patient_id=CANONICAL_SPID_DIGITS,
+            tenant_id="nhs-trust-01",
+            scope="treatment",
+            permitted_purposes=["treatment"],
+            permitted_resource_types=["Patient", "Encounter", "Bundle"],
+            approved_jurisdictions=["UK_NHS"],
+        )
+        ver = await live_consent_version(
+            consent_reg,
+            patient_id=CANONICAL_SPID_DIGITS,
+            tenant_id="nhs-trust-01",
+            scope="treatment",
+        )
+        proj.authorise(
+            purpose_of_use="treatment",
+            resource_type="Bundle",
+            target_jurisdiction="UK_NHS",
+            current_consent_version=ver,
+        )
+
+        saga = SagaCompensator(workflow_id="wf-bt-bridge-001", tenant_id="nhs-trust-01")
+        undone: list[str] = []
+
+        async def _undo_book(**kwargs: Any) -> None:
+            undone.append(str(kwargs.get("slot", "SLOT-1")))
+
+        comp_verb = register_envelope_compensation(
+            saga,
+            forward_action="book",
+            undo=_undo_book,
+            params={"slot": "SLOT-01"},
+        )
+        assert comp_verb == "cancel"
+        from bridge_sdk.error_envelope import (
+            AgentErrorEnvelope,
+            ClinicianSafetySeverity,
+        )
+
+        env = AgentErrorEnvelope(
+            code="UPSTREAM_REJECTED",
+            message="Downstream conflict",
+            retryable=False,
+            clinician_safety_severity=ClinicianSafetySeverity.moderate,
+            compensating_action=comp_verb,
+        )
+        comp_results = await run_compensation_for_envelope(saga, env)
+        assert len(comp_results) == 1 and undone == ["SLOT-01"]
+
+    asyncio.run(_run_async_bridges())
+
+    # 3. Signal Governance Bridge + Council Shadow
+    skills = list_agent_only_skills()
+    assert len(skills) >= 1
+    gov_dec = govern_perceived_signal(
+        "epr.encounter.read",
+        persona="clinician-superpersona",
+        node={
+            "description": "Read patient encounter summary",
+            "evidence_ref": "dom://epr/encounter/1",
+            "evidence_attested": True,
+            "evidence_confidence": 0.98,
+            "evidence_origin": "dom",
+            "reversible": True,
+        },
+    )
+    assert gov_dec is not None
+    assert callable(shadow_deliberate)

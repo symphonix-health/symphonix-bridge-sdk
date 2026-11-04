@@ -787,6 +787,626 @@ CONDUCTOR_SIBLING_MANIFESTS: dict[str, AgentActionManifest] = {
             ),
         ],
     ),
+    "BulletTrain": AgentActionManifest(
+        component="BulletTrain",
+        intents=[
+            ActionIntent(
+                intent="bullettrain.hie.federate",
+                title="Federate clinical encounter and SHR resource via BulletTrain OpenHIE Hub",
+                component="BulletTrain",
+                safety_class=SafetyClass.sensitive,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-bullettrain-hie-federate",
+            ),
+        ],
+    ),
+    "HMIS": AgentActionManifest(
+        component="HMIS",
+        intents=[
+            ActionIntent(
+                intent="hmis.adt.admit",
+                title="Record hospital ADT admission and bed assignment in HMIS",
+                component="HMIS",
+                safety_class=SafetyClass.sensitive,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-hmis-adt-admit",
+            ),
+        ],
+    ),
+    "gp-system": AgentActionManifest(
+        component="gp-system",
+        intents=[
+            ActionIntent(
+                intent="gp.consultation.record",
+                title="Record primary care GP consultation and referral in gp-system",
+                component="gp-system",
+                safety_class=SafetyClass.sensitive,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-gp-consultation-record",
+            ),
+        ],
+    ),
+    "eps": AgentActionManifest(
+        component="eps",
+        intents=[
+            ActionIntent(
+                intent="eps.prescription.sign",
+                title="Prepare electronic prescription for clinician signature in EPS",
+                component="eps",
+                safety_class=SafetyClass.high_risk,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-eps-prescription-sign",
+            ),
+        ],
+    ),
+    "etps": AgentActionManifest(
+        component="etps",
+        intents=[
+            ActionIntent(
+                intent="etps.spine.transmit",
+                title="Transmit signed electronic prescription via ETPS Spine bridge",
+                component="etps",
+                safety_class=SafetyClass.sensitive,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-etps-spine-transmit",
+            ),
+        ],
+    ),
+    "provider-portal": AgentActionManifest(
+        component="provider-portal",
+        intents=[
+            ActionIntent(
+                intent="provider.referral.review",
+                title="Review cross-specialty clinician referral in Provider Portal",
+                component="provider-portal",
+                safety_class=SafetyClass.sensitive,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-provider-referral-review",
+            ),
+        ],
+    ),
+    "citizen-portal": AgentActionManifest(
+        component="citizen-portal",
+        intents=[
+            ActionIntent(
+                intent="citizen.record.view",
+                title="Project patient-facing summary and consent status in Citizen Portal",
+                component="citizen-portal",
+                safety_class=SafetyClass.sensitive,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-citizen-record-view",
+            ),
+        ],
+    ),
+    "maternity-system": AgentActionManifest(
+        component="maternity-system",
+        intents=[
+            ActionIntent(
+                intent="maternity.partogram.evaluate",
+                title="Evaluate intrapartum partogram and maternal-fetal escalation in Maternity System",
+                component="maternity-system",
+                safety_class=SafetyClass.high_risk,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-maternity-partogram-evaluate",
+            ),
+        ],
+    ),
+    "cancer-pathway-tracker": AgentActionManifest(
+        component="cancer-pathway-tracker",
+        intents=[
+            ActionIntent(
+                intent="cancer.fds_clock.track",
+                title="Track 2WW/62-day Faster Diagnosis Standard oncology pathway clock",
+                component="cancer-pathway-tracker",
+                safety_class=SafetyClass.high_risk,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-cancer-fds-clock-track",
+            ),
+        ],
+    ),
+    "genomics-interpretation": AgentActionManifest(
+        component="genomics-interpretation",
+        intents=[
+            ActionIntent(
+                intent="genomics.variant.classify",
+                title="Classify ACMG genomic variant for molecular MDT review",
+                component="genomics-interpretation",
+                safety_class=SafetyClass.high_risk,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-genomics-variant-classify",
+            ),
+        ],
+    ),
+    "blood-transfusion": AgentActionManifest(
+        component="blood-transfusion",
+        intents=[
+            ActionIntent(
+                intent="transfusion.crossmatch.verify",
+                title="Verify electronic crossmatch and haemovigilance compatibility in Blood Transfusion",
+                component="blood-transfusion",
+                safety_class=SafetyClass.high_risk,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-transfusion-crossmatch-verify",
+            ),
+        ],
+    ),
+    "epaccs": AgentActionManifest(
+        component="epaccs",
+        intents=[
+            ActionIntent(
+                intent="epaccs.respect.coordinate",
+                title="Coordinate EPaCCS ReSPECT palliative care preferences across care settings",
+                component="epaccs",
+                safety_class=SafetyClass.high_risk,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-epaccs-respect-coordinate",
+            ),
+        ],
+    ),
+    "mha-administration": AgentActionManifest(
+        component="mha-administration",
+        intents=[
+            ActionIntent(
+                intent="mha.detention_clock.verify",
+                title="Verify Mental Health Act statutory detention clock and SOAD safeguard",
+                component="mha-administration",
+                safety_class=SafetyClass.high_risk,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-mha-detention-clock-verify",
+            ),
+        ],
+    ),
+    "screening-recall": AgentActionManifest(
+        component="screening-recall",
+        intents=[
+            ActionIntent(
+                intent="screening.cohort.invite",
+                title="Issue population screening recall invitation and failsafe tracking",
+                component="screening-recall",
+                safety_class=SafetyClass.sensitive,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-screening-cohort-invite",
+            ),
+        ],
+    ),
+    "rehabilitation": AgentActionManifest(
+        component="rehabilitation",
+        intents=[
+            ActionIntent(
+                intent="rehab.care_plan.update",
+                title="Update allied health and rehabilitation functional care plan",
+                component="rehabilitation",
+                safety_class=SafetyClass.sensitive,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-rehab-care-plan-update",
+            ),
+        ],
+    ),
+    "clinical-trial-system": AgentActionManifest(
+        component="clinical-trial-system",
+        intents=[
+            ActionIntent(
+                intent="ctms.subject.screen",
+                title="Screen clinical trial candidate against protocol eligibility criteria",
+                component="clinical-trial-system",
+                safety_class=SafetyClass.high_risk,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-ctms-subject-screen",
+            ),
+        ],
+    ),
+    "picis-system": AgentActionManifest(
+        component="picis-system",
+        intents=[
+            ActionIntent(
+                intent="picis.icu_stepup.evaluate",
+                title="Evaluate perioperative/ICU high-acuity step-up capacity and trajectory in PICIS",
+                component="picis-system",
+                safety_class=SafetyClass.high_risk,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-picis-icu-stepup-evaluate",
+            ),
+        ],
+    ),
+    "mortuary-and-me": AgentActionManifest(
+        component="mortuary-and-me",
+        intents=[
+            ActionIntent(
+                intent="mortuary.me_scrutiny.record",
+                title="Record Medical Examiner scrutiny and chain-of-custody verification",
+                component="mortuary-and-me",
+                safety_class=SafetyClass.high_risk,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-mortuary-me-scrutiny-record",
+            ),
+        ],
+    ),
+    "outbreak-management": AgentActionManifest(
+        component="outbreak-management",
+        intents=[
+            ActionIntent(
+                intent="outbreak.contact_trace.record",
+                title="Record communicable disease outbreak contact-tracing episode",
+                component="outbreak-management",
+                safety_class=SafetyClass.sensitive,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-outbreak-contact-trace-record",
+            ),
+        ],
+    ),
+    "analytics-bi": AgentActionManifest(
+        component="analytics-bi",
+        intents=[
+            ActionIntent(
+                intent="analytics.cohort.aggregate",
+                title="Compute de-identified population health KPI aggregate in Analytics BI",
+                component="analytics-bi",
+                safety_class=SafetyClass.routine,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-analytics-cohort-aggregate",
+            ),
+        ],
+    ),
+    "erp": AgentActionManifest(
+        component="erp",
+        intents=[
+            ActionIntent(
+                intent="erp.ledger.reconcile",
+                title="Reconcile healthcare enterprise resource planning financial ledger entry",
+                component="erp",
+                safety_class=SafetyClass.sensitive,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-erp-ledger-reconcile",
+            ),
+        ],
+    ),
+    "supply-chain-erp": AgentActionManifest(
+        component="supply-chain-erp",
+        intents=[
+            ActionIntent(
+                intent="supply_chain.stock.replenish",
+                title="Trigger medical supply chain lot/cold-chain replenishment order",
+                component="supply-chain-erp",
+                safety_class=SafetyClass.sensitive,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-supply-chain-stock-replenish",
+            ),
+        ],
+    ),
+    "ormdet-governance-console": AgentActionManifest(
+        component="ormdet-governance-console",
+        intents=[
+            ActionIntent(
+                intent="ormdet.model_risk.audit",
+                title="Record ORMDET clinical AI and multi-agent operational risk governance audit",
+                component="ormdet-governance-console",
+                safety_class=SafetyClass.sensitive,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-ormdet-model-risk-audit",
+            ),
+        ],
+    ),
+    "vr-therapy": AgentActionManifest(
+        component="vr-therapy",
+        intents=[
+            ActionIntent(
+                intent="vr_therapy.session.supervise",
+                title="Supervise therapeutic VR digital behavioural health session telemetry",
+                component="vr-therapy",
+                safety_class=SafetyClass.sensitive,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-vr-therapy-session-supervise",
+            ),
+        ],
+    ),
+    "hear-the-risk": AgentActionManifest(
+        component="hear-the-risk",
+        intents=[
+            ActionIntent(
+                intent="hear_the_risk.biomarker.screen",
+                title="Evaluate acoustic vocal biomarker risk stratification screening",
+                component="hear-the-risk",
+                safety_class=SafetyClass.high_risk,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-hear-the-risk-biomarker-screen",
+            ),
+        ],
+    ),
+    "helixcare-diagnostic-access-network": AgentActionManifest(
+        component="helixcare-diagnostic-access-network",
+        intents=[
+            ActionIntent(
+                intent="hdan.diagnostic_slot.route",
+                title="Route federated diagnostic access referral across HelixCare HDAN",
+                component="helixcare-diagnostic-access-network",
+                safety_class=SafetyClass.sensitive,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-hdan-diagnostic-slot-route",
+            ),
+        ],
+    ),
+    "kenya-uhc-implementation": AgentActionManifest(
+        component="kenya-uhc-implementation",
+        intents=[
+            ActionIntent(
+                intent="kenya_uhc.sha_claim.verify",
+                title="Verify Kenya SHA UHC national country-pack eligibility and claim bundle",
+                component="kenya-uhc-implementation",
+                safety_class=SafetyClass.sensitive,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-kenya-uhc-sha-claim-verify",
+            ),
+        ],
+    ),
+    "tool-library": AgentActionManifest(
+        component="tool-library",
+        intents=[
+            ActionIntent(
+                intent="tool_library.catalog.inspect",
+                title="Inspect governed clinical and operational tool library catalogue entry",
+                component="tool-library",
+                safety_class=SafetyClass.routine,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-tool-library-catalog-inspect",
+            ),
+        ],
+    ),
+    "ambient-clinical-scribe": AgentActionManifest(
+        component="ambient-clinical-scribe",
+        intents=[
+            ActionIntent(
+                intent="ambient_scribe.soap_note.draft",
+                title="Draft structured ambient clinical consultation SOAP note for clinician sign-off",
+                component="ambient-clinical-scribe",
+                safety_class=SafetyClass.high_risk,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-ambient-scribe-soap-note-draft",
+            ),
+        ],
+    ),
+    "mdt-board-orchestrator": AgentActionManifest(
+        component="mdt-board-orchestrator",
+        intents=[
+            ActionIntent(
+                intent="mdt_board.quorum.coordinate",
+                title="Coordinate multi-disciplinary team board case list and specialist quorum",
+                component="mdt-board-orchestrator",
+                safety_class=SafetyClass.sensitive,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-mdt-board-quorum-coordinate",
+            ),
+        ],
+    ),
+    "renal-dialysis-coordination": AgentActionManifest(
+        component="renal-dialysis-coordination",
+        intents=[
+            ActionIntent(
+                intent="renal_dialysis.session.schedule",
+                title="Coordinate haemodialysis chair schedule and vascular access surveillance",
+                component="renal-dialysis-coordination",
+                safety_class=SafetyClass.high_risk,
+                autonomy_default=AutonomyLevel.advisory,
+                input=IOContract(
+                    fields=[
+                        _patient_ref(),
+                        FieldSpec(name="context_note", type=FieldType.string, required=False),
+                    ]
+                ),
+                output=IOContract(fields=[FieldSpec(name="outcome_ref", type=FieldType.reference)]),
+                fhir_task_code="agent-renal-dialysis-session-schedule",
+            ),
+        ],
+    ),
     "global-agent-registry": AgentActionManifest(
         component="global-agent-registry",
         intents=[
