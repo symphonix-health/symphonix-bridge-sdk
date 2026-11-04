@@ -2859,21 +2859,33 @@ def test_conductor_headed_browser_signalbox_driven_e2e(
     sibling_harness: RealSiblingServiceHarness,
 ) -> None:
     """Launch live Conductor/Nexus SFDS web server, execute a real Conductor-governed
-    step, and drive the UI in a headed Chromium browser (`headless=False`), verifying
-    computed styles, layout geometry, interactive probes, and WORM audit trail.
+    step, and drive the UI through SignalBox's real `AgentSession` (`headless=False`)
+    on `WinSta0\\Default` with `ensure_default_desktop()`, `bring_browser_pids_to_foreground()`,
+    `verify_os_window_visibility(..., strict=True)`, and the visible SignalBox `clinician`
+    persona cursor overlay (`glide_to`), verifying computed styles, layout geometry,
+    interactive probes, all 6 tabs + 2 sub-tabs, and WORM audit trail.
     """
+    import asyncio
     import socket
     import threading
     import time
 
     import uvicorn
-    from playwright.sync_api import sync_playwright
 
     nexus_src = WORKSPACE_ROOT / "nexus-a2a-protocol" / "src"
-    if str(nexus_src) not in sys.path:
-        sys.path.insert(0, str(nexus_src))
+    sbx_src = WORKSPACE_ROOT / "signalbox-mcp" / "src"
+    for p_dir in (nexus_src, sbx_src):
+        if str(p_dir) not in sys.path:
+            sys.path.insert(0, str(p_dir))
 
     from nexus_a2a_protocol.signalbox_voice import create_signalbox_voice_app
+    from signalbox_mcp.browser.cursor import glide_to
+    from signalbox_mcp.browser.headed import (
+        bring_browser_pids_to_foreground,
+        ensure_default_desktop,
+        verify_os_window_visibility,
+    )
+    from signalbox_mcp.session import get_or_create_session
 
     # 1. Execute a real Conductor governed step prior to browser verification
     claims = _clinical_claims()
@@ -2912,28 +2924,51 @@ def test_conductor_headed_browser_signalbox_driven_e2e(
         except OSError:
             time.sleep(0.1)
 
-    try:
-        with sync_playwright() as p:
-            browser = p.chromium.launch(headless=False)
-            context = browser.new_context(viewport={"width": 1440, "height": 900})
-            page = context.new_page()
-            page.goto(base_url, wait_until="networkidle")
+    async def _drive_via_signalbox_headed_session() -> None:
+        ensure_default_desktop()
+        session = get_or_create_session(
+            "conductor-pytest-headed-e2e",
+            persona="clinician",
+        )
+        try:
+            open_res = await session.open_browser(
+                headless=False,
+                url=base_url,
+                wait_until="networkidle",
+            )
+            assert open_res.get("ok") is True, f"SignalBox open_browser failed: {open_res}"
+            assert open_res.get("headless") is False
+            pids = set(session._browser_process_pids.keys())
+            assert pids, "Expected real Chromium OS process PIDs from SignalBox session"
+            bring_browser_pids_to_foreground(pids)
+            vis = verify_os_window_visibility(pids, strict=True)
+            assert vis.get("verified") is True, f"OS window visibility check failed: {vis}"
+
+            page = session.page
+            assert page is not None
+
+            async def _sbx_click(selector: str, wait_ms: int = 250) -> None:
+                bring_browser_pids_to_foreground(pids)
+                await glide_to(page, selector, steps=18, dwell_ms=100)
+                await page.click(selector)
+                await page.wait_for_timeout(wait_ms)
 
             banner = page.locator('[data-testid="layer0-safety-banner"]')
-            assert banner.is_visible()
-            banner_text = banner.inner_text()
+            assert await banner.is_visible()
+            banner_text = await banner.inner_text()
             assert "Amelia Thornton" in banner_text
             assert "943 476 5919" in banner_text
             assert "BENZYLPENICILLIN" in banner_text.upper()
 
             # Verify computed styles and geometry on the rendered SFDS v2.4 surface
-            computed = page.evaluate(
+            computed = await page.evaluate(
                 """() => {
                     const rootStyle = getComputedStyle(document.documentElement);
                     const bannerEl = document.querySelector('[data-testid="layer0-safety-banner"]');
                     const mainEl = document.querySelector('main.sfds-content');
                     const rect = bannerEl.getBoundingClientRect();
                     const mainRect = mainEl.getBoundingClientRect();
+                    const cursorEl = document.getElementById('__signalbox_cursor__');
                     return {
                         primaryToken: rootStyle.getPropertyValue('--primary').trim(),
                         borderToken: rootStyle.getPropertyValue('--border').trim(),
@@ -2942,7 +2977,8 @@ def test_conductor_headed_browser_signalbox_driven_e2e(
                         mainWidth: mainRect.width,
                         viewportWidth: window.innerWidth,
                         horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth,
-                        verticalOverflow: document.documentElement.scrollHeight > window.innerHeight
+                        verticalOverflow: document.documentElement.scrollHeight > window.innerHeight,
+                        hasSignalBoxCursor: Boolean(cursorEl)
                     };
                 }"""
             )
@@ -2953,47 +2989,40 @@ def test_conductor_headed_browser_signalbox_driven_e2e(
             assert computed["mainWidth"] >= computed["viewportWidth"] - 2
             assert computed["horizontalOverflow"] is False
             assert computed["verticalOverflow"] is False
+            assert computed["hasSignalBoxCursor"] is True
 
-            # Click & verify all 4/4 Voice Co-Pilot Quick Verification Probes
-            page.click("#voice-probe-executed")
-            page.wait_for_timeout(150)
-            assert page.locator("#outcome-badge").inner_text().strip() == "EXECUTED"
+            # Click & verify all 4/4 Voice Co-Pilot Quick Verification Probes with SignalBox cursor
+            await _sbx_click("#voice-probe-executed")
+            assert (await page.locator("#outcome-badge").inner_text()).strip() == "EXECUTED"
 
-            page.click("#voice-probe-safety-blocked")
-            page.wait_for_timeout(150)
-            badge_text_blocked = page.locator("#outcome-badge").inner_text()
+            await _sbx_click("#voice-probe-safety-blocked")
+            badge_text_blocked = await page.locator("#outcome-badge").inner_text()
             assert (
                 "SAFETY_BLOCKED" in badge_text_blocked.upper()
                 or "BLOCKED" in badge_text_blocked.upper()
             )
 
-            page.click("#voice-probe-candid-refusal")
-            page.wait_for_timeout(150)
-            assert "REFUSAL" in page.locator("#outcome-badge").inner_text().upper()
+            await _sbx_click("#voice-probe-candid-refusal")
+            assert "REFUSAL" in (await page.locator("#outcome-badge").inner_text()).upper()
 
-            page.click("#voice-probe-needs-clarification")
-            page.wait_for_timeout(150)
-            assert "CLARIFICATION" in page.locator("#outcome-badge").inner_text().upper()
+            await _sbx_click("#voice-probe-needs-clarification")
+            assert "CLARIFICATION" in (await page.locator("#outcome-badge").inner_text()).upper()
 
             # Exercise all 4/4 Conductor-Driven SignalBox DAG Workflows in Tab 0
             conductor_surface = page.locator('[data-testid="conductor-signalbox-surface"]')
-            assert conductor_surface.is_visible()
+            assert await conductor_surface.is_visible()
 
-            page.click("#conductor-btn-multi-sibling-dag")
-            page.wait_for_timeout(150)
-            assert page.locator("#outcome-badge").inner_text().strip() == "EXECUTED"
+            await _sbx_click("#conductor-btn-multi-sibling-dag")
+            assert (await page.locator("#outcome-badge").inner_text()).strip() == "EXECUTED"
 
-            page.click("#conductor-btn-sepsis-escalation")
-            page.wait_for_timeout(150)
-            assert page.locator("#outcome-badge").inner_text().strip() == "EXECUTED"
+            await _sbx_click("#conductor-btn-sepsis-escalation")
+            assert (await page.locator("#outcome-badge").inner_text()).strip() == "EXECUTED"
 
-            page.click("#conductor-btn-r0-r3-research")
-            page.wait_for_timeout(150)
-            assert page.locator("#outcome-badge").inner_text().strip() == "EXECUTED"
+            await _sbx_click("#conductor-btn-r0-r3-research")
+            assert (await page.locator("#outcome-badge").inner_text()).strip() == "EXECUTED"
 
-            page.click("#conductor-btn-hitl-gate")
-            page.wait_for_timeout(150)
-            assert "REFUSAL" in page.locator("#outcome-badge").inner_text().upper()
+            await _sbx_click("#conductor-btn-hitl-gate")
+            assert "REFUSAL" in (await page.locator("#outcome-badge").inner_text()).upper()
 
             # Exhaustively click & audit all 6/6 Primary Tabs (0..5) and 2/2 Inner Sub-Tabs (5A, 5B)
             for tab_btn_id, panel_id in (
@@ -3004,10 +3033,16 @@ def test_conductor_headed_browser_signalbox_driven_e2e(
                 ("#subtab-btn-cryptographic-envelope-audit", "#panel-cryptographic-envelope-audit"),
                 ("#subtab-btn-conductor-orchestration-dag", "#panel-conductor-orchestration-dag"),
             ):
-                page.click(tab_btn_id)
-                page.wait_for_timeout(120)
-                assert page.locator(panel_id).is_visible(), f"Panel {panel_id} not visible after clicking {tab_btn_id}"
-                geom = page.evaluate(
+                await _sbx_click(tab_btn_id, wait_ms=200)
+                assert await page.locator(panel_id).is_visible(), (
+                    f"Panel {panel_id} not visible after clicking {tab_btn_id}"
+                )
+                audit_res = await session.layout_audit()
+                assert audit_res.get("ok") is True
+                assert audit_res["verdict"]["passed"] is True, (
+                    f"SignalBox layout_audit failed on {tab_btn_id}: {audit_res['verdict']}"
+                )
+                geom = await page.evaluate(
                     """() => {
                         const mainEl = document.querySelector('main.sfds-content');
                         const mainRect = mainEl.getBoundingClientRect();
@@ -3023,34 +3058,32 @@ def test_conductor_headed_browser_signalbox_driven_e2e(
                 assert geom["fullWidth"] is True, f"Main content not full width on {tab_btn_id}"
 
             # Check WORM audit rows on Tab 4
-            page.click("#subtab-btn-cryptographic-envelope-audit")
-            page.wait_for_timeout(120)
-            assert page.locator("#worm-audit-tbody tr").count() >= 4
+            await _sbx_click("#subtab-btn-cryptographic-envelope-audit", wait_ms=200)
+            assert await page.locator("#worm-audit-tbody tr").count() >= 4
 
             # Check both inner sub-tabs (5A and 5B) on Tab 5
-            page.click("#subtab-btn-conductor-orchestration-dag")
-            page.wait_for_timeout(120)
-            page.click("#inner-tab-btn-conductor-receipts")
-            page.wait_for_timeout(120)
-            assert page.locator("#inner-panel-conductor-receipts").is_visible()
-            assert page.locator("#conductor-dag-receipts-tbody tr").count() >= 8
-            assert page.evaluate("() => document.documentElement.scrollHeight <= window.innerHeight") is True
+            await _sbx_click("#subtab-btn-conductor-orchestration-dag", wait_ms=200)
+            await _sbx_click("#inner-tab-btn-conductor-receipts", wait_ms=200)
+            assert await page.locator("#inner-panel-conductor-receipts").is_visible()
+            assert await page.locator("#conductor-dag-receipts-tbody tr").count() >= 8
+            assert await page.evaluate("() => document.documentElement.scrollHeight <= window.innerHeight") is True
 
-            page.click("#inner-tab-btn-conductor-scorecard")
-            page.wait_for_timeout(120)
-            assert page.locator("#inner-panel-conductor-scorecard").is_visible()
-            assert page.evaluate("() => document.documentElement.scrollHeight <= window.innerHeight") is True
+            await _sbx_click("#inner-tab-btn-conductor-scorecard", wait_ms=200)
+            assert await page.locator("#inner-panel-conductor-scorecard").is_visible()
+            assert await page.evaluate("() => document.documentElement.scrollHeight <= window.innerHeight") is True
 
-            body_text = page.locator("body").inner_text()
+            body_text = await page.locator("body").inner_text()
             assert "undefined" not in body_text
             assert "NaN" not in body_text
             assert "[object Object]" not in body_text
+        finally:
+            await session.close()
 
-            browser.close()
+    try:
+        asyncio.run(_drive_via_signalbox_headed_session())
     finally:
         server.should_exit = True
         thread.join(timeout=3.0)
-
 
 
 # ============================================================================
