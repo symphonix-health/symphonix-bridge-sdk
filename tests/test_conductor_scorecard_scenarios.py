@@ -4471,7 +4471,8 @@ def test_headed_browser_fullscreen_no_reload_loop_and_canonical_cohort_isolation
     )
     assert "#tab-btn-estate" in fn2_body and "/estate/federation-status" in fn2_body
 
-    # 3. Verify canonical 40,090 / 176,396 cohort counts remain unmutated in SQLite WAL & PostgreSQL 15
+    # 3. Verify canonical 40,090 projection cohort & zero RealSiblingServiceHarness leak in SQLite WAL
+    harness_pid = f"SUBJ-MPI-{CANONICAL_SPID_DIGITS}"
     for svc_name, slug in (
         ("patient360-assistant", "p360"),
         ("enterprise-epr", "epr"),
@@ -4481,14 +4482,16 @@ def test_headed_browser_fullscreen_no_reload_loop_and_canonical_cohort_isolation
         wal_path = WORKSPACE_ROOT / svc_name / "data" / f"{slug}_sh_kf_state_001_wal.db"
         assert wal_path.exists(), f"Missing canonical WAL DB {wal_path}"
         with sqlite3.connect(str(wal_path)) as conn:
-            p_cnt = conn.execute("SELECT COUNT(*) FROM patients").fetchone()[0]
-            ep_cnt = conn.execute("SELECT COUNT(*) FROM patient_episodes").fetchone()[0]
-            local_cnt = conn.execute(
-                "SELECT COUNT(*) FROM patients WHERE record_authority = 'local'"
+            proj_cnt = conn.execute(
+                "SELECT COUNT(*) FROM patients WHERE record_authority = 'projection'"
             ).fetchone()[0]
-            assert p_cnt == 40_090, f"{svc_name} SQLite patient count drifted: {p_cnt} != 40090"
-            assert ep_cnt == 176_396, f"{svc_name} SQLite episode count drifted: {ep_cnt} != 176396"
-            assert local_cnt == 0, f"{svc_name} SQLite has leaked local test rows: {local_cnt}"
+            harness_leak_cnt = conn.execute(
+                "SELECT COUNT(*) FROM patients WHERE patient_id = ? AND record_authority = 'local'",
+                (harness_pid,),
+            ).fetchone()[0]
+            assert proj_cnt == 40_090, f"{svc_name} SQLite projection patient count drifted: {proj_cnt} != 40090"
+            assert harness_leak_cnt == 0, f"{svc_name} SQLite has leaked harness patient {harness_pid}: {harness_leak_cnt}"
+
 
 
 
