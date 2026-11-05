@@ -3431,7 +3431,7 @@ def test_conductor_headed_browser_signalbox_driven_e2e(
             await _sbx_click("#subtab-btn-cryptographic-envelope-audit", wait_ms=200)
             assert await page.locator("#worm-audit-tbody tr").count() >= 4
 
-            # Check both inner sub-tabs (5A and 5B) on Tab 5
+            # Check all 3 inner sub-tabs (5A, 5B, and 5C) on Tab 5
             await _sbx_click("#subtab-btn-conductor-orchestration-dag", wait_ms=200)
             await _sbx_click("#inner-tab-btn-conductor-receipts", wait_ms=200)
             assert await page.locator("#inner-panel-conductor-receipts").is_visible()
@@ -3441,6 +3441,37 @@ def test_conductor_headed_browser_signalbox_driven_e2e(
             await _sbx_click("#inner-tab-btn-conductor-scorecard", wait_ms=200)
             assert await page.locator("#inner-panel-conductor-scorecard").is_visible()
             assert await page.evaluate("() => document.documentElement.scrollHeight <= window.innerHeight") is True
+
+            # Sub-Tab 5C: Drive all 7 Conductor Runtime Functions (100/100 14-Column Canonical Scenarios)
+            # in the headed SignalBox browser using each function's relevant SuperPersona
+            await _sbx_click("#inner-tab-btn-conductor-14col-matrix", wait_ms=200)
+            assert await page.locator("#inner-panel-conductor-14col-matrix").is_visible()
+            assert await page.evaluate("() => document.documentElement.scrollHeight <= window.innerHeight") is True
+
+            fn_persona_schedule = [
+                (1, "security-compliance-auditor-superpersona", 13),
+                (2, "clinical-safety-officer-superpersona", 13),
+                (3, "clinician-superpersona", 4),
+                (4, "discharge-coordinator-superpersona", 16),
+                (5, "clinician-superpersona", 9),
+                (6, "research-scientist-superpersona", 11),
+                (7, "clinical-safety-officer-superpersona", 34),
+            ]
+            for fn_num, superpersona_id, expected_count in fn_persona_schedule:
+                await page.select_option("#layer0-persona-select", superpersona_id)
+                await _sbx_click(f"#btn-run-14col-fn-{fn_num}", wait_ms=150)
+                await page.wait_for_function(
+                    f"() => (document.getElementById('status-14col-fn-{fn_num}')?.textContent || '').trim().startsWith('PASS')",
+                    timeout=10000,
+                )
+                status_text = (await page.locator(f"#status-14col-fn-{fn_num}").inner_text()).strip()
+                assert status_text == f"PASS ({expected_count}/{expected_count})", (
+                    f"Expected Fn {fn_num} ({superpersona_id}) to reach PASS ({expected_count}/{expected_count}), got {status_text!r}"
+                )
+                assert await page.evaluate("() => document.documentElement.scrollHeight <= window.innerHeight") is True
+
+            total_badge_text = (await page.locator("#conductor-14col-total-badge").inner_text()).strip()
+            assert "100/100 PASS" in total_badge_text, f"Expected 100/100 PASS in total badge, got {total_badge_text!r}"
 
             body_text = await page.locator("body").inner_text()
             assert "undefined" not in body_text
