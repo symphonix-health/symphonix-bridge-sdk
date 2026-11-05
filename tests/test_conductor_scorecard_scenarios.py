@@ -4439,8 +4439,8 @@ def test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e(
 
 def test_headed_browser_fullscreen_no_reload_loop_and_canonical_cohort_isolation_guard() -> None:
     """Regression guard locking in:
-    1. Headed SignalBox tests never call `page.set_viewport_size(...)` (which overrides
-       `no_viewport=True` and prevents automatic full-screen display) and always invoke
+    1. Headed SignalBox tests never invoke viewport-shrinking overrides (which disable
+       `no_viewport=True` and prevent automatic full-screen display) and always invoke
        `ensure_window_maximised(page)` with `innerWidth >= availWidth - 40` assertions.
     2. Headed SignalBox tests never loop `browser_navigate` across `SIBLING_ROUTER_PATHS`
        reloading the identical shared `/workbench-ui` template 46 times in a row.
@@ -4448,15 +4448,13 @@ def test_headed_browser_fullscreen_no_reload_loop_and_canonical_cohort_isolation
        preserving canonical `40,090` patients / `176,396` episodes (`0` `record_authority='local'`
        rows) across the live sibling SQLite WAL and PostgreSQL 15 stores.
     """
-    source_text = Path(__file__).read_text(encoding="utf-8")
-    # 1. Forbid page.set_viewport_size in headed browser tests
-    fn1_start = source_text.index("def test_conductor_headed_browser_signalbox_driven_e2e")
-    fn1_end = source_text.index("def test_exhaustive_conductor_14col_matrix_row_execution")
-    fn2_start = source_text.index("def test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e")
-    fn2_end = source_text.index("def test_headed_browser_fullscreen_no_reload_loop_and_canonical_cohort_isolation_guard")
+    import inspect
+
+    fn1_body = inspect.getsource(test_conductor_headed_browser_signalbox_driven_e2e)
+    fn2_body = inspect.getsource(test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e)
     for fn_name, body in (
-        ("test_conductor_headed_browser_signalbox_driven_e2e", source_text[fn1_start:fn1_end]),
-        ("test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e", source_text[fn2_start:fn2_end]),
+        ("test_conductor_headed_browser_signalbox_driven_e2e", fn1_body),
+        ("test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e", fn2_body),
     ):
         assert "set_viewport_size(" not in body, (
             f"{fn_name} must never call set_viewport_size() on a headed SignalBox session; "
@@ -4467,7 +4465,6 @@ def test_headed_browser_fullscreen_no_reload_loop_and_canonical_cohort_isolation
         )
 
     # 2. Forbid 46-iteration browser_navigate loops over SIBLING_ROUTER_PATHS
-    fn2_body = source_text[fn2_start:fn2_end]
     assert fn2_body.count("browser_navigate(") == 1, (
         "Headed estate browser verification must use a single-pass tabbed workbench, "
         "never loop browser_navigate() across all 46 shared templates."
@@ -4492,5 +4489,6 @@ def test_headed_browser_fullscreen_no_reload_loop_and_canonical_cohort_isolation
             assert p_cnt == 40_090, f"{svc_name} SQLite patient count drifted: {p_cnt} != 40090"
             assert ep_cnt == 176_396, f"{svc_name} SQLite episode count drifted: {ep_cnt} != 176396"
             assert local_cnt == 0, f"{svc_name} SQLite has leaked local test rows: {local_cnt}"
+
 
 
