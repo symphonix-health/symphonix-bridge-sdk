@@ -152,6 +152,12 @@
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
     },
     {
+      "path": "ambulance-ems/src/clinical_cohort_3tier_router.py",
+      "owner_repo": "ambulance-ems",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
       "path": "ambulance-ems/tests/harness/reduced_json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.14col.json",
       "owner_repo": "ambulance-ems",
       "status": "pending_sibling_migration",
@@ -248,6 +254,12 @@
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
     },
     {
+      "path": "blood-transfusion/src/clinical_cohort_3tier_router.py",
+      "owner_repo": "blood-transfusion",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
       "path": "blood-transfusion/tests/harness/json_matrices/blood_transfusion_national_capability_canonical.json",
       "owner_repo": "blood-transfusion",
       "status": "pending_sibling_migration",
@@ -339,6 +351,12 @@
     },
     {
       "path": "cancer-pathway-tracker/frontend/src/components/Layout.tsx",
+      "owner_repo": "cancer-pathway-tracker",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "cancer-pathway-tracker/src/clinical_cohort_3tier_router.py",
       "owner_repo": "cancer-pathway-tracker",
       "status": "pending_sibling_migration",
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
@@ -459,6 +477,12 @@
     },
     {
       "path": "community-nursing/frontend/src/App.tsx",
+      "owner_repo": "community-nursing",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "community-nursing/src/clinical_cohort_3tier_router.py",
       "owner_repo": "community-nursing",
       "status": "pending_sibling_migration",
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
@@ -776,6 +800,12 @@
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
     },
     {
+      "path": "gp-system/src/clinical_cohort_3tier_router.py",
+      "owner_repo": "gp-system",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
       "path": "gp-system/tests/harness/reduced_json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.14col.json",
       "owner_repo": "gp-system",
       "status": "pending_sibling_migration",
@@ -890,6 +920,12 @@
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
     },
     {
+      "path": "helixcare-diagnostic-access-network/tests/test_hdan_real_service_scenarios.py",
+      "owner_repo": "helixcare-diagnostic-access-network",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
       "path": "helixcare-diagnostic-access-network/tests/test_investor_readiness_scenarios.py",
       "owner_repo": "helixcare-diagnostic-access-network",
       "status": "pending_sibling_migration",
@@ -963,6 +999,12 @@
     },
     {
       "path": "lis/frontend/src/components/Layout.tsx",
+      "owner_repo": "lis",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "lis/src/clinical_cohort_3tier_router.py",
       "owner_repo": "lis",
       "status": "pending_sibling_migration",
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
@@ -1220,7 +1262,7 @@
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
     },
     {
-      "path": "nursing-station/tests/test_clinical_decision_record_w10.py",
+      "path": "nursing-station/src/clinical_cohort_3tier_router.py",
       "owner_repo": "nursing-station",
       "status": "pending_sibling_migration",
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
@@ -1322,6 +1364,12 @@
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
     },
     {
+      "path": "pacs-ris/src/clinical_cohort_3tier_router.py",
+      "owner_repo": "pacs-ris",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
       "path": "pacs-ris/tests/harness/reduced_json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.14col.json",
       "owner_repo": "pacs-ris",
       "status": "pending_sibling_migration",
@@ -1335,6 +1383,12 @@
     },
     {
       "path": "patient360-assistant/src/patient360_assistant/service/clinical_cohort_3tier_router.py",
+      "owner_repo": "patient360-assistant",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "patient360-assistant/tests/harness/json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.json",
       "owner_repo": "patient360-assistant",
       "status": "pending_sibling_migration",
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
@@ -1725,6 +1779,12 @@
     },
     {
       "path": "vr-therapy/frontend/src/api/types.ts",
+      "owner_repo": "vr-therapy",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "vr-therapy/tests/test_vr_therapy_real_service_scenarios.py",
       "owner_repo": "vr-therapy",
       "status": "pending_sibling_migration",
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."

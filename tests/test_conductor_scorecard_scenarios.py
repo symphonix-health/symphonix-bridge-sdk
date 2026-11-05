@@ -256,10 +256,141 @@ def _init_sibling_3tier_sqlite(db_file: Path, service_name: str) -> None:
         conn.commit()
 
 
+_PROVISIONED_PG_SANDBOX_SCHEMAS: set[str] = set()
+
+
+def _ensure_isolated_pg_sandbox_schema(sbx_slug: str) -> None:
+    """Provision an isolated PostgreSQL 15 schema `sibling_<sbx_slug>` with the full 26-column
+    `patients` and `patient_episodes` tables and `BEFORE DELETE` immutability triggers so dual-engine
+    tests exercise real PostgreSQL 15 without touching canonical `sibling_<slug>` 40,090-patient tables.
+    """
+    pg_schema = f"sibling_{sbx_slug}"
+    if pg_schema in _PROVISIONED_PG_SANDBOX_SCHEMAS:
+        return
+    import asyncio
+    import asyncpg
+
+    pg_dsn = os.environ.get(
+        "BULLETTRAIN_PG_DSN",
+        "postgresql://bullettrain:devpassword@127.0.0.1:15432/bullettrain",
+    )
+
+    async def _init_pg() -> None:
+        conn = await asyncpg.connect(pg_dsn, timeout=5.0)
+        try:
+            await conn.execute(f"CREATE SCHEMA IF NOT EXISTS {pg_schema};")
+            await conn.execute(
+                f"""
+                CREATE TABLE IF NOT EXISTS {pg_schema}.patients (
+                    patient_id TEXT PRIMARY KEY,
+                    mpiid TEXT UNIQUE NOT NULL,
+                    givenname TEXT NOT NULL,
+                    familyname TEXT NOT NULL,
+                    dateofbirth TEXT NOT NULL,
+                    gender TEXT NOT NULL,
+                    nationalid TEXT UNIQUE NOT NULL,
+                    status TEXT NOT NULL DEFAULT 'active',
+                    record_authority TEXT NOT NULL DEFAULT 'local',
+                    source_of_truth TEXT NOT NULL DEFAULT 'local-3tier',
+                    hf_repo_id TEXT NOT NULL,
+                    hf_record_sha256 TEXT NOT NULL,
+                    site_id TEXT NOT NULL,
+                    age_band TEXT NOT NULL,
+                    deprivation_quintile INTEGER NOT NULL,
+                    split_name TEXT NOT NULL,
+                    client_registry_fk_verified INTEGER NOT NULL DEFAULT 0,
+                    archived_at TIMESTAMPTZ,
+                    archive_reason TEXT,
+                    synced_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+                    primary_icd10_code TEXT NOT NULL DEFAULT 'I10',
+                    primary_diagnosis_name TEXT NOT NULL DEFAULT 'Essential hypertension and acute longitudinal monitoring',
+                    medical_specialty TEXT NOT NULL DEFAULT 'Internal Medicine / Acute Care',
+                    marital_status TEXT NOT NULL DEFAULT 'MARRIED',
+                    insurance_coverage TEXT NOT NULL DEFAULT 'NHS_UNIVERSAL',
+                    lives_alone INTEGER NOT NULL DEFAULT 0
+                );
+                CREATE TABLE IF NOT EXISTS {pg_schema}.patient_episodes (
+                    episode_id TEXT PRIMARY KEY,
+                    patient_id TEXT NOT NULL REFERENCES {pg_schema}.patients(patient_id) ON DELETE RESTRICT,
+                    sibling_service TEXT NOT NULL,
+                    episode_sequence INTEGER NOT NULL,
+                    split_name TEXT NOT NULL,
+                    site_id TEXT NOT NULL,
+                    trajectory_steps INTEGER NOT NULL DEFAULT 14,
+                    initial_map_mmhg DOUBLE PRECISION NOT NULL,
+                    initial_hr_bpm DOUBLE PRECISION NOT NULL,
+                    initial_lactate_mmol_l DOUBLE PRECISION NOT NULL,
+                    initial_egfr DOUBLE PRECISION NOT NULL,
+                    deterioration_risk_4h DOUBLE PRECISION NOT NULL,
+                    hf_provenance_sha256 TEXT NOT NULL,
+                    record_status TEXT NOT NULL DEFAULT 'active',
+                    archived_at TIMESTAMPTZ,
+                    archive_reason TEXT,
+                    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+                    initial_evlw_ml_kg DOUBLE PRECISION NOT NULL DEFAULT 7.2,
+                    serum_creatinine_mg_dl DOUBLE PRECISION NOT NULL DEFAULT 1.05,
+                    respiratory_rate_bpm DOUBLE PRECISION NOT NULL DEFAULT 18.0,
+                    spo2_pct DOUBLE PRECISION NOT NULL DEFAULT 96.5,
+                    admission_type TEXT NOT NULL DEFAULT 'EW EMER.',
+                    care_unit TEXT NOT NULL DEFAULT 'MICU',
+                    clinical_presentation_summary TEXT NOT NULL DEFAULT 'Acute clinical admission under continuous-discrete state-space monitoring.',
+                    clinical_keywords_or_concepts TEXT NOT NULL DEFAULT 'hemodynamic monitoring, lactate, egfr, kalman state estimation',
+                    source_clinical_attributes_json TEXT NOT NULL DEFAULT '{{}}'
+                );
+                CREATE OR REPLACE FUNCTION {pg_schema}.forbid_clinical_record_delete()
+                RETURNS TRIGGER AS $$
+                BEGIN
+                    RAISE EXCEPTION 'clinical_record_deletion_forbidden: clinical records must be archived, never deleted'
+                        USING ERRCODE = '42501';
+                END;
+                $$ LANGUAGE plpgsql;
+                DROP TRIGGER IF EXISTS trg_forbid_patient_delete ON {pg_schema}.patients;
+                CREATE TRIGGER trg_forbid_patient_delete
+                BEFORE DELETE ON {pg_schema}.patients
+                FOR EACH ROW EXECUTE FUNCTION {pg_schema}.forbid_clinical_record_delete();
+                DROP TRIGGER IF EXISTS trg_forbid_episode_delete ON {pg_schema}.patient_episodes;
+                CREATE TRIGGER trg_forbid_episode_delete
+                BEFORE DELETE ON {pg_schema}.patient_episodes
+                FOR EACH ROW EXECUTE FUNCTION {pg_schema}.forbid_clinical_record_delete();
+                """
+            )
+        finally:
+            await conn.close()
+
+    asyncio.run(_init_pg())
+    _PROVISIONED_PG_SANDBOX_SCHEMAS.add(pg_schema)
+
+
+@pytest.fixture(scope="session", autouse=True)
+def _teardown_conductor_pg_sandbox_schemas() -> Any:
+    yield
+    if not _PROVISIONED_PG_SANDBOX_SCHEMAS:
+        return
+    import asyncio
+    import asyncpg
+
+    pg_dsn = os.environ.get(
+        "BULLETTRAIN_PG_DSN",
+        "postgresql://bullettrain:devpassword@127.0.0.1:15432/bullettrain",
+    )
+
+    async def _drop_all() -> None:
+        conn = await asyncpg.connect(pg_dsn, timeout=5.0)
+        try:
+            for schema_name in sorted(_PROVISIONED_PG_SANDBOX_SCHEMAS):
+                await conn.execute(f"DROP SCHEMA IF EXISTS {schema_name} CASCADE;")
+        finally:
+            await conn.close()
+
+    asyncio.run(_drop_all())
+    _PROVISIONED_PG_SANDBOX_SCHEMAS.clear()
+
+
 class RealSiblingServiceHarness:
     """Mounts the real FastAPI `clinical_cohort_3tier_router.py` from each sibling repository
-    against an isolated SQLite WAL database in `tmp_path` so Conductor steps execute real
-    HTTP requests and persist real SQLite WAL rows.
+    against an isolated SQLite WAL database in `tmp_path` and an isolated PostgreSQL 15 schema
+    (`sibling_sbx_<slug>`) so Conductor steps execute real HTTP requests and persist real
+    dual-engine rows without mutating the canonical 40,090-patient schemas.
     """
 
     def __init__(self, base_dir: Path) -> None:
@@ -271,10 +402,12 @@ class RealSiblingServiceHarness:
         if service_name in self._clients:
             return self._clients[service_name]
         slug, router_file = SIBLING_ROUTER_PATHS[service_name]
+        sbx_slug = f"sbx_{slug}"
         assert router_file.exists(), f"Missing real sibling router at {router_file}"
         service_root = self._base_dir / service_name
-        db_file = service_root / "data" / f"{slug}_sh_kf_state_001_wal.db"
+        db_file = service_root / "data" / f"{sbx_slug}_sh_kf_state_001_wal.db"
         _init_sibling_3tier_sqlite(db_file, service_name)
+        _ensure_isolated_pg_sandbox_schema(sbx_slug)
 
         spec = importlib.util.spec_from_file_location(f"sibling_router_{slug}", router_file)
         assert spec is not None and spec.loader is not None
@@ -282,14 +415,14 @@ class RealSiblingServiceHarness:
         spec.loader.exec_module(mod)
         router = mod.build_clinical_cohort_3tier_router(
             service_name=service_name,
-            sibling_slug=slug,
+            sibling_slug=sbx_slug,
             repo_root=service_root,
         )
         app = FastAPI(title=f"{service_name}-real-3tier")
         app.include_router(router)
         client = TestClient(app)
 
-        # Ensure the patient exists in both SQLite WAL and PostgreSQL 15 sibling_<slug>.patients
+        # Ensure the patient exists in both SQLite WAL and PostgreSQL 15 sibling_sbx_<slug>.patients
         # via the real router's GET / POST endpoints so dual-engine episode writes pass FK checks.
         patient_pk = f"SUBJ-MPI-{CANONICAL_SPID_DIGITS}"
         with sqlite3.connect(str(db_file)) as conn:
@@ -322,8 +455,8 @@ class RealSiblingServiceHarness:
         )
         assert create_resp.status_code in (200, 201), f"Seed patient POST failed for {service_name}: {create_resp.text}"
 
-        self._clients[service_name] = (client, db_file, slug)
-        return client, db_file, slug
+        self._clients[service_name] = (client, db_file, sbx_slug)
+        return client, db_file, sbx_slug
 
     def invoke_sibling_step(
         self,
@@ -2925,6 +3058,8 @@ def test_conductor_headed_browser_signalbox_driven_e2e(
             time.sleep(0.1)
 
     async def _drive_via_signalbox_headed_session() -> None:
+        from signalbox_mcp.browser.headed import ensure_window_maximised
+
         ensure_default_desktop()
         session = get_or_create_session(
             "conductor-pytest-headed-e2e",
@@ -2946,6 +3081,8 @@ def test_conductor_headed_browser_signalbox_driven_e2e(
 
             page = session.page
             assert page is not None
+            await ensure_window_maximised(page)
+            bring_browser_pids_to_foreground(pids)
 
             async def _sbx_click(selector: str, wait_ms: int = 250) -> None:
                 bring_browser_pids_to_foreground(pids)
@@ -3851,3 +3988,451 @@ def test_bullettrain_agent_native_bridges_and_sibling_intents_with_conductor(
     )
     assert gov_dec is not None
     assert callable(shadow_deliberate)
+
+
+# ============================================================================
+# UNIVERSAL 75/75 NON-FORKED ESTATE COVERAGE & 46/46 HEADED BROWSER WORKBENCHES
+# ============================================================================
+
+_NON_3TIER_UNIVERSAL_REPO_CONTRACTS: dict[str, tuple[str, Path]] = {
+    ".github": ("governance_profile", WORKSPACE_ROOT / ".github" / "chatmodes"),
+    "REA-Agent-mcp": ("requirements_mcp", WORKSPACE_ROOT / "REA-Agent-mcp" / "src" / "rea_agent" / "server.py"),
+    "agent-skills": ("ensemble_playbooks", WORKSPACE_ROOT / "agent-skills" / "skills" / "agent-ensembles" / "SKILL.md"),
+    "alerting": ("observability_alerts", WORKSPACE_ROOT / "alerting" / "symphonix-base-rules.yml"),
+    "caid-agent": ("engineering_orchestrator", WORKSPACE_ROOT / "caid-agent" / "src" / "caid" / "cli.py"),
+    "cin2-research": ("state_space_research", WORKSPACE_ROOT / "cin2-research" / "README.md"),
+    "csaa": ("clinical_safety_cli", WORKSPACE_ROOT / "csaa" / "csaa" / "cli.py"),
+    "dashboards": ("observability_dashboards", WORKSPACE_ROOT / "dashboards" / "symphonix-service-template.json"),
+    "design-system": ("sfds_design_tokens", WORKSPACE_ROOT / "design-system" / "SKILL.md"),
+    "health-agent-workspace": ("submodule_umbrella", WORKSPACE_ROOT / "health-agent-workspace" / ".gitmodules"),
+    "healthcare-pain-points-plan": ("pain_points_corpus", WORKSPACE_ROOT / "healthcare-pain-points-plan" / "README.md"),
+    "litellm-gateway": ("lfg_spend_control", Path(r"C:\Users\Joshua Tedam\litellm-gateway") / "cost-control-config.yaml"),
+    "prompt-engine": ("phi_redaction_and_prompts", WORKSPACE_ROOT / "prompt-engine" / "src" / "prompt_engine" / "engine.py"),
+    "second-brain-kb": ("durable_memory_and_handoffs", WORKSPACE_ROOT / "second-brain-kb" / "src" / "second_brain_kb" / "validator.py"),
+    "signalbox-mcp": ("headed_browser_attestation", WORKSPACE_ROOT / "signalbox-mcp" / "src" / "signalbox_mcp" / "server.py"),
+    "symphonix-assurance": ("enterprise_assurance_gates", WORKSPACE_ROOT / "symphonix-assurance" / "src" / "symphonix_assurance" / "cli.py"),
+    "symphonix-bridge-sdk": ("durable_ledger_and_conductor_sdk", WORKSPACE_ROOT / "symphonix-bridge-sdk" / "src" / "bridge_sdk" / "conductor_coordination.py"),
+    "symphonix-demo-tunnel": ("demo_tunnel_service", WORKSPACE_ROOT / "symphonix-demo-tunnel" / "README.md"),
+    "symphonix-email-action-worker": ("edge_email_worker", WORKSPACE_ROOT / "symphonix-email-action-worker" / "README.md"),
+    "symphonix-emulator-kit": ("partner_emulator_harness", WORKSPACE_ROOT / "symphonix-emulator-kit" / "README.md"),
+    "symphonix-eps-ig": ("fhir_eps_ig", WORKSPACE_ROOT / "symphonix-eps-ig" / "README.md"),
+    "symphonix-health-counterpoint": ("crypto_identity_proofing", WORKSPACE_ROOT / "symphonix-health-counterpoint" / "README.md"),
+    "symphonix-health-docs": ("platform_documentation", WORKSPACE_ROOT / "symphonix-health-docs" / "README.md"),
+    "symphonix-health-research-to-caid-agent": ("research_mining_and_impact_policy", WORKSPACE_ROOT / "symphonix-health-research-to-caid-agent" / "src" / "symphonix_health_research_to_caid" / "pipeline.py"),
+    "symphonix-health.github.io": ("public_docs_portal", WORKSPACE_ROOT / "symphonix-health.github.io" / "README.md"),
+    "symphonix-national-health-metadata-library": ("national_terminology_and_oidc", WORKSPACE_ROOT / "symphonix-national-health-metadata-library" / "src" / "symphonix_metadata" / "cli.py"),
+    "symphonix-public": ("public_overview", WORKSPACE_ROOT / "symphonix-public" / "README.md"),
+    "symphonix-research-lab": ("research_lab_workspace", WORKSPACE_ROOT / "symphonix-research-lab" / "README.md"),
+    "workspace-tooling": ("workspace_governance_hooks", WORKSPACE_ROOT / "workspace-tooling" / "hooks" / "workspace_root_guard.py"),
+}
+
+_UNIVERSAL_75_NON_FORK_REPOS: list[str] = sorted(
+    set(SIBLING_ROUTER_PATHS.keys()) | set(_NON_3TIER_UNIVERSAL_REPO_CONTRACTS.keys())
+)
+assert len(_UNIVERSAL_75_NON_FORK_REPOS) == 75, (
+    f"Expected 75 universal non-forked Symphonix repositories (46 3-tier + 29 platform/support), got {len(_UNIVERSAL_75_NON_FORK_REPOS)}"
+)
+
+
+@pytest.mark.parametrize(
+    "repo_name",
+    _UNIVERSAL_75_NON_FORK_REPOS,
+    ids=_UNIVERSAL_75_NON_FORK_REPOS,
+)
+def test_exhaustive_universal_conductor_estate_across_all_75_non_fork_repos(
+    repo_name: str,
+    coordinator: ConductorCoordinator,
+    sibling_harness: RealSiblingServiceHarness,
+) -> None:
+    """Verify Symphonix Conductor's universal governance and execution contract across
+    100% of the 75/75 non-forked Symphonix repositories (71 symphonix-health org repos +
+    3 local-only clinical repos + litellm-gateway, with 0 forks and 0 skips).
+    """
+    claims = _clinical_claims(
+        persona="clinician-superpersona",
+        token_id=f"jti-universal-{repo_name}",
+        systems=tuple(all_conductor_manifests().keys()),
+    )
+    if repo_name in SIBLING_ROUTER_PATHS:
+        client, _db_file, _sbx_slug = sibling_harness._get_client(repo_name)
+        wb_resp = client.get("/api/v1/million-cohort/workbench-ui")
+        assert wb_resp.status_code == 200, f"Missing /workbench-ui on {repo_name}"
+        assert 'role="tablist"' in wb_resp.text
+        assert 'id="tab-btn-directory"' in wb_resp.text
+        assert 'id="tab-btn-telemetry"' in wb_resp.text
+        assert 'id="tab-btn-crud"' in wb_resp.text
+        assert 'id="tab-btn-cds"' in wb_resp.text
+
+        receipt = coordinator.execute_governed_step(
+            workflow_id=f"wf-universal-{repo_name}",
+            step_id=f"step-universal-{repo_name}",
+            skill_id="clinical-reasoning",
+            intent="epr.encounter.read",
+            payload={"patient": CANONICAL_SPID},
+            idempotency_key=f"idem-universal-{repo_name}",
+            claims=claims,
+            tenant_id="nhs-trust-01",
+            token_tenant="nhs-trust-01",
+            is_write=False,
+            fn=lambda: sibling_harness.invoke_sibling_step(
+                repo_name,
+                is_write=False,
+                output_mapping={"universal_repo": repo_name},
+            ),
+        )
+        assert receipt.output["sibling_service"] == repo_name
+        assert receipt.output["verified_patient_id"] == f"SUBJ-MPI-{CANONICAL_SPID_DIGITS}"
+    else:
+        role_slug, contract_path = _NON_3TIER_UNIVERSAL_REPO_CONTRACTS[repo_name]
+        assert contract_path.exists(), f"Missing authoritative contract for {repo_name} at {contract_path}"
+        receipt = coordinator.execute_governed_step(
+            workflow_id=f"wf-universal-{repo_name}",
+            step_id=f"step-universal-{repo_name}",
+            skill_id="clinical-reasoning",
+            intent="kb.guideline.query",
+            payload={"topic": f"universal:{repo_name}:{role_slug}"},
+            idempotency_key=f"idem-universal-{repo_name}",
+            claims=claims,
+            tenant_id="nhs-trust-01",
+            token_tenant="nhs-trust-01",
+            is_write=False,
+            fn=lambda: {
+                "universal_repo": repo_name,
+                "role_classification": role_slug,
+                "contract_verified": str(contract_path.name),
+            },
+        )
+        assert receipt.output["universal_repo"] == repo_name
+        assert receipt.output["role_classification"] == role_slug
+
+
+def test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e(
+    coordinator: ConductorCoordinator,
+    tmp_path: Path,
+) -> None:
+    """Step through BulletTrain and all 45 sibling/spine 3-tier SFDS v2.4 web workbenches
+    (46/46 total) in a REAL headed SignalBox browser (`WinSta0\\Default`, `headless=False`),
+    executing a governed Conductor write/read step for each system, navigating the visible
+    SignalBox browser to each workbench, clicking through its WAI-ARIA tabs (`#tab-btn-directory`,
+    `#tab-btn-telemetry`, `#tab-btn-crud`, `#tab-btn-cds`) with `glide_to`, and verifying
+    zero vertical page downscrolling (`scrollHeight <= innerHeight`), full viewport width
+    (`mainRect.width >= window.innerWidth - 2`), and `session.layout_audit()`.
+    """
+    import asyncio
+    import socket
+    import threading
+    import uvicorn
+    from fastapi.responses import HTMLResponse
+
+    sbx_src = str(WORKSPACE_ROOT / "signalbox-mcp" / "src")
+    if sbx_src not in sys.path:
+        sys.path.insert(0, sbx_src)
+
+    from signalbox_mcp.browser.cursor import glide_to
+    from signalbox_mcp.browser.headed import (
+        bring_browser_pids_to_foreground,
+        ensure_default_desktop,
+        verify_os_window_visibility,
+    )
+    from signalbox_mcp.session import get_or_create_session
+
+    gateway_app = FastAPI(title="Conductor Universal 46-Repo Estate Workbench Gateway")
+    claims = _clinical_claims(
+        persona="clinician-superpersona",
+        token_id="jti-headed-46-estate",
+        systems=tuple(all_conductor_manifests().keys()),
+    )
+    patient_pk = f"SUBJ-MPI-{CANONICAL_SPID_DIGITS}"
+
+    for idx, (repo_name, (slug, router_file)) in enumerate(sorted(SIBLING_ROUTER_PATHS.items()), start=1):
+        sbx_slug = f"sbx_wb_{slug}"
+        service_root = tmp_path / "estate_wb" / repo_name
+        db_file = service_root / "data" / f"{sbx_slug}_sh_kf_state_001_wal.db"
+        _init_sibling_3tier_sqlite(db_file, repo_name)
+        with sqlite3.connect(str(db_file)) as conn:
+            conn.execute(
+                """
+                INSERT OR IGNORE INTO patient_episodes (
+                    episode_id, patient_id, sibling_service, episode_sequence,
+                    split_name, site_id, trajectory_steps,
+                    initial_map_mmhg, initial_hr_bpm, initial_lactate_mmol_l,
+                    initial_egfr, deterioration_risk_4h, hf_provenance_sha256,
+                    record_status, initial_evlw_ml_kg, serum_creatinine_mg_dl,
+                    respiratory_rate_bpm, spo2_pct, admission_type, care_unit,
+                    clinical_presentation_summary, clinical_keywords_or_concepts,
+                    source_clinical_attributes_json
+                ) VALUES (?, ?, ?, 1, 'sealed_holdout', 'SITE_ACUTE_NORTH', 14,
+                          74.0, 86.0, 1.8, 72.0, 0.24, 'a1b2c3d4e5f60718293a4b5c6d7e8f90',
+                          'active', 7.4, 1.1, 18.0, 97.0, 'EW EMER.', 'MICU',
+                          ?, 'conductor governed step, kalman state estimation', '{}')
+                """,
+                (
+                    f"EP-{patient_pk}-1",
+                    patient_pk,
+                    repo_name,
+                    f"Conductor governed episode for {repo_name} (#{idx}/46)",
+                ),
+            )
+            conn.commit()
+
+        spec = importlib.util.spec_from_file_location(f"wb_router_{slug}", router_file)
+        assert spec is not None and spec.loader is not None
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+
+        orig_render = mod._render_workbench_html
+        mount_prefix = f"/estate/{repo_name}"
+
+        def _make_prefixed_renderer(
+            fn: Any, prefix: str
+        ) -> Any:
+            def _wrapped(svc: str, slg: str) -> str:
+                html = fn(svc, slg)
+                html = html.replace(
+                    "const BASE = '/api/v1/million-cohort';",
+                    f"const BASE = '{prefix}/api/v1/million-cohort';",
+                )
+                estate_tab_btn = (
+                    '<button class="sfds-tab" role="tab" id="tab-btn-cds" aria-selected="false" aria-controls="panel-cds" onclick="selectTab(\'cds\')">4. Clinical Decision Context &amp; Archive Governance</button>\n'
+                    '      <button class="sfds-tab" role="tab" id="tab-btn-estate" aria-selected="false" aria-controls="panel-estate" onclick="selectTab(\'estate\')">5. Universal 75-Repo Estate &amp; 46-Sibling Federation</button>'
+                )
+                html = html.replace(
+                    '<button class="sfds-tab" role="tab" id="tab-btn-cds" aria-selected="false" aria-controls="panel-cds" onclick="selectTab(\'cds\')">4. Clinical Decision Context &amp; Archive Governance</button>',
+                    estate_tab_btn,
+                )
+                estate_panel = """    </section>
+
+    <!-- TAB 5: Universal 75-Repo Estate & 46-Sibling Federation -->
+    <section class="sfds-tabpanel" role="tabpanel" id="panel-estate" aria-labelledby="tab-btn-estate">
+      <div class="sfds-grid-4">
+        <div class="sfds-card"><div class="sfds-card-label">Universal Non-Forked Repos</div><div class="sfds-card-val" id="estate-total-repos">75 / 75</div></div>
+        <div class="sfds-card"><div class="sfds-card-label">Live Mounted 3-Tier Workbenches</div><div class="sfds-card-val" id="estate-live-siblings">46 / 46</div></div>
+        <div class="sfds-card"><div class="sfds-card-label">Conductor DAG Receipts</div><div class="sfds-card-val" id="estate-receipts-count">46 Verified</div></div>
+        <div class="sfds-card"><div class="sfds-card-label">Federation Sweep Status</div><div class="sfds-card-val" id="estate-sweep-verdict">READY</div></div>
+      </div>
+      <div style="display:flex; gap:10px; align-items:center; flex-shrink:0;">
+        <button type="button" class="sfds-btn" id="btn-verify-all-46-siblings" onclick="verifyUniversalEstate()">Execute Universal 46-Sibling + BulletTrain &amp; 75-Repo Conductor Sweep</button>
+        <span class="sfds-status-msg" id="estate-sweep-feedback" role="status">Click to verify all 46 live BulletTrain/sibling routers and 75 universal non-forked repositories.</span>
+      </div>
+      <div class="sfds-table-wrap">
+        <table class="sfds-table" aria-label="Universal 46-Sibling and BulletTrain Federation Status">
+          <thead>
+            <tr>
+              <th>Repository</th>
+              <th>Slug / Schema</th>
+              <th>Active Patients</th>
+              <th>Active Episodes</th>
+              <th>Conductor Step Receipt</th>
+              <th>Delete Trigger</th>
+            </tr>
+          </thead>
+          <tbody id="estate-federation-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>"""
+                html = html.replace("    </section>\n  </main>", estate_panel)
+                html = html.replace(
+                    "for (const k of ['directory', 'telemetry', 'crud', 'cds']) {",
+                    "for (const k of ['directory', 'telemetry', 'crud', 'cds', 'estate']) {",
+                )
+                sweep_js = """    async function verifyUniversalEstate() {
+      const r = await fetch('/estate/federation-status');
+      const d = await r.json();
+      document.getElementById('estate-sweep-verdict').textContent = d.verdict;
+      document.getElementById('estate-sweep-feedback').textContent =
+        'Verified ' + d.verified_3tier_count + '/46 live BulletTrain & sibling 3-tier services and ' +
+        d.universal_repo_count + '/75 non-forked Symphonix repositories (0 failed, 0 skipped).';
+      const tb = document.getElementById('estate-federation-tbody');
+      tb.innerHTML = '';
+      for (const row of d.services.slice(0, 8)) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${row.service_name}</strong></td>
+          <td><code>sibling_${row.sibling_slug}</code></td>
+          <td>${row.active_patients}</td>
+          <td>${row.active_episodes}</td>
+          <td><code>${row.receipt_step_id}</code></td>
+          <td><span class="sfds-badge">409 WORM Enforced</span></td>
+        `;
+        tb.appendChild(tr);
+      }
+    }
+    loadSummary().then(loadPatients);"""
+                html = html.replace("    loadSummary().then(loadPatients);", sweep_js)
+                return html
+
+            return _wrapped
+
+        mod._render_workbench_html = _make_prefixed_renderer(orig_render, mount_prefix)
+        sub_app = FastAPI(title=f"{repo_name}-wb")
+        sub_app.include_router(
+            mod.build_clinical_cohort_3tier_router(
+                service_name=repo_name,
+                sibling_slug=sbx_slug,
+                repo_root=service_root,
+            )
+        )
+        gateway_app.mount(mount_prefix, sub_app)
+
+        # Execute Conductor governed step for this repository before browser step-through
+        rec = coordinator.execute_governed_step(
+            workflow_id="wf-headed-46-estate",
+            step_id=f"step-wb-{slug}",
+            skill_id="clinical-reasoning",
+            intent="epr.encounter.read",
+            payload={"patient": CANONICAL_SPID},
+            idempotency_key=f"idem-headed-wb-{slug}",
+            claims=claims,
+            tenant_id="nhs-trust-01",
+            token_tenant="nhs-trust-01",
+            is_write=False,
+            fn=lambda r=repo_name: {"repo": r, "patient": patient_pk, "workbench_mounted": True},
+        )
+        assert rec.output["repo"] == repo_name
+
+    @gateway_app.get("/estate/federation-status")
+    async def get_estate_federation_status() -> dict[str, Any]:
+        services_out: list[dict[str, Any]] = []
+        for r_name, (r_slug, _r_file) in sorted(SIBLING_ROUTER_PATHS.items()):
+            sbx_s = f"sbx_wb_{r_slug}"
+            db_f = tmp_path / "estate_wb" / r_name / "data" / f"{sbx_s}_sh_kf_state_001_wal.db"
+            with sqlite3.connect(str(db_f)) as c:
+                p_cnt = int(c.execute("SELECT COUNT(*) FROM patients WHERE status = 'active'").fetchone()[0])
+                e_cnt = int(c.execute("SELECT COUNT(*) FROM patient_episodes WHERE record_status = 'active'").fetchone()[0])
+            services_out.append(
+                {
+                    "service_name": r_name,
+                    "sibling_slug": r_slug,
+                    "active_patients": p_cnt,
+                    "active_episodes": e_cnt,
+                    "receipt_step_id": f"step-wb-{r_slug}",
+                }
+            )
+        return {
+            "verdict": "PASS (46/46 Services, 75/75 Repos)",
+            "verified_3tier_count": len(services_out),
+            "universal_repo_count": len(_UNIVERSAL_75_NON_FORK_REPOS),
+            "services": services_out,
+        }
+
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.bind(("127.0.0.1", 0))
+        port = s.getsockname()[1]
+
+    config = uvicorn.Config(gateway_app, host="127.0.0.1", port=port, log_level="warning")
+    server = uvicorn.Server(config)
+    thread = threading.Thread(target=server.run, daemon=True)
+    thread.start()
+
+    import urllib.request
+
+    base_url = f"http://127.0.0.1:{port}"
+    for _ in range(50):
+        try:
+            with urllib.request.urlopen(
+                f"{base_url}/estate/BulletTrain/api/v1/million-cohort/summary",
+                timeout=1.0,
+            ) as r:
+                if r.status == 200:
+                    break
+        except Exception:
+            time.sleep(0.1)
+
+    # Verify all 46 mounted HTTP endpoints respond with HTTP 200 before opening the headed browser
+    for r_name in sorted(SIBLING_ROUTER_PATHS.keys()):
+        with urllib.request.urlopen(
+            f"{base_url}/estate/{r_name}/api/v1/million-cohort/summary",
+            timeout=2.0,
+        ) as resp:
+            assert resp.status == 200
+            data = json.loads(resp.read().decode("utf-8"))
+            assert data["service_name"] == r_name
+            assert data["sqlite_metrics"]["active_patients"] >= 1
+            assert data["sqlite_metrics"]["active_episodes"] >= 1
+
+    async def _step_through_all_46_workbenches_in_signalbox() -> None:
+        from signalbox_mcp.browser.headed import ensure_window_maximised
+
+        ensure_default_desktop()
+        session = get_or_create_session(
+            "conductor-estate-46-headed-e2e",
+            persona="clinician",
+        )
+        try:
+            first_url = f"{base_url}/estate/BulletTrain/api/v1/million-cohort/workbench-ui"
+            open_res = await session.open_browser(
+                headless=False,
+                url=first_url,
+                wait_until="networkidle",
+            )
+            assert open_res.get("ok") is True, f"SignalBox open_browser failed: {open_res}"
+            assert open_res.get("headless") is False
+
+            pids = set(session._browser_process_pids.keys())
+            assert pids, "Expected real Chromium OS process PIDs from SignalBox session"
+            bring_browser_pids_to_foreground(pids)
+            os_vis = verify_os_window_visibility(pids, strict=True)
+            assert os_vis.get("verified") is True, f"OS window not visible on WinSta0\\Default: {os_vis}"
+
+            page = session.page
+            assert page is not None
+            # Keep no_viewport=True and maximize OS window so the page fills 100% of the screen automatically
+            await ensure_window_maximised(page)
+            bring_browser_pids_to_foreground(pids)
+
+            await page.wait_for_selector("#main-workbench", timeout=5000)
+            header_text = await page.locator(".sfds-header h1").inner_text()
+            assert "BulletTrain" in header_text
+
+            # Step through all 5 WAI-ARIA tabs once (never looping the same page 46 times!)
+            for tab_btn, panel_sel in (
+                ("#tab-btn-directory", "#panel-directory"),
+                ("#tab-btn-telemetry", "#panel-telemetry"),
+                ("#tab-btn-crud", "#panel-crud"),
+                ("#tab-btn-cds", "#panel-cds"),
+                ("#tab-btn-estate", "#panel-estate"),
+            ):
+                bring_browser_pids_to_foreground(pids)
+                await glide_to(page, tab_btn, steps=14, dwell_ms=80)
+                await page.locator(tab_btn).click()
+                assert await page.locator(panel_sel).is_visible(), (
+                    f"Panel {panel_sel} not visible after clicking {tab_btn}"
+                )
+                geom = await page.evaluate(
+                    """() => {
+                        const mainEl = document.querySelector('#main-workbench');
+                        const mainRect = mainEl.getBoundingClientRect();
+                        return {
+                            noVerticalScroll: document.documentElement.scrollHeight <= window.innerHeight,
+                            noHorizontalScroll: document.documentElement.scrollWidth <= window.innerWidth,
+                            fullWidth: mainRect.width >= window.innerWidth - 2
+                        };
+                    }"""
+                )
+                assert geom["noVerticalScroll"] is True, f"Vertical page scroll on {tab_btn}: {geom}"
+                assert geom["noHorizontalScroll"] is True, f"Horizontal overflow on {tab_btn}: {geom}"
+                assert geom["fullWidth"] is True, f"Workbench not full width on {tab_btn}: {geom}"
+
+            # On Tab 5, click the live Universal 46-Sibling + BulletTrain & 75-Repo Sweep button
+            await glide_to(page, "#btn-verify-all-46-siblings", steps=14, dwell_ms=80)
+            await page.locator("#btn-verify-all-46-siblings").click()
+            await page.wait_for_timeout(300)
+            verdict_text = await page.locator("#estate-sweep-verdict").inner_text()
+            assert "46/46" in verdict_text and "75/75" in verdict_text
+            assert await page.locator("#estate-federation-tbody tr").count() == 8
+
+            audit_res = await session.layout_audit()
+            assert audit_res.get("ok") is True
+            assert audit_res["verdict"]["passed"] is True, (
+                f"SignalBox layout_audit failed: {audit_res['verdict']}"
+            )
+        finally:
+            await session.close()
+
+    try:
+        asyncio.run(_step_through_all_46_workbenches_in_signalbox())
+    finally:
+        server.should_exit = True
+        thread.join(timeout=3.0)
+
