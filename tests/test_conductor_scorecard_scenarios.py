@@ -4465,7 +4465,7 @@ def test_headed_browser_fullscreen_no_reload_loop_and_canonical_cohort_isolation
         )
 
     # 2. Forbid 46-iteration browser_navigate loops over SIBLING_ROUTER_PATHS
-    assert fn2_body.count("browser_navigate(") == 1, (
+    assert fn2_body.count("browser_navigate(") == 0, (
         "Headed estate browser verification must use a single-pass tabbed workbench, "
         "never loop browser_navigate() across all 46 shared templates."
     )
