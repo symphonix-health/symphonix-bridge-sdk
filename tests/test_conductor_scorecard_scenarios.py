@@ -4436,3 +4436,61 @@ def test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e(
         server.should_exit = True
         thread.join(timeout=3.0)
 
+
+def test_headed_browser_fullscreen_no_reload_loop_and_canonical_cohort_isolation_guard() -> None:
+    """Regression guard locking in:
+    1. Headed SignalBox tests never call `page.set_viewport_size(...)` (which overrides
+       `no_viewport=True` and prevents automatic full-screen display) and always invoke
+       `ensure_window_maximised(page)` with `innerWidth >= availWidth - 40` assertions.
+    2. Headed SignalBox tests never loop `browser_navigate` across `SIBLING_ROUTER_PATHS`
+       reloading the identical shared `/workbench-ui` template 46 times in a row.
+    3. `RealSiblingServiceHarness` routes all dual-engine writes strictly to `sibling_sbx_<slug>`,
+       preserving canonical `40,090` patients / `176,396` episodes (`0` `record_authority='local'`
+       rows) across the live sibling SQLite WAL and PostgreSQL 15 stores.
+    """
+    source_text = Path(__file__).read_text(encoding="utf-8")
+    # 1. Forbid page.set_viewport_size in headed browser tests
+    fn1_start = source_text.index("def test_conductor_headed_browser_signalbox_driven_e2e")
+    fn1_end = source_text.index("def test_exhaustive_conductor_14col_matrix_row_execution")
+    fn2_start = source_text.index("def test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e")
+    fn2_end = source_text.index("def test_headed_browser_fullscreen_no_reload_loop_and_canonical_cohort_isolation_guard")
+    for fn_name, body in (
+        ("test_conductor_headed_browser_signalbox_driven_e2e", source_text[fn1_start:fn1_end]),
+        ("test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e", source_text[fn2_start:fn2_end]),
+    ):
+        assert "set_viewport_size(" not in body, (
+            f"{fn_name} must never call set_viewport_size() on a headed SignalBox session; "
+            "keep no_viewport=True + ensure_window_maximised(page) so the page fills the screen automatically."
+        )
+        assert "ensure_window_maximised(page)" in body, (
+            f"{fn_name} must call ensure_window_maximised(page) for automatic full-screen display."
+        )
+
+    # 2. Forbid 46-iteration browser_navigate loops over SIBLING_ROUTER_PATHS
+    fn2_body = source_text[fn2_start:fn2_end]
+    assert fn2_body.count("browser_navigate(") == 1, (
+        "Headed estate browser verification must use a single-pass tabbed workbench, "
+        "never loop browser_navigate() across all 46 shared templates."
+    )
+    assert "#tab-btn-estate" in fn2_body and "/estate/federation-status" in fn2_body
+
+    # 3. Verify canonical 40,090 / 176,396 cohort counts remain unmutated in SQLite WAL & PostgreSQL 15
+    for svc_name, slug in (
+        ("patient360-assistant", "p360"),
+        ("enterprise-epr", "epr"),
+        ("picis-system", "picis"),
+        ("scheduling-gateway", "scheduling"),
+    ):
+        wal_path = WORKSPACE_ROOT / svc_name / "data" / f"{slug}_sh_kf_state_001_wal.db"
+        assert wal_path.exists(), f"Missing canonical WAL DB {wal_path}"
+        with sqlite3.connect(str(wal_path)) as conn:
+            p_cnt = conn.execute("SELECT COUNT(*) FROM patients").fetchone()[0]
+            ep_cnt = conn.execute("SELECT COUNT(*) FROM patient_episodes").fetchone()[0]
+            local_cnt = conn.execute(
+                "SELECT COUNT(*) FROM patients WHERE record_authority = 'local'"
+            ).fetchone()[0]
+            assert p_cnt == 40_090, f"{svc_name} SQLite patient count drifted: {p_cnt} != 40090"
+            assert ep_cnt == 176_396, f"{svc_name} SQLite episode count drifted: {ep_cnt} != 176396"
+            assert local_cnt == 0, f"{svc_name} SQLite has leaked local test rows: {local_cnt}"
+
+
