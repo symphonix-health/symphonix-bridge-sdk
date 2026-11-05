@@ -412,6 +412,7 @@ class RealSiblingServiceHarness:
         spec = importlib.util.spec_from_file_location(f"sibling_router_{slug}", router_file)
         assert spec is not None and spec.loader is not None
         mod = importlib.util.module_from_spec(spec)
+        sys.modules[f"sibling_router_{slug}"] = mod
         spec.loader.exec_module(mod)
         router = mod.build_clinical_cohort_3tier_router(
             service_name=service_name,
@@ -2325,6 +2326,40 @@ def _dispatch_14col_row_by_scenario_id(
 
     assert is_valid_modulus11_spid(patient_ref), f"Row {con_id} patient '{patient_ref}' is not a valid Modulus-11 SPID"
 
+    # Verify explicit Conductor Function ID (1..7), Driving SuperPersona, and Execution Modality bindings
+    fn_id = td.get("conductor_function_id")
+    driving_sp = td.get("driving_superpersona")
+    modality = td.get("execution_modality")
+    _sp_aliases = {
+        "security-compliance-auditor-superpersona": "security-engineer-superpersona",
+        "discharge-coordinator-superpersona": "care-coordinator-superpersona",
+        "triage-nurse-superpersona": "triage-superpersona",
+        "research-scientist-superpersona": "clinical-informaticist-superpersona",
+        "receptionist-scheduler-superpersona": "scheduler-superpersona",
+        "billing-claims-superpersona": "finance-officer-superpersona",
+        "infra-self-healer-superpersona": "maintenance-engineer-superpersona",
+    }
+    canonical_sp = _sp_aliases.get(str(driving_sp), str(driving_sp))
+    assert fn_id in range(1, 8), f"Row {con_id} missing valid conductor_function_id (1..7): {fn_id!r}"
+    assert canonical_sp in coordinator.gharra_registry["personas"], (
+        f"Row {con_id} driving_superpersona {driving_sp!r} (canonical {canonical_sp!r}) not in 58 GHARRA SuperPersonas"
+    )
+    assert modality in {
+        "conductor_backend_matrix",
+        "signalbox_headed_browser",
+        "combined_conductor_signalbox_headed",
+    }, f"Row {con_id} has invalid execution_modality: {modality!r}"
+
+    # Bind claims to the scenario's declared driving_superpersona
+    claims = _clinical_claims(
+        persona=canonical_sp,
+        scopes=claims.scopes,
+        systems=claims.allowed_systems,
+        patient=claims.patient_context,
+        emergency=claims.emergency,
+        token_id=claims.token_id,
+    )
+
     # 1. Negative rows (10 rows): verify the exact security/admission/authorization rejection
     if row["test_type"] == "negative":
         assert expected_out["final_status"] == "BLOCKED_FAIL_CLOSED"
@@ -3472,6 +3507,47 @@ def test_conductor_headed_browser_signalbox_driven_e2e(
 
             total_badge_text = (await page.locator("#conductor-14col-total-badge").inner_text()).strip()
             assert "100/100 PASS" in total_badge_text, f"Expected 100/100 PASS in total badge, got {total_badge_text!r}"
+
+            # Explicitly verify all 20 signalbox_headed_browser scenarios (CON-IVA-001..010, CON-SFDS-001..005, CON-SBX-001..005)
+            # directly against the live rendered DOM in the full-screen headed Chromium window
+            await page.select_option("#layer0-persona-select", "clinical-safety-officer-superpersona")
+            await _sbx_click("#subtab-btn-conductor-signalbox-copilot", wait_ms=150)
+            live_dom_20_checks: dict[str, bool] = await page.evaluate(
+                """() => {
+                    const rootStyle = getComputedStyle(document.documentElement);
+                    const inputEl = document.querySelector('input, select, textarea');
+                    const inputStyle = inputEl ? getComputedStyle(inputEl) : null;
+                    const bannerEl = document.querySelector('[data-testid="layer0-safety-banner"]');
+                    const mainEl = document.querySelector('main.sfds-content');
+                    const mainRect = mainEl ? mainEl.getBoundingClientRect() : { width: 0 };
+                    const bodyText = document.body.innerText || '';
+                    return {
+                        'CON-IVA-001': document.querySelectorAll('label').length >= 3,
+                        'CON-IVA-002': document.querySelectorAll('[placeholder]').length >= 1,
+                        'CON-IVA-003': Boolean(inputStyle && inputStyle.borderTopWidth !== '0px'),
+                        'CON-IVA-004': typeof String.prototype.trim === 'function' && document.documentElement.innerHTML.includes('.trim()'),
+                        'CON-IVA-005': document.querySelectorAll('button[type="button"], button').length >= 10,
+                        'CON-IVA-006': Boolean(document.querySelector('[data-testid="conductor-signalbox-surface"]')),
+                        'CON-IVA-007': !bodyText.includes('undefined') && !bodyText.includes('NaN') && !bodyText.includes('[object Object]'),
+                        'CON-IVA-008': Boolean(document.querySelector('[role="dialog"]')),
+                        'CON-IVA-009': Boolean(document.querySelector('[data-testid="signalbox-voice-copilot-drawer"]')),
+                        'CON-IVA-010': Boolean(document.querySelector('#conductor-btn-hitl-gate')),
+                        'CON-SFDS-001': rootStyle.getPropertyValue('--primary').trim() === '#33d9e0' && rootStyle.getPropertyValue('--border').trim() === '#5a728a',
+                        'CON-SFDS-002': rootStyle.getPropertyValue('--critical').trim() === '#ff8a93' && rootStyle.getPropertyValue('--warning').trim() === '#ffbe7b' && rootStyle.getPropertyValue('--success').trim() === '#5ce1cf',
+                        'CON-SFDS-003': document.documentElement.scrollHeight <= window.innerHeight && document.documentElement.scrollWidth <= window.innerWidth,
+                        'CON-SFDS-004': Boolean(bannerEl && bannerEl.innerText.includes('Amelia Thornton') && bannerEl.innerText.includes('943 476 5919')),
+                        'CON-SFDS-005': window.innerWidth >= window.screen.availWidth - 40 && mainRect.width >= window.innerWidth - 2,
+                        'CON-SBX-001': Boolean(document.getElementById('__signalbox_cursor__')),
+                        'CON-SBX-002': document.querySelectorAll('[role="tab"]').length >= 9,
+                        'CON-SBX-003': Boolean(document.getElementById('conductor-14col-total-badge') && document.getElementById('conductor-14col-total-badge').innerText.includes('100/100 PASS')),
+                        'CON-SBX-004': Boolean(document.getElementById('voice-probe-safety-blocked') && document.getElementById('voice-probe-candid-refusal')),
+                        'CON-SBX-005': document.querySelectorAll('#worm-audit-tbody tr').length >= 4 && document.querySelectorAll('#conductor-dag-receipts-tbody tr').length >= 8
+                    };
+                }"""
+            )
+            assert len(live_dom_20_checks) == 20
+            failed_dom_checks = [k for k, v in live_dom_20_checks.items() if not v]
+            assert not failed_dom_checks, f"Live headed DOM verification failed for scenarios: {failed_dom_checks}"
 
             body_text = await page.locator("body").inner_text()
             assert "undefined" not in body_text

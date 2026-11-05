@@ -165,7 +165,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-001"
+            "requirement_id": "BSDK-001",
+            "conductor_function_id": 4,
+            "driving_superpersona": "care-coordinator-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -227,7 +230,10 @@
           "BSDK-001-AC01",
           "BSDK-001-AC02",
           "BSDK-001-AC03"
-        ]
+        ],
+        "conductor_function_id": 4,
+        "driving_superpersona": "care-coordinator-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -293,7 +299,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-002"
+            "requirement_id": "BSDK-002",
+            "conductor_function_id": 4,
+            "driving_superpersona": "care-coordinator-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -355,7 +364,10 @@
           "BSDK-002-AC01",
           "BSDK-002-AC02",
           "BSDK-002-AC03"
-        ]
+        ],
+        "conductor_function_id": 4,
+        "driving_superpersona": "care-coordinator-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -421,7 +433,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-003"
+            "requirement_id": "BSDK-003",
+            "conductor_function_id": 4,
+            "driving_superpersona": "care-coordinator-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -483,7 +498,10 @@
           "BSDK-003-AC01",
           "BSDK-003-AC02",
           "BSDK-003-AC03"
-        ]
+        ],
+        "conductor_function_id": 4,
+        "driving_superpersona": "care-coordinator-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -549,7 +567,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-101"
+            "requirement_id": "BSDK-101",
+            "conductor_function_id": 4,
+            "driving_superpersona": "care-coordinator-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -611,7 +632,10 @@
           "BSDK-101-AC01",
           "BSDK-101-AC02",
           "BSDK-101-AC03"
-        ]
+        ],
+        "conductor_function_id": 4,
+        "driving_superpersona": "care-coordinator-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -677,7 +701,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-102"
+            "requirement_id": "BSDK-102",
+            "conductor_function_id": 4,
+            "driving_superpersona": "triage-superpersona",
+            "execution_modality": "combined_conductor_signalbox_headed"
           }
         },
         "expected_connector_calls": [
@@ -739,7 +766,10 @@
           "BSDK-102-AC01",
           "BSDK-102-AC02",
           "BSDK-102-AC03"
-        ]
+        ],
+        "conductor_function_id": 4,
+        "driving_superpersona": "triage-superpersona",
+        "execution_modality": "combined_conductor_signalbox_headed"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -805,7 +835,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-103"
+            "requirement_id": "BSDK-103",
+            "conductor_function_id": 4,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "combined_conductor_signalbox_headed"
           }
         },
         "expected_connector_calls": [
@@ -867,7 +900,10 @@
           "BSDK-103-AC01",
           "BSDK-103-AC02",
           "BSDK-103-AC03"
-        ]
+        ],
+        "conductor_function_id": 4,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "combined_conductor_signalbox_headed"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -933,7 +969,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-104"
+            "requirement_id": "BSDK-104",
+            "conductor_function_id": 4,
+            "driving_superpersona": "pharmacist-superpersona",
+            "execution_modality": "combined_conductor_signalbox_headed"
           }
         },
         "expected_connector_calls": [
@@ -995,7 +1034,10 @@
           "BSDK-104-AC01",
           "BSDK-104-AC02",
           "BSDK-104-AC03"
-        ]
+        ],
+        "conductor_function_id": 4,
+        "driving_superpersona": "pharmacist-superpersona",
+        "execution_modality": "combined_conductor_signalbox_headed"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -1061,7 +1103,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-105"
+            "requirement_id": "BSDK-105",
+            "conductor_function_id": 4,
+            "driving_superpersona": "triage-superpersona",
+            "execution_modality": "combined_conductor_signalbox_headed"
           }
         },
         "expected_connector_calls": [
@@ -1123,7 +1168,10 @@
           "BSDK-105-AC01",
           "BSDK-105-AC02",
           "BSDK-105-AC03"
-        ]
+        ],
+        "conductor_function_id": 4,
+        "driving_superpersona": "triage-superpersona",
+        "execution_modality": "combined_conductor_signalbox_headed"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -1189,7 +1237,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-106"
+            "requirement_id": "BSDK-106",
+            "conductor_function_id": 4,
+            "driving_superpersona": "scheduler-superpersona",
+            "execution_modality": "combined_conductor_signalbox_headed"
           }
         },
         "expected_connector_calls": [
@@ -1251,7 +1302,10 @@
           "BSDK-106-AC01",
           "BSDK-106-AC02",
           "BSDK-106-AC03"
-        ]
+        ],
+        "conductor_function_id": 4,
+        "driving_superpersona": "scheduler-superpersona",
+        "execution_modality": "combined_conductor_signalbox_headed"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -1317,7 +1371,10 @@
             "test_type": "edge",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-107"
+            "requirement_id": "BSDK-107",
+            "conductor_function_id": 4,
+            "driving_superpersona": "finance-officer-superpersona",
+            "execution_modality": "combined_conductor_signalbox_headed"
           }
         },
         "expected_connector_calls": [
@@ -1379,7 +1436,10 @@
           "BSDK-107-AC01",
           "BSDK-107-AC02",
           "BSDK-107-AC03"
-        ]
+        ],
+        "conductor_function_id": 4,
+        "driving_superpersona": "finance-officer-superpersona",
+        "execution_modality": "combined_conductor_signalbox_headed"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -1445,7 +1505,10 @@
             "test_type": "edge",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-108"
+            "requirement_id": "BSDK-108",
+            "conductor_function_id": 4,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "combined_conductor_signalbox_headed"
           }
         },
         "expected_connector_calls": [
@@ -1507,7 +1570,10 @@
           "BSDK-108-AC01",
           "BSDK-108-AC02",
           "BSDK-108-AC03"
-        ]
+        ],
+        "conductor_function_id": 4,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "combined_conductor_signalbox_headed"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -1573,7 +1639,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-109"
+            "requirement_id": "BSDK-109",
+            "conductor_function_id": 4,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "combined_conductor_signalbox_headed"
           }
         },
         "expected_connector_calls": [
@@ -1635,7 +1704,10 @@
           "BSDK-109-AC01",
           "BSDK-109-AC02",
           "BSDK-109-AC03"
-        ]
+        ],
+        "conductor_function_id": 4,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "combined_conductor_signalbox_headed"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -1701,7 +1773,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-110"
+            "requirement_id": "BSDK-110",
+            "conductor_function_id": 4,
+            "driving_superpersona": "radiologist-superpersona",
+            "execution_modality": "combined_conductor_signalbox_headed"
           }
         },
         "expected_connector_calls": [
@@ -1763,7 +1838,10 @@
           "BSDK-110-AC01",
           "BSDK-110-AC02",
           "BSDK-110-AC03"
-        ]
+        ],
+        "conductor_function_id": 4,
+        "driving_superpersona": "radiologist-superpersona",
+        "execution_modality": "combined_conductor_signalbox_headed"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -1829,7 +1907,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-111"
+            "requirement_id": "BSDK-111",
+            "conductor_function_id": 4,
+            "driving_superpersona": "care-coordinator-superpersona",
+            "execution_modality": "combined_conductor_signalbox_headed"
           }
         },
         "expected_connector_calls": [
@@ -1891,7 +1972,10 @@
           "BSDK-111-AC01",
           "BSDK-111-AC02",
           "BSDK-111-AC03"
-        ]
+        ],
+        "conductor_function_id": 4,
+        "driving_superpersona": "care-coordinator-superpersona",
+        "execution_modality": "combined_conductor_signalbox_headed"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -1957,7 +2041,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-112"
+            "requirement_id": "BSDK-112",
+            "conductor_function_id": 4,
+            "driving_superpersona": "care-coordinator-superpersona",
+            "execution_modality": "combined_conductor_signalbox_headed"
           }
         },
         "expected_connector_calls": [
@@ -2019,7 +2106,10 @@
           "BSDK-112-AC01",
           "BSDK-112-AC02",
           "BSDK-112-AC03"
-        ]
+        ],
+        "conductor_function_id": 4,
+        "driving_superpersona": "care-coordinator-superpersona",
+        "execution_modality": "combined_conductor_signalbox_headed"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -2085,7 +2175,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-113"
+            "requirement_id": "BSDK-113",
+            "conductor_function_id": 1,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -2147,7 +2240,10 @@
           "BSDK-113-AC01",
           "BSDK-113-AC02",
           "BSDK-113-AC03"
-        ]
+        ],
+        "conductor_function_id": 1,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -2213,7 +2309,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-114"
+            "requirement_id": "BSDK-114",
+            "conductor_function_id": 1,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -2275,7 +2374,10 @@
           "BSDK-114-AC01",
           "BSDK-114-AC02",
           "BSDK-114-AC03"
-        ]
+        ],
+        "conductor_function_id": 1,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -2341,7 +2443,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-115"
+            "requirement_id": "BSDK-115",
+            "conductor_function_id": 1,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -2403,7 +2508,10 @@
           "BSDK-115-AC01",
           "BSDK-115-AC02",
           "BSDK-115-AC03"
-        ]
+        ],
+        "conductor_function_id": 1,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -2469,7 +2577,10 @@
             "test_type": "negative",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-116"
+            "requirement_id": "BSDK-116",
+            "conductor_function_id": 1,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -2531,7 +2642,10 @@
           "BSDK-116-AC01",
           "BSDK-116-AC02",
           "BSDK-116-AC03"
-        ]
+        ],
+        "conductor_function_id": 1,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -2597,7 +2711,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-117"
+            "requirement_id": "BSDK-117",
+            "conductor_function_id": 2,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -2659,7 +2776,10 @@
           "BSDK-117-AC01",
           "BSDK-117-AC02",
           "BSDK-117-AC03"
-        ]
+        ],
+        "conductor_function_id": 2,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -2725,7 +2845,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-118"
+            "requirement_id": "BSDK-118",
+            "conductor_function_id": 2,
+            "driving_superpersona": "maintenance-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -2787,7 +2910,10 @@
           "BSDK-118-AC01",
           "BSDK-118-AC02",
           "BSDK-118-AC03"
-        ]
+        ],
+        "conductor_function_id": 2,
+        "driving_superpersona": "maintenance-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -2853,7 +2979,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-119"
+            "requirement_id": "BSDK-119",
+            "conductor_function_id": 2,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -2915,7 +3044,10 @@
           "BSDK-119-AC01",
           "BSDK-119-AC02",
           "BSDK-119-AC03"
-        ]
+        ],
+        "conductor_function_id": 2,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -2981,7 +3113,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-120"
+            "requirement_id": "BSDK-120",
+            "conductor_function_id": 2,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -3043,7 +3178,10 @@
           "BSDK-120-AC01",
           "BSDK-120-AC02",
           "BSDK-120-AC03"
-        ]
+        ],
+        "conductor_function_id": 2,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -3109,7 +3247,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-121"
+            "requirement_id": "BSDK-121",
+            "conductor_function_id": 2,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -3171,7 +3312,10 @@
           "BSDK-121-AC01",
           "BSDK-121-AC02",
           "BSDK-121-AC03"
-        ]
+        ],
+        "conductor_function_id": 2,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -3237,7 +3381,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-122"
+            "requirement_id": "BSDK-122",
+            "conductor_function_id": 2,
+            "driving_superpersona": "pharmacist-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -3299,7 +3446,10 @@
           "BSDK-122-AC01",
           "BSDK-122-AC02",
           "BSDK-122-AC03"
-        ]
+        ],
+        "conductor_function_id": 2,
+        "driving_superpersona": "pharmacist-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -3365,7 +3515,10 @@
             "test_type": "negative",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-123"
+            "requirement_id": "BSDK-123",
+            "conductor_function_id": 2,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -3427,7 +3580,10 @@
           "BSDK-123-AC01",
           "BSDK-123-AC02",
           "BSDK-123-AC03"
-        ]
+        ],
+        "conductor_function_id": 2,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -3493,7 +3649,10 @@
             "test_type": "edge",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-124"
+            "requirement_id": "BSDK-124",
+            "conductor_function_id": 2,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -3555,7 +3714,10 @@
           "BSDK-124-AC01",
           "BSDK-124-AC02",
           "BSDK-124-AC03"
-        ]
+        ],
+        "conductor_function_id": 2,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -3621,7 +3783,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-125"
+            "requirement_id": "BSDK-125",
+            "conductor_function_id": 2,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -3683,7 +3848,10 @@
           "BSDK-125-AC01",
           "BSDK-125-AC02",
           "BSDK-125-AC03"
-        ]
+        ],
+        "conductor_function_id": 2,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -3749,7 +3917,10 @@
             "test_type": "negative",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-126"
+            "requirement_id": "BSDK-126",
+            "conductor_function_id": 2,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -3811,7 +3982,10 @@
           "BSDK-126-AC01",
           "BSDK-126-AC02",
           "BSDK-126-AC03"
-        ]
+        ],
+        "conductor_function_id": 2,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -3877,7 +4051,10 @@
             "test_type": "negative",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-127"
+            "requirement_id": "BSDK-127",
+            "conductor_function_id": 2,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -3939,7 +4116,10 @@
           "BSDK-127-AC01",
           "BSDK-127-AC02",
           "BSDK-127-AC03"
-        ]
+        ],
+        "conductor_function_id": 2,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -4005,7 +4185,10 @@
             "test_type": "negative",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-128"
+            "requirement_id": "BSDK-128",
+            "conductor_function_id": 2,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -4067,7 +4250,10 @@
           "BSDK-128-AC01",
           "BSDK-128-AC02",
           "BSDK-128-AC03"
-        ]
+        ],
+        "conductor_function_id": 2,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -4133,7 +4319,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-129"
+            "requirement_id": "BSDK-129",
+            "conductor_function_id": 6,
+            "driving_superpersona": "clinical-informaticist-superpersona",
+            "execution_modality": "combined_conductor_signalbox_headed"
           }
         },
         "expected_connector_calls": [
@@ -4195,7 +4384,10 @@
           "BSDK-129-AC01",
           "BSDK-129-AC02",
           "BSDK-129-AC03"
-        ]
+        ],
+        "conductor_function_id": 6,
+        "driving_superpersona": "clinical-informaticist-superpersona",
+        "execution_modality": "combined_conductor_signalbox_headed"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -4261,7 +4453,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-130"
+            "requirement_id": "BSDK-130",
+            "conductor_function_id": 6,
+            "driving_superpersona": "clinical-informaticist-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -4323,7 +4518,10 @@
           "BSDK-130-AC01",
           "BSDK-130-AC02",
           "BSDK-130-AC03"
-        ]
+        ],
+        "conductor_function_id": 6,
+        "driving_superpersona": "clinical-informaticist-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -4389,7 +4587,10 @@
             "test_type": "negative",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-131"
+            "requirement_id": "BSDK-131",
+            "conductor_function_id": 6,
+            "driving_superpersona": "clinical-informaticist-superpersona",
+            "execution_modality": "combined_conductor_signalbox_headed"
           }
         },
         "expected_connector_calls": [
@@ -4451,7 +4652,10 @@
           "BSDK-131-AC01",
           "BSDK-131-AC02",
           "BSDK-131-AC03"
-        ]
+        ],
+        "conductor_function_id": 6,
+        "driving_superpersona": "clinical-informaticist-superpersona",
+        "execution_modality": "combined_conductor_signalbox_headed"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -4517,7 +4721,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-132"
+            "requirement_id": "BSDK-132",
+            "conductor_function_id": 6,
+            "driving_superpersona": "clinical-informaticist-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -4579,7 +4786,10 @@
           "BSDK-132-AC01",
           "BSDK-132-AC02",
           "BSDK-132-AC03"
-        ]
+        ],
+        "conductor_function_id": 6,
+        "driving_superpersona": "clinical-informaticist-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -4645,7 +4855,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-133"
+            "requirement_id": "BSDK-133",
+            "conductor_function_id": 6,
+            "driving_superpersona": "clinical-informaticist-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -4707,7 +4920,10 @@
           "BSDK-133-AC01",
           "BSDK-133-AC02",
           "BSDK-133-AC03"
-        ]
+        ],
+        "conductor_function_id": 6,
+        "driving_superpersona": "clinical-informaticist-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -4773,7 +4989,10 @@
             "test_type": "negative",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-134"
+            "requirement_id": "BSDK-134",
+            "conductor_function_id": 6,
+            "driving_superpersona": "clinical-informaticist-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -4835,7 +5054,10 @@
           "BSDK-134-AC01",
           "BSDK-134-AC02",
           "BSDK-134-AC03"
-        ]
+        ],
+        "conductor_function_id": 6,
+        "driving_superpersona": "clinical-informaticist-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -4901,7 +5123,10 @@
             "test_type": "negative",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-135"
+            "requirement_id": "BSDK-135",
+            "conductor_function_id": 6,
+            "driving_superpersona": "clinical-informaticist-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -4963,7 +5188,10 @@
           "BSDK-135-AC01",
           "BSDK-135-AC02",
           "BSDK-135-AC03"
-        ]
+        ],
+        "conductor_function_id": 6,
+        "driving_superpersona": "clinical-informaticist-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -5029,7 +5257,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-136"
+            "requirement_id": "BSDK-136",
+            "conductor_function_id": 6,
+            "driving_superpersona": "clinical-informaticist-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -5091,7 +5322,10 @@
           "BSDK-136-AC01",
           "BSDK-136-AC02",
           "BSDK-136-AC03"
-        ]
+        ],
+        "conductor_function_id": 6,
+        "driving_superpersona": "clinical-informaticist-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -5157,7 +5391,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-137"
+            "requirement_id": "BSDK-137",
+            "conductor_function_id": 6,
+            "driving_superpersona": "clinical-informaticist-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -5219,7 +5456,10 @@
           "BSDK-137-AC01",
           "BSDK-137-AC02",
           "BSDK-137-AC03"
-        ]
+        ],
+        "conductor_function_id": 6,
+        "driving_superpersona": "clinical-informaticist-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -5285,7 +5525,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-138"
+            "requirement_id": "BSDK-138",
+            "conductor_function_id": 5,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -5347,7 +5590,10 @@
           "BSDK-138-AC01",
           "BSDK-138-AC02",
           "BSDK-138-AC03"
-        ]
+        ],
+        "conductor_function_id": 5,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -5413,7 +5659,10 @@
             "test_type": "edge",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-139"
+            "requirement_id": "BSDK-139",
+            "conductor_function_id": 5,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -5475,7 +5724,10 @@
           "BSDK-139-AC01",
           "BSDK-139-AC02",
           "BSDK-139-AC03"
-        ]
+        ],
+        "conductor_function_id": 5,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -5541,7 +5793,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-140"
+            "requirement_id": "BSDK-140",
+            "conductor_function_id": 5,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -5603,7 +5858,10 @@
           "BSDK-140-AC01",
           "BSDK-140-AC02",
           "BSDK-140-AC03"
-        ]
+        ],
+        "conductor_function_id": 5,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -5669,7 +5927,10 @@
             "test_type": "edge",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-141"
+            "requirement_id": "BSDK-141",
+            "conductor_function_id": 5,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -5731,7 +5992,10 @@
           "BSDK-141-AC01",
           "BSDK-141-AC02",
           "BSDK-141-AC03"
-        ]
+        ],
+        "conductor_function_id": 5,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -5797,7 +6061,10 @@
             "test_type": "negative",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-142"
+            "requirement_id": "BSDK-142",
+            "conductor_function_id": 1,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -5859,7 +6126,10 @@
           "BSDK-142-AC01",
           "BSDK-142-AC02",
           "BSDK-142-AC03"
-        ]
+        ],
+        "conductor_function_id": 1,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -5925,7 +6195,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-143"
+            "requirement_id": "BSDK-143",
+            "conductor_function_id": 3,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "combined_conductor_signalbox_headed"
           }
         },
         "expected_connector_calls": [
@@ -5987,7 +6260,10 @@
           "BSDK-143-AC01",
           "BSDK-143-AC02",
           "BSDK-143-AC03"
-        ]
+        ],
+        "conductor_function_id": 3,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "combined_conductor_signalbox_headed"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -6053,7 +6329,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-144"
+            "requirement_id": "BSDK-144",
+            "conductor_function_id": 1,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -6115,7 +6394,10 @@
           "BSDK-144-AC01",
           "BSDK-144-AC02",
           "BSDK-144-AC03"
-        ]
+        ],
+        "conductor_function_id": 1,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -6181,7 +6463,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-145"
+            "requirement_id": "BSDK-145",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -6243,7 +6528,10 @@
           "BSDK-145-AC01",
           "BSDK-145-AC02",
           "BSDK-145-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -6309,7 +6597,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-146"
+            "requirement_id": "BSDK-146",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -6371,7 +6662,10 @@
           "BSDK-146-AC01",
           "BSDK-146-AC02",
           "BSDK-146-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -6437,7 +6731,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-147"
+            "requirement_id": "BSDK-147",
+            "conductor_function_id": 3,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "combined_conductor_signalbox_headed"
           }
         },
         "expected_connector_calls": [
@@ -6499,7 +6796,10 @@
           "BSDK-147-AC01",
           "BSDK-147-AC02",
           "BSDK-147-AC03"
-        ]
+        ],
+        "conductor_function_id": 3,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "combined_conductor_signalbox_headed"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -6565,7 +6865,10 @@
             "test_type": "negative",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-148"
+            "requirement_id": "BSDK-148",
+            "conductor_function_id": 3,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -6627,7 +6930,10 @@
           "BSDK-148-AC01",
           "BSDK-148-AC02",
           "BSDK-148-AC03"
-        ]
+        ],
+        "conductor_function_id": 3,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -6693,7 +6999,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-149"
+            "requirement_id": "BSDK-149",
+            "conductor_function_id": 6,
+            "driving_superpersona": "clinical-informaticist-superpersona",
+            "execution_modality": "combined_conductor_signalbox_headed"
           }
         },
         "expected_connector_calls": [
@@ -6755,7 +7064,10 @@
           "BSDK-149-AC01",
           "BSDK-149-AC02",
           "BSDK-149-AC03"
-        ]
+        ],
+        "conductor_function_id": 6,
+        "driving_superpersona": "clinical-informaticist-superpersona",
+        "execution_modality": "combined_conductor_signalbox_headed"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -6821,7 +7133,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-150"
+            "requirement_id": "BSDK-150",
+            "conductor_function_id": 7,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -6883,7 +7198,10 @@
           "BSDK-150-AC01",
           "BSDK-150-AC02",
           "BSDK-150-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -6949,7 +7267,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-151"
+            "requirement_id": "BSDK-151",
+            "conductor_function_id": 6,
+            "driving_superpersona": "clinical-informaticist-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -7011,7 +7332,10 @@
           "BSDK-151-AC01",
           "BSDK-151-AC02",
           "BSDK-151-AC03"
-        ]
+        ],
+        "conductor_function_id": 6,
+        "driving_superpersona": "clinical-informaticist-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -7077,7 +7401,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-152"
+            "requirement_id": "BSDK-152",
+            "conductor_function_id": 7,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -7139,7 +7466,10 @@
           "BSDK-152-AC01",
           "BSDK-152-AC02",
           "BSDK-152-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -7205,7 +7535,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-153"
+            "requirement_id": "BSDK-153",
+            "conductor_function_id": 7,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -7267,7 +7600,10 @@
           "BSDK-153-AC01",
           "BSDK-153-AC02",
           "BSDK-153-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -7333,7 +7669,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-154"
+            "requirement_id": "BSDK-154",
+            "conductor_function_id": 7,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -7395,7 +7734,10 @@
           "BSDK-154-AC01",
           "BSDK-154-AC02",
           "BSDK-154-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -7461,7 +7803,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-155"
+            "requirement_id": "BSDK-155",
+            "conductor_function_id": 7,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -7523,7 +7868,10 @@
           "BSDK-155-AC01",
           "BSDK-155-AC02",
           "BSDK-155-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -7589,7 +7937,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-156"
+            "requirement_id": "BSDK-156",
+            "conductor_function_id": 4,
+            "driving_superpersona": "care-coordinator-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -7651,7 +8002,10 @@
           "BSDK-156-AC01",
           "BSDK-156-AC02",
           "BSDK-156-AC03"
-        ]
+        ],
+        "conductor_function_id": 4,
+        "driving_superpersona": "care-coordinator-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -7717,7 +8071,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-157"
+            "requirement_id": "BSDK-157",
+            "conductor_function_id": 1,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -7779,7 +8136,10 @@
           "BSDK-157-AC01",
           "BSDK-157-AC02",
           "BSDK-157-AC03"
-        ]
+        ],
+        "conductor_function_id": 1,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -7845,7 +8205,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-158"
+            "requirement_id": "BSDK-158",
+            "conductor_function_id": 1,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -7907,7 +8270,10 @@
           "BSDK-158-AC01",
           "BSDK-158-AC02",
           "BSDK-158-AC03"
-        ]
+        ],
+        "conductor_function_id": 1,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -7973,7 +8339,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-159"
+            "requirement_id": "BSDK-159",
+            "conductor_function_id": 2,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -8035,7 +8404,10 @@
           "BSDK-159-AC01",
           "BSDK-159-AC02",
           "BSDK-159-AC03"
-        ]
+        ],
+        "conductor_function_id": 2,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -8101,7 +8473,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-160"
+            "requirement_id": "BSDK-160",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -8163,7 +8538,10 @@
           "BSDK-160-AC01",
           "BSDK-160-AC02",
           "BSDK-160-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -8229,7 +8607,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-161"
+            "requirement_id": "BSDK-161",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -8291,7 +8672,10 @@
           "BSDK-161-AC01",
           "BSDK-161-AC02",
           "BSDK-161-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -8357,7 +8741,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-162"
+            "requirement_id": "BSDK-162",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -8419,7 +8806,10 @@
           "BSDK-162-AC01",
           "BSDK-162-AC02",
           "BSDK-162-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -8485,7 +8875,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-163"
+            "requirement_id": "BSDK-163",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -8547,7 +8940,10 @@
           "BSDK-163-AC01",
           "BSDK-163-AC02",
           "BSDK-163-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -8613,7 +9009,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-164"
+            "requirement_id": "BSDK-164",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -8675,7 +9074,10 @@
           "BSDK-164-AC01",
           "BSDK-164-AC02",
           "BSDK-164-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -8741,7 +9143,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-165"
+            "requirement_id": "BSDK-165",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -8803,7 +9208,10 @@
           "BSDK-165-AC01",
           "BSDK-165-AC02",
           "BSDK-165-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -8869,7 +9277,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-166"
+            "requirement_id": "BSDK-166",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -8931,7 +9342,10 @@
           "BSDK-166-AC01",
           "BSDK-166-AC02",
           "BSDK-166-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -8997,7 +9411,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-167"
+            "requirement_id": "BSDK-167",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -9059,7 +9476,10 @@
           "BSDK-167-AC01",
           "BSDK-167-AC02",
           "BSDK-167-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -9125,7 +9545,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-168"
+            "requirement_id": "BSDK-168",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -9187,7 +9610,10 @@
           "BSDK-168-AC01",
           "BSDK-168-AC02",
           "BSDK-168-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -9253,7 +9679,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-169"
+            "requirement_id": "BSDK-169",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -9315,7 +9744,10 @@
           "BSDK-169-AC01",
           "BSDK-169-AC02",
           "BSDK-169-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -9381,7 +9813,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-170"
+            "requirement_id": "BSDK-170",
+            "conductor_function_id": 3,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "combined_conductor_signalbox_headed"
           }
         },
         "expected_connector_calls": [
@@ -9443,7 +9878,10 @@
           "BSDK-170-AC01",
           "BSDK-170-AC02",
           "BSDK-170-AC03"
-        ]
+        ],
+        "conductor_function_id": 3,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "combined_conductor_signalbox_headed"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -9509,7 +9947,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-171"
+            "requirement_id": "BSDK-171",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -9571,7 +10012,10 @@
           "BSDK-171-AC01",
           "BSDK-171-AC02",
           "BSDK-171-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -9637,7 +10081,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-172"
+            "requirement_id": "BSDK-172",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -9699,7 +10146,10 @@
           "BSDK-172-AC01",
           "BSDK-172-AC02",
           "BSDK-172-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -9765,7 +10215,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-173"
+            "requirement_id": "BSDK-173",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -9827,7 +10280,10 @@
           "BSDK-173-AC01",
           "BSDK-173-AC02",
           "BSDK-173-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -9893,7 +10349,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-174"
+            "requirement_id": "BSDK-174",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -9955,7 +10414,10 @@
           "BSDK-174-AC01",
           "BSDK-174-AC02",
           "BSDK-174-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -10021,7 +10483,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-175"
+            "requirement_id": "BSDK-175",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinical-safety-officer-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -10083,7 +10548,10 @@
           "BSDK-175-AC01",
           "BSDK-175-AC02",
           "BSDK-175-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinical-safety-officer-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -10149,7 +10617,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-176"
+            "requirement_id": "BSDK-176",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -10211,7 +10682,10 @@
           "BSDK-176-AC01",
           "BSDK-176-AC02",
           "BSDK-176-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -10277,7 +10751,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-177"
+            "requirement_id": "BSDK-177",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -10339,7 +10816,10 @@
           "BSDK-177-AC01",
           "BSDK-177-AC02",
           "BSDK-177-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -10405,7 +10885,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-178"
+            "requirement_id": "BSDK-178",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -10467,7 +10950,10 @@
           "BSDK-178-AC01",
           "BSDK-178-AC02",
           "BSDK-178-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -10533,7 +11019,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-179"
+            "requirement_id": "BSDK-179",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -10595,7 +11084,10 @@
           "BSDK-179-AC01",
           "BSDK-179-AC02",
           "BSDK-179-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -10661,7 +11153,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-180"
+            "requirement_id": "BSDK-180",
+            "conductor_function_id": 7,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "signalbox_headed_browser"
           }
         },
         "expected_connector_calls": [
@@ -10723,7 +11218,10 @@
           "BSDK-180-AC01",
           "BSDK-180-AC02",
           "BSDK-180-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "signalbox_headed_browser"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -10789,7 +11287,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-181"
+            "requirement_id": "BSDK-181",
+            "conductor_function_id": 5,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -10851,7 +11352,10 @@
           "BSDK-181-AC01",
           "BSDK-181-AC02",
           "BSDK-181-AC03"
-        ]
+        ],
+        "conductor_function_id": 5,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -10917,7 +11421,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-182"
+            "requirement_id": "BSDK-182",
+            "conductor_function_id": 5,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -10979,7 +11486,10 @@
           "BSDK-182-AC01",
           "BSDK-182-AC02",
           "BSDK-182-AC03"
-        ]
+        ],
+        "conductor_function_id": 5,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -11045,7 +11555,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-183"
+            "requirement_id": "BSDK-183",
+            "conductor_function_id": 5,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -11107,7 +11620,10 @@
           "BSDK-183-AC01",
           "BSDK-183-AC02",
           "BSDK-183-AC03"
-        ]
+        ],
+        "conductor_function_id": 5,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -11173,7 +11689,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-184"
+            "requirement_id": "BSDK-184",
+            "conductor_function_id": 5,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -11235,7 +11754,10 @@
           "BSDK-184-AC01",
           "BSDK-184-AC02",
           "BSDK-184-AC03"
-        ]
+        ],
+        "conductor_function_id": 5,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -11301,7 +11823,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-185"
+            "requirement_id": "BSDK-185",
+            "conductor_function_id": 5,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -11363,7 +11888,10 @@
           "BSDK-185-AC01",
           "BSDK-185-AC02",
           "BSDK-185-AC03"
-        ]
+        ],
+        "conductor_function_id": 5,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -11429,7 +11957,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-186"
+            "requirement_id": "BSDK-186",
+            "conductor_function_id": 1,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -11491,7 +12022,10 @@
           "BSDK-186-AC01",
           "BSDK-186-AC02",
           "BSDK-186-AC03"
-        ]
+        ],
+        "conductor_function_id": 1,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -11557,7 +12091,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-187"
+            "requirement_id": "BSDK-187",
+            "conductor_function_id": 1,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -11619,7 +12156,10 @@
           "BSDK-187-AC01",
           "BSDK-187-AC02",
           "BSDK-187-AC03"
-        ]
+        ],
+        "conductor_function_id": 1,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -11685,7 +12225,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-188"
+            "requirement_id": "BSDK-188",
+            "conductor_function_id": 1,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -11747,7 +12290,10 @@
           "BSDK-188-AC01",
           "BSDK-188-AC02",
           "BSDK-188-AC03"
-        ]
+        ],
+        "conductor_function_id": 1,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -11813,7 +12359,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-189"
+            "requirement_id": "BSDK-189",
+            "conductor_function_id": 1,
+            "driving_superpersona": "clinician-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -11875,7 +12424,10 @@
           "BSDK-189-AC01",
           "BSDK-189-AC02",
           "BSDK-189-AC03"
-        ]
+        ],
+        "conductor_function_id": 1,
+        "driving_superpersona": "clinician-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -11941,7 +12493,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-190"
+            "requirement_id": "BSDK-190",
+            "conductor_function_id": 1,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -12003,7 +12558,10 @@
           "BSDK-190-AC01",
           "BSDK-190-AC02",
           "BSDK-190-AC03"
-        ]
+        ],
+        "conductor_function_id": 1,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -12069,7 +12627,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-191"
+            "requirement_id": "BSDK-191",
+            "conductor_function_id": 7,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -12131,7 +12692,10 @@
           "BSDK-191-AC01",
           "BSDK-191-AC02",
           "BSDK-191-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -12197,7 +12761,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-192"
+            "requirement_id": "BSDK-192",
+            "conductor_function_id": 7,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -12259,7 +12826,10 @@
           "BSDK-192-AC01",
           "BSDK-192-AC02",
           "BSDK-192-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -12325,7 +12895,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-193"
+            "requirement_id": "BSDK-193",
+            "conductor_function_id": 7,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -12387,7 +12960,10 @@
           "BSDK-193-AC01",
           "BSDK-193-AC02",
           "BSDK-193-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -12453,7 +13029,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-194"
+            "requirement_id": "BSDK-194",
+            "conductor_function_id": 7,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -12515,7 +13094,10 @@
           "BSDK-194-AC01",
           "BSDK-194-AC02",
           "BSDK-194-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -12581,7 +13163,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-195"
+            "requirement_id": "BSDK-195",
+            "conductor_function_id": 7,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -12643,7 +13228,10 @@
           "BSDK-195-AC01",
           "BSDK-195-AC02",
           "BSDK-195-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -12709,7 +13297,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "BSDK-196"
+            "requirement_id": "BSDK-196",
+            "conductor_function_id": 7,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -12771,7 +13362,10 @@
           "BSDK-196-AC01",
           "BSDK-196-AC02",
           "BSDK-196-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
@@ -12837,7 +13431,10 @@
             "test_type": "positive",
             "patient": "Patient/9434765919",
             "tenant": "nhs-trust-01",
-            "requirement_id": "DS-001"
+            "requirement_id": "DS-001",
+            "conductor_function_id": 7,
+            "driving_superpersona": "security-engineer-superpersona",
+            "execution_modality": "conductor_backend_matrix"
           }
         },
         "expected_connector_calls": [
@@ -12899,7 +13496,10 @@
           "DS-001-AC01",
           "DS-001-AC02",
           "DS-001-AC03"
-        ]
+        ],
+        "conductor_function_id": 7,
+        "driving_superpersona": "security-engineer-superpersona",
+        "execution_modality": "conductor_backend_matrix"
       },
       "validation_rules": [
         "source_matrix:tests/harness/json_matrices/conductor_coordination_scenarios.json",
