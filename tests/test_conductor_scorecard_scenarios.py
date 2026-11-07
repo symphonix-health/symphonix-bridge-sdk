@@ -4836,8 +4836,14 @@ def test_headed_browser_fullscreen_no_reload_loop_and_canonical_cohort_isolation
 def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() -> None:
     """Headed SignalBox browser verification of GHARRA Network Topology & Federation Graph
     and HelixCare / NEXUS-A2A 33-Agent Network Topology & Clinician Digital Twin on WinSta0\\Default.
+    Self-heals required services (GHARRA API, GHARRA Next.js frontend, HelixCare Command Centre,
+    and Clinician Digital Twin) if not already listening and tears down spawned processes on exit.
     """
     import asyncio
+    import shutil
+    import subprocess
+    import time
+    import urllib.request
 
     sb_src = str(WORKSPACE_ROOT / "signalbox-mcp" / "src")
     if sb_src not in sys.path:
@@ -4852,127 +4858,278 @@ def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() ->
     )
     from signalbox_mcp.session import get_or_create_session
 
-    async def _run_gharra_and_helixcare_topology_headed() -> None:
-        host = os.environ.get("SIGNALBOX_LOOPBACK_HOST", "127.0.0.1")
-        gharra_port = int(os.environ.get("GHARRA_FRONTEND_PORT", "5191"))
-        hc_cc_port = int(os.environ.get("HELIXCARE_COMMAND_CENTRE_PORT", "18099"))
-        hc_dt_port = int(os.environ.get("HELIXCARE_DIGITAL_TWIN_PORT", "18039"))
-        gharra_base = os.environ.get("GHARRA_FRONTEND_URL", f"http://{host}:{gharra_port}")
-        hc_cc_base = os.environ.get("HELIXCARE_COMMAND_CENTRE_URL", f"http://{host}:{hc_cc_port}")
-        hc_dt_base = os.environ.get("HELIXCARE_DIGITAL_TWIN_URL", f"http://{host}:{hc_dt_port}")
-        ensure_default_desktop()
-        session = get_or_create_session(
-            "conductor-gharra-helixcare-topology-headed",
-            persona="clinician-superpersona",
-        )
+    host = os.environ.get("SIGNALBOX_LOOPBACK_HOST", "127.0.0.1")
+    gharra_api_port = int(os.environ.get("GHARRA_API_PORT", "8401"))
+    gharra_port = int(os.environ.get("GHARRA_FRONTEND_PORT", "5191"))
+    hc_cc_port = int(os.environ.get("HELIXCARE_COMMAND_CENTRE_PORT", "18099"))
+    hc_dt_port = int(os.environ.get("HELIXCARE_DIGITAL_TWIN_PORT", "18039"))
+    gharra_api_base = os.environ.get("GHARRA_API_URL", f"http://{host}:{gharra_api_port}")
+    gharra_base = os.environ.get("GHARRA_FRONTEND_URL", f"http://{host}:{gharra_port}")
+    hc_cc_base = os.environ.get("HELIXCARE_COMMAND_CENTRE_URL", f"http://{host}:{hc_cc_port}")
+    hc_dt_base = os.environ.get("HELIXCARE_DIGITAL_TWIN_URL", f"http://{host}:{hc_dt_port}")
+
+    def _url_ok(url: str, timeout: float = 2.0) -> bool:
         try:
-            open_res = await session.open_browser(
-                headless=False,
-                url=f"{gharra_base}/topology",
-                wait_until="domcontentloaded",
+            with urllib.request.urlopen(url, timeout=timeout) as resp:
+                return 200 <= resp.status < 500
+        except Exception:
+            return False
+
+    spawned: list[subprocess.Popen[bytes]] = []
+    gar_root = WORKSPACE_ROOT / "global-agent-registry"
+    nx_root = WORKSPACE_ROOT / "nexus-a2a-protocol"
+
+    try:
+        if not _url_ok(f"{gharra_api_base}/health"):
+            env_gar = dict(os.environ)
+            env_gar["PYTHONPATH"] = str(gar_root / "src")
+            env_gar["GHARRA_AUTH_MODE"] = "disabled"
+            env_gar["GHARRA_DB_PATH"] = str(gar_root / "data" / "gharra.db")
+            env_gar["GHARRA_RATE_LIMIT_MAX"] = "100000"
+            env_gar["GHARRA_CORS_ORIGINS"] = (
+                f"http://localhost:{gharra_port},{gharra_base}"
             )
-            assert open_res.get("ok") is True, f"open_browser failed: {open_res}"
-            assert open_res.get("headless") is False
+            spawned.append(
+                subprocess.Popen(
+                    [
+                        sys.executable,
+                        "-m",
+                        "uvicorn",
+                        "gharra.api.main:app",
+                        "--host",
+                        host,
+                        "--port",
+                        str(gharra_api_port),
+                    ],
+                    cwd=str(gar_root),
+                    env=env_gar,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                )
+            )
 
-            pids = set(session._browser_process_pids.keys())
-            assert pids, "Expected Chromium PIDs"
-            bring_browser_pids_to_foreground(pids)
-            os_vis = verify_os_window_visibility(pids, strict=True)
-            assert os_vis.get("verified") is True, f"OS window not visible: {os_vis}"
+        if not _url_ok(f"{gharra_base}/topology"):
+            node_exe = shutil.which("node") or "node"
+            env_fe = dict(os.environ)
+            env_fe["NEXT_PUBLIC_API_URL"] = gharra_api_base
+            spawned.append(
+                subprocess.Popen(
+                    [
+                        node_exe,
+                        str(gar_root / "frontend" / "node_modules" / "next" / "dist" / "bin" / "next"),
+                        "dev",
+                        "-H",
+                        host,
+                        "-p",
+                        str(gharra_port),
+                    ],
+                    cwd=str(gar_root / "frontend"),
+                    env=env_fe,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                )
+            )
 
-            page = session.page
-            assert page is not None
-            await ensure_window_maximised(page)
-            bring_browser_pids_to_foreground(pids)
+        if not _url_ok(f"{hc_cc_base}/"):
+            env_cc = dict(os.environ)
+            env_cc["PYTHONPATH"] = os.pathsep.join(
+                [str(nx_root), str(nx_root / "src"), str(nx_root / "shared")]
+            )
+            spawned.append(
+                subprocess.Popen(
+                    [
+                        sys.executable,
+                        "-m",
+                        "uvicorn",
+                        "app.main:app",
+                        "--app-dir",
+                        str(nx_root / "shared" / "command-centre"),
+                        "--host",
+                        host,
+                        "--port",
+                        str(hc_cc_port),
+                    ],
+                    cwd=str(nx_root),
+                    env=env_cc,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                )
+            )
 
-            await page.wait_for_selector("[data-testid='subtab-gar-route-command-surface']", timeout=15000)
-            for subtab_tid in (
-                "subtab-gar-registered-agents-discovery",
-                "subtab-gar-attestation-trust-scores",
-                "subtab-gar-gra-tier-policy-gates",
-                "subtab-gar-revocation-audit-trail",
-                "subtab-gar-route-command-surface",
-            ):
-                sel = f"[data-testid='{subtab_tid}']"
+        if not _url_ok(f"{hc_dt_base}/health"):
+            env_dt = dict(os.environ)
+            env_dt["PYTHONPATH"] = os.pathsep.join(
+                [str(nx_root), str(nx_root / "src"), str(nx_root / "shared")]
+            )
+            spawned.append(
+                subprocess.Popen(
+                    [
+                        sys.executable,
+                        "-m",
+                        "uvicorn",
+                        "app.main:app",
+                        "--app-dir",
+                        str(nx_root / "demos" / "helixcare" / "clinician-digital-twin-agent"),
+                        "--host",
+                        host,
+                        "--port",
+                        str(hc_dt_port),
+                    ],
+                    cwd=str(nx_root),
+                    env=env_dt,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                )
+            )
+
+        deadline = time.monotonic() + 45.0
+        for probe_url in (
+            f"{gharra_api_base}/health",
+            f"{gharra_base}/topology",
+            f"{hc_cc_base}/",
+            f"{hc_dt_base}/health",
+        ):
+            while time.monotonic() < deadline:
+                if _url_ok(probe_url, timeout=3.0):
+                    break
+                time.sleep(0.5)
+            else:
+                raise AssertionError(f"Service did not become ready within 45s: {probe_url}")
+
+        async def _run_gharra_and_helixcare_topology_headed() -> None:
+            ensure_default_desktop()
+            session = get_or_create_session(
+                "conductor-gharra-helixcare-topology-headed",
+                persona="clinician-superpersona",
+            )
+            try:
+                open_res = await session.open_browser(
+                    headless=False,
+                    url=f"{gharra_base}/topology",
+                    wait_until="domcontentloaded",
+                )
+                assert open_res.get("ok") is True, f"open_browser failed: {open_res}"
+                assert open_res.get("headless") is False
+
+                pids = set(session._browser_process_pids.keys())
+                assert pids, "Expected Chromium PIDs"
                 bring_browser_pids_to_foreground(pids)
-                await glide_to(page, sel, steps=10, dwell_ms=60)
-                await page.locator(sel).click()
-                await page.wait_for_timeout(250)
+                os_vis = verify_os_window_visibility(pids, strict=True)
+                assert os_vis.get("verified") is True, f"OS window not visible: {os_vis}"
 
-            await page.wait_for_selector(".react-flow__node", timeout=15000)
-            await page.wait_for_timeout(600)
-            gharra_topo = await page.evaluate(
-                """() => ({
-                    nodeCount: document.querySelectorAll('.react-flow__node').length,
-                    edgeCount: document.querySelectorAll('.react-flow__edge').length,
-                    innerWidth: window.innerWidth,
-                    innerHeight: window.innerHeight,
-                    availWidth: window.screen.availWidth,
-                    availHeight: window.screen.availHeight,
-                })"""
-            )
-            assert gharra_topo["nodeCount"] >= 20, f"Expected >=20 GHARRA topology nodes: {gharra_topo}"
-            assert gharra_topo["edgeCount"] >= 10, f"Expected >=10 GHARRA topology edges: {gharra_topo}"
-            assert gharra_topo["innerWidth"] >= gharra_topo["availWidth"] - 40
-            assert gharra_topo["innerHeight"] >= gharra_topo["availHeight"] - 140
-
-            await page.goto(f"{gharra_base}/federation", wait_until="domcontentloaded")
-            bring_browser_pids_to_foreground(pids)
-            await page.wait_for_selector("[data-testid='subtab-gar-route-command-surface']", timeout=15000)
-            await glide_to(page, "[data-testid='subtab-gar-route-command-surface']", steps=10, dwell_ms=60)
-            await page.locator("[data-testid='subtab-gar-route-command-surface']").click()
-            await page.wait_for_timeout(500)
-
-            topo_btn = page.locator(".sfds-route-command-surface button:has-text('Topology')")
-            await topo_btn.first.wait_for(state="visible", timeout=10000)
-            await glide_to(page, ".sfds-route-command-surface button:has-text('Topology')", steps=10, dwell_ms=60)
-            await topo_btn.first.click()
-            await page.wait_for_selector(".react-flow__node", timeout=15000)
-            await page.wait_for_timeout(600)
-            assert await page.locator(".react-flow__node").count() >= 6
-
-            await page.goto(f"{hc_cc_base}/", wait_until="domcontentloaded")
-            bring_browser_pids_to_foreground(pids)
-            await page.wait_for_selector("#topology-svg .node-circle", timeout=15000)
-            await page.wait_for_timeout(600)
-            hc_topo = await page.evaluate(
-                """() => ({
-                    nodeCount: document.querySelectorAll('#topology-svg .node-circle').length,
-                    hubCount: document.querySelectorAll('#topology-svg .hub-node').length,
-                    edgeCount: document.querySelectorAll('#topology-svg .edge-line').length,
-                })"""
-            )
-            assert hc_topo["nodeCount"] >= 30, f"Expected >=30 HelixCare agent nodes: {hc_topo}"
-            assert hc_topo["hubCount"] == 1
-            assert hc_topo["edgeCount"] >= 30
-
-            for nav_target in (
-                "view-agents",
-                "view-scenarios",
-                "view-traces",
-                "view-performance",
-                "view-consultation",
-                "view-overview",
-            ):
-                sel = f".nx-nav-item[data-nav-target='{nav_target}']"
+                page = session.page
+                assert page is not None
+                await ensure_window_maximised(page)
                 bring_browser_pids_to_foreground(pids)
-                await glide_to(page, sel, steps=10, dwell_ms=60)
-                await page.locator(sel).click()
-                await page.wait_for_timeout(400)
-                if nav_target == "view-agents":
-                    await page.wait_for_selector("#topology-svg-agents .node-circle", timeout=10000)
-                    assert await page.locator("#topology-svg-agents .node-circle").count() >= 30
 
-            await page.goto(f"{hc_dt_base}/", wait_until="domcontentloaded")
-            bring_browser_pids_to_foreground(pids)
-            await page.wait_for_timeout(500)
-            assert "Consultation" in (await page.title())
-        finally:
-            await session.close()
+                await page.wait_for_selector(
+                    "[data-testid='subtab-gar-route-command-surface']", timeout=20000
+                )
+                for subtab_tid in (
+                    "subtab-gar-registered-agents-discovery",
+                    "subtab-gar-attestation-trust-scores",
+                    "subtab-gar-gra-tier-policy-gates",
+                    "subtab-gar-revocation-audit-trail",
+                    "subtab-gar-route-command-surface",
+                ):
+                    sel = f"[data-testid='{subtab_tid}']"
+                    bring_browser_pids_to_foreground(pids)
+                    await glide_to(page, sel, steps=10, dwell_ms=60)
+                    await page.locator(sel).click()
+                    await page.wait_for_timeout(250)
 
-    asyncio.run(_run_gharra_and_helixcare_topology_headed())
+                await page.wait_for_selector(".react-flow__node", timeout=20000)
+                await page.wait_for_timeout(600)
+                gharra_topo = await page.evaluate(
+                    """() => ({
+                        nodeCount: document.querySelectorAll('.react-flow__node').length,
+                        edgeCount: document.querySelectorAll('.react-flow__edge').length,
+                        innerWidth: window.innerWidth,
+                        innerHeight: window.innerHeight,
+                        availWidth: window.screen.availWidth,
+                        availHeight: window.screen.availHeight,
+                    })"""
+                )
+                assert gharra_topo["nodeCount"] >= 20, f"Expected >=20 GHARRA topology nodes: {gharra_topo}"
+                assert gharra_topo["edgeCount"] >= 10, f"Expected >=10 GHARRA topology edges: {gharra_topo}"
+                assert gharra_topo["innerWidth"] >= gharra_topo["availWidth"] - 40
+                assert gharra_topo["innerHeight"] >= gharra_topo["availHeight"] - 140
 
+                await page.goto(f"{gharra_base}/federation", wait_until="domcontentloaded")
+                bring_browser_pids_to_foreground(pids)
+                await page.wait_for_selector(
+                    "[data-testid='subtab-gar-route-command-surface']", timeout=20000
+                )
+                await glide_to(
+                    page, "[data-testid='subtab-gar-route-command-surface']", steps=10, dwell_ms=60
+                )
+                await page.locator("[data-testid='subtab-gar-route-command-surface']").click()
+                await page.wait_for_timeout(500)
 
+                topo_btn = page.locator(".sfds-route-command-surface button:has-text('Topology')")
+                await topo_btn.first.wait_for(state="visible", timeout=10000)
+                await glide_to(
+                    page,
+                    ".sfds-route-command-surface button:has-text('Topology')",
+                    steps=10,
+                    dwell_ms=60,
+                )
+                await topo_btn.first.click()
+                await page.wait_for_selector(".react-flow__node", timeout=15000)
+                await page.wait_for_timeout(600)
+                assert await page.locator(".react-flow__node").count() >= 6
 
+                await page.goto(f"{hc_cc_base}/", wait_until="domcontentloaded")
+                bring_browser_pids_to_foreground(pids)
+                await page.wait_for_selector("#topology-svg .node-circle", timeout=15000)
+                await page.wait_for_timeout(600)
+                hc_topo = await page.evaluate(
+                    """() => ({
+                        nodeCount: document.querySelectorAll('#topology-svg .node-circle').length,
+                        hubCount: document.querySelectorAll('#topology-svg .hub-node').length,
+                        edgeCount: document.querySelectorAll('#topology-svg .edge-line').length,
+                    })"""
+                )
+                assert hc_topo["nodeCount"] >= 30, f"Expected >=30 HelixCare agent nodes: {hc_topo}"
+                assert hc_topo["hubCount"] == 1
+                assert hc_topo["edgeCount"] >= 30
 
+                for nav_target in (
+                    "view-agents",
+                    "view-scenarios",
+                    "view-traces",
+                    "view-performance",
+                    "view-consultation",
+                    "view-overview",
+                ):
+                    sel = f".nx-nav-item[data-nav-target='{nav_target}']"
+                    bring_browser_pids_to_foreground(pids)
+                    await glide_to(page, sel, steps=10, dwell_ms=60)
+                    await page.locator(sel).click()
+                    await page.wait_for_timeout(400)
+                    if nav_target == "view-agents":
+                        await page.wait_for_selector("#topology-svg-agents .node-circle", timeout=10000)
+                        assert await page.locator("#topology-svg-agents .node-circle").count() >= 30
 
+                await page.goto(f"{hc_dt_base}/", wait_until="domcontentloaded")
+                bring_browser_pids_to_foreground(pids)
+                await page.wait_for_timeout(500)
+                assert "Consultation" in (await page.title())
+            finally:
+                await session.close()
+
+        asyncio.run(_run_gharra_and_helixcare_topology_headed())
+    finally:
+        for proc in spawned:
+            try:
+                if os.name == "nt":
+                    subprocess.run(
+                        ["taskkill", "/F", "/T", "/PID", str(proc.pid)],
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.DEVNULL,
+                        check=False,
+                    )
+                else:
+                    proc.terminate()
+            except Exception:
+                pass

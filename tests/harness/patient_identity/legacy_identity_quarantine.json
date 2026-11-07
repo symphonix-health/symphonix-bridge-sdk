@@ -1538,6 +1538,12 @@
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
     },
     {
+      "path": "patient360-assistant/tests/harness/canonical_matrices/sh_kf_state_001_trajectory_gate_d_canonical.json",
+      "owner_repo": "patient360-assistant",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
       "path": "patient360-assistant/tests/harness/json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.json",
       "owner_repo": "patient360-assistant",
       "status": "pending_sibling_migration",
@@ -1941,6 +1947,12 @@
     },
     {
       "path": "triage-api/src/clinical_cohort_3tier_router.py",
+      "owner_repo": "triage-api",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "triage-api/tests/harness/canonical_matrices/sh_kf_state_001_trajectory_gate_d_canonical.json",
       "owner_repo": "triage-api",
       "status": "pending_sibling_migration",
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
