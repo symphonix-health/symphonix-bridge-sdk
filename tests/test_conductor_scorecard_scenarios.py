@@ -110,7 +110,7 @@ CANONICAL_SPID = "Patient/9434765919"
 CANONICAL_SPID_DIGITS = "9434765919"
 
 # Map every clinical sibling component to its real 3-tier router module path in the workspace
-# Map every applicable non-forked repository (BulletTrain + 2 spine + 43 siblings = 46/46)
+# Map every applicable non-forked repository (BulletTrain + 2 spine + 48 siblings = 51/51)
 # to its real 3-tier clinical cohort router module path and PostgreSQL schema slug in the workspace
 SIBLING_ROUTER_PATHS: dict[str, tuple[str, Path]] = {
     "BulletTrain": ("bullettrain", WORKSPACE_ROOT / "BulletTrain" / "services" / "client_registry" / "clinical_cohort_3tier_router.py"),
@@ -119,6 +119,7 @@ SIBLING_ROUTER_PATHS: dict[str, tuple[str, Path]] = {
     "ambulance-ems": ("ambulance", WORKSPACE_ROOT / "ambulance-ems" / "src" / "clinical_cohort_3tier_router.py"),
     "analytics-bi": ("analytics_bi", WORKSPACE_ROOT / "analytics-bi" / "backend" / "src" / "clinical_cohort_3tier_router.py"),
     "appointment-system": ("appointment_system", WORKSPACE_ROOT / "appointment-system" / "backend" / "src" / "clinical_cohort_3tier_router.py"),
+    "blood-donor-registry": ("blood_donor", WORKSPACE_ROOT / "blood-donor-registry" / "src" / "clinical_cohort_3tier_router.py"),
     "blood-transfusion": ("transfusion", WORKSPACE_ROOT / "blood-transfusion" / "src" / "clinical_cohort_3tier_router.py"),
     "cancer-pathway-tracker": ("cancer", WORKSPACE_ROOT / "cancer-pathway-tracker" / "src" / "clinical_cohort_3tier_router.py"),
     "citizen-portal": ("citizen_portal", WORKSPACE_ROOT / "citizen-portal" / "backend" / "src" / "clinical_cohort_3tier_router.py"),
@@ -133,9 +134,12 @@ SIBLING_ROUTER_PATHS: dict[str, tuple[str, Path]] = {
     "genomics-interpretation": ("genomics", WORKSPACE_ROOT / "genomics-interpretation" / "src" / "routes" / "clinical_cohort_3tier_router.py"),
     "global-agent-registry": ("global_agent_registry", WORKSPACE_ROOT / "global-agent-registry" / "src" / "gharra" / "api" / "clinical_cohort_3tier_router.py"),
     "gp-system": ("gp", WORKSPACE_ROOT / "gp-system" / "src" / "clinical_cohort_3tier_router.py"),
+    "gpconnect": ("gpconnect", WORKSPACE_ROOT / "gpconnect" / "src" / "clinical_cohort_3tier_router.py"),
+    "health-grc-platform": ("health_grc", WORKSPACE_ROOT / "health-grc-platform" / "src" / "clinical_cohort_3tier_router.py"),
     "hear-the-risk": ("hear_the_risk", WORKSPACE_ROOT / "hear-the-risk" / "backend" / "app" / "clinical_cohort_3tier_router.py"),
     "helixcare-diagnostic-access-network": ("helixcare_hdan", WORKSPACE_ROOT / "helixcare-diagnostic-access-network" / "src" / "hdan_gateway" / "clinical_cohort_3tier_router.py"),
     "insurance-eclaims": ("insurance_eclaims", WORKSPACE_ROOT / "insurance-eclaims" / "backend" / "src" / "clinical_cohort_3tier_router.py"),
+    "integration-adaptors": ("integration_adaptors", WORKSPACE_ROOT / "integration-adaptors" / "SCRWebService" / "clinical_cohort_3tier_router.py"),
     "kenya-uhc-implementation": ("kenya_uhc", WORKSPACE_ROOT / "kenya-uhc-implementation" / "src" / "clinical_cohort_3tier_router.py"),
     "lis": ("lis", WORKSPACE_ROOT / "lis" / "src" / "clinical_cohort_3tier_router.py"),
     "maternity-system": ("maternity", WORKSPACE_ROOT / "maternity-system" / "src" / "clinical_cohort_3tier_router.py"),
@@ -146,6 +150,7 @@ SIBLING_ROUTER_PATHS: dict[str, tuple[str, Path]] = {
     "nursing-station": ("nursing", WORKSPACE_ROOT / "nursing-station" / "src" / "clinical_cohort_3tier_router.py"),
     "ormdet-governance-console": ("ormdet", WORKSPACE_ROOT / "ormdet-governance-console" / "backend" / "src" / "clinical_cohort_3tier_router.py"),
     "outbreak-management": ("outbreak", WORKSPACE_ROOT / "outbreak-management" / "src" / "clinical_cohort_3tier_router.py"),
+    "overseas-referral-management": ("overseas_referral", WORKSPACE_ROOT / "overseas-referral-management" / "src" / "clinical_cohort_3tier_router.py"),
     "pacs-ris": ("pacs", WORKSPACE_ROOT / "pacs-ris" / "src" / "clinical_cohort_3tier_router.py"),
     "patient360-assistant": ("p360", WORKSPACE_ROOT / "patient360-assistant" / "src" / "patient360_assistant" / "service" / "clinical_cohort_3tier_router.py"),
     "pharmacy-system": ("pharmacy", WORKSPACE_ROOT / "pharmacy-system" / "src" / "clinical_cohort_3tier_router.py"),
@@ -4331,12 +4336,13 @@ def test_bullettrain_agent_native_bridges_and_sibling_intents_with_conductor(
 
 
 # ============================================================================
-# UNIVERSAL 75/75 NON-FORKED ESTATE COVERAGE & 46/46 HEADED BROWSER WORKBENCHES
+# UNIVERSAL 83/83 (81/81 ALL_NON_FORKED + .github + litellm-gateway) ESTATE COVERAGE & 51/51 HEADED BROWSER WORKBENCHES
 # ============================================================================
 
 _NON_3TIER_UNIVERSAL_REPO_CONTRACTS: dict[str, tuple[str, Path]] = {
     ".github": ("governance_profile", WORKSPACE_ROOT / ".github" / "chatmodes"),
     "REA-Agent-mcp": ("requirements_mcp", WORKSPACE_ROOT / "REA-Agent-mcp" / "src" / "rea_agent" / "server.py"),
+    "africa-marketplace": ("pan_african_marketplace", WORKSPACE_ROOT / "africa-marketplace" / "README.md"),
     "agent-skills": ("ensemble_playbooks", WORKSPACE_ROOT / "agent-skills" / "skills" / "agent-ensembles" / "SKILL.md"),
     "alerting": ("observability_alerts", WORKSPACE_ROOT / "alerting" / "symphonix-base-rules.yml"),
     "caid-agent": ("engineering_orchestrator", WORKSPACE_ROOT / "caid-agent" / "src" / "caid" / "cli.py"),
@@ -4344,8 +4350,10 @@ _NON_3TIER_UNIVERSAL_REPO_CONTRACTS: dict[str, tuple[str, Path]] = {
     "csaa": ("clinical_safety_cli", WORKSPACE_ROOT / "csaa" / "csaa" / "cli.py"),
     "dashboards": ("observability_dashboards", WORKSPACE_ROOT / "dashboards" / "symphonix-service-template.json"),
     "design-system": ("sfds_design_tokens", WORKSPACE_ROOT / "design-system" / "SKILL.md"),
+    "elocute": ("speech_clinical_elocute", WORKSPACE_ROOT / "elocute" / "README.md"),
     "health-agent-workspace": ("submodule_umbrella", WORKSPACE_ROOT / "health-agent-workspace" / ".gitmodules"),
     "healthcare-pain-points-plan": ("pain_points_corpus", WORKSPACE_ROOT / "healthcare-pain-points-plan" / "README.md"),
+    "init-prior-experiments": ("prior_experiments_research", WORKSPACE_ROOT / "init-prior-experiments" / "README.md"),
     "litellm-gateway": ("lfg_spend_control", Path(r"C:\Users\Joshua Tedam\litellm-gateway") / "cost-control-config.yaml"),
     "prompt-engine": ("phi_redaction_and_prompts", WORKSPACE_ROOT / "prompt-engine" / "src" / "prompt_engine" / "engine.py"),
     "second-brain-kb": ("durable_memory_and_handoffs", WORKSPACE_ROOT / "second-brain-kb" / "src" / "second_brain_kb" / "validator.py"),
@@ -4369,8 +4377,8 @@ _NON_3TIER_UNIVERSAL_REPO_CONTRACTS: dict[str, tuple[str, Path]] = {
 _UNIVERSAL_75_NON_FORK_REPOS: list[str] = sorted(
     set(SIBLING_ROUTER_PATHS.keys()) | set(_NON_3TIER_UNIVERSAL_REPO_CONTRACTS.keys())
 )
-assert len(_UNIVERSAL_75_NON_FORK_REPOS) == 75, (
-    f"Expected 75 universal non-forked Symphonix repositories (46 3-tier + 29 platform/support), got {len(_UNIVERSAL_75_NON_FORK_REPOS)}"
+assert len(_UNIVERSAL_75_NON_FORK_REPOS) == 83, (
+    f"Expected 83 universal non-forked Symphonix repositories (51 3-tier + 32 platform/support = 81 all_non_forked + .github + litellm-gateway), got {len(_UNIVERSAL_75_NON_FORK_REPOS)}"
 )
 
 
@@ -4385,8 +4393,9 @@ def test_exhaustive_universal_conductor_estate_across_all_75_non_fork_repos(
     sibling_harness: RealSiblingServiceHarness,
 ) -> None:
     """Verify Symphonix Conductor's universal governance and execution contract across
-    100% of the 75/75 non-forked Symphonix repositories (71 symphonix-health org repos +
-    3 local-only clinical repos + litellm-gateway, with 0 forks and 0 skips).
+    100% of the 83/83 non-forked Symphonix repositories (all 81/81 `all_non_forked`
+    estate repos from `estate_repo_inventory.py` + `.github` + `litellm-gateway`,
+    including all 51/51 3-tier clinical/operational/HIE routers, with 0 forks and 0 skips).
     """
     claims = _clinical_claims(
         persona="clinician-superpersona",
@@ -4450,11 +4459,11 @@ def test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e(
     coordinator: ConductorCoordinator,
     tmp_path: Path,
 ) -> None:
-    """Step through BulletTrain and all 45 sibling/spine 3-tier SFDS v2.4 web workbenches
-    (46/46 total) in a REAL headed SignalBox browser (`WinSta0\\Default`, `headless=False`),
+    """Step through BulletTrain and all 50 sibling/spine 3-tier SFDS v2.4 web workbenches
+    (51/51 total) in a REAL headed SignalBox browser (`WinSta0\\Default`, `headless=False`),
     executing a governed Conductor write/read step for each system, navigating the visible
-    SignalBox browser to each workbench, clicking through its WAI-ARIA tabs (`#tab-btn-directory`,
-    `#tab-btn-telemetry`, `#tab-btn-crud`, `#tab-btn-cds`) with `glide_to`, and verifying
+    SignalBox browser to the workbench, clicking through its WAI-ARIA tabs (`#tab-btn-directory`,
+    `#tab-btn-telemetry`, `#tab-btn-crud`, `#tab-btn-cds`, `#tab-btn-estate`) with `glide_to`, and verifying
     zero vertical page downscrolling (`scrollHeight <= innerHeight`), full viewport width
     (`mainRect.width >= window.innerWidth - 2`), and `session.layout_audit()`.
     """
@@ -4476,10 +4485,15 @@ def test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e(
     )
     from signalbox_mcp.session import get_or_create_session
 
-    gateway_app = FastAPI(title="Conductor Universal 46-Repo Estate Workbench Gateway")
+    total_3tier = len(SIBLING_ROUTER_PATHS)
+    total_universal = len(_UNIVERSAL_75_NON_FORK_REPOS)
+    assert total_3tier == 51
+    assert total_universal == 83
+
+    gateway_app = FastAPI(title="Conductor Universal 51-Service & 83-Repo Estate Workbench Gateway")
     claims = _clinical_claims(
         persona="clinician-superpersona",
-        token_id="jti-headed-46-estate",
+        token_id="jti-headed-51-estate",
         systems=tuple(all_conductor_manifests().keys()),
     )
     patient_pk = f"SUBJ-MPI-{CANONICAL_SPID_DIGITS}"
@@ -4510,7 +4524,7 @@ def test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e(
                     f"EP-{patient_pk}-1",
                     patient_pk,
                     repo_name,
-                    f"Conductor governed episode for {repo_name} (#{idx}/46)",
+                    f"Conductor governed episode for {repo_name} (#{idx}/{total_3tier})",
                 ),
             )
             conn.commit()
@@ -4534,7 +4548,7 @@ def test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e(
                 )
                 estate_tab_btn = (
                     '<button class="sfds-tab" role="tab" id="tab-btn-cds" aria-selected="false" aria-controls="panel-cds" onclick="selectTab(\'cds\')">4. Clinical Decision Context &amp; Archive Governance</button>\n'
-                    '      <button class="sfds-tab" role="tab" id="tab-btn-estate" aria-selected="false" aria-controls="panel-estate" onclick="selectTab(\'estate\')">5. Universal 75-Repo Estate &amp; 46-Sibling Federation</button>'
+                    '      <button class="sfds-tab" role="tab" id="tab-btn-estate" aria-selected="false" aria-controls="panel-estate" onclick="selectTab(\'estate\')">5. Universal 83-Repo Estate &amp; 51-Sibling Federation</button>'
                 )
                 html = html.replace(
                     '<button class="sfds-tab" role="tab" id="tab-btn-cds" aria-selected="false" aria-controls="panel-cds" onclick="selectTab(\'cds\')">4. Clinical Decision Context &amp; Archive Governance</button>',
@@ -4542,20 +4556,20 @@ def test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e(
                 )
                 estate_panel = """    </section>
 
-    <!-- TAB 5: Universal 75-Repo Estate & 46-Sibling Federation -->
+    <!-- TAB 5: Universal 83-Repo Estate & 51-Sibling Federation -->
     <section class="sfds-tabpanel" role="tabpanel" id="panel-estate" aria-labelledby="tab-btn-estate">
       <div class="sfds-grid-4">
-        <div class="sfds-card"><div class="sfds-card-label">Universal Non-Forked Repos</div><div class="sfds-card-val" id="estate-total-repos">75 / 75</div></div>
-        <div class="sfds-card"><div class="sfds-card-label">Live Mounted 3-Tier Workbenches</div><div class="sfds-card-val" id="estate-live-siblings">46 / 46</div></div>
-        <div class="sfds-card"><div class="sfds-card-label">Conductor DAG Receipts</div><div class="sfds-card-val" id="estate-receipts-count">46 Verified</div></div>
+        <div class="sfds-card"><div class="sfds-card-label">Universal Non-Forked Repos</div><div class="sfds-card-val" id="estate-total-repos">83 / 83 (81 all_non_forked)</div></div>
+        <div class="sfds-card"><div class="sfds-card-label">Live Mounted 3-Tier Workbenches</div><div class="sfds-card-val" id="estate-live-siblings">51 / 51</div></div>
+        <div class="sfds-card"><div class="sfds-card-label">Conductor DAG Receipts</div><div class="sfds-card-val" id="estate-receipts-count">51 Verified</div></div>
         <div class="sfds-card"><div class="sfds-card-label">Federation Sweep Status</div><div class="sfds-card-val" id="estate-sweep-verdict">READY</div></div>
       </div>
       <div style="display:flex; gap:10px; align-items:center; flex-shrink:0;">
-        <button type="button" class="sfds-btn" id="btn-verify-all-46-siblings" onclick="verifyUniversalEstate()">Execute Universal 46-Sibling + BulletTrain &amp; 75-Repo Conductor Sweep</button>
-        <span class="sfds-status-msg" id="estate-sweep-feedback" role="status">Click to verify all 46 live BulletTrain/sibling routers and 75 universal non-forked repositories.</span>
+        <button type="button" class="sfds-btn" id="btn-verify-all-46-siblings" onclick="verifyUniversalEstate()">Execute Universal 51-Sibling + BulletTrain &amp; 83-Repo Conductor Sweep</button>
+        <span class="sfds-status-msg" id="estate-sweep-feedback" role="status">Click to verify all 51 live BulletTrain/sibling routers and 83 universal non-forked repositories.</span>
       </div>
       <div class="sfds-table-wrap">
-        <table class="sfds-table" aria-label="Universal 46-Sibling and BulletTrain Federation Status">
+        <table class="sfds-table" aria-label="Universal 51-Sibling and BulletTrain Federation Status">
           <thead>
             <tr>
               <th>Repository</th>
@@ -4581,8 +4595,8 @@ def test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e(
       const d = await r.json();
       document.getElementById('estate-sweep-verdict').textContent = d.verdict;
       document.getElementById('estate-sweep-feedback').textContent =
-        'Verified ' + d.verified_3tier_count + '/46 live BulletTrain & sibling 3-tier services and ' +
-        d.universal_repo_count + '/75 non-forked Symphonix repositories (0 failed, 0 skipped).';
+        'Verified ' + d.verified_3tier_count + '/51 live BulletTrain & sibling 3-tier services and ' +
+        d.universal_repo_count + '/83 non-forked Symphonix repositories (0 failed, 0 skipped).';
       const tb = document.getElementById('estate-federation-tbody');
       tb.innerHTML = '';
       for (const row of d.services.slice(0, 8)) {
@@ -4617,7 +4631,7 @@ def test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e(
 
         # Execute Conductor governed step for this repository before browser step-through
         rec = coordinator.execute_governed_step(
-            workflow_id="wf-headed-46-estate",
+            workflow_id="wf-headed-51-estate",
             step_id=f"step-wb-{slug}",
             skill_id="clinical-reasoning",
             intent="epr.encounter.read",
@@ -4650,7 +4664,7 @@ def test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e(
                 }
             )
         return {
-            "verdict": "PASS (46/46 Services, 75/75 Repos)",
+            "verdict": f"PASS ({len(services_out)}/51 Services, {len(_UNIVERSAL_75_NON_FORK_REPOS)}/83 Repos)",
             "verified_3tier_count": len(services_out),
             "universal_repo_count": len(_UNIVERSAL_75_NON_FORK_REPOS),
             "services": services_out,
@@ -4679,7 +4693,7 @@ def test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e(
         except Exception:
             time.sleep(0.1)
 
-    # Verify all 46 mounted HTTP endpoints respond with HTTP 200 before opening the headed browser
+    # Verify all 51 mounted HTTP endpoints respond with HTTP 200 before opening the headed browser
     for r_name in sorted(SIBLING_ROUTER_PATHS.keys()):
         with urllib.request.urlopen(
             f"{base_url}/estate/{r_name}/api/v1/million-cohort/summary",
@@ -4696,7 +4710,7 @@ def test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e(
 
         ensure_default_desktop()
         session = get_or_create_session(
-            "conductor-estate-46-headed-e2e",
+            "conductor-estate-51-headed-e2e",
             persona="clinician",
         )
         try:
@@ -4725,7 +4739,7 @@ def test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e(
             header_text = await page.locator(".sfds-header h1").inner_text()
             assert "BulletTrain" in header_text
 
-            # Step through all 5 WAI-ARIA tabs once (never looping the same page 46 times!)
+            # Step through all 5 WAI-ARIA tabs once (never looping the same page 51 times!)
             for tab_btn, panel_sel in (
                 ("#tab-btn-directory", "#panel-directory"),
                 ("#tab-btn-telemetry", "#panel-telemetry"),
@@ -4754,12 +4768,12 @@ def test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e(
                 assert geom["noHorizontalScroll"] is True, f"Horizontal overflow on {tab_btn}: {geom}"
                 assert geom["fullWidth"] is True, f"Workbench not full width on {tab_btn}: {geom}"
 
-            # On Tab 5, click the live Universal 46-Sibling + BulletTrain & 75-Repo Sweep button
+            # On Tab 5, click the live Universal 51-Sibling + BulletTrain & 83-Repo Sweep button
             await glide_to(page, "#btn-verify-all-46-siblings", steps=14, dwell_ms=80)
             await page.locator("#btn-verify-all-46-siblings").click()
             await page.wait_for_timeout(300)
             verdict_text = await page.locator("#estate-sweep-verdict").inner_text()
-            assert "46/46" in verdict_text and "75/75" in verdict_text
+            assert "51/51" in verdict_text and "83/83" in verdict_text
             assert await page.locator("#estate-federation-tbody tr").count() == 8
 
             audit_res = await session.layout_audit()
@@ -4783,7 +4797,7 @@ def test_headed_browser_fullscreen_no_reload_loop_and_canonical_cohort_isolation
        `no_viewport=True` and prevent automatic full-screen display) and always invoke
        `ensure_window_maximised(page)` with `innerWidth >= availWidth - 40` assertions.
     2. Headed SignalBox tests never loop `browser_navigate` across `SIBLING_ROUTER_PATHS`
-       reloading the identical shared `/workbench-ui` template 46 times in a row.
+       reloading the identical shared `/workbench-ui` template 51 times in a row.
     3. `RealSiblingServiceHarness` routes all dual-engine writes strictly to `sibling_sbx_<slug>`,
        preserving canonical `40,090` patients / `176,396` episodes (`0` `record_authority='local'`
        rows) across the live sibling SQLite WAL and PostgreSQL 15 stores.
@@ -4804,10 +4818,10 @@ def test_headed_browser_fullscreen_no_reload_loop_and_canonical_cohort_isolation
             f"{fn_name} must call ensure_window_maximised(page) for automatic full-screen display."
         )
 
-    # 2. Forbid 46-iteration browser_navigate loops over SIBLING_ROUTER_PATHS
+    # 2. Forbid 51-iteration browser_navigate loops over SIBLING_ROUTER_PATHS
     assert fn2_body.count("browser_navigate(") == 0, (
         "Headed estate browser verification must use a single-pass tabbed workbench, "
-        "never loop browser_navigate() across all 46 shared templates."
+        "never loop browser_navigate() across all 51 shared templates."
     )
     assert "#tab-btn-estate" in fn2_body and "/estate/federation-status" in fn2_body
 
@@ -4834,10 +4848,12 @@ def test_headed_browser_fullscreen_no_reload_loop_and_canonical_cohort_isolation
 
 
 def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() -> None:
-    """Headed SignalBox browser verification of GHARRA Network Topology & Federation Graph
-    and HelixCare / NEXUS-A2A 33-Agent Network Topology & Clinician Digital Twin on WinSta0\\Default.
-    Self-heals required services (GHARRA API, GHARRA Next.js frontend, HelixCare Command Centre,
-    and Clinician Digital Twin) if not already listening and tears down spawned processes on exit.
+    """Headed SignalBox browser verification of:
+    1. GHARRA `/login` route & Network Topology / Federation Graph (`5191/login`, `5191/topology`, `5191/federation`)
+    2. HelixCare / NEXUS-A2A 33-Agent Network Topology (`18099/`) & Clinician Digital Twin (`18039/`)
+    3. NEXUS-A2A Wave-8 Global & West Africa `/login` & `/ui/workstation` (`18232/login`, `18232/ui/workstation`
+       stepping through all 6 sub-tabs and executing all 10/10 14-column scenarios)
+    on WinSta0\\Default. Self-heals required services if not already listening and tears down spawned processes on exit.
     """
     import asyncio
     import shutil
@@ -4863,10 +4879,12 @@ def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() ->
     gharra_port = int(os.environ.get("GHARRA_FRONTEND_PORT", "5191"))
     hc_cc_port = int(os.environ.get("HELIXCARE_COMMAND_CENTRE_PORT", "18099"))
     hc_dt_port = int(os.environ.get("HELIXCARE_DIGITAL_TWIN_PORT", "18039"))
+    wave8_port = int(os.environ.get("NEXUS_WAVE8_WORKSTATION_PORT", "18232"))
     gharra_api_base = os.environ.get("GHARRA_API_URL", f"http://{host}:{gharra_api_port}")
     gharra_base = os.environ.get("GHARRA_FRONTEND_URL", f"http://{host}:{gharra_port}")
     hc_cc_base = os.environ.get("HELIXCARE_COMMAND_CENTRE_URL", f"http://{host}:{hc_cc_port}")
     hc_dt_base = os.environ.get("HELIXCARE_DIGITAL_TWIN_URL", f"http://{host}:{hc_dt_port}")
+    wave8_base = os.environ.get("NEXUS_WAVE8_WORKSTATION_URL", f"http://{host}:{wave8_port}")
 
     def _url_ok(url: str, timeout: float = 2.0) -> bool:
         try:
@@ -4880,7 +4898,11 @@ def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() ->
     nx_root = WORKSPACE_ROOT / "nexus-a2a-protocol"
 
     try:
-        if not _url_ok(f"{gharra_api_base}/health"):
+        if not _url_ok(f"{gharra_api_base}/v1/agents?limit=24"):
+            if _url_ok(f"{gharra_api_base}/health"):
+                gharra_api_port = 18401
+                gharra_api_base = f"http://{host}:{gharra_api_port}"
+        if not _url_ok(f"{gharra_api_base}/v1/agents?limit=24"):
             env_gar = dict(os.environ)
             env_gar["PYTHONPATH"] = str(gar_root / "src")
             env_gar["GHARRA_AUTH_MODE"] = "disabled"
@@ -4908,7 +4930,37 @@ def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() ->
                 )
             )
 
-        if not _url_ok(f"{gharra_base}/topology"):
+        api_deadline = time.monotonic() + 20.0
+        while time.monotonic() < api_deadline:
+            if _url_ok(f"{gharra_api_base}/v1/agents?limit=24", timeout=2.0):
+                break
+            time.sleep(0.5)
+
+        if not _url_ok(f"{gharra_base}/api/v1/agents?limit=24"):
+            if _url_ok(f"{gharra_base}/topology") and os.name == "nt":
+                netstat = subprocess.run(
+                    ["netstat", "-ano", "-p", "tcp"],
+                    capture_output=True,
+                    text=True,
+                    check=False,
+                )
+                for line in netstat.stdout.splitlines():
+                    if f":{gharra_port}" in line and "LISTENING" in line.upper():
+                        parts = line.split()
+                        if parts and parts[-1].isdigit():
+                            subprocess.run(
+                                ["taskkill", "/F", "/T", "/PID", parts[-1]],
+                                stdout=subprocess.DEVNULL,
+                                stderr=subprocess.DEVNULL,
+                                check=False,
+                            )
+                time.sleep(1.0)
+            next_lock = gar_root / "frontend" / ".next" / "dev" / "lock"
+            if next_lock.exists():
+                try:
+                    next_lock.unlink()
+                except OSError:
+                    pass
             node_exe = shutil.which("node") or "node"
             env_fe = dict(os.environ)
             env_fe["NEXT_PUBLIC_API_URL"] = gharra_api_base
@@ -4982,12 +5034,43 @@ def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() ->
                 )
             )
 
+        if not _url_ok(f"{wave8_base}/health"):
+            env_w8 = dict(os.environ)
+            env_w8["PYTHONPATH"] = os.pathsep.join(
+                [
+                    str(nx_root),
+                    str(nx_root / "src"),
+                    str(WORKSPACE_ROOT / "cin2-research" / "src"),
+                ]
+            )
+            spawned.append(
+                subprocess.Popen(
+                    [
+                        sys.executable,
+                        "-m",
+                        "uvicorn",
+                        "src.cin2_wave8_global_wa_app:app",
+                        "--host",
+                        host,
+                        "--port",
+                        str(wave8_port),
+                    ],
+                    cwd=str(nx_root),
+                    env=env_w8,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                )
+            )
+
         deadline = time.monotonic() + 45.0
         for probe_url in (
             f"{gharra_api_base}/health",
+            f"{gharra_api_base}/v1/agents?limit=24",
+            f"{gharra_base}/login",
             f"{gharra_base}/topology",
             f"{hc_cc_base}/",
             f"{hc_dt_base}/health",
+            f"{wave8_base}/health",
         ):
             while time.monotonic() < deadline:
                 if _url_ok(probe_url, timeout=3.0):
@@ -5003,9 +5086,10 @@ def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() ->
                 persona="clinician-superpersona",
             )
             try:
+                # 1. Verify GHARRA /login route first
                 open_res = await session.open_browser(
                     headless=False,
-                    url=f"{gharra_base}/topology",
+                    url=f"{gharra_base}/login",
                     wait_until="domcontentloaded",
                 )
                 assert open_res.get("ok") is True, f"open_browser failed: {open_res}"
@@ -5022,9 +5106,25 @@ def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() ->
                 await ensure_window_maximised(page)
                 bring_browser_pids_to_foreground(pids)
 
+                await page.wait_for_selector("[data-testid='gar-login-gate']", timeout=20000)
+                await page.wait_for_selector("[data-testid='gar-login-submit-btn']", timeout=15000)
+                await page.wait_for_timeout(300)
+                login_geom = await page.evaluate(
+                    """() => ({
+                        noVerticalScroll: document.documentElement.scrollHeight <= window.innerHeight + 2,
+                        gateCount: document.querySelectorAll("[data-testid='gar-login-gate']").length,
+                    })"""
+                )
+                assert login_geom["gateCount"] == 1, f"Expected GHARRA /login gate: {login_geom}"
+                assert login_geom["noVerticalScroll"] is True, f"GHARRA /login vertical scroll: {login_geom}"
+
+                # 2. Navigate to GHARRA /topology and step through all 5 sub-tabs
+                await page.goto(f"{gharra_base}/topology", wait_until="domcontentloaded")
+                bring_browser_pids_to_foreground(pids)
                 await page.wait_for_selector(
                     "[data-testid='subtab-gar-route-command-surface']", timeout=20000
                 )
+                await page.wait_for_timeout(800)
                 for subtab_tid in (
                     "subtab-gar-registered-agents-discovery",
                     "subtab-gar-attestation-trust-scores",
@@ -5037,6 +5137,12 @@ def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() ->
                     await glide_to(page, sel, steps=10, dwell_ms=60)
                     await page.locator(sel).click()
                     await page.wait_for_timeout(250)
+
+                for _attempt in range(6):
+                    if await page.locator("[data-testid='gar-subtab5-route-command-surface']").is_visible():
+                        break
+                    await page.locator("[data-testid='subtab-gar-route-command-surface']").click()
+                    await page.wait_for_timeout(400)
 
                 await page.wait_for_selector(".react-flow__node", timeout=20000)
                 await page.wait_for_timeout(600)
@@ -5055,16 +5161,21 @@ def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() ->
                 assert gharra_topo["innerWidth"] >= gharra_topo["availWidth"] - 40
                 assert gharra_topo["innerHeight"] >= gharra_topo["availHeight"] - 140
 
+                # 3. Navigate to GHARRA /federation and verify Federation Topology graph
                 await page.goto(f"{gharra_base}/federation", wait_until="domcontentloaded")
                 bring_browser_pids_to_foreground(pids)
                 await page.wait_for_selector(
                     "[data-testid='subtab-gar-route-command-surface']", timeout=20000
                 )
-                await glide_to(
-                    page, "[data-testid='subtab-gar-route-command-surface']", steps=10, dwell_ms=60
-                )
-                await page.locator("[data-testid='subtab-gar-route-command-surface']").click()
-                await page.wait_for_timeout(500)
+                await page.wait_for_timeout(800)
+                for _attempt in range(6):
+                    await glide_to(
+                        page, "[data-testid='subtab-gar-route-command-surface']", steps=10, dwell_ms=60
+                    )
+                    await page.locator("[data-testid='subtab-gar-route-command-surface']").click()
+                    await page.wait_for_timeout(400)
+                    if await page.locator("[data-testid='gar-subtab5-route-command-surface']").is_visible():
+                        break
 
                 topo_btn = page.locator(".sfds-route-command-surface button:has-text('Topology')")
                 await topo_btn.first.wait_for(state="visible", timeout=10000)
@@ -5079,6 +5190,7 @@ def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() ->
                 await page.wait_for_timeout(600)
                 assert await page.locator(".react-flow__node").count() >= 6
 
+                # 4. Navigate to HelixCare Command Centre 33-Agent Network Topology
                 await page.goto(f"{hc_cc_base}/", wait_until="domcontentloaded")
                 bring_browser_pids_to_foreground(pids)
                 await page.wait_for_selector("#topology-svg .node-circle", timeout=15000)
@@ -5111,10 +5223,38 @@ def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() ->
                         await page.wait_for_selector("#topology-svg-agents .node-circle", timeout=10000)
                         assert await page.locator("#topology-svg-agents .node-circle").count() >= 30
 
+                # 5. Navigate to Clinician Digital Twin Consultation Room
                 await page.goto(f"{hc_dt_base}/", wait_until="domcontentloaded")
                 bring_browser_pids_to_foreground(pids)
                 await page.wait_for_timeout(500)
                 assert "Consultation" in (await page.title())
+
+                # 6. Navigate to Wave-8 /ui/workstation (SHRL-TR-2026-003H)
+                await page.goto(f"{wave8_base}/ui/workstation", wait_until="domcontentloaded")
+                bring_browser_pids_to_foreground(pids)
+                await page.wait_for_selector("#subtab-14col", timeout=10000)
+                for w8_tab in (
+                    "#subtab-physics",
+                    "#subtab-cdr",
+                    "#subtab-planes",
+                    "#subtab-doh",
+                    "#subtab-pg15-dual",
+                    "#subtab-14col",
+                ):
+                    bring_browser_pids_to_foreground(pids)
+                    await glide_to(page, w8_tab, steps=10, dwell_ms=60)
+                    await page.locator(w8_tab).click()
+                    await page.wait_for_timeout(200)
+                    w8_geom = await page.evaluate(
+                        "() => ({ noVerticalScroll: document.documentElement.scrollHeight <= window.innerHeight + 2 })"
+                    )
+                    assert w8_geom["noVerticalScroll"] is True, f"Vertical scroll on {w8_tab}: {w8_geom}"
+
+                await glide_to(page, "#run-all-14col-btn", steps=10, dwell_ms=60)
+                await page.locator("#run-all-14col-btn").click()
+                await page.wait_for_timeout(800)
+                mat_summary = await page.locator("#matrix-14col-summary").inner_text()
+                assert "10/10" in mat_summary, f"Expected 10/10 Wave-8 scenarios verified: {mat_summary}"
             finally:
                 await session.close()
 

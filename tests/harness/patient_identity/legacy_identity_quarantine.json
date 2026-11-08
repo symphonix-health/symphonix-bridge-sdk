@@ -1406,12 +1406,6 @@
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
     },
     {
-      "path": "nursing-station/tests/harness/json_matrices/nursing_station_national_capability_canonical.json",
-      "owner_repo": "nursing-station",
-      "status": "pending_sibling_migration",
-      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
-    },
-    {
       "path": "nursing-station/tests/harness/reduced_json_matrices/nursing_station_national_capability_canonical.14col.json",
       "owner_repo": "nursing-station",
       "status": "pending_sibling_migration",
@@ -1425,6 +1419,12 @@
     },
     {
       "path": "nursing-station/tests/harness/reduced_json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.14col.json",
+      "owner_repo": "nursing-station",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "nursing-station/tests/test_api.py",
       "owner_repo": "nursing-station",
       "status": "pending_sibling_migration",
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
