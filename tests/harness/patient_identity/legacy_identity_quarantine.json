@@ -8,6 +8,12 @@
   },
   "findings": [
     {
+      "path": "BulletTrain/bullettrain/assistant/symchat_workspace.py",
+      "owner_repo": "BulletTrain",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
       "path": "BulletTrain/bullettrain/connectors/nhs_registries.py",
       "owner_repo": "BulletTrain",
       "status": "pending_sibling_migration",
@@ -57,12 +63,6 @@
     },
     {
       "path": "BulletTrain/reports/bevan/gpu-tuned-zero-tolerance-final/eval_1788370357.json",
-      "owner_repo": "BulletTrain",
-      "status": "pending_sibling_migration",
-      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
-    },
-    {
-      "path": "BulletTrain/scripts/llm/screen_bevan_terminology_staging.py",
       "owner_repo": "BulletTrain",
       "status": "pending_sibling_migration",
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
@@ -2008,6 +2008,12 @@
     {
       "path": "vr-therapy/tests/test_vr_therapy_real_service_scenarios.py",
       "owner_repo": "vr-therapy",
+      "status": "pending_sibling_migration",
+      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "workspace-tooling/docs/symchat/CAID_14_COLUMN_SCORECARD.md",
+      "owner_repo": "workspace-tooling",
       "status": "pending_sibling_migration",
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
     }
