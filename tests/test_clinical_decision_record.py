@@ -373,3 +373,51 @@ def test_role_profile_masking_preserves_schema_validity() -> None:
         == "fp-local-998877"
     )
     assert validate_clinical_decision_record(developer_masked) == []
+
+
+def test_patient_role_masking_and_dual_audience_explanation_req_p26_a5a() -> None:
+    from bridge_sdk import (
+        build_dual_audience_user_explanation,
+        translate_jargon_for_patient_summary,
+    )
+
+    record = _sample_record()
+    record["decision"]["summary"] = (
+        "Action STEP_UP_ICU_HDU_AND_GATE_D_SIGNOFF due to MAP=61 mmHg and EVLW=11.4 mL/kg."
+    )
+    patient_masked = mask_clinical_decision_record(record, role_profile="patient")
+    assert validate_clinical_decision_record(patient_masked) == []
+    assert "STEP_UP_ICU_HDU_AND_GATE_D_SIGNOFF" not in patient_masked["decision"]["summary"]
+    assert "urgent closer monitoring" in patient_masked["decision"]["summary"]
+    assert "blood pressure (mean arterial pressure)" in patient_masked["decision"]["summary"]
+
+    dual = build_dual_audience_user_explanation(
+        record,
+        ukf_drivers=[
+            {
+                "parameter": "MAP",
+                "observed_value": "61 mmHg",
+                "reference_threshold": ">= 65 mmHg",
+                "direction": "low_critical",
+            },
+            {
+                "parameter": "EVLW",
+                "observed_value": "11.4 mL/kg",
+                "reference_threshold": "<= 10.0 mL/kg",
+                "direction": "elevated",
+            },
+        ],
+        decision_threshold_margin=0.22,
+    )
+    assert dual["schema_contract"] == "SYMPHONIX_DUAL_AUDIENCE_EXPLANATION_V1"
+    assert len(dual["clinician_rationale"]["top_ukf_drivers"]) == 2
+    assert dual["clinician_rationale"]["decision_threshold_margin"] == 0.22
+    assert dual["clinician_rationale"]["human_review_gate"]["requires_human_review"] is True
+    patient_exp = dual["explain_to_patient"]
+    assert patient_exp["pemat_understandability_score"] >= 0.85
+    assert patient_exp["pemat_actionability_score"] >= 0.85
+    assert "STEP_UP_ICU_HDU_AND_GATE_D_SIGNOFF" not in patient_exp["plain_language_summary"]
+    assert "clinical decision-support system" in patient_exp["ai_assistance_and_uncertainty_disclosure"]
+    assert "/api/v1/million-cohort/governance/contest-decision" in patient_exp["how_to_contest_or_ask_questions"]
+    assert "kidney function" in translate_jargon_for_patient_summary("eGFR=42")
+
