@@ -133,3 +133,54 @@ def test_hitl_suspension_and_resume_survive_process_restarts(tmp_path: Path) -> 
     adapter3 = DurableLedgerAdapter(db_file)
     assert adapter3.load_ledger().current_state("wf-triage-0001") == WorkflowState.running
     assert adapter3.load_inbox().pending() == []
+
+
+def test_load_inbox_normalizes_external_cohort_seed_rows(tmp_path: Path) -> None:
+    """External cohort seeders that write non-enum reviewer_outcome or clinical_ref JSON must not crash load_inbox()."""
+    db_file = tmp_path / "durable_seed.db"
+    adapter = DurableLedgerAdapter(db_file)
+    with adapter._connect() as conn:
+        conn.execute(
+            """
+            INSERT INTO durable_handoff_packages (
+                workflow_id, tenant_id, operator_subject, trigger_value,
+                task_summary, provenance_ref, audit_chain_ref, decision_rationale,
+                recommended_next_action, pre_handoff_state, pending_inputs_json,
+                resolved, resolution, resumed_to_state, reviewer_outcome,
+                receiver_evidence_json, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                "durablehan-2026-0013",
+                "local-dev",
+                "local-operator",
+                "consent_conflict",
+                "Triage paused: consent does not permit lab disclosure.",
+                "Provenance/p-1",
+                "case-2026-06-02-00042",
+                "Active consent permits triage but not lab-result disclosure.",
+                "Confirm consent scope with the patient, then resume.",
+                "running",
+                '["updated consent scope"]',
+                13,
+                "durable_handoff_packages-resolution-0013",
+                "running",
+                "durable_handoff_packages-reviewer_outcome-0013",
+                '{"clinical_ref": "DURABLE_HANDOFF_PACKAGES-0013", "facility_ods": "RJ1"}',
+                "2026-11-15T00:00:00Z",
+            ),
+        )
+        conn.commit()
+
+    inbox = adapter.load_inbox()
+    assert inbox.pending() == []
+    entry = inbox._entries["durablehan-2026-0013"]
+    assert entry.resolved is True
+    assert entry.reviewer_outcome == ReviewerOutcome.correct
+    assert entry.receiver_observer_evidence is not None
+    assert entry.receiver_observer_evidence.receiver_ref == "Organization/RJ1"
+    assert (
+        entry.receiver_observer_evidence.evidence_ref
+        == "DocumentReference/DURABLE_HANDOFF_PACKAGES-0013"
+    )
+

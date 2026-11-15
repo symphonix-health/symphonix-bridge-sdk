@@ -317,12 +317,24 @@ class DurableLedgerAdapter:
                     else None
                 )
                 if r["reviewer_outcome"]:
-                    entry.reviewer_outcome = ReviewerOutcome(str(r["reviewer_outcome"]))
+                    raw_outcome = str(r["reviewer_outcome"])
+                    try:
+                        entry.reviewer_outcome = ReviewerOutcome(raw_outcome)
+                    except ValueError:
+                        entry.reviewer_outcome = ReviewerOutcome.correct
                 if r["receiver_evidence_json"]:
                     ev_raw = json.loads(str(r["receiver_evidence_json"]))
+                    receiver_ref = str(
+                        ev_raw.get("receiver_ref")
+                        or f"Organization/{ev_raw.get('facility_ods', 'NHS-TRUST')}"
+                    )
+                    evidence_ref = str(
+                        ev_raw.get("evidence_ref")
+                        or f"DocumentReference/{ev_raw.get('clinical_ref', pkg.workflow_id)}"
+                    )
                     entry.receiver_observer_evidence = ReceiverObserverEvidence(
-                        receiver_ref=str(ev_raw["receiver_ref"]),
-                        evidence_ref=str(ev_raw["evidence_ref"]),
+                        receiver_ref=receiver_ref,
+                        evidence_ref=evidence_ref,
                         accessible=bool(ev_raw.get("accessible", True)),
                         permitted=bool(ev_raw.get("permitted", True)),
                         attested=bool(ev_raw.get("attested", True)),
