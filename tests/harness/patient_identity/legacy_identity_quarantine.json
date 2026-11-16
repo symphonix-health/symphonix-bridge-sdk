@@ -170,10 +170,10 @@
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
     },
     {
-      "path": "ambulance-ems/tests/harness/reduced_json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.14col.json",
+      "path": "ambulance-ems/tests/harness/json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.json",
       "owner_repo": "ambulance-ems",
       "status": "pending_sibling_migration",
-      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+      "reason": "Legacy external NHS Number or local PAT- identifier token pending canonical SPID alias migration."
     },
     {
       "path": "analytics-bi/backend/src/clinical_cohort_3tier_router.py",
@@ -296,10 +296,10 @@
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
     },
     {
-      "path": "blood-transfusion/tests/harness/national_capability_scenarios.py",
+      "path": "blood-transfusion/tests/harness/json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.json",
       "owner_repo": "blood-transfusion",
       "status": "pending_sibling_migration",
-      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+      "reason": "Legacy external NHS Number or local PAT- identifier token pending canonical SPID alias migration."
     },
     {
       "path": "caid-agent/frontend/src/SfdsWorkspaceTabs.tsx",
@@ -396,6 +396,12 @@
       "owner_repo": "cancer-pathway-tracker",
       "status": "pending_sibling_migration",
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "cancer-pathway-tracker/tests/harness/json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.json",
+      "owner_repo": "cancer-pathway-tracker",
+      "status": "pending_sibling_migration",
+      "reason": "Legacy external NHS Number or local PAT- identifier token pending canonical SPID alias migration."
     },
     {
       "path": "cancer-pathway-tracker/tests/harness/reduced_json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.14col.json",
@@ -548,6 +554,12 @@
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
     },
     {
+      "path": "community-nursing/tests/harness/json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.json",
+      "owner_repo": "community-nursing",
+      "status": "pending_sibling_migration",
+      "reason": "Legacy external NHS Number or local PAT- identifier token pending canonical SPID alias migration."
+    },
+    {
       "path": "community-nursing/tests/harness/reduced_json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.14col.json",
       "owner_repo": "community-nursing",
       "status": "pending_sibling_migration",
@@ -642,6 +654,12 @@
       "owner_repo": "epaccs",
       "status": "pending_sibling_migration",
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "epaccs/tests/harness/json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.json",
+      "owner_repo": "epaccs",
+      "status": "pending_sibling_migration",
+      "reason": "Legacy external NHS Number or local PAT- identifier token pending canonical SPID alias migration."
     },
     {
       "path": "epaccs/tests/harness/reduced_json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.14col.json",
@@ -920,58 +938,58 @@
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
     },
     {
-      "path": "health-agent-workspace/caid-agent/docs/sibling_harness_prompts/entities_README.md",
+      "path": "health-agent-workspace/BulletTrain/graphify-out/converted/risk_mitigation_plans_gharra_b0eee784.md",
       "owner_repo": "health-agent-workspace",
       "status": "pending_sibling_migration",
-      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+      "reason": "Legacy external NHS Number or local PAT- identifier token pending canonical SPID alias migration."
     },
     {
-      "path": "health-agent-workspace/caid-agent/docs/sibling_harness_prompts/entities_catalogue.md",
+      "path": "health-agent-workspace/BulletTrain/graphify-out/converted/risk_mitigation_plans_gharra_cf5e21d0.md",
       "owner_repo": "health-agent-workspace",
       "status": "pending_sibling_migration",
-      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+      "reason": "Legacy external NHS Number or local PAT- identifier token pending canonical SPID alias migration."
     },
     {
-      "path": "health-agent-workspace/caid-agent/graphify-out/graph.json",
+      "path": "health-agent-workspace/BulletTrain/reports/bevan/gpu-tuned-zero-tolerance-final/eval_1788370357.json",
       "owner_repo": "health-agent-workspace",
       "status": "pending_sibling_migration",
-      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+      "reason": "Legacy external NHS Number or local PAT- identifier token pending canonical SPID alias migration."
     },
     {
-      "path": "health-agent-workspace/caid-agent/src/caid/team/clinical_safety_bridge.py",
+      "path": "health-agent-workspace/BulletTrain/services/bevan_llm/eval_runner.py",
       "owner_repo": "health-agent-workspace",
       "status": "pending_sibling_migration",
-      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+      "reason": "Legacy external NHS Number or local PAT- identifier token pending canonical SPID alias migration."
     },
     {
-      "path": "health-agent-workspace/caid-agent/src/caid/team/code_reviewer.py",
+      "path": "health-agent-workspace/BulletTrain/services/signalbox/instruction_intake.py",
       "owner_repo": "health-agent-workspace",
       "status": "pending_sibling_migration",
-      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+      "reason": "Legacy external NHS Number or local PAT- identifier token pending canonical SPID alias migration."
     },
     {
-      "path": "health-agent-workspace/caid-agent/src/caid/team/referential_integrity.py",
+      "path": "health-agent-workspace/BulletTrain/services/signalbox/instruction_routes.py",
       "owner_repo": "health-agent-workspace",
       "status": "pending_sibling_migration",
-      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+      "reason": "Legacy external NHS Number or local PAT- identifier token pending canonical SPID alias migration."
     },
     {
-      "path": "health-agent-workspace/caid-agent/tests/harness/test_harness_triplet.py",
+      "path": "health-agent-workspace/BulletTrain/services/signalbox/persistence.py",
       "owner_repo": "health-agent-workspace",
       "status": "pending_sibling_migration",
-      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+      "reason": "Legacy external NHS Number or local PAT- identifier token pending canonical SPID alias migration."
     },
     {
-      "path": "health-agent-workspace/caid-agent/tests/test_code_reviewer.py",
+      "path": "health-agent-workspace/BulletTrain/services/text_transform/main.py",
       "owner_repo": "health-agent-workspace",
       "status": "pending_sibling_migration",
-      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+      "reason": "Legacy external NHS Number or local PAT- identifier token pending canonical SPID alias migration."
     },
     {
-      "path": "health-agent-workspace/caid-agent/tests/test_fpfn_verifier.py",
+      "path": "health-agent-workspace/BulletTrain/spec/instruction_intents.yaml",
       "owner_repo": "health-agent-workspace",
       "status": "pending_sibling_migration",
-      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+      "reason": "Legacy external NHS Number or local PAT- identifier token pending canonical SPID alias migration."
     },
     {
       "path": "health-grc-platform/src/clinical_cohort_3tier_router.py",
@@ -1130,6 +1148,12 @@
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
     },
     {
+      "path": "lis/tests/harness/json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.json",
+      "owner_repo": "lis",
+      "status": "pending_sibling_migration",
+      "reason": "Legacy external NHS Number or local PAT- identifier token pending canonical SPID alias migration."
+    },
+    {
       "path": "lis/tests/harness/reduced_json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.14col.json",
       "owner_repo": "lis",
       "status": "pending_sibling_migration",
@@ -1182,6 +1206,12 @@
       "owner_repo": "maternity-system",
       "status": "pending_sibling_migration",
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "maternity-system/tests/harness/json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.json",
+      "owner_repo": "maternity-system",
+      "status": "pending_sibling_migration",
+      "reason": "Legacy external NHS Number or local PAT- identifier token pending canonical SPID alias migration."
     },
     {
       "path": "maternity-system/tests/harness/reduced_json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.14col.json",
@@ -1406,6 +1436,12 @@
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
     },
     {
+      "path": "nursing-station/tests/harness/json_matrices/nursing_station_national_capability_canonical.json",
+      "owner_repo": "nursing-station",
+      "status": "pending_sibling_migration",
+      "reason": "Legacy external NHS Number or local PAT- identifier token pending canonical SPID alias migration."
+    },
+    {
       "path": "nursing-station/tests/harness/reduced_json_matrices/nursing_station_national_capability_canonical.14col.json",
       "owner_repo": "nursing-station",
       "status": "pending_sibling_migration",
@@ -1419,12 +1455,6 @@
     },
     {
       "path": "nursing-station/tests/harness/reduced_json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.14col.json",
-      "owner_repo": "nursing-station",
-      "status": "pending_sibling_migration",
-      "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
-    },
-    {
-      "path": "nursing-station/tests/test_api.py",
       "owner_repo": "nursing-station",
       "status": "pending_sibling_migration",
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
@@ -1512,6 +1542,12 @@
       "owner_repo": "pacs-ris",
       "status": "pending_sibling_migration",
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "pacs-ris/tests/harness/json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.json",
+      "owner_repo": "pacs-ris",
+      "status": "pending_sibling_migration",
+      "reason": "Legacy external NHS Number or local PAT- identifier token pending canonical SPID alias migration."
     },
     {
       "path": "pacs-ris/tests/harness/reduced_json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.14col.json",
@@ -1608,6 +1644,12 @@
       "owner_repo": "pharmacy-system",
       "status": "pending_sibling_migration",
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
+    },
+    {
+      "path": "pharmacy-system/tests/harness/json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.json",
+      "owner_repo": "pharmacy-system",
+      "status": "pending_sibling_migration",
+      "reason": "Legacy external NHS Number or local PAT- identifier token pending canonical SPID alias migration."
     },
     {
       "path": "pharmacy-system/tests/harness/reduced_json_matrices/sh_kf_state_001_trajectory_gate_d_scenarios.14col.json",

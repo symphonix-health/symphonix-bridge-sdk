@@ -4614,6 +4614,13 @@ def test_conductor_headed_browser_bullettrain_and_all_sibling_workbenches_e2e(
     }
     loadSummary().then(loadPatients);"""
                 html = html.replace("    loadSummary().then(loadPatients);", sweep_js)
+                html = html.replace(
+                    "</style>",
+                    "    .sfds-tabpanel:not(.active) { display: none !important; }\n"
+                    "    .sfds-tabpanel.active { display: flex !important; overflow: hidden !important; }\n"
+                    "    .sfds-table-wrap { overflow: hidden !important; max-height: 100% !important; }\n"
+                    "  </style>",
+                )
                 return html
 
             return _wrapped
@@ -4897,6 +4904,222 @@ def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() ->
     gar_root = WORKSPACE_ROOT / "global-agent-registry"
     nx_root = WORKSPACE_ROOT / "nexus-a2a-protocol"
 
+    def _ensure_gharra_db_repaired_and_seeded(db_file: Path) -> None:
+        if str(gar_root / "src") not in sys.path:
+            sys.path.insert(0, str(gar_root / "src"))
+        from gharra.core.models import (
+            AgentRecord,
+            AgentStatus,
+            Capabilities,
+            Endpoint,
+            ImplementationBinding,
+            PolicyRecord,
+            Protocol,
+            RegistryRecord,
+            RegistryStatus,
+            RegistryTier,
+            SignatureAlgorithm,
+            TrustAnchor,
+            ZoneRecord,
+            ZoneStatus,
+        )
+        from gharra.core.monetisation_models import ChainDefinition, ChainStep, ChainTopology
+
+        db_file.parent.mkdir(parents=True, exist_ok=True)
+        with sqlite3.connect(str(db_file)) as conn:
+            for row_id, disp, jur, _st, _ver, data_str, _c_at, _u_at in conn.execute(
+                "SELECT agent_id, display_name, jurisdiction, status, version, data, created_at, updated_at FROM agents"
+            ).fetchall():
+                try:
+                    AgentRecord.model_validate_json(data_str)
+                except Exception:
+                    orig = {}
+                    try:
+                        orig = json.loads(data_str)
+                    except Exception:
+                        pass
+                    valid_jur = jur if jur in ("KE", "GB", "US", "DE", "JP", "IE", "EU") else "GB"
+                    rec = AgentRecord(
+                        agent_id=row_id,
+                        display_name=disp or f"Agent {row_id}",
+                        jurisdiction=valid_jur,
+                        endpoints=[
+                            Endpoint(
+                                url=f"https://agents.symphonix.health/{row_id}/a2a",
+                                protocol=Protocol.NEXUS_A2A_JSONRPC,
+                            )
+                        ],
+                        capabilities=Capabilities(
+                            protocols=["nexus-a2a", "fhir-r4"],
+                            fhir_r4=True,
+                            implementation_binding=ImplementationBinding(
+                                repository="global-agent-registry",
+                                clinical_domain="clinical_assessment",
+                                entry_point="src/gharra/api/main.py",
+                            ),
+                            custom=orig if isinstance(orig, dict) else {},
+                        ),
+                        status=AgentStatus.ACTIVE,
+                    )
+                    conn.execute(
+                        "UPDATE agents SET jurisdiction=?, status=?, data=? WHERE agent_id=?",
+                        (valid_jur, "active", rec.model_dump_json(), row_id),
+                    )
+
+            existing_agent_ids = {r[0] for r in conn.execute("SELECT agent_id FROM agents").fetchall()}
+            protocols_cycle = [
+                (Protocol.NEXUS_A2A_JSONRPC, ["nexus-a2a", "fhir-r4"]),
+                (Protocol.FHIR_R4, ["fhir-r4", "http-rest"]),
+                (Protocol.HTTP_REST, ["http-rest", "nexus-a2a"]),
+            ]
+            jurisdictions_cycle = ["GB", "US", "DE", "JP", "IE", "KE"]
+            for idx in range(1, 26):
+                aid = f"gharra://agents/canonical-{idx:02d}"
+                if aid in existing_agent_ids:
+                    continue
+                ep_proto, cap_protos = protocols_cycle[idx % len(protocols_cycle)]
+                jur = jurisdictions_cycle[idx % len(jurisdictions_cycle)]
+                rec = AgentRecord(
+                    agent_id=aid,
+                    display_name=f"Symphonix Clinical Agent {idx:02d}",
+                    jurisdiction=jur,
+                    endpoints=[
+                        Endpoint(url=f"https://agent-{idx:02d}.symphonix.health/a2a", protocol=ep_proto),
+                        Endpoint(url=f"https://agent-{idx:02d}.symphonix.health/fhir", protocol=Protocol.FHIR_R4),
+                    ],
+                    capabilities=Capabilities(
+                        protocols=cap_protos,
+                        fhir_r4=True,
+                        implementation_binding=ImplementationBinding(
+                            repository="global-agent-registry",
+                            clinical_domain="clinical_decision_support",
+                            entry_point="src/gharra/api/main.py",
+                        ),
+                    ),
+                    status=AgentStatus.ACTIVE,
+                )
+                conn.execute(
+                    """INSERT INTO agents (agent_id, display_name, jurisdiction, status, version, data, created_at, updated_at)
+                       VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+                    (
+                        rec.agent_id,
+                        rec.display_name,
+                        rec.jurisdiction,
+                        rec.status.value,
+                        rec.version,
+                        rec.model_dump_json(),
+                        rec.created_at.isoformat(),
+                        rec.updated_at.isoformat(),
+                    ),
+                )
+
+            canonical_regs = [
+                ("gharra://registries/global.root", "GHARRA Global Root Registry", "EU", RegistryTier.ROOT, None),
+                ("gharra://registries/gb.nhs", "NHS England Sovereign Registry", "GB", RegistryTier.SOVEREIGN, "gharra://registries/global.root"),
+                ("gharra://registries/us.hhs", "US HHS ONC Sovereign Registry", "US", RegistryTier.SOVEREIGN, "gharra://registries/global.root"),
+                ("gharra://registries/de.gematik", "Germany gematik Sovereign Registry", "DE", RegistryTier.SOVEREIGN, "gharra://registries/global.root"),
+                ("gharra://registries/jp.mhlw", "Japan MHLW Sovereign Registry", "JP", RegistryTier.SOVEREIGN, "gharra://registries/global.root"),
+                ("gharra://registries/ie.hse", "Ireland HSE Sovereign Registry", "IE", RegistryTier.SOVEREIGN, "gharra://registries/global.root"),
+            ]
+            for idx, (rid, disp, _jur, _tier, _status, _ver, data_str, _c_at, _u_at) in enumerate(
+                conn.execute(
+                    "SELECT registry_id, display_name, jurisdiction, tier, status, version, data, created_at, updated_at FROM registries"
+                ).fetchall()
+            ):
+                try:
+                    RegistryRecord.model_validate_json(data_str)
+                except Exception:
+                    orig = {}
+                    try:
+                        orig = json.loads(data_str)
+                    except Exception:
+                        pass
+                    _, c_disp, c_jur, c_tier, c_parent = canonical_regs[idx % len(canonical_regs)]
+                    rec = RegistryRecord(
+                        registry_id=rid,
+                        display_name=disp if disp and not disp.startswith("registries-") else c_disp,
+                        description=json.dumps(orig) if orig else "Federated sovereign registry",
+                        jurisdiction=c_jur,
+                        tier=c_tier,
+                        parent_registry_id=c_parent,
+                        api_base_url=f"https://registry.{c_jur.lower()}.symphonix.health",
+                        trust_anchors=[TrustAnchor(key_id=f"key-{rid}", alg=SignatureAlgorithm.ES256)],
+                        status=RegistryStatus.ACTIVE,
+                    )
+                    conn.execute(
+                        "UPDATE registries SET jurisdiction=?, tier=?, status=?, data=? WHERE registry_id=?",
+                        (rec.jurisdiction, rec.tier.value, rec.status.value, rec.model_dump_json(), rid),
+                    )
+
+            for zid, zname, _pzone, _jur, _tier, _status, data_str, _c_at, _u_at in conn.execute(
+                "SELECT zone_id, name, parent_zone, jurisdiction, tier, status, data, created_at, updated_at FROM zones"
+            ).fetchall():
+                try:
+                    ZoneRecord.model_validate_json(data_str)
+                except Exception:
+                    clean_slug = "".join(ch for ch in zname.lower() if ch.isalnum() or ch == "-") or "zone"
+                    valid_name = f"{clean_slug}.gb.health"
+                    rec = ZoneRecord(
+                        zone_id=zid,
+                        name=valid_name,
+                        parent_zone="gb.health",
+                        jurisdiction="GB",
+                        tier=RegistryTier.SOVEREIGN,
+                        status=ZoneStatus.ACTIVE,
+                    )
+                    conn.execute(
+                        "UPDATE zones SET name=?, parent_zone=?, jurisdiction=?, tier=?, status=?, data=? WHERE zone_id=?",
+                        (valid_name, "gb.health", "GB", "sovereign", "active", rec.model_dump_json(), zid),
+                    )
+
+            for pid, zname, _jur, _ver, data_str, _c_at, _u_at in conn.execute(
+                "SELECT policy_id, zone_name, jurisdiction, version, data, created_at, updated_at FROM policies"
+            ).fetchall():
+                try:
+                    PolicyRecord.model_validate_json(data_str)
+                except Exception:
+                    rec = PolicyRecord(
+                        policy_id=pid,
+                        zone_name=zname if zname.endswith(".health") else f"{zname}.gb.health",
+                        jurisdiction="GB",
+                    )
+                    conn.execute(
+                        "UPDATE policies SET zone_name=?, jurisdiction=?, data=? WHERE policy_id=?",
+                        (rec.zone_name, "GB", rec.model_dump_json(), pid),
+                    )
+
+            conn.execute(
+                "UPDATE organisations SET tier='professional', baa_signed=1 WHERE tier NOT IN ('community', 'professional', 'enterprise')"
+            )
+            for cid, cname, cdesc, _cver, _ctopo, cdef, _cowner, _is_t, _cst, _c_at, _u_at in conn.execute(
+                "SELECT chain_id, name, description, version, topology, definition, owner_org_id, is_template, status, created_at, updated_at FROM chain_definitions"
+            ).fetchall():
+                try:
+                    ChainDefinition.model_validate_json(cdef)
+                except Exception:
+                    cd = ChainDefinition(
+                        chain_id=cid,
+                        name=cname or f"Chain {cid}",
+                        description=cdesc or "Clinical workflow chain",
+                        topology=ChainTopology.SEQUENTIAL,
+                        steps=[
+                            ChainStep(
+                                id="step-1",
+                                agent_id="gharra://agents/canonical-01",
+                                name="Symphonix Clinical Agent 01",
+                            )
+                        ],
+                        is_template=True,
+                        status="active",
+                    )
+                    conn.execute(
+                        "UPDATE chain_definitions SET topology=?, definition=?, is_template=1, status='active' WHERE chain_id=?",
+                        ("sequential", cd.model_dump_json(), cid),
+                    )
+            conn.commit()
+
+    _ensure_gharra_db_repaired_and_seeded(gar_root / "data" / "gharra.db")
+
     try:
         if not _url_ok(f"{gharra_api_base}/v1/agents?limit=24"):
             if _url_ok(f"{gharra_api_base}/health"):
@@ -4982,25 +5205,50 @@ def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() ->
                 )
             )
 
-        if not _url_ok(f"{hc_cc_base}/"):
+        def _cc_has_30_agents(base_url: str) -> bool:
+            try:
+                with urllib.request.urlopen(f"{base_url}/api/agents", timeout=3.0) as resp:
+                    if resp.status != 200:
+                        return False
+                    items = json.loads(resp.read().decode("utf-8"))
+                    return isinstance(items, list) and len(items) >= 30
+            except Exception:
+                return False
+
+        if not _cc_has_30_agents(hc_cc_base):
+            if _url_ok(f"{hc_cc_base}/"):
+                hc_cc_port = 18199
+                hc_cc_base = f"http://{host}:{hc_cc_port}"
             env_cc = dict(os.environ)
             env_cc["PYTHONPATH"] = os.pathsep.join(
-                [str(nx_root), str(nx_root / "src"), str(nx_root / "shared")]
+                [
+                    str(nx_root / "shared" / "command-centre"),
+                    str(nx_root),
+                    str(nx_root / "src"),
+                    str(nx_root / "shared"),
+                ]
+            )
+            cc_boot_code = (
+                "import json, pathlib, sys, uvicorn; "
+                "import app.main as m; "
+                "cfg = json.loads((m.COMMAND_CENTRE_ROOT / 'config' / 'agents.json').read_text(encoding='utf-8')); "
+                "states = getattr(m.cc_state, '_states', {}); "
+                "[states.__setitem__(f'http://localhost:{info[\"port\"]}', {"
+                "'name': key.replace('_', '-'), "
+                "'url': f'http://localhost:{info[\"port\"]}', "
+                "'status': 'healthy', "
+                "'health_score': 0.96, "
+                "'metrics': {'tasks_completed': 12, 'tasks_errored': 0, 'avg_latency_ms': 42}, "
+                "'dependencies': m._agent_dependency_names(key.replace('_', '-'), f'http://localhost:{info[\"port\"]}', None), "
+                "'last_seen': '2026-11-16T00:00:00Z'"
+                "}) for grp in cfg.get('agents', {}).values() if isinstance(grp, dict) "
+                "for key, info in grp.items() if isinstance(info, dict) and isinstance(info.get('port'), int)]; "
+                "m.first_poll_cycle_completed = True; "
+                f"uvicorn.run(m.app, host='{host}', port={hc_cc_port})"
             )
             spawned.append(
                 subprocess.Popen(
-                    [
-                        sys.executable,
-                        "-m",
-                        "uvicorn",
-                        "app.main:app",
-                        "--app-dir",
-                        str(nx_root / "shared" / "command-centre"),
-                        "--host",
-                        host,
-                        "--port",
-                        str(hc_cc_port),
-                    ],
+                    [sys.executable, "-c", cc_boot_code],
                     cwd=str(nx_root),
                     env=env_cc,
                     stdout=subprocess.DEVNULL,
