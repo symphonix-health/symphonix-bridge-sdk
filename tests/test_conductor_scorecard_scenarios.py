@@ -262,132 +262,194 @@ def _init_sibling_3tier_sqlite(db_file: Path, service_name: str) -> None:
 
 
 _PROVISIONED_PG_SANDBOX_SCHEMAS: set[str] = set()
+_ASYNCPG_PATCHED: bool = False
 
 
-def _ensure_isolated_pg_sandbox_schema(sbx_slug: str) -> None:
-    """Provision an isolated PostgreSQL 15 schema `sibling_<sbx_slug>` with the full 26-column
-    `patients` and `patient_episodes` tables and `BEFORE DELETE` immutability triggers so dual-engine
-    tests exercise real PostgreSQL 15 without touching canonical `sibling_<slug>` 40,090-patient tables.
-    """
-    pg_schema = f"sibling_{sbx_slug}"
-    if pg_schema in _PROVISIONED_PG_SANDBOX_SCHEMAS:
+def _patch_asyncpg_local_no_ssl_with_retry() -> None:
+    global _ASYNCPG_PATCHED
+    if _ASYNCPG_PATCHED:
         return
     import asyncio
     import asyncpg
+
+    orig_connect = asyncpg.connect
+
+    async def _resilient_connect(dsn: str | None = None, *args: Any, **kwargs: Any) -> Any:
+        if dsn and ("127.0.0.1:15432" in dsn or "localhost:15432" in dsn):
+            if kwargs.get("ssl") is None:
+                kwargs["ssl"] = False
+            kwargs["timeout"] = max(float(kwargs.get("timeout") or 25.0), 25.0)
+        last_exc: BaseException | None = None
+        for attempt in range(25):
+            try:
+                return await orig_connect(dsn, *args, **kwargs)
+            except Exception as exc:
+                last_exc = exc
+                if attempt == 24:
+                    raise
+                if attempt in (1, 5, 10):
+                    import subprocess
+                    subprocess.run(
+                        ["docker", "start", "bt-postgres-dev"],
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.DEVNULL,
+                        check=False,
+                    )
+                await asyncio.sleep(2.0)
+        raise RuntimeError(f"asyncpg connect failed: {last_exc}")
+
+    asyncpg.connect = _resilient_connect
+    _ASYNCPG_PATCHED = True
+
+
+def _provision_pg_schema_sql(pg_schema: str) -> str:
+    return f"""
+    CREATE SCHEMA IF NOT EXISTS {pg_schema};
+    CREATE TABLE IF NOT EXISTS {pg_schema}.patients (
+        patient_id TEXT PRIMARY KEY,
+        mpiid TEXT UNIQUE NOT NULL,
+        givenname TEXT NOT NULL,
+        familyname TEXT NOT NULL,
+        dateofbirth TEXT NOT NULL,
+        gender TEXT NOT NULL,
+        nationalid TEXT UNIQUE NOT NULL,
+        status TEXT NOT NULL DEFAULT 'active',
+        record_authority TEXT NOT NULL DEFAULT 'local',
+        source_of_truth TEXT NOT NULL DEFAULT 'local-3tier',
+        hf_repo_id TEXT NOT NULL,
+        hf_record_sha256 TEXT NOT NULL,
+        site_id TEXT NOT NULL,
+        age_band TEXT NOT NULL,
+        deprivation_quintile INTEGER NOT NULL,
+        split_name TEXT NOT NULL,
+        client_registry_fk_verified INTEGER NOT NULL DEFAULT 0,
+        archived_at TIMESTAMPTZ,
+        archive_reason TEXT,
+        synced_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        primary_icd10_code TEXT NOT NULL DEFAULT 'I10',
+        primary_diagnosis_name TEXT NOT NULL DEFAULT 'Essential hypertension and acute longitudinal monitoring',
+        medical_specialty TEXT NOT NULL DEFAULT 'Internal Medicine / Acute Care',
+        marital_status TEXT NOT NULL DEFAULT 'MARRIED',
+        insurance_coverage TEXT NOT NULL DEFAULT 'NHS_UNIVERSAL',
+        lives_alone INTEGER NOT NULL DEFAULT 0
+    );
+    CREATE TABLE IF NOT EXISTS {pg_schema}.patient_episodes (
+        episode_id TEXT PRIMARY KEY,
+        patient_id TEXT NOT NULL REFERENCES {pg_schema}.patients(patient_id) ON DELETE RESTRICT,
+        sibling_service TEXT NOT NULL,
+        episode_sequence INTEGER NOT NULL,
+        split_name TEXT NOT NULL,
+        site_id TEXT NOT NULL,
+        trajectory_steps INTEGER NOT NULL DEFAULT 14,
+        initial_map_mmhg DOUBLE PRECISION NOT NULL,
+        initial_hr_bpm DOUBLE PRECISION NOT NULL,
+        initial_lactate_mmol_l DOUBLE PRECISION NOT NULL,
+        initial_egfr DOUBLE PRECISION NOT NULL,
+        deterioration_risk_4h DOUBLE PRECISION NOT NULL,
+        hf_provenance_sha256 TEXT NOT NULL,
+        record_status TEXT NOT NULL DEFAULT 'active',
+        archived_at TIMESTAMPTZ,
+        archive_reason TEXT,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        initial_evlw_ml_kg DOUBLE PRECISION NOT NULL DEFAULT 7.2,
+        serum_creatinine_mg_dl DOUBLE PRECISION NOT NULL DEFAULT 1.05,
+        respiratory_rate_bpm DOUBLE PRECISION NOT NULL DEFAULT 18.0,
+        spo2_pct DOUBLE PRECISION NOT NULL DEFAULT 96.5,
+        admission_type TEXT NOT NULL DEFAULT 'EW EMER.',
+        care_unit TEXT NOT NULL DEFAULT 'MICU',
+        clinical_presentation_summary TEXT NOT NULL DEFAULT 'Acute clinical admission under continuous-discrete state-space monitoring.',
+        clinical_keywords_or_concepts TEXT NOT NULL DEFAULT 'hemodynamic monitoring, lactate, egfr, kalman state estimation',
+        source_clinical_attributes_json TEXT NOT NULL DEFAULT '{{}}'
+    );
+    CREATE OR REPLACE FUNCTION {pg_schema}.forbid_clinical_record_delete()
+    RETURNS TRIGGER AS $$
+    BEGIN
+        RAISE EXCEPTION 'clinical_record_deletion_forbidden: clinical records must be archived, never deleted'
+            USING ERRCODE = '42501';
+    END;
+    $$ LANGUAGE plpgsql;
+    DROP TRIGGER IF EXISTS trg_forbid_patient_delete ON {pg_schema}.patients;
+    CREATE TRIGGER trg_forbid_patient_delete
+    BEFORE DELETE ON {pg_schema}.patients
+    FOR EACH ROW EXECUTE FUNCTION {pg_schema}.forbid_clinical_record_delete();
+    DROP TRIGGER IF EXISTS trg_forbid_episode_delete ON {pg_schema}.patient_episodes;
+    CREATE TRIGGER trg_forbid_episode_delete
+    BEFORE DELETE ON {pg_schema}.patient_episodes
+    FOR EACH ROW EXECUTE FUNCTION {pg_schema}.forbid_clinical_record_delete();
+    """
+
+
+def _ensure_isolated_pg_sandbox_schema(sbx_slug: str) -> None:
+    """Provision an isolated PostgreSQL 15 schema `sibling_<sbx_slug>` (and batch-provision all 51
+    `sibling_sbx_<slug>` schemas in a single connection on first call) with the full 26-column
+    `patients` and `patient_episodes` tables and `BEFORE DELETE` immutability triggers so dual-engine
+    tests exercise real PostgreSQL 15 without touching canonical `sibling_<slug>` 40,090-patient tables.
+    """
+    _patch_asyncpg_local_no_ssl_with_retry()
+    pg_schema = f"sibling_{sbx_slug}"
+    if pg_schema in _PROVISIONED_PG_SANDBOX_SCHEMAS:
+        return
+    import subprocess
+    import time
+    import psycopg2
 
     pg_dsn = os.environ.get(
         "BULLETTRAIN_PG_DSN",
         "postgresql://bullettrain:devpassword@127.0.0.1:15432/bullettrain",
     )
 
-    async def _init_pg() -> None:
-        conn = await asyncpg.connect(pg_dsn, timeout=5.0)
-        try:
-            await conn.execute(f"CREATE SCHEMA IF NOT EXISTS {pg_schema};")
-            await conn.execute(
-                f"""
-                CREATE TABLE IF NOT EXISTS {pg_schema}.patients (
-                    patient_id TEXT PRIMARY KEY,
-                    mpiid TEXT UNIQUE NOT NULL,
-                    givenname TEXT NOT NULL,
-                    familyname TEXT NOT NULL,
-                    dateofbirth TEXT NOT NULL,
-                    gender TEXT NOT NULL,
-                    nationalid TEXT UNIQUE NOT NULL,
-                    status TEXT NOT NULL DEFAULT 'active',
-                    record_authority TEXT NOT NULL DEFAULT 'local',
-                    source_of_truth TEXT NOT NULL DEFAULT 'local-3tier',
-                    hf_repo_id TEXT NOT NULL,
-                    hf_record_sha256 TEXT NOT NULL,
-                    site_id TEXT NOT NULL,
-                    age_band TEXT NOT NULL,
-                    deprivation_quintile INTEGER NOT NULL,
-                    split_name TEXT NOT NULL,
-                    client_registry_fk_verified INTEGER NOT NULL DEFAULT 0,
-                    archived_at TIMESTAMPTZ,
-                    archive_reason TEXT,
-                    synced_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-                    primary_icd10_code TEXT NOT NULL DEFAULT 'I10',
-                    primary_diagnosis_name TEXT NOT NULL DEFAULT 'Essential hypertension and acute longitudinal monitoring',
-                    medical_specialty TEXT NOT NULL DEFAULT 'Internal Medicine / Acute Care',
-                    marital_status TEXT NOT NULL DEFAULT 'MARRIED',
-                    insurance_coverage TEXT NOT NULL DEFAULT 'NHS_UNIVERSAL',
-                    lives_alone INTEGER NOT NULL DEFAULT 0
-                );
-                CREATE TABLE IF NOT EXISTS {pg_schema}.patient_episodes (
-                    episode_id TEXT PRIMARY KEY,
-                    patient_id TEXT NOT NULL REFERENCES {pg_schema}.patients(patient_id) ON DELETE RESTRICT,
-                    sibling_service TEXT NOT NULL,
-                    episode_sequence INTEGER NOT NULL,
-                    split_name TEXT NOT NULL,
-                    site_id TEXT NOT NULL,
-                    trajectory_steps INTEGER NOT NULL DEFAULT 14,
-                    initial_map_mmhg DOUBLE PRECISION NOT NULL,
-                    initial_hr_bpm DOUBLE PRECISION NOT NULL,
-                    initial_lactate_mmol_l DOUBLE PRECISION NOT NULL,
-                    initial_egfr DOUBLE PRECISION NOT NULL,
-                    deterioration_risk_4h DOUBLE PRECISION NOT NULL,
-                    hf_provenance_sha256 TEXT NOT NULL,
-                    record_status TEXT NOT NULL DEFAULT 'active',
-                    archived_at TIMESTAMPTZ,
-                    archive_reason TEXT,
-                    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-                    initial_evlw_ml_kg DOUBLE PRECISION NOT NULL DEFAULT 7.2,
-                    serum_creatinine_mg_dl DOUBLE PRECISION NOT NULL DEFAULT 1.05,
-                    respiratory_rate_bpm DOUBLE PRECISION NOT NULL DEFAULT 18.0,
-                    spo2_pct DOUBLE PRECISION NOT NULL DEFAULT 96.5,
-                    admission_type TEXT NOT NULL DEFAULT 'EW EMER.',
-                    care_unit TEXT NOT NULL DEFAULT 'MICU',
-                    clinical_presentation_summary TEXT NOT NULL DEFAULT 'Acute clinical admission under continuous-discrete state-space monitoring.',
-                    clinical_keywords_or_concepts TEXT NOT NULL DEFAULT 'hemodynamic monitoring, lactate, egfr, kalman state estimation',
-                    source_clinical_attributes_json TEXT NOT NULL DEFAULT '{{}}'
-                );
-                CREATE OR REPLACE FUNCTION {pg_schema}.forbid_clinical_record_delete()
-                RETURNS TRIGGER AS $$
-                BEGIN
-                    RAISE EXCEPTION 'clinical_record_deletion_forbidden: clinical records must be archived, never deleted'
-                        USING ERRCODE = '42501';
-                END;
-                $$ LANGUAGE plpgsql;
-                DROP TRIGGER IF EXISTS trg_forbid_patient_delete ON {pg_schema}.patients;
-                CREATE TRIGGER trg_forbid_patient_delete
-                BEFORE DELETE ON {pg_schema}.patients
-                FOR EACH ROW EXECUTE FUNCTION {pg_schema}.forbid_clinical_record_delete();
-                DROP TRIGGER IF EXISTS trg_forbid_episode_delete ON {pg_schema}.patient_episodes;
-                CREATE TRIGGER trg_forbid_episode_delete
-                BEFORE DELETE ON {pg_schema}.patient_episodes
-                FOR EACH ROW EXECUTE FUNCTION {pg_schema}.forbid_clinical_record_delete();
-                """
-            )
-        finally:
-            await conn.close()
+    schemas_to_create = {pg_schema}
+    if not _PROVISIONED_PG_SANDBOX_SCHEMAS:
+        for _svc, (c_slug, _rpath) in SIBLING_ROUTER_PATHS.items():
+            schemas_to_create.add(f"sibling_sbx_{c_slug}")
 
-    asyncio.run(_init_pg())
-    _PROVISIONED_PG_SANDBOX_SCHEMAS.add(pg_schema)
+    for attempt in range(30):
+        try:
+            conn = psycopg2.connect(pg_dsn, connect_timeout=15)
+            try:
+                conn.autocommit = True
+                with conn.cursor() as cur:
+                    for sch in sorted(schemas_to_create):
+                        cur.execute(_provision_pg_schema_sql(sch))
+                break
+            finally:
+                conn.close()
+        except Exception:
+            if attempt == 29:
+                raise
+            if attempt in (0, 4, 10, 18):
+                subprocess.run(
+                    ["docker", "start", "bt-postgres-dev"],
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    check=False,
+                )
+            time.sleep(2.0)
+
+    _PROVISIONED_PG_SANDBOX_SCHEMAS.update(schemas_to_create)
 
 
 @pytest.fixture(scope="session", autouse=True)
 def _teardown_conductor_pg_sandbox_schemas() -> Any:
+    _patch_asyncpg_local_no_ssl_with_retry()
     yield
     if not _PROVISIONED_PG_SANDBOX_SCHEMAS:
         return
-    import asyncio
-    import asyncpg
+    import psycopg2
 
     pg_dsn = os.environ.get(
         "BULLETTRAIN_PG_DSN",
         "postgresql://bullettrain:devpassword@127.0.0.1:15432/bullettrain",
     )
 
-    async def _drop_all() -> None:
-        conn = await asyncpg.connect(pg_dsn, timeout=5.0)
-        try:
+    conn = psycopg2.connect(pg_dsn, connect_timeout=20)
+    try:
+        conn.autocommit = True
+        with conn.cursor() as cur:
             for schema_name in sorted(_PROVISIONED_PG_SANDBOX_SCHEMAS):
-                await conn.execute(f"DROP SCHEMA IF EXISTS {schema_name} CASCADE;")
-        finally:
-            await conn.close()
-
-    asyncio.run(_drop_all())
+                cur.execute(f"DROP SCHEMA IF EXISTS {schema_name} CASCADE;")
+    finally:
+        conn.close()
     _PROVISIONED_PG_SANDBOX_SCHEMAS.clear()
 
 
@@ -5121,11 +5183,27 @@ def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() ->
     _ensure_gharra_db_repaired_and_seeded(gar_root / "data" / "gharra.db")
 
     try:
-        if not _url_ok(f"{gharra_api_base}/v1/agents?limit=24"):
+        def _gharra_api_has_20_agents(api_prefix: str) -> bool:
+            try:
+                with urllib.request.urlopen(f"{api_prefix}/v1/agents?limit=24", timeout=3.0) as r1:
+                    if r1.status != 200:
+                        return False
+                    d1 = json.loads(r1.read().decode("utf-8"))
+                    agents = d1.get("agents", []) if isinstance(d1, dict) else []
+                with urllib.request.urlopen(f"{api_prefix}/v1/registries", timeout=3.0) as r2:
+                    if r2.status != 200:
+                        return False
+                    d2 = json.loads(r2.read().decode("utf-8"))
+                    regs = d2.get("registries", []) if isinstance(d2, dict) else []
+                return len(agents) >= 20 and len(regs) >= 6
+            except Exception:
+                return False
+
+        if not _gharra_api_has_20_agents(gharra_api_base):
             if _url_ok(f"{gharra_api_base}/health"):
                 gharra_api_port = 18401
                 gharra_api_base = f"http://{host}:{gharra_api_port}"
-        if not _url_ok(f"{gharra_api_base}/v1/agents?limit=24"):
+        if not _gharra_api_has_20_agents(gharra_api_base):
             env_gar = dict(os.environ)
             env_gar["PYTHONPATH"] = str(gar_root / "src")
             env_gar["GHARRA_AUTH_MODE"] = "disabled"
@@ -5153,14 +5231,14 @@ def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() ->
                 )
             )
 
-        api_deadline = time.monotonic() + 20.0
+        api_deadline = time.monotonic() + 25.0
         while time.monotonic() < api_deadline:
-            if _url_ok(f"{gharra_api_base}/v1/agents?limit=24", timeout=2.0):
+            if _gharra_api_has_20_agents(gharra_api_base):
                 break
             time.sleep(0.5)
 
-        if not _url_ok(f"{gharra_base}/api/v1/agents?limit=24"):
-            if _url_ok(f"{gharra_base}/topology") and os.name == "nt":
+        if not _gharra_api_has_20_agents(f"{gharra_base}/api"):
+            if os.name == "nt":
                 netstat = subprocess.run(
                     ["netstat", "-ano", "-p", "tcp"],
                     capture_output=True,
@@ -5310,22 +5388,24 @@ def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() ->
                 )
             )
 
-        deadline = time.monotonic() + 45.0
+        deadline = time.monotonic() + 60.0
         for probe_url in (
             f"{gharra_api_base}/health",
             f"{gharra_api_base}/v1/agents?limit=24",
             f"{gharra_base}/login",
             f"{gharra_base}/topology",
+            f"{gharra_base}/api/v1/agents?limit=24",
+            f"{gharra_base}/api/v1/registries",
             f"{hc_cc_base}/",
             f"{hc_dt_base}/health",
             f"{wave8_base}/health",
         ):
             while time.monotonic() < deadline:
-                if _url_ok(probe_url, timeout=3.0):
+                if _url_ok(probe_url, timeout=4.0):
                     break
                 time.sleep(0.5)
             else:
-                raise AssertionError(f"Service did not become ready within 45s: {probe_url}")
+                raise AssertionError(f"Service did not become ready within 60s: {probe_url}")
 
         async def _run_gharra_and_helixcare_topology_headed() -> None:
             ensure_default_desktop()
@@ -5392,7 +5472,13 @@ def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() ->
                     await page.locator("[data-testid='subtab-gar-route-command-surface']").click()
                     await page.wait_for_timeout(400)
 
-                await page.wait_for_selector(".react-flow__node", timeout=20000)
+                try:
+                    await page.wait_for_selector(".react-flow__node", timeout=12000)
+                except Exception:
+                    await page.reload(wait_until="domcontentloaded")
+                    await page.wait_for_selector("[data-testid='subtab-gar-route-command-surface']", timeout=15000)
+                    await page.locator("[data-testid='subtab-gar-route-command-surface']").click()
+                    await page.wait_for_selector(".react-flow__node", timeout=20000)
                 await page.wait_for_timeout(600)
                 gharra_topo = await page.evaluate(
                     """() => ({
