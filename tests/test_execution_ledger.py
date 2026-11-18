@@ -9,7 +9,6 @@ on the path in the current interpreter.
 
 from __future__ import annotations
 
-import importlib.util
 import sys
 
 import pytest
@@ -193,10 +192,6 @@ def test_health_metrics_queryable() -> None:
     assert h.compensation_count == 1
 
 
-@pytest.mark.skipif(
-    importlib.util.find_spec("bullettrain") is None,
-    reason="BulletTrain not importable in this interpreter",
-)
 def test_sdk_chain_matches_real_bullettrain_hashchain() -> None:
     # The SDK ledger's chain construction must equal BulletTrain's real
     # HashChain for identical inputs, so the two ledger faces never diverge.

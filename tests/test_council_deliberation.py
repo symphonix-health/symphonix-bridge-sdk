@@ -59,7 +59,9 @@ OPTION_HIGH = DecisionOption(
 )
 
 
-def _ballot(member: str = "clinical", option: DecisionOption = OPTION_A, **over) -> CouncilBallot:
+def _ballot(
+    member: str = "clinical", option: DecisionOption = OPTION_A, **over
+) -> CouncilBallot:
     base = dict(
         member_id=member,
         option=option,
@@ -82,14 +84,18 @@ def _tool_ok(tool_id: str = "terminology") -> EquipageCheck:
     )
 
 
-def _seat(member: str, *, substrate: str = "llm", safety: bool = False, **over) -> MemberEquipage:
+def _seat(
+    member: str, *, substrate: str = "llm", safety: bool = False, **over
+) -> MemberEquipage:
     base = dict(
         member_id=member,
         lens=f"{member}-lens",
         substrate=substrate,
         persona_token_ref=f"token://{member}",
         tool_checks=(_tool_ok(),),
-        skill_checks=(SkillPackCheck(pack_id="core-clinical", version="1.0", approved=True),),
+        skill_checks=(
+            SkillPackCheck(pack_id="core-clinical", version="1.0", approved=True),
+        ),
         is_safety_seat=safety,
     )
     base.update(over)
@@ -267,7 +273,9 @@ def test_unapproved_skill_pack_fails_seat() -> None:
             _seat(
                 "clinical",
                 skill_checks=(
-                    SkillPackCheck(pack_id="oncology-pack", version="0.9", approved=False),
+                    SkillPackCheck(
+                        pack_id="oncology-pack", version="0.9", approved=False
+                    ),
                 ),
             ),
             _seat("pharmacy"),
@@ -539,13 +547,7 @@ def test_routine_advisory_may_autocommit() -> None:
 
 # ---- Cross-repo contract: EnsembleVoter parity (FR-CDL-007) ----------------
 
-import importlib.util  # noqa: E402
 
-
-@pytest.mark.skipif(
-    importlib.util.find_spec("bullettrain") is None,
-    reason="BulletTrain not importable in this interpreter",
-)
 def test_synthesis_winner_matches_real_ensemble_voter() -> None:
     # The SDK synthesis generalises EnsembleVoter's weighted-score semantics
     # (score = confidence * weight, aggregated per option, max wins). For an

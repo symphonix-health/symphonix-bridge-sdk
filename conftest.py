@@ -1,6 +1,5 @@
 """Workspace-root conftest.py — hydrates User-scope env vars."""
 
-
 from __future__ import annotations
 
 import sys
@@ -59,11 +58,38 @@ def _hydrate_user_scope_secrets() -> None:
 _hydrate_user_scope_secrets()
 
 
+def _resolve_workspace_root(repo_root: Path) -> Path:
+    import os
+
+    for key in ("SYMPHONIX_WORKSPACE_ROOT", "CAID_WORKSPACE"):
+        val = os.environ.get(key)
+        if val and (Path(val) / "workspace-tooling").is_dir():
+            return Path(val).resolve()
+    parent = repo_root.parent
+    if (parent / "workspace-tooling").is_dir():
+        return parent.resolve()
+    git_file = repo_root / ".git"
+    if git_file.is_file():
+        text = git_file.read_text(encoding="utf-8", errors="ignore").strip()
+        if text.startswith("gitdir:"):
+            gitdir = Path(text.split("gitdir:", 1)[1].strip())
+            if len(gitdir.parents) >= 3:
+                ws = gitdir.parents[3]
+                if (ws / "workspace-tooling").is_dir():
+                    return ws.resolve()
+    return parent.resolve()
+
+
 def _add_workspace_sibling_packages() -> None:
     """Make local sibling packages importable for real cross-repo contract tests."""
+    import os
 
-    workspace = Path(__file__).resolve().parents[1]
+    repo_root = Path(__file__).resolve().parent
+    workspace = _resolve_workspace_root(repo_root)
+    os.environ["SYMPHONIX_WORKSPACE_ROOT"] = str(workspace)
+    os.environ["CAID_WORKSPACE"] = str(workspace)
     candidates = (
+        repo_root / "src",
         workspace / "BulletTrain",
         workspace / "global-agent-registry" / "src",
     )
@@ -75,3 +101,18 @@ def _add_workspace_sibling_packages() -> None:
 
 
 _add_workspace_sibling_packages()
+
+
+def pytest_sessionfinish(session, exitstatus) -> None:  # type: ignore[no-untyped-def]
+    """Fail the pytest session if any test is skipped or xfailed (L-FIX-DO-NOT-SKIP)."""
+    import os
+
+    if os.environ.get("SYMPHONIX_ALLOW_TEST_SKIPS") == "1":
+        return
+    terminal = session.config.pluginmanager.get_plugin("terminalreporter")
+    if terminal is None:
+        return
+    skipped = terminal.stats.get("skipped", [])
+    xfailed = terminal.stats.get("xfailed", [])
+    if skipped or xfailed:
+        session.exitstatus = 1

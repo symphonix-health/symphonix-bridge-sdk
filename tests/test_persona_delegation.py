@@ -23,10 +23,9 @@ from bridge_sdk.persona_delegation import (
 
 _HAVE_JWT = importlib.util.find_spec("jwt") is not None
 _HAVE_CRYPTO = importlib.util.find_spec("cryptography") is not None
-pytestmark = pytest.mark.skipif(
-    not (_HAVE_JWT and _HAVE_CRYPTO),
-    reason="PyJWT + cryptography required for real-key delegation tests",
-)
+assert (
+    _HAVE_JWT and _HAVE_CRYPTO
+), "PyJWT + cryptography required for real-key delegation tests"
 
 NOW = 1_900_000_000  # fixed clock for deterministic exp checks
 

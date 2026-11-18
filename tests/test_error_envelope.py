@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import importlib.util
 
 import pytest
 
@@ -126,10 +125,6 @@ def test_backoff_rejects_negative_attempt() -> None:
         backoff_after(-1)
 
 
-@pytest.mark.skipif(
-    importlib.util.find_spec("bullettrain") is None,
-    reason="BulletTrain not importable in this interpreter",
-)
 def test_backoff_defaults_match_real_retrypolicy() -> None:
     # The envelope's backoff floor must match the REAL RetryPolicy defaults so
     # advertised retry_after_ms agrees with what execute_with_retry waits.

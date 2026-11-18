@@ -16,7 +16,6 @@ import importlib.util
 import json
 from pathlib import Path
 
-import pytest
 
 from bridge_sdk.agent_contract import reference_manifest
 from bridge_sdk.gharra_registration import (
@@ -67,10 +66,6 @@ def test_protocol_value_is_a_real_gharra_enum_member() -> None:
     assert GHARRA_PROTOCOL_REST == "http-rest"
 
 
-@pytest.mark.skipif(
-    not _GHARRA_AVAILABLE,
-    reason="GHARRA package not importable in this interpreter (needs GHARRA venv)",
-)
 def test_payload_validates_against_real_gharra_agentrecord() -> None:
     # FR-AEC-002: the registration body validates against GHARRA's REAL model.
     from gharra.core.models import AgentRecord  # type: ignore
