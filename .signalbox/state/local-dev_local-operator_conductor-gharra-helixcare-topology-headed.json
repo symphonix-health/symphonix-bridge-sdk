@@ -1,0 +1,29 @@
+{
+  "current_lease": {
+    "capabilities": [
+      "browser.control"
+    ],
+    "expires_at": 1794930316.8402903,
+    "fencing_token": 7,
+    "issued_at": 1794930016.8402903,
+    "lease_id": "lease-local-dev:local-operator:conductor-gharra-helixcare-topology-headed-7",
+    "operator_id": "local-operator",
+    "revoked": false,
+    "session_id": "conductor-gharra-helixcare-topology-headed",
+    "tenant_id": "local-dev"
+  },
+  "fence_counter": 9,
+  "fsm_state": "closed",
+  "persona": "clinician-superpersona",
+  "persona_binding_expires_at": null,
+  "persona_binding_source": "local_dev_unscoped",
+  "quota_events": [],
+  "quota_limit": null,
+  "scope": {
+    "operator_id": "local-operator",
+    "session_id": "conductor-gharra-helixcare-topology-headed",
+    "tenant_id": "local-dev"
+  },
+  "task_count": 0,
+  "websocket_subscriptions": []
+}
