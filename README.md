@@ -24,9 +24,12 @@
 | Catalogue | [Symphonix system catalogue](https://github.com/symphonix-health/symphonix-health.github.io/blob/main/docs/system-catalogue.md) |
 | Scope basis | Live system catalogue; forked/imported and discovery-only repos are excluded. The catalogue page carries the current count. |
 | Evidence rule | Catalogue presence is orientation only. Use repo-local tests, CAID artefacts, seeded data, and runbooks for readiness claims. |
-<!-- symphonix-health-ecosystem:end -->
-<p align="center">
-  <img src="https://raw.githubusercontent.com/symphonix-health/.github/master/profile/assets/github-org-atlas.svg" alt="Symphonix Health GitHub system atlas - the catalogued repositories, grouped by ecosystem layer" width="100%" />
+<!-- symphonix-health-ecosystem:end -->
+
+<p align="center">
+
+  <img src="https://raw.githubusercontent.com/symphonix-health/.github/master/profile/assets/github-org-atlas.svg" alt="Symphonix Health GitHub system atlas - the catalogued repositories, grouped by ecosystem layer" width="100%" />
+
 </p>
 
 ## Recent Enhancements
@@ -197,3 +200,10 @@ Functional use-case projections are stored in `tests/harness/reduced_json_matric
 ## Licence
 
 Apache License 2.0. See [LICENSE](LICENSE).
+
+## ChartRecall (`Memorilla-v2`) System-1 Reflex & Bounded-Rationality Integration (`src/bridge_sdk/system1_reflex.py`)
+
+- **Deterministic Specialist Evaluators Powered by `ChartRecall` Slot Readouts**:
+  - `Tier0SafetyFloor` (`D4` allergy, penicillin/NSAID/beta-blocker family contraindications, and renal eGFR bounds in `< 0.5 ms`)
+  - `ConsultationStateReflex` (`D1`/`D2`/`D5` spoken negation and diagnostic prerequisite verification)
+  - `BoundedRationalityEnvelope` (`<= 3` active cards per consultation turn ranked by Tier-0 clinical acuity preemption)
