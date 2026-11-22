@@ -485,7 +485,7 @@ class Tier0SafetyFloor:
             min_risk = max(min_risk, 0.65)
 
         elapsed_ms = (time.perf_counter() - t0) * 1000.0
-        return Tier0SafetyResult(
+        res = Tier0SafetyResult(
             blocked=blocked,
             emergency=emergency,
             min_risk_score=round(min_risk, 4),
@@ -495,6 +495,24 @@ class Tier0SafetyFloor:
             news2_single_param_red=news2_red,
             latency_ms=round(elapsed_ms, 4),
         )
+        from .decision_port_shadow import observe_shadow_decision
+
+        det_df4 = (
+            "unauthorized_tool_or_egress_block"
+            if (blocked or emergency)
+            else "benign_authorized_action"
+        )
+        observe_shadow_decision(
+            family="DF4",
+            prompt=(
+                f"vitals={dict(vitals or {})} meds={list(proposed_medications)} "
+                f"allergies={list(allergies)} blocked={blocked} emergency={emergency} "
+                f"plan={free_text_plan}"
+            ),
+            deterministic_decision=det_df4,
+            request_meta={"blocked": blocked, "emergency": emergency, "red_flags": list(red_flags)},
+        )
+        return res
 
     @staticmethod
     def enforce_monotonicity(

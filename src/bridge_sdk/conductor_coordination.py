@@ -716,6 +716,22 @@ class ConductorCoordinator:
         manifest = self._manifests[decision.component]
         action_intent = manifest.get(intent)
         action_intent.validate_payload(payload)
+        from .decision_port_shadow import observe_shadow_decision
+
+        det_df5 = (
+            "urgent_clinical_signal_expedite"
+            if action_intent.safety_class is SafetyClass.high_risk
+            else "complete_valid_routine_file"
+        )
+        observe_shadow_decision(
+            family="DF5",
+            prompt=(
+                f"skill={skill_id} intent={intent} component={decision.component} "
+                f"safety_class={action_intent.safety_class.value} payload_keys={sorted(payload.keys())}"
+            ),
+            deterministic_decision=det_df5,
+            request_meta={"intent": intent, "component": decision.component},
+        )
         return decision.component, action_intent.safety_class
 
     def enforce_budget_and_fanout(
