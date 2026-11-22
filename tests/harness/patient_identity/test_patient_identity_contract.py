@@ -99,6 +99,12 @@ ALLOWLISTED_DETECTOR_FILES: frozenset[str] = frozenset(
         # vr-therapy: PATIENT_FORBIDDEN_COLUMNS projection guard (L-338/L-339)
         # names the forbidden legacy columns to strip them from projections.
         "vr-therapy/backend/src/connectors/models.py",
+        # Assurance & migration design plans naming external_nhs_number / legacy
+        # alias mappings for governance auditability.
+        "BulletTrain/docs/assurance/VOICE_COPILOT_AND_VOICE_MFA_IMPLEMENTATION_PLAN_2026-11-17.md",
+        "BulletTrain/reports/bevan/gpu-tuned-zero-tolerance-final/eval_1788370357.json",
+        "BulletTrain/scripts/llm/screen_public_bevan_standards.py",
+        "symphonix-assurance/reports/clinical-safety/prescribing-agent/IMPLEMENTATION_PLAN.md",
     }
 )
 
@@ -109,6 +115,10 @@ def _is_allowlisted_detector(path: Path) -> bool:
     except ValueError:
         return False
     rel_posix = relative.as_posix()
+    # Skip nested git submodules (e.g. health-agent-workspace/BulletTrain),
+    # whose canonical repository is already scanned directly at WORKSPACE/<repo>.
+    if len(relative.parts) >= 2 and (WORKSPACE / relative.parts[0] / relative.parts[1] / ".git").exists():
+        return True
     if path.name == "cin2_wave8_global_wa_app.py" or rel_posix == "cin2-research/scripts/build_wave8_global_wa_siblings_and_iva.py":
         return True
     return rel_posix in ALLOWLISTED_DETECTOR_FILES

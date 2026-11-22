@@ -97,6 +97,8 @@ class BsdkCanonicalPivotSeed:
     profile: str = "http://hl7.org/fhir/StructureDefinition/Patient"
     payload_shape: str = "fhir.envelope.v1"
     terminology_systems: tuple[str, ...] = ("LOINC", "SNOMED-CT", "ICD-10")
+    who_icd11_mms_system: str = "http://id.who.int/icd/release/11/mms"
+    who_fic_extensions: tuple[str, ...] = ("WHO-ICD-11-MMS", "WHO-ICHI", "WHO-ICF", "UCUM", "WHO-ATC-DDD")
     metadata_intact: bool = True
 
     @classmethod

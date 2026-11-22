@@ -3493,7 +3493,11 @@ def test_conductor_headed_browser_signalbox_driven_e2e(
             await _sbx_click("#conductor-btn-r0-r3-research")
             assert (await page.locator("#outcome-badge").inner_text()).strip() == "EXECUTED"
 
-            await _sbx_click("#conductor-btn-hitl-gate")
+            await _sbx_click("#conductor-btn-hitl-gate", wait_ms=400)
+            await page.wait_for_function(
+                "() => ((document.getElementById('outcome-badge')?.innerText || '').toUpperCase().includes('REFUSAL'))",
+                timeout=8000,
+            )
             assert "REFUSAL" in (await page.locator("#outcome-badge").inner_text()).upper()
 
             # Exhaustively click & audit all 6/6 Primary Tabs (0..5) and 2/2 Inner Sub-Tabs (5A, 5B)
@@ -5265,23 +5269,27 @@ def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() ->
             node_exe = shutil.which("node") or "node"
             env_fe = dict(os.environ)
             env_fe["NEXT_PUBLIC_API_URL"] = gharra_api_base
-            spawned.append(
-                subprocess.Popen(
-                    [
-                        node_exe,
-                        str(gar_root / "frontend" / "node_modules" / "next" / "dist" / "bin" / "next"),
-                        "dev",
-                        "-H",
-                        host,
-                        "-p",
-                        str(gharra_port),
-                    ],
-                    cwd=str(gar_root / "frontend"),
-                    env=env_fe,
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL,
-                )
+            gharra_fe_cmd = [
+                node_exe,
+                str(gar_root / "frontend" / "node_modules" / "next" / "dist" / "bin" / "next"),
+                "dev",
+                "-H",
+                host,
+                "-p",
+                str(gharra_port),
+            ]
+            gharra_fe_proc = subprocess.Popen(
+                gharra_fe_cmd,
+                cwd=str(gar_root / "frontend"),
+                env=env_fe,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
             )
+            spawned.append(gharra_fe_proc)
+        else:
+            gharra_fe_cmd = None
+            gharra_fe_proc = None
+            env_fe = None
 
         def _cc_has_30_agents(base_url: str) -> bool:
             try:
@@ -5388,7 +5396,8 @@ def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() ->
                 )
             )
 
-        deadline = time.monotonic() + 60.0
+        gharra_fe_retried = False
+        deadline = time.monotonic() + 150.0
         for probe_url in (
             f"{gharra_api_base}/health",
             f"{gharra_api_base}/v1/agents?limit=24",
@@ -5401,11 +5410,27 @@ def test_conductor_headed_browser_gharra_and_helixcare_network_topology_e2e() ->
             f"{wave8_base}/health",
         ):
             while time.monotonic() < deadline:
+                if (
+                    gharra_fe_proc is not None
+                    and gharra_fe_cmd is not None
+                    and not gharra_fe_retried
+                    and gharra_fe_proc.poll() is not None
+                ):
+                    # Next.js 16 may exit once on cold start to print its upgrade reminder.
+                    gharra_fe_retried = True
+                    gharra_fe_proc = subprocess.Popen(
+                        gharra_fe_cmd,
+                        cwd=str(gar_root / "frontend"),
+                        env=env_fe,
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.DEVNULL,
+                    )
+                    spawned.append(gharra_fe_proc)
                 if _url_ok(probe_url, timeout=4.0):
                     break
                 time.sleep(0.5)
             else:
-                raise AssertionError(f"Service did not become ready within 60s: {probe_url}")
+                raise AssertionError(f"Service did not become ready within 150s: {probe_url}")
 
         async def _run_gharra_and_helixcare_topology_headed() -> None:
             ensure_default_desktop()
