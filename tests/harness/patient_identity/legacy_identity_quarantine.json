@@ -1220,13 +1220,13 @@
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
     },
     {
-      "path": "mha-administration/mha_administration_shared/schemas.py",
+      "path": "mha-administration/frontend/src/pages/TribunalApplicationsPage.tsx",
       "owner_repo": "mha-administration",
       "status": "pending_sibling_migration",
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."
     },
     {
-      "path": "mha-administration/src/clinical_cohort_3tier_router.py",
+      "path": "mha-administration/mha_administration_shared/schemas.py",
       "owner_repo": "mha-administration",
       "status": "pending_sibling_migration",
       "reason": "Current cross-repo SPID static scan finding recorded for the owning sibling repo."

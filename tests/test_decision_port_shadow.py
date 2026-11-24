@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
-from pathlib import Path
 import threading
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
 from typing import Any
 
 import pytest
@@ -22,7 +22,9 @@ class _StubHandler(BaseHTTPRequestHandler):
         body = json.loads(self.rfile.read(length).decode("utf-8"))
         opts = list(body["questions"]["decision"]["criteria"].keys())
         chosen = opts[0]
-        probs = {k: (0.95 if k == chosen else 0.05 / max(1, len(opts) - 1)) for k in opts}
+        probs = {
+            k: (0.95 if k == chosen else 0.05 / max(1, len(opts) - 1)) for k in opts
+        }
         raw = json.dumps(
             {
                 "answers": {
@@ -84,9 +86,15 @@ def test_bridge_shadow_default_off_and_enabled_loopback(
         )
         assert comp
 
-        rows = [json.loads(x) for x in log_file.read_text(encoding="utf-8").splitlines() if x.strip()]
+        rows = [
+            json.loads(x)
+            for x in log_file.read_text(encoding="utf-8").splitlines()
+            if x.strip()
+        ]
         assert [r["decision_family"] for r in rows] == ["DF4", "DF5"]
-        assert all(set(shadow_mod.REQUIRED_AUDIT_FIELDS).issubset(r.keys()) for r in rows)
+        assert all(
+            set(shadow_mod.REQUIRED_AUDIT_FIELDS).issubset(r.keys()) for r in rows
+        )
     finally:
         srv.shutdown()
         srv.server_close()
@@ -107,3 +115,23 @@ def test_bridge_no_hazard_downgrade_and_non_loopback() -> None:
     assert tier == "HUMAN_ESCALATED"
     assert final_dec is None
     assert pred_sc is True
+
+
+def test_bevan_primary_local_system2_and_zero_cloud_enforcement() -> None:
+    assert shadow_mod.PRIMARY_LOCAL_SYSTEM2_MODEL == "bevan-baseline:20b"
+    assert shadow_mod.LOCAL_SYSTEM2_PREFERENCE_ORDER[0] == "bevan-baseline:20b"
+    assert (
+        shadow_mod.assert_local_model_id("bevan-baseline:20b") == "bevan-baseline:20b"
+    )
+    assert len(shadow_mod.FROZEN_PORTFOLIO) == 12
+    for forbidden_id in (
+        "gemma4:cloud",
+        "glm-5.3:cloud",
+        "deepseek-v4-flash:cloud",
+        "claude-sonnet-4-6",
+        "gemini-2.5-pro",
+        "gpt-4o",
+        "deepseek-chat",
+    ):
+        with pytest.raises(shadow_mod.CloudModelRefusedError):
+            shadow_mod.assert_local_model_id(forbidden_id)
