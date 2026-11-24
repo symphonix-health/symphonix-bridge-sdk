@@ -3464,36 +3464,52 @@ def test_conductor_headed_browser_signalbox_driven_e2e(
             assert computed["hasSignalBoxCursor"] is True
 
             # Click & verify all 4/4 Voice Co-Pilot Quick Verification Probes with SignalBox cursor
-            await _sbx_click("#voice-probe-executed")
+            await _sbx_click("#voice-probe-executed", wait_ms=800)
+            await page.wait_for_function("() => /EXECUTED/i.test(document.getElementById('outcome-badge')?.innerText || '')")
             assert (await page.locator("#outcome-badge").inner_text()).strip() == "EXECUTED"
 
-            await _sbx_click("#voice-probe-safety-blocked")
+            await _sbx_click("#voice-probe-safety-blocked", wait_ms=800)
+            await page.wait_for_function("() => /BLOCKED/i.test(document.getElementById('outcome-badge')?.innerText || '')")
             badge_text_blocked = await page.locator("#outcome-badge").inner_text()
             assert (
                 "SAFETY_BLOCKED" in badge_text_blocked.upper()
                 or "BLOCKED" in badge_text_blocked.upper()
             )
 
-            await _sbx_click("#voice-probe-candid-refusal")
+            await _sbx_click("#voice-probe-candid-refusal", wait_ms=800)
+            await page.wait_for_function("() => /REFUSAL/i.test(document.getElementById('outcome-badge')?.innerText || '')")
             assert "REFUSAL" in (await page.locator("#outcome-badge").inner_text()).upper()
 
-            await _sbx_click("#voice-probe-needs-clarification")
+            await _sbx_click("#voice-probe-needs-clarification", wait_ms=800)
+            await page.wait_for_function("() => /CLARIFICATION/i.test(document.getElementById('outcome-badge')?.innerText || '')")
             assert "CLARIFICATION" in (await page.locator("#outcome-badge").inner_text()).upper()
 
             # Exercise all 4/4 Conductor-Driven SignalBox DAG Workflows in Tab 0
             conductor_surface = page.locator('[data-testid="conductor-signalbox-surface"]')
             assert await conductor_surface.is_visible()
 
-            await _sbx_click("#conductor-btn-multi-sibling-dag")
+            await _sbx_click("#conductor-btn-multi-sibling-dag", wait_ms=400)
+            await page.wait_for_function(
+                "() => (document.getElementById('outcome-badge')?.innerText || '').trim() === 'EXECUTED'",
+                timeout=8000,
+            )
             assert (await page.locator("#outcome-badge").inner_text()).strip() == "EXECUTED"
 
-            await _sbx_click("#conductor-btn-sepsis-escalation")
+            await _sbx_click("#conductor-btn-sepsis-escalation", wait_ms=400)
+            await page.wait_for_function(
+                "() => (document.getElementById('outcome-badge')?.innerText || '').trim() === 'EXECUTED'",
+                timeout=8000,
+            )
             assert (await page.locator("#outcome-badge").inner_text()).strip() == "EXECUTED"
 
-            await _sbx_click("#conductor-btn-r0-r3-research")
+            await _sbx_click("#conductor-btn-r0-r3-research", wait_ms=400)
+            await page.wait_for_function(
+                "() => (document.getElementById('outcome-badge')?.innerText || '').trim() === 'EXECUTED'",
+                timeout=8000,
+            )
             assert (await page.locator("#outcome-badge").inner_text()).strip() == "EXECUTED"
 
-            await _sbx_click("#conductor-btn-hitl-gate", wait_ms=400)
+            await _sbx_click("#conductor-btn-hitl-gate", wait_ms=1000)
             await page.wait_for_function(
                 "() => ((document.getElementById('outcome-badge')?.innerText || '').toUpperCase().includes('REFUSAL'))",
                 timeout=8000,
