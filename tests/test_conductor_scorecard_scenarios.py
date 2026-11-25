@@ -4898,6 +4898,7 @@ def test_exhaustive_signalbox_voice_copilot_across_all_36_repos(
         "audit",
         "national_identifier",
         "cdr_builder",
+        "services",
     )
     saved_top_mods = {
         k: v
