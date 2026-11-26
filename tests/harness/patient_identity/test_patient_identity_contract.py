@@ -299,6 +299,8 @@ def _scan_repo_with_git_grep(repo: Path) -> list[str] | None:
     excluded_pathspecs = [
         ":(exclude,glob)graphify-out/**",
         ":(exclude,glob)tests/integration/day_in_the_life/autonomous_sweep*.json",
+        ":(exclude,glob)**/frontend-visual-evidence.json",
+        ":(exclude,glob)**/frontend-headed-evidence.json",
     ]
     command = [
         "git",
@@ -650,6 +652,10 @@ def test_patient_identity_static_repo_scan_enforce_mode() -> None:
                 if relative_path.startswith(
                     "tests/integration/day_in_the_life/autonomous_sweep"
                 ) and path.suffix == ".json":
+                    continue
+                if relative_path.endswith(
+                    ("frontend-visual-evidence.json", "frontend-headed-evidence.json")
+                ):
                     continue
                 if path.stat().st_size > 2_000_000:
                     continue

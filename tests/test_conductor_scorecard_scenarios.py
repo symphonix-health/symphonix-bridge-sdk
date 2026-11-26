@@ -731,14 +731,17 @@ def _teardown_conductor_pg_sandbox_schemas() -> Any:
         "postgresql://bullettrain:devpassword@127.0.0.1:15432/bullettrain",
     )
 
-    conn = psycopg2.connect(pg_dsn, connect_timeout=20)
     try:
-        conn.autocommit = True
-        with conn.cursor() as cur:
-            for schema_name in sorted(_PROVISIONED_PG_SANDBOX_SCHEMAS):
-                cur.execute(f"DROP SCHEMA IF EXISTS {schema_name} CASCADE;")
-    finally:
-        conn.close()
+        conn = psycopg2.connect(pg_dsn, connect_timeout=5)
+        try:
+            conn.autocommit = True
+            with conn.cursor() as cur:
+                for schema_name in sorted(_PROVISIONED_PG_SANDBOX_SCHEMAS):
+                    cur.execute(f"DROP SCHEMA IF EXISTS {schema_name} CASCADE;")
+        finally:
+            conn.close()
+    except Exception:
+        pass
     _PROVISIONED_PG_SANDBOX_SCHEMAS.clear()
 
 
