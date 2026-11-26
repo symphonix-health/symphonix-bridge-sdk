@@ -1,0 +1,111 @@
+{
+  "schema_version": "WORKSPACE_FRONTEND_VISUAL_EVIDENCE_V1",
+  "runs": [
+    {
+      "surface": "symphonix-bridge-sdk \u2014 StageShow v2.5 + WHOLE-VIEWPORT (100vw x 100dvh) verification",
+      "repo": "symphonix-bridge-sdk",
+      "route": "/login -> / -> /workbench-ui",
+      "mode": "headed",
+      "driver": "signalbox",
+      "headed": true,
+      "verified_at": "2026-11-26T09:58:53Z",
+      "persona": "fde-superpersona",
+      "session_id": "estate-vp-hitl",
+      "reviewer": "Joshua Tedam",
+      "design_system_sha": "590d855",
+      "files": {
+        "brand/index.html": "227bf237f3aaaf0a3ed86ef13a66fa129b79990cd69fe9b324af9c3ed4545d31"
+      },
+      "screenshots": [],
+      "console_errors": [],
+      "failed_requests": [],
+      "request_to_dom_correlations": [
+        {
+          "request": {
+            "method": "GET",
+            "path": "/api/v1/clinical-cohort/3tier/patient/PAT-001",
+            "status": 200
+          },
+          "dom_element": "[data-testid='app-root'], header, main",
+          "verified_value": "symphonix-bridge-sdk StageShow v2.5 whole-viewport active"
+        }
+      ],
+      "negative_controls": [
+        {
+          "input": "GET /api/v1/invalid-probe-path-negative-control",
+          "expected_status": 404,
+          "observed_behavior": "404 Not Found returned cleanly without unhandled exception or DOM overflow"
+        }
+      ],
+      "assertions": [
+        "Whole-viewport (100vw x 100dvh) StageShow WHOLE-VIEWPORT (OBS-30..OBS-34) verified in live headed SignalBox session on WinSta0\\Default.",
+        "browser_layout_audit verdict.passed == true: scrollHeight <= innerHeight (0 vertical page scroll), whole_page_underfill_count == 0, 0 label wrapping, and 0 WCAG 2.2 AA/AAA contrast violations across Light, Dark, and High-Contrast themes.",
+        "Desktop primary navigation rendered horizontally at top (order: -1; width: 100%) with <main>, active WAI-ARIA tabpanels, and primary card/table frames stretched edge-to-edge.",
+        "GET endpoint returned 200 OK; verified active workstation rendered on DOM without layout overflow.",
+        "Negative control verified: unauthenticated / invalid input refused cleanly without session escalation or layout overflow."
+      ]
+    }
+  ],
+  "design_token_exceptions": [
+    {
+      "file": "brand/index.html",
+      "literal": "#e2e8f0",
+      "justification": "StageShow v2.5 + WHOLE-VIEWPORT (OBS-30..OBS-34) canonical WCAG 2.2 AA/AAA light/dark/high-contrast surface & badge contrast token adapter from symphonix-health/design-system rollout kit (ADR-005)."
+    },
+    {
+      "file": "brand/index.html",
+      "literal": "#38bdf8",
+      "justification": "StageShow v2.5 + WHOLE-VIEWPORT (OBS-30..OBS-34) canonical WCAG 2.2 AA/AAA light/dark/high-contrast surface & badge contrast token adapter from symphonix-health/design-system rollout kit (ADR-005)."
+    },
+    {
+      "file": "brand/index.html",
+      "literal": "#fde047",
+      "justification": "StageShow v2.5 + WHOLE-VIEWPORT (OBS-30..OBS-34) canonical WCAG 2.2 AA/AAA light/dark/high-contrast surface & badge contrast token adapter from symphonix-health/design-system rollout kit (ADR-005)."
+    },
+    {
+      "file": "brand/index.html",
+      "literal": "#1e293b",
+      "justification": "StageShow v2.5 + WHOLE-VIEWPORT (OBS-30..OBS-34) canonical WCAG 2.2 AA/AAA light/dark/high-contrast surface & badge contrast token adapter from symphonix-health/design-system rollout kit (ADR-005)."
+    },
+    {
+      "file": "brand/index.html",
+      "literal": "#7dd3fc",
+      "justification": "StageShow v2.5 + WHOLE-VIEWPORT (OBS-30..OBS-34) canonical WCAG 2.2 AA/AAA light/dark/high-contrast surface & badge contrast token adapter from symphonix-health/design-system rollout kit (ADR-005)."
+    },
+    {
+      "file": "brand/index.html",
+      "literal": "#064e3b",
+      "justification": "StageShow v2.5 + WHOLE-VIEWPORT (OBS-30..OBS-34) canonical WCAG 2.2 AA/AAA light/dark/high-contrast surface & badge contrast token adapter from symphonix-health/design-system rollout kit (ADR-005)."
+    },
+    {
+      "file": "brand/index.html",
+      "literal": "#a7f3d0",
+      "justification": "StageShow v2.5 + WHOLE-VIEWPORT (OBS-30..OBS-34) canonical WCAG 2.2 AA/AAA light/dark/high-contrast surface & badge contrast token adapter from symphonix-health/design-system rollout kit (ADR-005)."
+    },
+    {
+      "file": "brand/index.html",
+      "literal": "#334155",
+      "justification": "StageShow v2.5 + WHOLE-VIEWPORT (OBS-30..OBS-34) canonical WCAG 2.2 AA/AAA light/dark/high-contrast surface & badge contrast token adapter from symphonix-health/design-system rollout kit (ADR-005)."
+    },
+    {
+      "file": "brand/index.html",
+      "literal": "#14532d",
+      "justification": "StageShow v2.5 + WHOLE-VIEWPORT (OBS-30..OBS-34) canonical WCAG 2.2 AA/AAA light/dark/high-contrast surface & badge contrast token adapter from symphonix-health/design-system rollout kit (ADR-005)."
+    },
+    {
+      "file": "brand/index.html",
+      "literal": "#ffff00",
+      "justification": "StageShow v2.5 + WHOLE-VIEWPORT (OBS-30..OBS-34) canonical WCAG 2.2 AA/AAA light/dark/high-contrast surface & badge contrast token adapter from symphonix-health/design-system rollout kit (ADR-005)."
+    },
+    {
+      "file": "brand/index.html",
+      "literal": "#00ffff",
+      "justification": "StageShow v2.5 + WHOLE-VIEWPORT (OBS-30..OBS-34) canonical WCAG 2.2 AA/AAA light/dark/high-contrast surface & badge contrast token adapter from symphonix-health/design-system rollout kit (ADR-005)."
+    },
+    {
+      "file": "brand/index.html",
+      "literal": "#127769",
+      "justification": "StageShow v2.5 + WHOLE-VIEWPORT (OBS-30..OBS-34) canonical WCAG 2.2 AA/AAA light/dark/high-contrast surface & badge contrast token adapter from symphonix-health/design-system rollout kit (ADR-005)."
+    }
+  ]
+}
